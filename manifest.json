@@ -3,6 +3,11 @@
 	"name": "DaltonTab",
 	"version": "0.1",
 
+	"permissions": [
+		"*://*.dalton.org/",
+		"*://*.planhub.me/"
+	],
+
 	"chrome_url_overrides" : {
 		"newtab": "newTab.html"
 	}
