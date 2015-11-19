@@ -5,7 +5,8 @@
 
 	"permissions": [
 		"*://*.dalton.org/",
-		"*://*.planhub.me/"
+		"*://*.planhub.me/",
+		"https://www.bing.com/"
 	],
 
 	"chrome_url_overrides" : {
