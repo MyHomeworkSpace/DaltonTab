@@ -1,0 +1,32 @@
+body {
+	position: relative;
+}
+
+.section {
+	padding-top:50px;
+	height:500px;
+	color: #fff;
+}
+#section1 {
+	background-color: #1E88E5;
+	max-height: 350px;
+}
+#section2 {
+	background-color: #673ab7;
+}
+#section3 {
+	background-color: #ff9800;
+}
+#section41 {
+	background-color: #00bcd4;
+}
+#section42 {
+	background-color: #009688;
+}
+
+.mainTime {
+	font-size: 6em;
+}
+.mainDate {
+	font-size: 2em;
+}
