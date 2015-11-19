@@ -4,13 +4,19 @@ body {
 
 .section {
 	padding-top:50px;
-	height:500px;
+	height: 500px;
 	color: #fff;
 }
+
 #section1 {
-	background-color: transparent;
+	background-color: #1E88E5;
 	max-height: 350px;
+	transition: background-color 0.75s;
 }
+#section1.imageLoaded {
+	background-color: transparent;
+}
+
 #section2 {
 	background-color: #673ab7;
 }
