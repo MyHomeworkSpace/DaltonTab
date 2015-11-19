@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>New Tab</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.smooth-scroll.js"></script>
-  <style>
-  body {
-      position: relative;
-  }
-  #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}
-  #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
-  #section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
-  #section41 {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;}
-  #section42 {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
-  </style>
-</head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+	<head>
+		<title>New Tab</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.smooth-scroll.js"></script>
+		<script src="js/moment.js"></script>
+		<script src="js/main.js"></script>
+		<style>
+			body {
+				position: relative;
+			}
+			#section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}
+			#section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
+			#section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+			#section41 {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;}
+			#section42 {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
+		</style>
+	</head>
+	<body data-spy="scroll" data-target=".navbar" data-offset="50">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="http://courses.dalton.org">New Tab</a>
+				</div>
+				<div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav">
+							<li><a href="#section1" class="current-time">(Current Time)</a></li>
+							<li><a href="#section2">Homework</a></li>
+							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Schedules <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#section41">Schedule</a></li>
+									<li><a href="#section42">Classes</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://courses.dalton.org">New Tab</a>
-    </div>
-    <div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="#section1">(Current Time)</a></li>
-          <li><a href="#section2">Homework</a></li>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Schedules <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#section41">Schedule</a></li>
-              <li><a href="#section42">Classes</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<div id="section1" class="container-fluid">
-  <br />
-  <br />
-  <h1 style="text-align:center">(Current Time)</h1>
-  <p style="text-align:center">(Current Date)</p>
-</div>
-<div id="section2" class="container-fluid">
-  <h1>Homework</h1>
-  <p>Homework goes here! :P. Required Libraries: CoursesLib, PlanhubAPI</p>
-</div>
-<div id="section41" class="container-fluid">
-  <h1>Schedule</h1>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-</div>
-<div id="section42" class="container-fluid">
-  <h1>Classes</h1>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-</div>
-
-</body>
+		<div id="section1" class="container-fluid">
+			<br />
+			<br />
+			<h1 style="text-align:center" class="current-time">(Current Time)</h1>
+			<p style="text-align:center">(Current Date)</p>
+		</div>
+		<div id="section2" class="container-fluid">
+			<h1>Homework</h1>
+			<p>Homework goes here! :P. Required Libraries: CoursesLib, PlanhubAPI</p>
+		</div>
+		<div id="section41" class="container-fluid">
+			<h1>Schedule</h1>
+			<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+		</div>
+		<div id="section42" class="container-fluid">
+			<h1>Classes</h1>
+			<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+		</div>
+	</body>
 </html>
