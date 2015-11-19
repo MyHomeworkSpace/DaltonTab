@@ -1,6 +1,8 @@
 $(document).ready(function() {
-	$(".current-time").text(moment().format("h:mm A"));
-	setInterval(function() {
+	var timeUpdFunc = function() {
 		$(".current-time").text(moment().format("h:mm A"));
-	}, 1000);
+		$(".current-date").text(moment().format("MMMM Do, YYYY"));
+	};
+	timeUpdFunc();
+	setInterval(timeUpdFunc, 1000);
 });
