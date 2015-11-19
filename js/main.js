@@ -7,6 +7,6 @@ $(document).ready(function() {
 	setInterval(timeUpdFunc, 1000);
 
 	$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US", function(response) {
-		$("#section1").css("background-image", "url(https://www.bing.com" + response.images[0].url + ")");
+		$("#section1").parallax({ imageSrc: "https://www.bing.com" + response.images[0].url, bleed: 20, positionY: "0px" });
 	})
 });
