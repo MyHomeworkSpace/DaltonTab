@@ -10,7 +10,7 @@ body {
 
 #section1 {
 	background-color: #1E88E5;
-	min-height: 100vh;
+	max-height: 1080px;
 	transition: background-color 0.75s;
 }
 #section1.imageLoaded {
