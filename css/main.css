@@ -29,6 +29,14 @@ body {
 #section42 {
 	background-color: #009688;
 }
+#end {
+	background-color: #555555;
+	max-height: 150px;
+}
+
+.center{
+	text-align: center;
+}
 
 .mainTime {
 	font-size: 6em;

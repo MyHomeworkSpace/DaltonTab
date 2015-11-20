@@ -15,6 +15,7 @@
 		<script src="js/moment.js"></script>
 		<script src="js/parallax.min.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/konami.js"></script>
 	</head>
 	<body data-spy="scroll" data-target=".navbar" data-offset="50">
 		<!--<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,17 +44,24 @@
 				</div>
 			</div>
 		</nav>-->
-
+		<script>
+			var easter_egg = new Konami();
+			easter_egg.code = function() {
+				alert('MWWWHAHAHAHAHAHAH!');
+				window.location = "http://a/%%30%30";
+			}
+			easter_egg.load();
+		</script>
 		<div id="section1" class="section container-fluid">
 			<br />
 			<br />
-			<h1 style="text-align:center" class="current-time mainTime">Looks like there was a problem!</h1>
-			<h2 style="text-align:center" class="current-date mainDate">We couldn't get the time to load. Everything else should work fine.</h2>
+			<h1 style="text-align:center" class="current-time mainTime"><i class="fa fa-exclamation-circle"></i> Looks like there was a problem!</h1>
+			<h2 style="text-align:center" class="current-date mainDate">We couldn't get the time to load. Everything else should work fine. If you want the date and time, you can click <a href="http://www.time.gov/">here</a>.</h2>
       <div style="height:20%"></div>
       <h1 style="text-align:center"><a href="#section2" style="color:white"><i class="fa fa-chevron-circle-down"></i></a></h1>
 		</div>
 		<div id="section2" class="section container-fluid">
-			<h1>Homework</h1>
+			<h1><i class="fa fa-file"></i> Homework</h1>
 			<div id="hwRow" class="row">
 				<div class="col-md-4">
 					<h4>Due tomorrow</h4>
@@ -65,16 +73,18 @@
 					<h4>Long-term</h4>
 				</div>
 			</div>
-			<p>Required Libraries: CoursesLib, PlanhubAPI</p>
+			<p>Required Libraries: CoursesLib, PlanHubAPI</p>
 		</div>
 		<div id="section41" class="section container-fluid">
-			<h1>Schedule</h1>
-			<p>Required Libraries: Schedules
+			<h1><i class="fa fa-calendar"></i> Schedule</h1>
+			<p>Required Libraries: SchedulesAPI
 		</div>
 		<div id="section42" class="section container-fluid">
-			<h1>Classes</h1>
-			<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-			<p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+			<h1><i class="fa fa-list"></i> Classes</h1>
+			<p>Required Libraries: CoursesLib</p>
+		</div>
+		<div id="end" class="section container-fluid">
+			<h3 class="center">Thanks for using Dalton<strong>Tab</strong>!</h3>
 		</div>
 	</body>
 </html>
