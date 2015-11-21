@@ -32,6 +32,7 @@ background-image: url("https://www.bing.com/az/hprichbg/rb/XinjiangLake_EN-US108
 	background-color: rgba(0, 150, 136, 0.9);
 }
 #end {
+	height: 150;
 	background-color: rgba(85, 85, 85, 1);
 }
 
