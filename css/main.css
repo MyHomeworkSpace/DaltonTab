@@ -34,7 +34,7 @@ body {
 	max-height: 150px;
 }
 
-.center{
+.center {
 	text-align: center;
 }
 
@@ -43,4 +43,9 @@ body {
 }
 .mainDate {
 	font-size: 2em;
+}
+
+.section-warning {
+	font-size: 1.6em;
+	font-style: italic;
 }
