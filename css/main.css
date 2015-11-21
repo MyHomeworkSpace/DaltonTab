@@ -16,22 +16,34 @@ body {
 #section1.imageLoaded {
 	background-color: transparent;
 }
-
+body{
+background-image: url("https://www.bing.com/az/hprichbg/rb/XinjiangLake_EN-US10804600369_1920x1080.jpg");
+}
 #section2 {
-	background-color: #673ab7;
+	background-color: #C200E6;
+	opacity: .7;
+	filter:alpha(opacity=70);
 }
 #section3 {
 	background-color: #ff9800;
+	opacity: .7;
+	filter:alpha(opacity=70);
 }
 #section41 {
 	background-color: #00bcd4;
+	opacity: .7;
+	filter:alpha(opacity=70);
 }
 #section42 {
 	background-color: #009688;
+	opacity: .7;
+	filter:alpha(opacity=70);
 }
 #end {
 	background-color: #555555;
 	max-height: 150px;
+	opacity: .7;
+	filter:alpha(opacity=70);
 }
 
 .center {
