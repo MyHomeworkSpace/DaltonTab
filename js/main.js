@@ -30,6 +30,10 @@ $(document).ready(function() {
 		$("#settingsModal").modal();
 	});
 
+
+	$("#newTabDefault").click(function() {
+		window.location.href = "chrome-search://local-ntp/local-ntp.html"
+	});
 	$("#hwButton").smoothScroll();
 
 	window.coursesLib.checkLoggedIn(function(response) {
