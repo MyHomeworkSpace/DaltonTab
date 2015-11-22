@@ -50,7 +50,7 @@ window.coursesLib.getCourseInfo = function(courseId, doneFunc) {
 };
 
 window.coursesLib.getCourseList = function(doneFunc) {
-	$.get(window.coursesLib.baseUrl + "/index.php", function (resText) {
+	$.get(window.coursesLib.baseUrl + "/index.php?redirect=0", function (resText) {
 		var $response = $(resText);
 		var respObj = {};
 
@@ -86,7 +86,7 @@ window.coursesLib.getUpcomingCourseEvents = function(courseId, doneFunc) {
 						var eventText = $(this).children(".description").text();
 						var eventNormText = eventText.replace(/\r/g, "").replace(/\n/g, " ");
 						var eventLink = $(this).children(".referer").children("a").attr("href");
-						
+
 						var eventObj = {title: eventTitle, course: eventCourse, text: eventText, normText: eventNormText, html: eventHtml, link: eventLink};
 
 						respObj.events.push(eventObj);
@@ -115,7 +115,7 @@ window.coursesLib.getUpcomingEvents = function(doneFunc) {
 						var eventText = $(this).children(".description").text();
 						var eventNormText = eventText.replace(/\r/g, "").replace(/\n/g, " ");
 						var eventLink = $(this).children(".referer").children("a").attr("href");
-						
+
 						var eventObj = {title: eventTitle, course: eventCourse, text: eventText, normText: eventNormText, html: eventHtml, link: eventLink};
 
 						respObj.events.push(eventObj);
