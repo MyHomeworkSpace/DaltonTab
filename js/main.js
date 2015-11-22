@@ -2,6 +2,8 @@ window.daltonTab = {
 	subjects: []
 };
 
+
+
 window.daltonTab.addEventToList = function(ev, list) {
 	var tag = window.utils.getPrefix(ev.name);
 	var name = ev.name.split(" ");
@@ -28,7 +30,7 @@ window.daltonTab.addEventToList = function(ev, list) {
 					tag = tag + "ing";
 				}
 				$tag.addClass(window.utils.getPrefixClass(tag));
-				
+
 				$tag.text(tag);
 			$lineTwo.append($tag);
 
@@ -209,4 +211,11 @@ $(document).ready(function() {
 			});
 		});
 	});
+	setTimeout(function() {
+		$(window).trigger('resize');
+	}, 100)
+});
+
+$(document).on("load", function() {
+
 });

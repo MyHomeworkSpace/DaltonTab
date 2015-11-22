@@ -15,7 +15,7 @@ body {
 	background-color: #1E88E5;
 	max-height: 1080px;
 	transition: background-color 0.75s;
-	
+
 }
 #setup1 {
 	background-color: #1E88E5;
@@ -28,6 +28,10 @@ body {
 	background-color: transparent;
 }
 body{
+}
+#par{
+	background-size: 100%;
+	min-height: 100vh;
 }
 #section2 {
 	background-color: rgba(60, 77, 99, 0.9);
