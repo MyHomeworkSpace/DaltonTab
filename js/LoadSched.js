@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
-	$("#signIn").click(function() {
+	//$("#scheduleSignIn").click(function() {
+
 		var daltonid = $("#username").val();
 		var password = $("#password").val();
 
@@ -18,6 +19,11 @@ $(document).ready(function() {
 					var key = $data.find("result").children("key").text();
 					var owner = $data.find("result").children("key").attr("owner");
 					alert("Success! You've been signed in to Schedules.");
+					var today = new Date(dateString);
+					var id = key.split(":")[3]
+					var year = new Date(years);
+					$.post(schedulesUrl, {rouxRequest: "<request><key>"+key+"</key><action>selectStudentCalendar</action><ID>" + id +"</ID><academicyear>" + year + "</academicyear><start>" + today + "</start><end>" + today + "</end></request>"}, function(response) {console.log(response);});
+					$(tempResponse).find("period");
 					window.location.reload();
 				} else {
 					// Uh oh.
@@ -37,5 +43,5 @@ $(document).ready(function() {
 				window.close();
 			}
 		});
-	});
+	//});
 });
