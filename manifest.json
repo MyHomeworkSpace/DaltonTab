@@ -3,6 +3,8 @@
 	"name": "DaltonTab",
 	"version": "0.1",
 
+	"icons": {"128": "128.png"},
+
 	"permissions": [
 		"*://*.dalton.org/",
 		"*://*.planhub.me/",
