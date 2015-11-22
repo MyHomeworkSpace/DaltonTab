@@ -97,12 +97,17 @@ $(document).ready(function() {
 	timeUpdFunc();
 	setInterval(timeUpdFunc, 1000);
 
-	$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US", function(response) {
-		var url = "https://www.bing.com" + response.images[0].url;
-		$("#par").parallax({ imageSrc: url, bleed: 20, positionY: "0px" });
-		$("#par").addClass("imageLoaded");
-		$("#section1").addClass("imageLoaded");
-		//$("body").css("background-image", "url(" + url + ")");
+	
+	chrome.storage.sync.get("backImgTog", function(storage) {
+		if (storage.backImgTog != undefined || !storage.backImgTog) {
+			$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US", function(response) {
+				var url = "https://www.bing.com" + response.images[0].url;
+				$("#par").parallax({ imageSrc: url, bleed: 20, positionY: "0px" });
+				$("#par").addClass("imageLoaded");
+				$("#section1").addClass("imageLoaded");
+				//$("body").css("background-image", "url(" + url + ")");
+			});
+		}
 	});
 
 	$("#settingsBtn").click(function() {
@@ -140,6 +145,15 @@ $(document).ready(function() {
 	$("#schedulesLogOut").click(function() {
 		chrome.storage.sync.remove("schedulesLogin", function() {
 			window.location.reload();
+		});
+	});
+	
+	chrome.storage.sync.get("backImgTog", function(storage) {
+		$("#backImgTog").prop("checked", storage.backImgTog);
+	});
+	$("#backImgTog").change(function() {
+		chrome.storage.sync.set("backImgTog", $(this).prop("checked"), function() {
+			
 		});
 	});
 
