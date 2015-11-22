@@ -1,6 +1,6 @@
 body {
 	position: relative;
-	background-size: 100% auto;
+	background-size: 100% 2000px;
 }
 
 .section {
@@ -16,7 +16,7 @@ body {
 }
 #setup1 {
 	background-color: #1E88E5;
-  height: 1080px;
+	height: 1080px;
 	transition: background-color 0.75s;
 }
 #setup1.imageLoaded {
