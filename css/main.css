@@ -3,6 +3,14 @@ body {
 	background-size: 100% ;
 }
 
+#sourceCode {
+	color: white;
+}
+#sourceCode:hover {
+	color: #bfbfbf;
+	text-decoration: line-through;
+}
+
 .section {
 	padding-top:50px;
 	height: 500px;
