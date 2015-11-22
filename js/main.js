@@ -152,7 +152,7 @@ $(document).ready(function() {
 		$("#backImgTog").prop("checked", storage.backImgTog);
 	});
 	$("#backImgTog").change(function() {
-		chrome.storage.sync.set("backImgTog", $(this).prop("checked"), function() {
+		chrome.storage.sync.set({"backImgTog": $(this).prop("checked")}, function() {
 			
 		});
 	});
