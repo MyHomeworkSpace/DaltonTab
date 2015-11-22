@@ -14,4 +14,6 @@ $(document).ready(function() {
 	$("#settingsBtn").click(function() {
 		$("#settingsModal").modal();
 	});
+
+	$("#hwButton").smoothScroll();
 });
