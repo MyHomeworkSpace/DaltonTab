@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
-	$("#signIn").click(function() {
+	//$("#scheduleSignIn").click(function() {
+
 		var daltonid = $("#username").val();
 		var password = $("#password").val();
 
@@ -15,28 +16,32 @@ $(document).ready(function() {
 				var $data = $(data);
 				var statusCode = $data.find("result").attr("status");
 				if (statusCode == 200) {
-					swal("Awesome!", "You signed into Schedules.", "success")
 					var key = $data.find("result").children("key").text();
 					var owner = $data.find("result").children("key").attr("owner");
 					alert("Success! You've been signed in to Schedules.");
+					var today = new Date(dateString);
+					var id = key.split(":")[3]
+					var year = new Date(years);
+					$.post(schedulesUrl, {rouxRequest: "<request><key>"+key+"</key><action>selectStudentCalendar</action><ID>" + id +"</ID><academicyear>" + year + "</academicyear><start>" + today + "</start><end>" + today + "</end></request>"}, function(response) {console.log(response);});
+					$(tempResponse).find("period");
 					window.location.reload();
 				} else {
 					// Uh oh.
 					var errCode = $data.find("error").children("code").text();
 					var errMsg = $data.find("error").children("message").text();
 					if (errCode == "505") {
-						swal("Uh Oh...", "It seems like you put in the wrong credentials. Try again!", "warning");
+						alert("That username and password combination didn't work.\n\nDouble-check you have't made any typos.");
 						$("#loginform").show();
 						$("#loggingin").hide();
 					} else {
-						swal("Error" + errCode, errMsg, "error")
+						alert("Error " + errCode + " - " + errMsg);
 					}
 				}
 			},
 			error: function() {
-				swal("Whoops! An error occured while connecting to Schedules.", "Try again later, or, if that doesn't work, send an email to emails@coursesplus.tk.", "error");
+				alert("An error occured while connecting to Schedules.\n\nTry again later, or, if that doesn't work, send an email to emails@coursesplus.tk.");
 				window.close();
 			}
 		});
-	});
+	//});
 });
