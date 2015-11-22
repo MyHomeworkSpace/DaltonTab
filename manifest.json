@@ -5,6 +5,10 @@
 
 	"icons": {"128": "128.png"},
 
+	"background": {
+		"scripts": ["js/bg.js"]
+	},
+
 	"permissions": [
 		"*://*.dalton.org/",
 		"*://*.planhub.me/",
