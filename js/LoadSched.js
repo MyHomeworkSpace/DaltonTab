@@ -2,9 +2,6 @@ $(document).ready(function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
 	//$("#scheduleSignIn").click(function() {
 
-		var daltonid = "c20et";
-		var password = "---";
-
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; //January is 0!
@@ -38,7 +35,8 @@ $(document).ready(function() {
 					var year = yyyy;
 					$.post(schedulesUrl, {rouxRequest: "<request><key>"+key+"</key><action>selectStudentCalendar</action><ID>" + id +"</ID><academicyear>" + year + "</academicyear><start>" + today + "</start><end>" + today + "</end></request>"}, function(response) {
 						console.log(response);
-						console.log($(response).find("period"));
+						window.tempResponse = response;
+						console.log($(tempResponse).find("period"));
 					});
 					//window.location.reload();
 				} else {
