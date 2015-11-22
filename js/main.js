@@ -39,7 +39,7 @@ $(document).ready(function() {
 
 	window.coursesLib.checkLoggedIn(function(response) {
 		if (!response.isLoggedIn) {
-			$(".section-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">here</a>.');
+			$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">here</a>.');
 		} else {
 			window.coursesLib.getCourseList(function(response) {
 				for (var courseIndex in response.classes) {
@@ -57,5 +57,13 @@ $(document).ready(function() {
 			alert("T_PAAMAYIM_NEKUDOTAYIM");
 		}
 		easter_egg.load();
+	});
+
+	window.planhub.get("features/get/", function(data) {
+		console.log(data);
+		if (data.status == "error") {
+			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into PlanHub to view your homework.');
+			return;
+		}
 	});
 });
