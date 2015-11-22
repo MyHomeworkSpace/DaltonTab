@@ -17,6 +17,7 @@
 		<script src="js/main.js"></script>
 		<script src="js/konami.js"></script>
 		<script src="js/coursesLib.js"></script>
+		<script src="js/planhubApi.js"></script>
 	</head>
 	<body data-spy="scroll" data-target=".navbar" data-offset="50">
 		<!--<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -83,15 +84,15 @@
 			</div>
 			<div id="section2" class="section container-fluid">
 				<h1><i class="fa fa-file"></i> Homework</h1>
-				<h3 class="section-warning"></h3>
+				<h3 id="hw-warning" class="section-warning"></h3>
 				<div id="hwRow" class="row">
-					<div class="col-md-4">
+					<div id="hwTomorrow" class="col-md-4">
 						<h4>Due tomorrow</h4>
 					</div>
-					<div class="col-md-4">
+					<div id="hwSoon" class="col-md-4">
 						<h4>Due soon</h4>
 					</div>
-					<div class="col-md-4">
+					<div id="hwLongTerm" class="col-md-4">
 						<h4>Long-term</h4>
 					</div>
 				</div>
@@ -103,7 +104,7 @@
 			</div>
 			<div id="section42" class="section container-fluid">
 				<h1><i class="fa fa-list"></i> Classes</h1>
-				<ul id="courses">
+				<h3 id="classes-warning" class="section-warning"></h3>
 				</ul>
 			</div>
 			<div id="end" class="section container-fluid">
