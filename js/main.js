@@ -32,6 +32,34 @@ window.daltonTab.addEventToList = function(ev, list) {
 		var $name = $('<h4></h4>');
 			$name.text(name);
 		$item.append($name);
+
+		var $lineTwo = $('<h4></h4>');
+			var $tag = $('<span></span>');
+				$tag.addClass("first-word");
+				if (tag.toLowerCase() == "read") {
+					tag = tag + "ing";
+				}
+				$tag.addClass(window.utils.getPrefixClass(tag));
+				
+				$tag.text(tag);
+			$lineTwo.append($tag);
+
+			var $subject = $('<span></span>');
+				$subject.text(" in " + window.daltonTab.subjects[ev.subject].name);
+			$lineTwo.append($subject);
+
+			var $due = $('<span></span>');
+				var keyword = "due";
+				if (tag.toLowerCase() == "test" || tag.toLowerCase() == "exam" || tag.toLowerCase() == "midterm" || tag.toLowerCase() == "quiz" || tag.toLowerCase() == "ica" || tag.toLowerCase() == "lab") {
+					keyword = "on";
+				}
+				var dueText = window.utils.formatDate_pretty(moment(ev.due).add(1, "day").toDate());
+				if (moment(ev.due).add(1, "day").week() == moment().week()) {
+					dueText = window.utils.getDayOfWeek(moment(ev.due).add(1, "day").day());
+				}
+				$due.text(" " + keyword + " " + dueText);
+			$lineTwo.append($due);
+		$item.append($lineTwo);
 	$("#hw" + list).append($item);
 };
 window.daltonTab.findNextDay = function(offset) {
