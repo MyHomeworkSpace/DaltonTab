@@ -36,8 +36,21 @@ $(document).ready(function() {
 		var year = yyyy;
 		$.post(schedulesUrl, {rouxRequest: "<request><key>"+key+"</key><action>selectStudentCalendar</action><ID>" + id +"</ID><academicyear>" + year + "</academicyear><start>" + startFormat + "</start><end>" + endFormat + "</end></request>"}, function(response) {
 			var $data = $(response);
-			var periods = $data.find("period");
-			
+			$data.find("period").each(function() {
+				var $item = $("<tr></tr>");
+
+				var name = $(this).children("section").children("name").text().replace("<![CDATA[", "").replace("]]>");
+				var instructor = $(this).children("instructor").children("name").text();
+				var location = $(this).children("location").text();
+
+				$item.append("<strong>" + name + " in " + location + "</strong><br />");
+				if (instructor != "") {
+					$item.append("with " + instructor);
+				}
+
+				$("[data-dow=" + moment($(this).children("date").text()).day() + "]").append($item);
+			});
+
 		});
 	});
 });
