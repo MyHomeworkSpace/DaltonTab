@@ -16,6 +16,7 @@
 		<script src="js/parallax.min.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/konami.js"></script>
+		<script src="js/coursesLib.js"></script>
 	</head>
 	<body data-spy="scroll" data-target=".navbar" data-offset="50">
 		<!--<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -45,13 +46,6 @@
 				</div>
 			</div>
 		</nav>-->
-		<script>
-			var easter_egg = new Konami();
-			easter_egg.code = function() {
-				alert("MWWWHAHAHAHAHAHAH!");
-			}
-			easter_egg.load();
-		</script>
 
 		<div id="settingsModal" class="modal fade">
 	  		<div class="modal-dialog">
@@ -88,7 +82,7 @@
 		</div>
 		<div id="section2" class="section container-fluid">
 			<h1><i class="fa fa-file"></i> Homework</h1>
-			<h3 class="section-warning"><i class="fa fa-exclamation-circle"></i> Sync error messages would go here.</h3>
+			<h3 class="section-warning"></h3>
 			<div id="hwRow" class="row">
 				<div class="col-md-4">
 					<h4>Due tomorrow</h4>

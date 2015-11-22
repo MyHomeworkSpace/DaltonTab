@@ -7,8 +7,9 @@ function beginSchedules() {
 }
 
 function beginCourses() {
-	
+
 }
+
 
 $(document).ready(function() {
 	var timeUpdFunc = function() {
@@ -24,10 +25,22 @@ $(document).ready(function() {
 		$("#section1").addClass("imageLoaded");
 		$("body").css("background-image", "url(" + url + ")");
 	});
-	
+
 	$("#settingsBtn").click(function() {
 		$("#settingsModal").modal();
 	});
 
 	$("#hwButton").smoothScroll();
+
+	window.coursesLib.checkLoggedIn(function(response) {
+		if (!response.isLoggedIn) {
+			$(".section-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">here</a>.');
+		}
+
+		var easter_egg = new Konami();
+		easter_egg.code = function() {
+			alert("MWWWHAHAHAHAHAHAH!");
+		}
+		easter_egg.load();
+	});
 });
