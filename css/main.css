@@ -30,7 +30,8 @@ body {
 body{
 }
 #par{
-	background-size: 120%;
+	background-size: 100%;
+	min-height: 100vh;
 }
 #section2 {
 	background-color: rgba(60, 77, 99, 0.9);
