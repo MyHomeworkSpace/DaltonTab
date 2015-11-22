@@ -1,3 +1,15 @@
+function beginPlanHub() {
+
+}
+
+function beginSchedules() {
+
+}
+
+function beginCourses() {
+	
+}
+
 $(document).ready(function() {
 	var timeUpdFunc = function() {
 		$(".current-time").text(moment().format("h:mm A"));
