@@ -15,23 +15,22 @@ $(document).ready(function() {
 				var $data = $(data);
 				var statusCode = $data.find("result").attr("status");
 				if (statusCode == 200) {
-					alert("Success! You've been signed in to Schedules.");
-					window.location.reload();
+					swal("Awesome!", "You signed into Schedules.", "success")
 				} else {
 					// Uh oh.
 					var errCode = $data.find("error").children("code").text();
 					var errMsg = $data.find("error").children("message").text();
 					if (errCode == "505") {
-						alert("That username and password combination didn't work.\n\nDouble-check you have't made any typos.");
+						swal("Uh Oh...", "It seems like you put in the wrong credentials. Try again!", "warning");
 						$("#loginform").show();
 						$("#loggingin").hide();
 					} else {
-						alert("Error " + errCode + " - " + errMsg);
+						swal("Error" + errCode, errMsg, "error")
 					}
 				}
 			},
 			error: function() {
-				alert("An error occured while connecting to Schedules.\n\nTry again later, or, if that doesn't work, send an email to emails@coursesplus.tk.");
+				swal("Whoops! An error occured while connecting to Schedules.", "Try again later, or, if that doesn't work, send an email to emails@coursesplus.tk.", "error");
 				window.close();
 			}
 		});

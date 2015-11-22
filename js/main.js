@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 		var easter_egg = new Konami();
 		easter_egg.code = function() {
-			alert("T_PAAMAYIM_NEKUDOTAYIM");
+			swal("T_PAAMAYIM_NEKUDOTAYIM!", "MWAHHHAHAHAHAHAHAHAH", "warning")
 		}
 		easter_egg.load();
 	});
