@@ -131,8 +131,8 @@ $(document).ready(function() {
 
 	chrome.storage.sync.get(["schedulesLogin"], function(response) {
 		if (response.schedulesLogin != undefined) {
-			$("#schedulesSignIn").removeClass("hidden");
-			$("#schedulesSignedIn").addClass("hidden");
+			$("#schedulesSignIn").addClass("hidden");
+			$("#schedulesSignedIn").removeClass("hidden");
 			$("#schedulesAccountName").text(response.schedulesLogin.username);
 		}
 	});
