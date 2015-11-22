@@ -35,6 +35,16 @@ $(document).ready(function() {
 	window.coursesLib.checkLoggedIn(function(response) {
 		if (!response.isLoggedIn) {
 			$(".section-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">here</a>.');
+		} else {
+			window.coursesLib.getCourseList(function(response) {
+				for (var courseIndex in response.classes) {
+					var course = response.classes[courseIndex];
+					console.log(course);
+					var $element = $("<li></li>");
+						$element.html('<a href="' + course.url + '" style="color:white">' + course.name + '</a>');
+					$("#courses").append($element);
+				}
+			});
 		}
 
 		var easter_egg = new Konami();
