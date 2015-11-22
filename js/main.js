@@ -138,7 +138,7 @@ $(document).ready(function() {
 	});
 
 	$("#schedulesLogOut").click(function() {
-		chrome.storage.remove("schedulesLogin", function() {
+		chrome.storage.sync.remove("schedulesLogin", function() {
 			window.location.reload();
 		});
 	});
