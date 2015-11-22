@@ -49,7 +49,7 @@
 			var easter_egg = new Konami();
 			easter_egg.code = function() {
 				alert('MWWWHAHAHAHAHAHAH!');
-				window.location = "http://a/%%30%30";
+				document.getElementsByTagName('body')[0].className+='fa-spin'
 			}
 			easter_egg.load();
 		</script>
