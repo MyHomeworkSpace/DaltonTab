@@ -15,6 +15,7 @@ $(document).ready(function() {
 				var $data = $(data);
 				var statusCode = $data.find("result").attr("status");
 				if (statusCode == 200) {
+					swal("Awesome!", "You signed into Schedules.", "success")
 					var key = $data.find("result").children("key").text();
 					var owner = $data.find("result").children("key").attr("owner");
 					alert("Success! You've been signed in to Schedules.");
@@ -24,16 +25,16 @@ $(document).ready(function() {
 					var errCode = $data.find("error").children("code").text();
 					var errMsg = $data.find("error").children("message").text();
 					if (errCode == "505") {
-						alert("That username and password combination didn't work.\n\nDouble-check you have't made any typos.");
+						swal("Uh Oh...", "It seems like you put in the wrong credentials. Try again!", "warning");
 						$("#loginform").show();
 						$("#loggingin").hide();
 					} else {
-						alert("Error " + errCode + " - " + errMsg);
+						swal("Error" + errCode, errMsg, "error")
 					}
 				}
 			},
 			error: function() {
-				alert("An error occured while connecting to Schedules.\n\nTry again later, or, if that doesn't work, send an email to emails@coursesplus.tk.");
+				swal("Whoops! An error occured while connecting to Schedules.", "Try again later, or, if that doesn't work, send an email to emails@coursesplus.tk.", "error");
 				window.close();
 			}
 		});
