@@ -13,6 +13,14 @@ body {
 	max-height: 1080px;
 	transition: background-color 0.75s;
 }
+#setup1 {
+	background-color: #1E88E5;
+  height: 1080px;
+	transition: background-color 0.75s;
+}
+#setup1.imageLoaded {
+	background-color: transparent;
+}
 #section1.imageLoaded {
 	background-color: transparent;
 }
@@ -29,6 +37,12 @@ background-image: url("https://www.bing.com/az/hprichbg/rb/XinjiangLake_EN-US108
 	background-color: rgba(0, 188, 212, 0.9);
 }
 #section42 {
+	background-color: rgba(0, 150, 136, 0.9);
+}
+#section21 {
+	background-color: rgba(0, 188, 212, 0.9);
+}
+#section22 {
 	background-color: rgba(0, 150, 136, 0.9);
 }
 #end {
