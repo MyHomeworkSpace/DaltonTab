@@ -62,13 +62,19 @@
 					<div class="modal-body">
 						<p>Manage connected accounts and other preferences here.</p>
 						<div id="coursesSignIn" class="account">
-							<p>To sign into courses, go to <a href="courses.dalton.org">courses.dalton.org</a>.
+							<p>To sign into Courses, go to <a href="https://courses.dalton.org">courses.dalton.org</a>.
 						</div>
 						<div id="scheduleSignIn" class="account">
-							<button id="schedulesAccountBtn" class="btn btn-primary">Sign in to Schedules</button>
+							<div id="schedulesSignedIn" class="hidden">
+								<p>Signed in as <span id="schedulesAccountName"></span> </p>
+								<button id="schedulesSignOut" class="btn btn-primary">Log out</button>
+							</div>
+							<div id="schedulesSignIn">
+								<button id="schedulesAccountBtn" class="btn btn-primary">Sign in to Schedules</button>
+							</div>
 						</div>
 						<div id="planhubSignIn" class="account">
-							<button id="planhubAccountBtn" class="btn btn-primary">Sign in to PlanHub</button>
+							<p>To sign into PlanHub, go to <a href="https://planhub.me">planhub.me</a>.
 						</div>
 					</div>
 					<div class="modal-footer">

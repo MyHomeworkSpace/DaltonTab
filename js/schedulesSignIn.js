@@ -27,7 +27,7 @@ $(document).ready(function() {
 							text: "You signed into Schedules.",
 							type: "success"
 						}, function() {
-							window.close();
+							window.location.href = chrome.runtime.getURL("newTab.html");
 						});
 					});
 				} else {
@@ -45,7 +45,6 @@ $(document).ready(function() {
 			},
 			error: function() {
 				swal("Whoops! An error occured while connecting to Schedules.", "Try again later, or, if that doesn't work, send an email to emails@coursesplus.tk.", "error");
-				window.close();
 			}
 		});
 	});

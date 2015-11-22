@@ -126,7 +126,21 @@ $(document).ready(function() {
 
 		var left = ((width / 2) - (w / 2)) + dualScreenLeft;
 		var top = ((height / 2) - (h / 2)) + dualScreenTop;
-		window.open(chrome.runtime.getURL("schedulesSignIn.html"), "schedules", "status = 0, height = " + h + ", width = " + w + ", resizable = 0, top=" + top + ", left=" + left);
+		window.location.href = chrome.runtime.getURL("schedulesSignIn.html");
+	});
+
+	chrome.storage.sync.get(["schedulesLogin"], function(response) {
+		if (response.schedulesLogin != undefined) {
+			$("#schedulesSignIn").removeClass("hidden");
+			$("#schedulesSignedIn").addClass("hidden");
+			$("#schedulesAccountName").text(response.schedulesLogin.username);
+		}
+	});
+
+	$("#schedulesLogOut").click(function() {
+		chrome.storage.remove("schedulesLogin", function() {
+			window.location.reload();
+		});
 	});
 
 	window.coursesLib.checkLoggedIn(function(response) {
@@ -134,7 +148,7 @@ $(document).ready(function() {
 			$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">here</a>.');
 		} else {
 			window.coursesLib.getCourseList(function(response) {
-				for (var courseIndex in response.classes) {
+				for (var couyncrseIndex in response.classes) {
 					var course = response.classes[courseIndex];
 					console.log(course);
 					var $element = $("<li></li>");
