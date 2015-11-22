@@ -29,6 +29,9 @@ body {
 }
 body{
 }
+#par{
+	background-size: 120%;
+}
 #section2 {
 	background-color: rgba(60, 77, 99, 0.9);
 	z-index: 1;
