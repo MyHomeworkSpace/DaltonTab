@@ -1,15 +1,3 @@
-function beginPlanHub() {
-
-}
-
-function beginSchedules() {
-
-}
-
-function beginCourses() {
-
-}
-
 window.daltonTab = {
 	subjects: []
 };
@@ -119,11 +107,25 @@ $(document).ready(function() {
 		$("#settingsModal").modal();
 	});
 
-
 	$("#newTabDefault").click(function() {
 		window.location.href = "chrome-search://local-ntp/local-ntp.html"
 	});
 	$("#hwButton").smoothScroll();
+
+	$("#schedulesAccountBtn").click(function() {
+		var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+		var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+		width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+		height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+		var w = 600;
+		var h = 400;
+
+		var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+		var top = ((height / 2) - (h / 2)) + dualScreenTop;
+		window.open(chrome.runtime.getURL("schedulesSignIn.html"), "schedules", "status = 0, height = " + h + ", width = " + w + ", resizable = 0, top=" + top + ", left=" + left);
+	});
 
 	window.coursesLib.checkLoggedIn(function(response) {
 		if (!response.isLoggedIn) {

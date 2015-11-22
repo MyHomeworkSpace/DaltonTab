@@ -15,11 +15,21 @@ $(document).ready(function() {
 				var $data = $(data);
 				var statusCode = $data.find("result").attr("status");
 				if (statusCode == 200) {
-					swal("Awesome!", "You signed into Schedules.", "success")
 					var key = $data.find("result").children("key").text();
 					var owner = $data.find("result").children("key").attr("owner");
-					alert("Success! You've been signed in to Schedules.");
-					window.location.reload();
+					chrome.storage.sync.set({"schedulesLogin": {
+						key: key,
+						username: daltonid,
+						owner: owner
+					}}, function() {
+						swal({
+							title: "Awesome!",
+							text: "You signed into Schedules.",
+							type: "success"
+						}, function() {
+							window.close();
+						});
+					});
 				} else {
 					// Uh oh.
 					var errCode = $data.find("error").children("code").text();
