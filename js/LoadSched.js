@@ -30,6 +30,15 @@ $(document).ready(function() {
 	var today = yyyy+mm+dd;
 	
 	chrome.storage.sync.get(["schedulesLogin"], function(storage) {
+		if (storage.schedulesLogin == undefined) {
+			$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> You aren\'t signed in to Schedules. ');
+			var $link = $('<a href="#">Sign in to continue.</a>');
+				$link.click(function() {
+					$("#settingsModal").modal();
+					return false;
+				});
+			$("#schedules-warning").append($link);
+		}
 		var key = storage.schedulesLogin.key;
 		var owner = storage.schedulesLogin.username;
 		var id = key.split(":")[3];
