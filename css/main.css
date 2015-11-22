@@ -1,18 +1,21 @@
 body {
 	position: relative;
-	background-size: 100% 2000px;
+	background-size: 100% ;
 }
 
 .section {
 	padding-top:50px;
 	height: 500px;
 	color: #fff;
+	z-index: 0;
+	background-color: transparent;
 }
 
 #section1 {
 	background-color: #1E88E5;
 	max-height: 1080px;
 	transition: background-color 0.75s;
+	
 }
 #setup1 {
 	background-color: #1E88E5;
@@ -20,7 +23,6 @@ body {
 	transition: background-color 0.75s;
 }
 #setup1.imageLoaded {
-	background-color: transparent;
 }
 #section1.imageLoaded {
 	background-color: transparent;
@@ -29,6 +31,8 @@ body{
 }
 #section2 {
 	background-color: rgba(60, 77, 99, 0.9);
+	z-index: 1;
+	position: relative;
 }
 #section3 {
 	background-color: rgba(255, 152, 0, 0.9);
