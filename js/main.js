@@ -53,7 +53,7 @@ $(document).ready(function() {
 
 		var easter_egg = new Konami();
 		easter_egg.code = function() {
-			alert("MWWWHAHAHAHAHAHAH!");
+			alert("HEXING ACTIVATING...");
 		}
 		easter_egg.load();
 	});
