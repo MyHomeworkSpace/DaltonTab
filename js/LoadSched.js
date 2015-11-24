@@ -55,8 +55,20 @@ $(document).ready(function() {
 					$item.append("with " + instructor);
 				}
 				$("[data-dow=" + moment($(this).children("date").text()).day() + "]").append($item);
+				if(moment.day() == $(this).children("date").text()).day()) {
+					if (moment().hour() >= moment($(this).children("start").text()).hour() && moment().hour() <= moment($(this).children("end").text()).hour()) {
+						if (moment().hour() == moment($(this).children("start").text()).hour()) {
+							if (moment().minute() >= moment($(this).children("start").text()).minute()) {
+								// $(this) is the current period
+							}
+						} else {
+							if (moment().minute() <= moment($(this).children("end").text()).minute()) {
+								// $(this) is the current period
+							}
+						}
+					}
+				}
 			});
-
 		});
 	});
 });
