@@ -22,6 +22,7 @@ body {
 	background-color: #1E88E5;
 	max-height: 1080px;
 	transition: background-color 0.75s;
+	 background-size: 200%, 200%;
 
 }
 #setup1 {
