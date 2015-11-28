@@ -12,7 +12,7 @@ $(document).ready(function() {
 			start.subtract(1, "day");
 		}
 	}
-	var end = moment().add(7, "days");
+	var end = moment().add(6, "days");
 	var dd = start.date();
 	var mm = start.month()+1; //January is 0!
 	var yyyy = start.year();
@@ -52,19 +52,28 @@ $(document).ready(function() {
 			}
 			$data.find("period").each(function() {
 				var $item = $("<tr></tr>");
-
 				var name = $(this).children("section").children("name").text().replace("<![CDATA[", "").replace("]]>");
 				var instructor = $(this).children("instructor").children("name").text();
 				var location = $(this).children("location").text();
-
 				$item.append("<strong>" + name + " in " + location + "</strong><br />");
 				if (instructor != "") {
 					$item.append("with " + instructor);
 				}
-
 				$("[data-dow=" + moment($(this).children("date").text()).day() + "]").append($item);
+				if(moment.day() == $(this).children("date").text()).day()) {
+					if (moment().hour() >= moment($(this).children("start").text()).hour() && moment().hour() <= moment($(this).children("end").text()).hour()) {
+						if (moment().hour() == moment($(this).children("start").text()).hour()) {
+							if (moment().minute() >= moment($(this).children("start").text()).minute()) {
+								// $(this) is the current period
+							}
+						} else {
+							if (moment().minute() <= moment($(this).children("end").text()).minute()) {
+								// $(this) is the current period
+							}
+						}
+					}
+				}
 			});
-
 		});
 	});
 });
