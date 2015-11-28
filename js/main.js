@@ -160,7 +160,8 @@ $(document).ready(function() {
 
 	window.coursesLib.checkLoggedIn(function(response) {
 		if (!response.isLoggedIn) {
-			$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">here</a>.');
+			$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">to Courses</a>.');
+			$("#classes-warning").css("font-size", "3em");
 		} else {
 			window.coursesLib.getCourseList(function(response) {
 				for (var courseIndex in response.classes) {
@@ -183,11 +184,15 @@ $(document).ready(function() {
 	window.planhub.get("features/get/", function(data) {
 		console.log(data);
 		if (data.status == "error") {
-			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into PlanHub to view your homework.');
+			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://planhub.me">PlanHub</a> to view your homework.');
+			$("#hw-warning").css("font-size", "3em");
+			$("#hwRow").remove();
 			return;
 		}
 		if (data.features.indexOf("hwView") == -1) {
 			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Enable <a href="https://planhub.me/app#hwView">Homework View</a> to see your homework here.');
+			$("#hw-warning").css("font-size", "3em");
+			$("#hwRow").remove();
 			return;
 		}
 

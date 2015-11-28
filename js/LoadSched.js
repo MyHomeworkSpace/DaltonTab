@@ -45,6 +45,11 @@ $(document).ready(function() {
 		var year = yyyy;
 		$.post(schedulesUrl, {rouxRequest: "<request><key>"+key+"</key><action>selectStudentCalendar</action><ID>" + id +"</ID><academicyear>" + year + "</academicyear><start>" + startFormat + "</start><end>" + endFormat + "</end></request>"}, function(response) {
 			var $data = $(response);
+			if ($data.find("result").children("error").children("code").text() == "505") {
+				$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
+				$("#schedules-warning").css("font-size", "3em");
+				$("#schedulesTable").remove();
+			}
 			$data.find("period").each(function() {
 				var $item = $("<tr></tr>");
 
