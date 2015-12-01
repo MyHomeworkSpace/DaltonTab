@@ -1,2 +1,4 @@
 # DaltonTab
-Dalton Tab is a Chrome Extension built to be a hub for Dalton School Features. The extension integrates websites and apps such as Courses, Schedules, PlanHub, etc. This extension is licensed under the MIT License. Wow, I can't believe you're still reading this. Good for you! Ok, I'm going to stop typing now...
+DaltonTab is a Chrome Extension built to be a hub for Dalton School Features. The extension integrates websites and apps such as Courses, Schedules, PlanHub, etc. It is licensed under the MIT License, see the `LICENSE` file for more details.
+
+[Download it](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm)
