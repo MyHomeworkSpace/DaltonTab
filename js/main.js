@@ -65,27 +65,6 @@ window.daltonTab.findNextDay = function(offset) {
 	}
 	return retVal.toDate();
 };
-window.daltonTab.loadDate = function(date, list) {
-	console.log(date);
-	for (var subjectIndex in window.daltonTab.subjects) {
-		window.planhub.get("planner/events/get/" + window.utils.formatDate_api(date) + "/" + subjectIndex, function(data) {
-			var ev = data.events;
-			//window.daltonTab.loadStep();
-			if (ev.length == 0) {
-				return;
-			}
-			for (var evIndex in ev) {
-				var evObj = {
-					name: ev[evIndex].text,
-					due: new Date(data.date),
-					subject: ev[evIndex].sectionIndex,
-					done: ev[evIndex].done
-				};
-				window.daltonTab.addEventToList(evObj, list);
-			};
-		});
-	}
-};
 
 window.daltonTab.loadHomework = function() {
 		window.planhub.get("hwView/getHw?date=" + moment().format('YYYY-MM-DD'), function(data) {
@@ -226,48 +205,6 @@ $(document).ready(function() {
 				window.daltonTab.subjects[itm.sectionIndex] = itm;
 			};
 			window.daltonTab.loadHomework();
-			/*window.daltonTab.loadDate(window.daltonTab.findNextDay(1), "Tomorrow", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(2), "Soon", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(3), "Soon", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(4), "Soon", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(5), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(6), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(7), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(8), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(9), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(10), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(11), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(12), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(13), "Longterm", function() {
-
-			});
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(14), "Longterm", function() {
-
-			});*/
 		});
 	});
 	setTimeout(function() {
