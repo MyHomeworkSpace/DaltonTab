@@ -176,13 +176,13 @@ $(document).ready(function() {
 				}
 			});
 		}
-
-		var easter_egg = new Konami();
-		easter_egg.code = function() {
-			swal("Unexpected T_PAAMAYIM_NEKUDOTAYIM!", "MWAHHHAHAHAHAHAHAHAH\nConfused? Search on...\n This product uses Sapi, Papi, Capy, Wapi", "warning")
-		}
-		easter_egg.load();
 	});
+
+	var easter_egg = new Konami();
+	easter_egg.code = function() {
+		swal("Unexpected T_PAAMAYIM_NEKUDOTAYIM!", "MWAHHHAHAHAHAHAHAHAH\nConfused? Search on...\n This product uses Sapi, Papi, Capy, Wapi", "warning");
+	}
+	easter_egg.load();
 
 	window.planhub.get("features/get/", function(data) {
 		console.log(data);
