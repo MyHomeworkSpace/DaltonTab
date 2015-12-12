@@ -100,7 +100,6 @@ $(document).ready(function() {
 	timeUpdFunc();
 	setInterval(timeUpdFunc, 1000);
 
-
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		if (storage.backImgTog == undefined || !storage.backImgTog) {
 			$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US", function(response) {
@@ -112,6 +111,19 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	for (var sectionIndex in window.sections) {
+		var section = window.sections[sectionIndex];
+		var $section = $('<div class="section"></div>');
+			$section.attr("id", "section-" + sectionIndex);
+			var $header = $('<h1></h1>');
+				var $icon = $('<i class="fa"></i>');
+					$icon.addClass(section.icon);
+				$header.append($icon);
+				$header.append(" " + section.name);
+			$section.append($header);
+			$section.append(section.createHtml());
+	}
 
 	$("#settingsBtn").click(function() {
 		$("#settingsModal").modal();
@@ -210,8 +222,4 @@ $(document).ready(function() {
 	setTimeout(function() {
 		$(window).trigger('resize');
 	}, 100)
-});
-
-$(document).on("load", function() {
-
 });
