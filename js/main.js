@@ -2,8 +2,6 @@ window.daltonTab = {
 	subjects: []
 };
 
-
-
 window.daltonTab.addEventToList = function(ev, list) {
 	var tag = window.utils.getPrefix(ev.name);
 	var name = ev.name.split(" ");
@@ -89,6 +87,32 @@ window.daltonTab.loadDate = function(date, list) {
 	}
 };
 
+window.daltonTab.loadHomework = function() {
+		window.planhub.get("hwView/getHw?date=" + moment().format('YYYY-MM-DD'), function(data) {
+			var ev = data.events;
+			if (ev.length == 0) {
+				return;
+			}
+			for (var evIndex in ev) {
+				var evObj = {
+					name: ev[evIndex].text,
+					due: new Date(ev[evIndex].date.split("T")[0]),
+					subject: ev[evIndex].sectionIndex,
+					done: ev[evIndex].done
+				};
+				var list = "LongTerm";
+				var dueMoment = moment(evObj.due).utcOffset(0);
+				var tomorrow = moment(window.daltonTab.findNextDay(1)).date();
+				if (dueMoment.date() == tomorrow && dueMoment.month() == moment(window.daltonTab.findNextDay(1)).month() && dueMoment.year() == moment(window.daltonTab.findNextDay(1)).year()) { // moment.isSame didn't work here. /shrug
+					list = "Tomorrow";
+				} else if (dueMoment.isBefore(moment(window.daltonTab.findNextDay(5)).subtract(1, "day"))) {
+					list = "Soon";
+				}
+				window.daltonTab.addEventToList(evObj, list);
+			};
+		});
+};
+
 $(document).ready(function() {
 	var timeUpdFunc = function() {
 		$(".current-time").text(moment().format("h:mm A"));
@@ -97,7 +121,7 @@ $(document).ready(function() {
 	timeUpdFunc();
 	setInterval(timeUpdFunc, 1000);
 
-	
+
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		if (storage.backImgTog == undefined || !storage.backImgTog) {
 			$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US", function(response) {
@@ -148,13 +172,13 @@ $(document).ready(function() {
 			window.location.reload();
 		});
 	});
-	
+
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		$("#backImgTog").prop("checked", storage.backImgTog);
 	});
 	$("#backImgTog").change(function() {
 		chrome.storage.sync.set({"backImgTog": $(this).prop("checked")}, function() {
-			
+
 		});
 	});
 
@@ -201,7 +225,8 @@ $(document).ready(function() {
 				var itm = data.sections[i];
 				window.daltonTab.subjects[itm.sectionIndex] = itm;
 			};
-			window.daltonTab.loadDate(window.daltonTab.findNextDay(1), "Tomorrow", function() {
+			window.daltonTab.loadHomework();
+			/*window.daltonTab.loadDate(window.daltonTab.findNextDay(1), "Tomorrow", function() {
 
 			});
 			window.daltonTab.loadDate(window.daltonTab.findNextDay(2), "Soon", function() {
@@ -242,7 +267,7 @@ $(document).ready(function() {
 			});
 			window.daltonTab.loadDate(window.daltonTab.findNextDay(14), "Longterm", function() {
 
-			});
+			});*/
 		});
 	});
 	setTimeout(function() {
