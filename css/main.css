@@ -11,8 +11,10 @@ body {
 }
 
 .section {
-	padding-top:50px;
-	height: 500px;
+	padding-top: 50px;
+	padding-bottom: 10px;
+	min-height: 500px;
+	height: auto;
 	color: #fff;
 	z-index: 0;
 	background-color: transparent;
@@ -61,6 +63,7 @@ body{
 	background-color: rgba(0, 150, 136, 0.9);
 }
 #end {
+	min-height: 200px;
 	height: 200px;
 	background-color: rgba(85, 85, 85, 1);
 }
