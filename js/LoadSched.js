@@ -21,14 +21,14 @@ $(document).ready(function() {
 
 	if(dd<10) {
 		dd='0'+dd
-	} 
+	}
 
 	if(mm<10) {
 		mm='0'+mm
-	} 
+	}
 
 	var today = yyyy+mm+dd;
-	
+
 	chrome.storage.sync.get(["schedulesLogin"], function(storage) {
 		if (storage.schedulesLogin == undefined) {
 			$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> You aren\'t signed in to Schedules. ');
@@ -60,7 +60,7 @@ $(document).ready(function() {
 					$item.append("with " + instructor);
 				}
 				$("[data-dow=" + moment($(this).children("date").text()).day() + "]").append($item);
-				if(moment.day() == $(this).children("date").text()).day()) {
+				if(moment.day() == $(this).children("date").text().day()) {
 					if (moment().hour() >= moment($(this).children("start").text()).hour() && moment().hour() <= moment($(this).children("end").text()).hour()) {
 						if (moment().hour() == moment($(this).children("start").text()).hour()) {
 							if (moment().minute() >= moment($(this).children("start").text()).minute()) {
