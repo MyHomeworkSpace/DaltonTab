@@ -1,5 +1,8 @@
-$(document).ready(function() {
+window.schedule = {};
+
+window.LoadSched = function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
+	var rkeUrl = "https://rouxkeyextend.planhub.me/extend.php";
 	//$("#scheduleSignIn").click(function() {
 
 	var start = moment();
@@ -43,12 +46,40 @@ $(document).ready(function() {
 		var owner = storage.schedulesLogin.username;
 		var id = key.split(":")[3];
 		var year = yyyy;
+		if (!window.schedule.extended) {
+			window.schedule.extended = false;
+		}
 		$.post(schedulesUrl, {rouxRequest: "<request><key>"+key+"</key><action>selectStudentCalendar</action><ID>" + id +"</ID><academicyear>" + year + "</academicyear><start>" + startFormat + "</start><end>" + endFormat + "</end></request>"}, function(response) {
 			var $data = $(response);
 			if ($data.find("result").children("error").children("code").text() == "505") {
-				$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
-				$("#schedules-warning").css("font-size", "3em");
-				$("#schedulesTable").remove();
+				if (window.schedule.extended) {
+					// extension failed, give up.
+					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
+					$("#schedules-warning").css("font-size", "3em");
+					$("#schedulesTable").remove();
+				} else {
+					// try and extend key
+					$.post(rkeUrl, {
+						application: "schedules",
+						key: key
+					}, function(rkeResp_str) {
+						var rkeResp = JSON.parse(rkeResp_str);
+						if (rkeResp.status != "ok") {
+							$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
+							$("#schedules-warning").css("font-size", "3em");
+							$("#schedulesTable").remove();
+							return;
+						}
+						var newKey = rkeResp.key;
+						storage.schedulesLogin.key = newKey;
+						chrome.storage.sync.set({
+							schedulesLogin: storage.schedulesLogin
+						}, function() {
+							window.schedule.extended = true;
+							window.LoadSched();
+						})
+					});
+				}
 			}
 			$data.find("period").each(function() {
 				var $item = $("<tr></tr>");
@@ -76,4 +107,8 @@ $(document).ready(function() {
 			});
 		});
 	});
+};
+
+$(document).ready(function() {
+	window.LoadSched();
 });
