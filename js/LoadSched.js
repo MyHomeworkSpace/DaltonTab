@@ -15,7 +15,7 @@ window.LoadSched = function() {
 			start.subtract(1, "day");
 		}
 	}
-	var end = start;
+	var end = start.clone();
 	end.add(5, "days");
 	var dd = start.date();
 	var mm = start.month()+1; //January is 0!
