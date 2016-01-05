@@ -15,7 +15,7 @@ window.LoadSched = function() {
 			start.subtract(1, "day");
 		}
 	}
-	var end = moment().add(5, "days");
+	var end = start.add(5, "days");
 	var dd = start.date();
 	var mm = start.month()+1; //January is 0!
 	var yyyy = start.year();
