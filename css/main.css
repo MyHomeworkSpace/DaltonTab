@@ -132,6 +132,9 @@ body{
 	background-color: #FFD3BD;
 	color: black !important;
 }
+.daltonTab-done {
+	text-decoration: line-through;
+}
 /*
 .section a {
 	color: #f1f1f1;
