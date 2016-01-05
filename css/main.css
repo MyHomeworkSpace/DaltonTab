@@ -133,7 +133,9 @@ body{
 	color: black !important;
 }
 .daltonTab-done {
+	color: gray;
 	text-decoration: line-through;
+	font-style: italic;
 }
 /*
 .section a {
