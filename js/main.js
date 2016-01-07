@@ -107,6 +107,7 @@ $(document).ready(function() {
 				$("#par").parallax({ imageSrc: url, bleed: 20, positionY: "0px" });
 				$("#par").addClass("imageLoaded");
 				$("#section1").addClass("imageLoaded");
+				$(window).trigger('resize');
 				//$("body").css("background-image", "url(" + url + ")");
 			});
 		}
