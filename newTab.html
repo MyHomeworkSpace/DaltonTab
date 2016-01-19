@@ -24,36 +24,9 @@
 		<script src="js/sweetalert.min.js"></script>
 		<script src="js/LoadSched.js"></script>
 		<script src="js/planhubApi.js"></script>
+		<script src="js/nav.js"></script>
 	</head>
 	<body data-spy="scroll" data-target=".navbar" data-offset="50">
-		<!--<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="http://courses.dalton.org">New Tab</a>
-				</div>
-				<div>
-					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li><a href="#section1" class="current-time">(Current Time)</a></li>
-							<li><a href="#section2">Homework</a></li>
-							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Schedules <span class="caret"></span></a>
-							<iframe src=https://schedules.dalton.org/ width="600" height="400"></iframe>
-								<ul class="dropdown-menu">
-									<li><a href="#section41">Schedule</a></li>
-									<li><a href="#section42">Classes</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</nav>-->
-
 		<div id="settingsModal" class="modal fade">
 	  		<div class="modal-dialog">
 				<div class="modal-content">
@@ -96,9 +69,35 @@
 				<br />
 				<h1 style="text-align:center" class="current-time mainTime"><i class="fa fa-exclamation-circle"></i> Looks like there was a problem!</h1>
 				<h2 style="text-align:center" class="current-date mainDate">We couldn't get the time to load. Everything else should work fine. If you want the date and time, you can click <a href="http://www.time.gov/">here</a>.</h2>
-		  <div style="height:20%"></div>
+		  <div style="height:40%"></div>
 		  <h1 style="text-align:center"><a id="hwButton" href="#section2" style="color:white"><i class="fa fa-chevron-circle-down"></i></a></h1>
 			</div>
+			<nav class="navbar navbar-inverse" id="nav" data-spy="affix" width="100vw" data-offset-top="1080">
+				<div class="container-fluid">
+					<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="http://courses.dalton.org">New Tab</a>
+					</div>
+					<div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav">
+								<li><a href="#section1" class="current-time">(Current Time)</a></li>
+								<li><a href="#section2">Homework</a></li>
+								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Schedules <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="#section41">Schedule</a></li>
+										<li><a href="#section42">Classes</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
 			<div id="section2" class="section container-fluid">
 				<h1><i class="fa fa-file"></i> Homework</h1>
 				<h3 id="hw-warning" class="section-warning"></h3>
