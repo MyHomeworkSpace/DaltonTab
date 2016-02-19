@@ -103,6 +103,9 @@ $(document).ready(function() {
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		if (storage.backImgTog == undefined || !storage.backImgTog) {
 			$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US", function(response) {
+				console.log("===START BING IMAGE STUFF===");
+				console.log(response);
+				console.log("===END BING IMAGE STUFF===");
 				var url = "https://www.bing.com" + response.images[0].url;
 				$("#par").parallax({ imageSrc: url, bleed: 20, positionY: "0px" });
 				$("#par").addClass("imageLoaded");

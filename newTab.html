@@ -24,8 +24,33 @@
 		<script src="js/LoadSched.js"></script>
 		<script src="js/planhubApi.js"></script>
 		<script src="js/nav.js"></script>
+		<script src="js/feedback.js"></script>
 	</head>
 	<body data-spy="scroll" data-target=".navbar" data-offset="50">
+		<div id="feedback-modal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title"><span id="feedback-modal-title-first">Send a </span><span class="feedback-type"> </span></h4>
+					</div>
+					<div class="modal-body">
+						<p class="feedback-desc"></p>
+						<textarea id="feedback-msg" placeholder="Write your message here..."></textarea><strong>The following information will be sent with your feedback:</strong>
+						<ul>
+							<li>Your DaltonTab version (<strong class="daltontab-version"></strong>)</li>
+							<li>Information about what services you're signed in to</li>
+						</ul>
+						<p>Thanks for the feedback! Click "Submit" to send it!</p>
+					</div>
+					<div class="modal-footer feedback-footer-normal">
+						<button type="button" data-dismiss="modal" class="btn btn-default">Close without submitting</button>
+						<button type="button" id="feedback-submit" class="btn btn-primary">Submit</button>
+					</div>
+					<div class="modal-footer feedback-footer-load hidden"><i class="fa fa-circle-o-notch fa-spin"></i><span> Loading...</span></div>
+				</div>
+			</div>
+		</div>
 		<div id="settingsModal" class="modal fade">
 	  		<div class="modal-dialog">
 				<div class="modal-content">
@@ -146,7 +171,12 @@
 			</div>
 			<div id="end" class="section container-fluid">
 				<h3 class="center">Thanks for using Dalton<strong>Tab</strong>!</h3>
-				<h5 class="center"><button class="btn btn-default" id="settingsBtn">Settings</button><!--<button target="_blank" id="newTabDefault" class="btn btn-default">Default New Tab</button></h6>-->
+				<h5 class="center">
+					<button class="btn btn-default feedback-btn" data-type="smile"><i class="fa fa-smile-o"></i></button>
+					<button class="btn btn-default feedback-btn" data-type="frown"><i class="fa fa-frown-o"></i></button>
+					<button class="btn btn-default feedback-btn" data-type="idea"><i class="fa fa-lightbulb-o"></i></button>
+				</h5>
+				<h5 class="center"><button class="btn btn-default" id="settingsBtn">Settings</button></h5>
 				<h6 class="center"><a href="https://github.com/ULTIMATHEXERS/DaltonTab" id="sourceCode">View Source Code for DaltonTab Here!</a></h6>
 			</div>
 	</body>
