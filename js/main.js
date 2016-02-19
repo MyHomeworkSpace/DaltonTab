@@ -108,8 +108,13 @@ $(document).ready(function() {
 				$("#par").addClass("imageLoaded");
 				$("#section1").addClass("imageLoaded");
 				$(window).trigger('resize');
+				$("#daltontab-image-caption").text(response.images[0].copyright);
+				$("#daltontab-image-link").attr("href", response.images[0].copyrightlink)
+				$("#daltontab-image-link").text("Learn more");
 				//$("body").css("background-image", "url(" + url + ")");
 			});
+		} else {
+			$("#daltontab-image-caption").text("You've disabled the image background!");
 		}
 	});
 
@@ -222,5 +227,6 @@ $(document).ready(function() {
 	});
 	setTimeout(function() {
 		$(window).trigger('resize');
-	}, 100)
+	}, 100);
+	$(".daltontab-version").text(chrome.runtime.getManifest().version);
 });

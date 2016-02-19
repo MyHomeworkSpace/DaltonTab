@@ -33,7 +33,7 @@
 						<h4 class="modal-title">Settings</h4>
 					</div>
 					<div class="modal-body">
-						<p>Manage connected accounts and other preferences here.</p>
+						<h4>Connected accounts</h4>
 						<div id="coursesSignIn" class="account">
 							<p>To sign into Courses, go to <a href="https://courses.dalton.org">courses.dalton.org</a>.
 						</div>
@@ -49,12 +49,18 @@
 						<div id="planhubSignIn" class="account">
 							<p>To sign into PlanHub, go to <a href="https://planhub.me">planhub.me</a>.
 						</div>
+						<h4>Other options</h4>
 						<div id="backgroundImage" class="account">
 							<input id="backImgTog" type="checkbox"/>
 							<label for="backImgTog">
 								Disable Bing Image Background
 							</label>
 						</div>
+						<h4>About this image</h4>
+						<span id="daltontab-image-caption">Loading information, please wait...</span>
+						<a id="daltontab-image-link"></a>
+						<h4>About DaltonTab</h4>
+						<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
