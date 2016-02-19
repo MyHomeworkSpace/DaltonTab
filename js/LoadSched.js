@@ -3,6 +3,8 @@ window.schedule = {};
 window.LoadSched = function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
 	var rkeUrl = "https://rouxkeyextend.planhub.me/extend.php";
+	var printersUrl = "https://printers.dalton.org/hp_queues/db_printerconfig/index.php";
+	var schedulesTestUrl = "https://daltontabservices.planhub.me/v1/schedulesTestAcct.php";
 	//$("#scheduleSignIn").click(function() {
 
 	var start = moment();
@@ -60,25 +62,56 @@ window.LoadSched = function() {
 					$("#schedulesTable").remove();
 				} else {
 					// try and extend key
-					$.post(rkeUrl, {
-						application: "schedules",
-						key: key
-					}, function(rkeResp_str) {
-						var rkeResp = JSON.parse(rkeResp_str);
-						if (rkeResp.status != "ok") {
+					// first, we have to find the current IP address. This can be different from the public one if you're inside the Dalton network.
+					// to find it, we sign in to printers.dalton.org/hp_queues with a generic username/password
+					// however, we get that user/pass combo from a daltontab internal site
+					$.get(schedulesTestUrl, function(testAcct_str) {
+						var testAcct = JSON.parse(testAcct_str);
+						if (testAcct.status != "ok") {
+							// just give up
 							$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
 							$("#schedules-warning").css("font-size", "3em");
 							$("#schedulesTable").remove();
 							return;
 						}
-						var newKey = rkeResp.key;
-						storage.schedulesLogin.key = newKey;
-						chrome.storage.sync.set({
-							schedulesLogin: storage.schedulesLogin
-						}, function() {
-							window.schedule.extended = true;
-							window.LoadSched();
-						})
+						$.post(printersUrl, {
+							request: "<request><key></key><action>authenticate</action><credentials><username>" + testAcct.username + "</username><password type=\"plaintext\">" + testAcct.password + "</password></credentials></request>"
+						}, function(printersResp_str) {
+							// with this, we can now parse the given key for the IP
+							// and request a new one
+							var $printersResp = $(printersResp_str);
+							var statusCode = $printersResp.find("result").attr("status");
+							if (statusCode != 200) {
+								// just give up
+								$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
+								$("#schedules-warning").css("font-size", "3em");
+								$("#schedulesTable").remove();
+								return;
+							}
+							var printers_key = $printersResp.find("result").children("key").text();
+							var ip = printers_key.split(":")[2];
+							$.post(rkeUrl, {
+								application: "schedules",
+								key: key,
+								ip: ip
+							}, function(rkeResp_str) {
+								var rkeResp = JSON.parse(rkeResp_str);
+								if (rkeResp.status != "ok") {
+									$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
+									$("#schedules-warning").css("font-size", "3em");
+									$("#schedulesTable").remove();
+									return;
+								}
+								var newKey = rkeResp.key;
+								storage.schedulesLogin.key = newKey;
+								chrome.storage.sync.set({
+									schedulesLogin: storage.schedulesLogin
+								}, function() {
+									window.schedule.extended = true;
+									window.LoadSched();
+								})
+							});
+						});
 					});
 				}
 			}
