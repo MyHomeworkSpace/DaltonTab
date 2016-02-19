@@ -199,7 +199,7 @@ $(document).ready(function() {
 
 	window.planhub.get("features/get/", function(data) {
 		console.log(data);
-		if (data.status == "error") {
+		if (data.status == "error" || data.status == "auth_required") {
 			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://planhub.me">PlanHub</a> to view your homework.');
 			$("#hw-warning").css("font-size", "3em");
 			$("#hwRow").remove();
