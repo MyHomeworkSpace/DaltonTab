@@ -1,5 +1,5 @@
 window.feedback = {
-	url: "https://daltontabservices.planhub.me/v1/submitFeedback.php"
+	url: "https://daltontabservices.myhomework.space/v1/submitFeedback.php"
 };
 
 window.feedback.submitFeedback = function(type, message, done, err) {
