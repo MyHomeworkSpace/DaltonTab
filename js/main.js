@@ -67,7 +67,7 @@ window.daltonTab.findNextDay = function(offset) {
 };
 
 window.daltonTab.loadHomework = function() {
-		window.planhub.get("hwView/getHw?date=" + moment().format('YYYY-MM-DD'), function(data) {
+		window.mhs.get("hwView/getHw?date=" + moment().format('YYYY-MM-DD'), function(data) {
 			var ev = data.events;
 			if (ev.length == 0) {
 				return;
@@ -205,22 +205,22 @@ $(document).ready(function() {
 	}
 	easter_egg.load();
 
-	window.planhub.get("features/get/", function(data) {
+	window.mhs.get("features/get/", function(data) {
 		console.log(data);
 		if (data.status == "error" || data.status == "auth_required") {
-			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://planhub.me">PlanHub</a> to view your homework.');
+			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://myhomework.space">MyHomeworkSpace</a> to view your homework.');
 			$("#hw-warning").css("font-size", "3em");
 			$("#hwRow").remove();
 			return;
 		}
 		if (data.features.indexOf("hwView") == -1) {
-			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Enable <a href="https://planhub.me/app#hwView">Homework View</a> to see your homework here.');
+			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Enable <a href="https://myhomwork.space/app#hwView">Homework View</a> to see your homework here.');
 			$("#hw-warning").css("font-size", "3em");
 			$("#hwRow").remove();
 			return;
 		}
 
-		window.planhub.get("planner/sections/get/", function(data) {
+		window.mhs.get("planner/sections/get/", function(data) {
 			for (var i = 0; i < data.sections.length; i++) {
 				var itm = data.sections[i];
 				window.daltonTab.subjects[itm.sectionIndex] = itm;

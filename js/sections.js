@@ -1,5 +1,5 @@
 window.sections = {
-    planhub: {
+    planhub: { // don't change this plox
         name: "Homework",
         icon: "fa-file",
         description: "View your homework information from MyHomeworkSpace.",
