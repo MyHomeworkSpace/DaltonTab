@@ -4,7 +4,7 @@ window.LoadSched = function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
 	var rkeUrl = "https://rouxkeyextend.planhub.me/extend.php";
 	var printersUrl = "https://printers.dalton.org/hp_queues/db_printerconfig/index.php";
-	var schedulesTestUrl = "https://daltontabservices.planhub.me/v1/schedulesTestAcct.php";
+	var schedulesTestUrl = "https://daltontabservices.myhomework.space/v1/schedulesTestAcct.php";
 	//$("#scheduleSignIn").click(function() {
 
 	var start = moment();
