@@ -2,7 +2,7 @@ window.schedule = {};
 
 window.LoadSched = function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
-	var rkeUrl = "https://rouxkeyextend.myhomework.space/extend.php"; // don't change this either
+	var rkeUrl = "https://rouxkeyextend.myhomework.space/extend.php";
 	var printersUrl = "https://printers.dalton.org/hp_queues/db_printerconfig/index.php";
 	var schedulesTestUrl = "https://daltontabservices.myhomework.space/v1/schedulesTestAcct.php";
 	//$("#scheduleSignIn").click(function() {
