@@ -1,5 +1,5 @@
 window.mhs = {
-	basePath: "https://planhub.me/api/v1/"
+	basePath: "https://myhomework.space/api/v1/"
 };
 
 window.mhs.getNonce = function(callback) {
