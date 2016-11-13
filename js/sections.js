@@ -1,5 +1,5 @@
 window.sections = {
-    planhub: { // don't change this plox
+    myhomeworkspace: {
         name: "Homework",
         icon: "fa-file",
         description: "View your homework information from MyHomeworkSpace.",
@@ -15,29 +15,47 @@ window.sections = {
             return $html;
         },
         run: function() {
-        	window.mhs.get("features/get/", function(data) {
-        		console.log(data);
-        		if (data.status == "error" || data.status == "auth_required") {
-        			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://myhomework.space">MyHomeworkSpace</a> to view your homework.');
-        			$("#hw-warning").css("font-size", "3em");
-        			$("#hwRow").remove();
-        			return;
-        		}
-        		if (data.features.indexOf("hwView") == -1) {
-        			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Enable <a href="https://myhomwork.space/app#hwView">Homework View</a> to see your homework here.');
-        			$("#hw-warning").css("font-size", "3em");
-        			$("#hwRow").remove();
-        			return;
-        		}
+            window.mhs.init(function() {
+            	window.mhs.get("auth/me", function(data) {
+            		console.log(data);
+            		if (data.status == "error") {
+            			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://myhomework.space">MyHomeworkSpace</a> to view your homework.');
+            			$("#hw-warning").css("font-size", "3em");
+            			$("#hwRow").remove();
+            			return;
+            		}
 
-        		window.mhs.get("planner/sections/get/", function(data) {
-        			for (var i = 0; i < data.sections.length; i++) {
-        				var itm = data.sections[i];
-        				window.daltonTab.subjects[itm.sectionIndex] = itm;
-        			};
-        			window.daltonTab.loadHomework();
-        		});
-        	});
+            		window.mhs.get("classes/get/", function(data) {
+            			for (var i = 0; i < data.classes.length; i++) {
+            				var itm = data.classes[i];
+            				window.daltonTab.subjects[itm.id] = itm;
+            			};
+                        window.mhs.get("homework/getHWView", function(data) {
+                			var ev = data.homework;
+                			if (ev.length == 0) {
+                				return;
+                			}
+                			for (var evIndex in ev) {
+                				var evObj = {
+                					name: ev[evIndex].name,
+                					due: new Date(ev[evIndex].due),
+                					classId: ev[evIndex].classId,
+                					done: ev[evIndex].done
+                				};
+                				var list = "LongTerm";
+                				var dueMoment = moment(evObj.due).utcOffset(0);
+                				var tomorrow = moment(window.daltonTab.findNextDay(1)).date();
+                				if (dueMoment.date() == tomorrow && dueMoment.month() == moment(window.daltonTab.findNextDay(1)).month() && dueMoment.year() == moment(window.daltonTab.findNextDay(1)).year()) { // moment.isSame didn't work here. /shrug
+                					list = "Tomorrow";
+                				} else if (dueMoment.isBefore(moment(window.daltonTab.findNextDay(5)).subtract(1, "day"))) {
+                					list = "Soon";
+                				}
+                				window.daltonTab.addEventToList(evObj, list);
+                			};
+                		});
+            		});
+            	});
+            });
         }
     },
     schedule: {

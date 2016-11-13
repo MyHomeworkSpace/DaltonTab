@@ -1,5 +1,5 @@
 window.daltonTab = {
-	subjects: []
+	subjects: {}
 };
 
 window.daltonTab.addEventToList = function(ev, list) {
@@ -33,7 +33,7 @@ window.daltonTab.addEventToList = function(ev, list) {
 			$lineTwo.append($tag);
 
 			var $subject = $('<span></span>');
-				$subject.text(" in " + window.daltonTab.subjects[ev.subject].name);
+				$subject.text(" in " + window.daltonTab.subjects[ev.classId].name);
 			$lineTwo.append($subject);
 
 			var $due = $('<span></span>');
@@ -64,32 +64,6 @@ window.daltonTab.findNextDay = function(offset) {
 		}
 	}
 	return retVal.toDate();
-};
-
-window.daltonTab.loadHomework = function() {
-		window.mhs.get("hwView/getHw?date=" + moment().format('YYYY-MM-DD'), function(data) {
-			var ev = data.events;
-			if (ev.length == 0) {
-				return;
-			}
-			for (var evIndex in ev) {
-				var evObj = {
-					name: ev[evIndex].text,
-					due: new Date(ev[evIndex].date.split("T")[0]),
-					subject: ev[evIndex].sectionIndex,
-					done: ev[evIndex].done
-				};
-				var list = "LongTerm";
-				var dueMoment = moment(evObj.due).utcOffset(0);
-				var tomorrow = moment(window.daltonTab.findNextDay(1)).date();
-				if (dueMoment.date() == tomorrow && dueMoment.month() == moment(window.daltonTab.findNextDay(1)).month() && dueMoment.year() == moment(window.daltonTab.findNextDay(1)).year()) { // moment.isSame didn't work here. /shrug
-					list = "Tomorrow";
-				} else if (dueMoment.isBefore(moment(window.daltonTab.findNextDay(5)).subtract(1, "day"))) {
-					list = "Soon";
-				}
-				window.daltonTab.addEventToList(evObj, list);
-			};
-		});
 };
 
 $(document).ready(function() {

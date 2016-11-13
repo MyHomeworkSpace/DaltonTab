@@ -1,30 +1,36 @@
 window.mhs = {
-	basePath: "https://myhomework.space/api/v1/"
+	basePath: "https://api-v2.myhomework.space/",
+	nonce: ""
 };
 
+window.mhs.init = function(callback) {
+	window.mhs.getNonce(function(nonce) {
+		window.mhs.nonce = nonce;
+		callback();
+	});
+}
+
 window.mhs.getNonce = function(callback) {
-	$.get(window.mhs.basePath + "csrf", function(data) {
-		callback(data.nonce);
+	$.get(window.mhs.basePath + "auth/csrf", function(data) {
+		$.get(window.mhs.basePath + "auth/csrf", function(data) {
+			callback(data.token);
+		});
 	});
 };
 
 window.mhs.get = function(url, callback) {
-	window.mhs.getNonce(function(nonce) {
-		$.get(window.mhs.basePath + url, { nonce: nonce }, function(data) {
-			if (typeof data == "string") {
-				callback({ status: "error", message: "Not signed in!" });
-				return;
-			}
-			callback(data);
-		});
-	});
+	var callbackFunc = function(data) {
+		if (data.responseJSON) {
+			callback(data.responseJSON);
+			return;
+		}
+		callback(data);
+	};
+	$.get(window.mhs.basePath + url + "?csrfToken=" + window.mhs.nonce, callbackFunc).fail(callbackFunc);
 };
 
 window.mhs.post = function(url, data, callback) {
-	window.mhs.getNonce(function(nonce) {
-		data["nonce"] = nonce;
-		$.post(window.mhs.basePath + url, function(data) {
-			callback(data);
-		});
+	$.post(window.mhs.basePath + url + "?csrfToken=" + window.mhs.nonce, function(data) {
+		callback(data);
 	});
 };
