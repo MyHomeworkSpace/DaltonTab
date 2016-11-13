@@ -19,13 +19,5 @@
 
 	"chrome_url_overrides" : {
 		"newtab": "newTab.html"
-	},
-	"browser_action": {
-		"default_icon": {
-			"64": "64.png",
-			"128": "128.png"
-		},
-		"default_title": "DaltonTab",
-		"default_popup": "newTab.html"
 	}
 }
