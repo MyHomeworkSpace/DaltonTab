@@ -123,8 +123,9 @@ $(document).ready(function() {
 
 	for (var sectionIndex in window.sections) {
 		var section = window.sections[sectionIndex];
-		var $section = $('<div class="section"></div>');
+		var $section = $('<div class="section container-fluid"></div>');
 			$section.attr("id", "section-" + sectionIndex);
+			$section.css("background-color", section.background);
 			var $header = $('<h1></h1>');
 				var $icon = $('<i class="fa"></i>');
 					$icon.addClass(section.icon);
@@ -132,6 +133,12 @@ $(document).ready(function() {
 				$header.append(" " + section.name);
 			$section.append($header);
 			$section.append(section.createHtml());
+		$("#sectionContainer").append($section);
+	}
+
+	for (var sectionIndex in window.sections) {
+		var section = window.sections[sectionIndex];
+		section.run();
 	}
 
 	$("#settingsBtn").click(function() {
@@ -182,52 +189,12 @@ $(document).ready(function() {
 		});
 	});
 
-	window.coursesLib.checkLoggedIn(function(response) {
-		if (!response.isLoggedIn) {
-			$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">to Courses</a>.');
-			$("#classes-warning").css("font-size", "3em");
-		} else {
-			window.coursesLib.getCourseList(function(response) {
-				for (var courseIndex in response.classes) {
-					var course = response.classes[courseIndex];
-					console.log(course);
-					var $element = $("<li></li>");
-						$element.html('<a href="' + course.url + '" style="color:white">' + course.name + '</a>');
-					$("#courses").append($element);
-				}
-			});
-		}
-	});
-
 	var easter_egg = new Konami();
 	easter_egg.code = function() {
 		swal("Unexpected T_PAAMAYIM_NEKUDOTAYIM!", "MWAHHHAHAHAHAHAHAHAH\nConfused? Search on...\n This product uses Sapi, Papi, Capy, Wapi", "warning");
 	}
 	easter_egg.load();
 
-	window.mhs.get("features/get/", function(data) {
-		console.log(data);
-		if (data.status == "error" || data.status == "auth_required") {
-			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://myhomework.space">MyHomeworkSpace</a> to view your homework.');
-			$("#hw-warning").css("font-size", "3em");
-			$("#hwRow").remove();
-			return;
-		}
-		if (data.features.indexOf("hwView") == -1) {
-			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Enable <a href="https://myhomwork.space/app#hwView">Homework View</a> to see your homework here.');
-			$("#hw-warning").css("font-size", "3em");
-			$("#hwRow").remove();
-			return;
-		}
-
-		window.mhs.get("planner/sections/get/", function(data) {
-			for (var i = 0; i < data.sections.length; i++) {
-				var itm = data.sections[i];
-				window.daltonTab.subjects[itm.sectionIndex] = itm;
-			};
-			window.daltonTab.loadHomework();
-		});
-	});
 	setTimeout(function() {
 		$(window).trigger('resize');
 	}, 100);

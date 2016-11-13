@@ -142,7 +142,3 @@ window.LoadSched = function() {
 		});
 	});
 };
-
-$(document).ready(function() {
-	window.LoadSched();
-});
