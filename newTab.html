@@ -26,7 +26,7 @@
 	<script src="js/nav.js"></script>
 	<script src="js/feedback.js"></script>
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body>
 	<div id="feedback-modal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -91,31 +91,38 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	<div id="par">
-		<div id="section1" class="section container-fluid">
-			<br />
-			<br />
-			<h1 style="text-align:center" class="current-time mainTime"><i class="fa fa-exclamation-circle"></i> Looks like there was a problem!</h1>
-			<h2 style="text-align:center" class="current-date mainDate">We couldn't get the time to load. Everything else should work fine. If you want the date and time, you can click <a href="http://www.time.gov/">here</a>.</h2>
-			<div style="height:40%"></div>
-			<h1 style="text-align:center"><a id="hwButton" href="#section2" style="color:white"><i class="fa fa-chevron-circle-down"></i></a></h1>
+			</div>
 		</div>
+	</div>
+	<video id="videoBg" loop></video>
+	<div id="topSection" class="section container-fluid">
+		<div id="mainRow" class="row">
+			<div id="timeTop" class="col-md-6">
+				<h1 class="current-time mainTime"></h1>
+				<h2 class="current-date mainDate"></h2>
+			</div>
+			<div class="col-md-6">
+				<p>Stuff will go here I promise</p>
+			</div>
+		</div>
+
+		<a id="hwButton" href="#sectionContainer" style="color:white"><i class="fa fa-chevron-circle-down"></i></a>
+	</div>
+	<div id="topFiller"></div>
+	<div id="barTrigger"></div>
+	<div id="aboveTop">
 		<div id="sectionContainer">
 
 		</div>
-		<div id="end" class="section container-fluid">
-			<h3 class="center">Thanks for using Dalton<strong>Tab</strong>!</h3>
-			<h5 class="center">
-				<button class="btn btn-default feedback-btn" data-type="smile"><i class="fa fa-smile-o"></i></button>
-				<button class="btn btn-default feedback-btn" data-type="frown"><i class="fa fa-frown-o"></i></button>
-				<button class="btn btn-default feedback-btn" data-type="idea"><i class="fa fa-lightbulb-o"></i></button>
-			</h5>
-			<h5 class="center"><button class="btn btn-default" id="settingsBtn">Settings</button></h5>
-			<h6 class="center"><a href="https://github.com/ULTIMATHEXERS/DaltonTab" id="sourceCode">View Source Code for DaltonTab Here!</a></h6>
-		</div>
+	</div>
+	<div id="bottomBar">
+		<button class="btn btn-default btn-xs feedback-btn" data-type="smile"><i class="fa fa-smile-o"></i></button>
+		<button class="btn btn-default btn-xs feedback-btn" data-type="frown"><i class="fa fa-frown-o"></i></button>
+		<button class="btn btn-default btn-xs feedback-btn" data-type="idea"><i class="fa fa-lightbulb-o"></i></button>
+
+		<button class="btn btn-default btn-xs" id="settingsBtn">Settings</button>
+
+		<a href="https://github.com/ULTIMATHEXERS/DaltonTab" id="sourceCode">View Source Code for DaltonTab Here!</a>
 	</div>
 </body>
 </html>
