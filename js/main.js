@@ -74,6 +74,17 @@ $(document).ready(function() {
 	timeUpdFunc();
 	setInterval(timeUpdFunc, 1000);
 
+	$(window).scroll(function() {
+		if ($(window).scrollTop() > 80) {
+			$("#hwButton").attr("href", "#topFiller");
+			$("#hwButton").addClass("flipped");
+		} else {
+			$("#hwButton").attr("href", "#sectionContainer");
+			$("#hwButton").removeClass("flipped");
+		}
+	});
+	$("#hwButton").smoothScroll();
+
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		if (storage.backImgTog == undefined || !storage.backImgTog) {
 			$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US&video=1", function(response) {
@@ -130,7 +141,6 @@ $(document).ready(function() {
 	$("#newTabDefault").click(function() {
 		window.location.href = "chrome-search://local-ntp/local-ntp.html"
 	});
-	$("#hwButton").smoothScroll();
 
 	$("#schedulesAccountBtn").click(function() {
 		var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
