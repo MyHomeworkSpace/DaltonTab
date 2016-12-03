@@ -2,6 +2,10 @@ body {
 	z-index: 1;
 }
 
+label {
+	font-size: 1em;
+}
+
 #sourceCode {
 	color: white;
 }
@@ -17,6 +21,7 @@ body {
 	z-index: 0;
 	background-color: transparent;
 }
+
 #videoBg {
 	position: fixed;
 	top: 0;
@@ -70,27 +75,13 @@ body {
 	font-weight: 400;
 }
 
-#barTrigger {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 60px;
-	z-index: 1;
-}
 #bottomBar {
-	background: rgba(255, 255, 255, 0.3);
-	position: fixed;
-	left: 0;
-	bottom: 0;
+	background: rgba(255, 255, 255, 0.4);
 	width: 100%;
-	height: 30px;
 	z-index: 2;
-	opacity: 0;
-	transition: opacity 0.3s;
-}
-#barTrigger:hover ~ #bottomBar, #bottomBar:hover {
-	opacity: 1;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #hwButton {
