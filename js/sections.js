@@ -218,5 +218,70 @@ DaltonTab.Sections = {
         		}
         	});
         }
+    },
+    weather: {
+        name: "Weather",
+        icon: "fa-sun-o",
+        description: "View the current weather.",
+        background: "rgba(14, 100, 18, 0.69)",
+        createHtml: function() {
+            var $html = $('<div id="weather" class="row"></div>');
+                var $current = $('<div id="weatherCurrent" class="col-md-6"></div>');
+                $html.append($current);
+                var $forecast = $('<div id="weatherForecast" class="col-md-6"></div>');
+
+                $html.append($forecast);
+            return $html;
+        },
+        run: function() {
+            $.get("https://daltontabservices.myhomework.space/v1/weather.php", {
+                units: "f",
+                place: "New York, NY"
+            }, function(data) {
+                var results = data.query.results.channel;
+                var forecast = results.item.forecast;
+                console.log(results);
+
+                // current conditions
+                $("#weatherCurrent").html("");
+                var $currentInfo = $('<h2 id="weatherCurrentInfo"></h2>');
+                    var $bigIcon = $('<i class="weather-icon nomove"></i>');
+                        $bigIcon.addClass("icon-" + results.item.condition.code);
+                    $currentInfo.append($bigIcon);
+                    $currentInfo.append(" ");
+                    var $infoLabel = $('<span></span>');
+                        $infoLabel.text(results.item.condition.temp + "\xB0 - " + results.item.condition.text);
+                    $currentInfo.append($infoLabel);
+                $("#weatherCurrent").append($currentInfo);
+                $("#weatherCurrent").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
+
+                // forecast
+                $("#weatherForecast").html("<h2>Forecast</h2><div class='row'></div>");
+                for (var forecastIndex in forecast) {
+                    if (forecastIndex > 4) {
+                        break;
+                    }
+                    var dayForecast = forecast[forecastIndex];
+                    console.log(dayForecast);
+                    var $dayForecast = $('<div class="col-md-2"></div>');
+                        var $day = $('<h4></h4>');
+                            $day.text(dayForecast.day);
+                        $dayForecast.append($day);
+                        var $icon = $('<i class="weather-icon"></i>');
+                            $icon.addClass("icon-" + dayForecast.code);
+                        $dayForecast.append($icon);
+                        var $info = $('<div></div>');
+                            $info.text(dayForecast.text);
+                        $dayForecast.append($info);
+                        var $temps = $('<div></div>');
+                            $temps.text(dayForecast.high + " / " + dayForecast.low);
+                        $dayForecast.append($temps);
+                    $("#weatherForecast .row").append($dayForecast);
+                }
+                var $fullForecast = $('<h3><a>View full forecast &raquo;</a></h3>');
+                    $fullForecast.children("a").attr("href", results.link);
+                $("#weatherForecast").append($fullForecast);
+            });
+        }
     }
 };

@@ -6,10 +6,10 @@ label {
 	font-size: 1em;
 }
 
-#sourceCode {
+a {
 	color: white;
 }
-#sourceCode:hover {
+a:hover {
 	color: #bfbfbf;
 }
 
@@ -260,4 +260,11 @@ label {
 	line-height: 40px;
 	padding-left: 5px;
 	padding-right: 5px;
+}
+
+#weatherCurrent {
+	margin-top: -50px;
+}
+#weatherCurrentInfo {
+	font-size: 50px;
 }
