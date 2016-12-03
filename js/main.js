@@ -77,17 +77,14 @@ $(document).ready(function() {
 	setInterval(timeUpdFunc, 1000);
 
 	$(window).scroll(function() {
-		if ($(window).scrollTop() >= 80) {
+		if ($(window).scrollTop() >= 20) {
 			$("#hwButton").attr("href", "#topFiller");
 			$("#hwButton").addClass("flipped");
+			$("#sectionsButton").addClass("visible");
 		} else {
 			$("#hwButton").attr("href", "#sectionContainer");
 			$("#hwButton").removeClass("flipped");
 			$("#sectionsButton").removeClass("visible");
-		}
-		if ($(window).scrollTop() >= $(window).height()) {
-			$("#sectionsButton").addClass("visible");
-		} else {
 			$("#sectionsButton").removeClass("visible");
 		}
 	});
