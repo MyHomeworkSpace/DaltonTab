@@ -149,8 +149,6 @@ DaltonTab.Sections = {
                         $item.css("height", boxSize + "px");
                         $item.css("top", startOffset + "px");
 
-                        console.log(name);
-
                         $item.append("<strong>" + name + " in " + location + "</strong><br />");
                         if (instructor != "") {
                             $item.append("with " + instructor);
