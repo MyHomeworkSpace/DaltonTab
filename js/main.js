@@ -92,8 +92,8 @@ $(document).ready(function() {
 	});
 	$("#hwButton").smoothScroll();
 
-	$("#sectionsButton, #manageSectionsClose, #manageOverlay").click(function() {
-		$("#manageSectionsPane").toggleClass("opened");
+	$("#sectionsButton, #settingsPaneClose, #manageOverlay").click(function() {
+		$("#settingsPane").toggleClass("opened");
 	});
 
 	chrome.storage.sync.get("backImgTog", function(storage) {
@@ -144,10 +144,6 @@ $(document).ready(function() {
 		var section = DaltonTab.Sections[sectionIndex];
 		section.run();
 	}
-
-	$("#settingsBtn").click(function() {
-		$("#settingsModal").modal();
-	});
 
 	$("#newTabDefault").click(function() {
 		window.location.href = "chrome-search://local-ntp/local-ntp.html"

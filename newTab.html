@@ -57,59 +57,14 @@
 			</div>
 		</div>
 	</div>
-	<div id="settingsModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Settings</h4>
-				</div>
-				<div class="modal-body">
-					<h3>Connected accounts</h3>
-					<div id="planhubSignIn" class="account">
-						To sign into MyHomeworkSpace, go to <a href="https://myhomework.space">myhomework.space</a>.
-					</div>
-					<div id="scheduleSignIn" class="account">
-						<div id="schedulesSignedIn" class="hidden">
-							Signed in to Schedules as <strong id="schedulesAccountName"></strong>
-							<button id="schedulesLogOut" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Log out</button>
-						</div>
-						<div id="schedulesSignIn">
-							<button id="schedulesAccountBtn" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Schedules</button>
-						</div>
-					</div>
-					<div id="coursesSignIn" class="account">
-						To sign into Courses, go to <a href="https://courses.dalton.org">courses.dalton.org</a>.
-					</div>
+	<div id="settingsPane">
+		<h1>Modify page</h1>
+		<i id="settingsPaneClose" class="fa fa-times"></i>
 
-					<h3>Background image</h3>
-					<h4>About this image</h4>
-					<span id="daltontab-image-caption">Loading information, please wait...</span>
-					<a id="daltontab-image-link"></a>
-					<h4>Image options</h4>
-					<div id="backgroundImage" class="account">
-						<input id="backImgTog" type="checkbox"/>
-						<label for="backImgTog">
-							Disable Bing Image Background
-						</label>
-					</div>
-
-					<h3>About DaltonTab</h3>
-					<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="manageSectionsPane">
-		<h1>Manage sections</h1>
-		<i id="manageSectionsClose" class="fa fa-times"></i>
-
+		<h3>Manage sections</h3>
 		<div class="row">
 			<div class="col-md-6">
-				<h3>Current sections</h3>
+				<h4>Current sections</h4>
 				<ul id="currentSections" class="sectionList">
 					<li class="ui-state-default">Homework</li>
 					<li class="ui-state-default">Schedule</li>
@@ -117,12 +72,44 @@
 				</ul>
 			</div>
 			<div class="col-md-6">
-				<h3>Available sections</h3>
+				<h4>Available sections</h4>
 				<ul id="possibleSections" class="sectionList">
 					<li class="ui-state-default">Weather</li>
 				</ul>
 			</div>
 		</div>
+
+		<h3>Connected accounts</h3>
+		<div id="planhubSignIn" class="account">
+			To sign into MyHomeworkSpace, go to <a href="https://myhomework.space">myhomework.space</a>.
+		</div>
+		<div id="scheduleSignIn" class="account">
+			<div id="schedulesSignedIn" class="hidden">
+				Signed in to Schedules as <strong id="schedulesAccountName"></strong>
+				<button id="schedulesLogOut" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Log out</button>
+			</div>
+			<div id="schedulesSignIn">
+				<button id="schedulesAccountBtn" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Schedules</button>
+			</div>
+		</div>
+		<div id="coursesSignIn" class="account">
+			To sign into Courses, go to <a href="https://courses.dalton.org">courses.dalton.org</a>.
+		</div>
+
+		<h3>Background image</h3>
+		<h4>About this image</h4>
+		<span id="daltontab-image-caption">Loading information, please wait...</span>
+		<a id="daltontab-image-link"></a>
+		<h4>Image options</h4>
+		<div id="backgroundImage" class="account">
+			<input id="backImgTog" type="checkbox"/>
+			<label for="backImgTog">
+				Disable Bing Image Background
+			</label>
+		</div>
+
+		<h3>About</h3>
+		<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
 	</div>
 	<div id="manageOverlay"></div>
 	<video id="videoBg" loop></video>
@@ -148,8 +135,6 @@
 			<button class="btn btn-default feedback-btn" data-type="smile"><i class="fa fa-smile-o"></i></button>
 			<button class="btn btn-default feedback-btn" data-type="frown"><i class="fa fa-frown-o"></i></button>
 			<button class="btn btn-default feedback-btn" data-type="idea"><i class="fa fa-lightbulb-o"></i></button>
-
-			<button class="btn btn-default" id="settingsBtn">Settings</button>
 
 			<a href="https://github.com/ULTIMATHEXERS/DaltonTab" class="btn btn-default"><i class="fa fa-github"></i> View on GitHub</a>
 		</div>

@@ -209,7 +209,7 @@ label {
 	resize: none;
 }
 
-#manageSectionsPane {
+#settingsPane {
 	background: rgba(255, 255, 255, 0.9);
 	border-left: solid 2px black;
 	width: 600px;
@@ -219,13 +219,15 @@ label {
 	right: -1000px;
 	padding-left: 10px;
 	padding-right: 10px;
+	overflow-x: hidden;;
+	overflow-y: auto;
 	z-index: 12;
 	transition: right 0.2s;
 }
-#manageSectionsPane.opened {
+#settingsPane.opened {
 	right: 0;
 }
-#manageSectionsPane.opened ~ #manageOverlay {
+#settingsPane.opened ~ #manageOverlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -234,7 +236,11 @@ label {
 	z-index: 11;
 	background: rgba(0, 0, 0, 0.7);
 }
-#manageSectionsClose {
+#settingsPane h2, #settingsPane h3 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+#settingsPaneClose {
 	cursor: pointer;
 	font-size: 3em;
 	position: absolute;
