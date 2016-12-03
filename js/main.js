@@ -76,15 +76,25 @@ $(document).ready(function() {
 	setInterval(timeUpdFunc, 1000);
 
 	$(window).scroll(function() {
-		if ($(window).scrollTop() > 80) {
+		if ($(window).scrollTop() >= 80) {
 			$("#hwButton").attr("href", "#topFiller");
 			$("#hwButton").addClass("flipped");
 		} else {
 			$("#hwButton").attr("href", "#sectionContainer");
 			$("#hwButton").removeClass("flipped");
+			$("#sectionsButton").removeClass("visible");
+		}
+		if ($(window).scrollTop() >= $(window).height()) {
+			$("#sectionsButton").addClass("visible");
+		} else {
+			$("#sectionsButton").removeClass("visible");
 		}
 	});
 	$("#hwButton").smoothScroll();
+
+	$("#sectionsButton, #manageSectionsClose, #manageOverlay").click(function() {
+		$("#manageSectionsPane").toggleClass("opened");
+	});
 
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		if (storage.backImgTog == undefined || !storage.backImgTog) {
@@ -172,6 +182,10 @@ $(document).ready(function() {
 			window.location.reload();
 		});
 	});
+
+	$(".sectionList").sortable({
+      connectWith: ".sectionList"
+    }).disableSelection();
 
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		$("#backImgTog").prop("checked", storage.backImgTog);

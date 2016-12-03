@@ -6,14 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/schedule.css">
-	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/sweetalert.css">
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+
+	<link rel="stylesheet" href="css/schedule.css">
+	<link rel="stylesheet" href="css/main.css">
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.smooth-scroll.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/moment.js"></script>
 	<script src="js/parallax.min.js"></script>
 	<script src="js/konami.js"></script>
@@ -62,8 +66,8 @@
 				</div>
 				<div class="modal-body">
 					<h3>Connected accounts</h3>
-					<div id="coursesSignIn" class="account">
-						To sign into Courses, go to <a href="https://courses.dalton.org">courses.dalton.org</a>.
+					<div id="planhubSignIn" class="account">
+						To sign into MyHomeworkSpace, go to <a href="https://myhomework.space">myhomework.space</a>.
 					</div>
 					<div id="scheduleSignIn" class="account">
 						<div id="schedulesSignedIn" class="hidden">
@@ -74,8 +78,8 @@
 							<button id="schedulesAccountBtn" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Schedules</button>
 						</div>
 					</div>
-					<div id="planhubSignIn" class="account">
-						To sign into MyHomeworkSpace, go to <a href="https://myhomework.space">myhomework.space</a>.
+					<div id="coursesSignIn" class="account">
+						To sign into Courses, go to <a href="https://courses.dalton.org">courses.dalton.org</a>.
 					</div>
 
 					<h3>Background image</h3>
@@ -99,6 +103,28 @@
 			</div>
 		</div>
 	</div>
+	<div id="manageSectionsPane">
+		<h1>Manage sections</h1>
+		<i id="manageSectionsClose" class="fa fa-times"></i>
+
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Current sections</h3>
+				<ul id="currentSections" class="sectionList">
+					<li class="ui-state-default">Homework</li>
+					<li class="ui-state-default">Schedule</li>
+					<li class="ui-state-default">Classes</li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<h3>Available sections</h3>
+				<ul id="possibleSections" class="sectionList">
+					<li class="ui-state-default">Weather</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="manageOverlay"></div>
 	<video id="videoBg" loop></video>
 	<div id="topSection" class="section container-fluid">
 		<div id="mainRow" class="row">
@@ -111,7 +137,8 @@
 			</div>
 		</div>
 	</div>
-	<a id="hwButton" href="#sectionContainer" style="color:white"><i class="fa fa-chevron-circle-down"></i></a>
+	<a id="hwButton" href="#sectionContainer"><i class="fa fa-chevron-circle-down"></i></a>
+	<a id="sectionsButton"><i class="fa fa-pencil"></i></a>
 	<div id="topFiller"></div>
 	<div id="aboveTop">
 		<div id="sectionContainer">

@@ -93,6 +93,7 @@ DaltonTab.Sections = {
                             return false;
                         });
                     $("#schedules-warning").append($link);
+                    $("#schedule").remove();
                     return;
                 }
                 DaltonTab.Schedule.init(storage.schedulesLogin, function() {
@@ -161,7 +162,7 @@ DaltonTab.Sections = {
                     // session is expired
 					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
 					$("#schedules-warning").css("font-size", "3em");
-					$("#schedulesTable").remove();
+					$("#schedule").remove();
                 }, function() {
                     // general failure, but session might not be bad
                 });
