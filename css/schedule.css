@@ -1,0 +1,31 @@
+.dayOfWeek {
+	display: inline-block;
+	text-align: center;
+	width: 20%;
+}
+
+.dayClasses {
+    display: inline-block;
+	position: relative;
+	width: 20%;
+	height: 550px;
+}
+.dayClasses div {
+	position: relative;
+}
+
+.dayClasses .class {
+	border: solid 1px white;
+	display: block;
+	position: absolute;
+	width: 99%;
+	overflow: hidden;
+
+	font-size: 0.8em;
+	padding-top: 1px;
+	padding-left: 2px;
+}
+
+.dayClasses .class strong {
+	font-size: 1.1em;
+}

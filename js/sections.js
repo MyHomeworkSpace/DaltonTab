@@ -66,7 +66,20 @@ DaltonTab.Sections = {
         createHtml: function() {
             var $html = $("<div></div>");
                 $html.append('<h3 id="schedules-warning" class="section-warning"></h3>');
-                $html.append('<table id="schedulesTable" border="0" style="width:100%"><tr><td data-dow="1"><h5>Monday</h5></td><td data-dow="2"><h5>Tuesday</h5></td><td data-dow="3"><h5>Wednesday</h5></td><td data-dow="4"><h5>Thursday</h5></td><td data-dow="5"><h5>Friday</h5></td></tr><tr></tr><tr></tr></table>');
+                var $schedule = $('<div id="schedule"></div>');
+                    var $daysOfWeek = $('<div id="daysOfWeek"></div>');
+                        $daysOfWeek.append('<div class="dayOfWeek">Monday</div>');
+                        $daysOfWeek.append('<div class="dayOfWeek">Tuesday</div>');
+                        $daysOfWeek.append('<div class="dayOfWeek">Wednesday</div>');
+                        $daysOfWeek.append('<div class="dayOfWeek">Thursday</div>');
+                        $daysOfWeek.append('<div class="dayOfWeek">Friday</div>');
+                    $schedule.append($daysOfWeek);
+                    $schedule.append('<div class="dayClasses mon"><div></div></div>');
+                    $schedule.append('<div class="dayClasses tue"><div></div></div>');
+                    $schedule.append('<div class="dayClasses wed"><div></div></div>');
+                    $schedule.append('<div class="dayClasses thu"><div></div></div>');
+                    $schedule.append('<div class="dayClasses fri"><div></div></div>');
+                $html.append($schedule);
             return $html;
         },
         run: function() {
@@ -84,16 +97,67 @@ DaltonTab.Sections = {
                 }
                 DaltonTab.Schedule.init(storage.schedulesLogin, function() {
                     // yay it worked!
+
+                    // for some reason, some classes show up twice on schedules: once as a middle school class and once as a high school class
+                    // this means that the class ends up on the schedule twice
+                    // this includes my geometry class
+                    // to fix it, count the grades of your classes, and whichever is the higher number is declared "your grade"
+                    // classes from outside your grade are ignored
+                    // hopefully this doesn't break something?
+                    // could also change this to remove duplicate classes instead if it ends up breaking stuff
+                    // tho you have to be careful, because you might remove things like double chem if you do that
+                    var gradeCounts = {};
                     DaltonTab.Schedule.scheduleData.find("period").each(function() {
-                        var $item = $("<tr></tr>");
+                        var grade = $(this).children("SCHOOL_ID").text();
+                        if (!gradeCounts[grade]) {
+                            gradeCounts[grade] = 0;
+                        }
+                        gradeCounts[grade]++;
+                    });
+                    var yourGrade = "";
+                    var gradeCount = 0;
+                    for (var grade in gradeCounts) {
+                        if (gradeCounts[grade] > gradeCount) {
+                            yourGrade = grade;
+                            gradeCount = gradeCounts[grade];
+                        }
+                    }
+
+                    DaltonTab.Schedule.scheduleData.find("period").each(function() {
+                        if ($(this).children("SCHOOL_ID").text() != yourGrade) {
+                            return; // outside my grade
+                        }
+                        var $item = $('<div class="class"></div>');
+
                         var name = $(this).children("section").children("name").text().replace("<![CDATA[", "").replace("]]>");
                         var instructor = $(this).children("instructor").children("name").text();
                         var location = $(this).children("location").text();
+
+                        var date = moment($(this).children("date").text());
+                        var start = moment($(this).children("start").text());
+                        var end = moment($(this).children("end").text());
+                        var startHour = start.hour() - 8;
+                		var startMin = start.minutes();
+                		var endHour = end.hour() - 8;
+                		var endMin = end.minutes();
+
+                        var pixelsPerMinute = 1.25;
+
+                        var startOffset = (startHour * 60 + startMin) * pixelsPerMinute;
+                        var endOffset = (endHour * 60 + endMin) * pixelsPerMinute;
+                        var boxSize = endOffset - startOffset;
+                        $item.css("height", boxSize + "px");
+                        $item.css("top", startOffset + "px");
+
+                        console.log(name);
+
                         $item.append("<strong>" + name + " in " + location + "</strong><br />");
                         if (instructor != "") {
                             $item.append("with " + instructor);
+                            $item.append("<br />");
                         }
-                        $("[data-dow=" + moment($(this).children("date").text()).day() + "]").append($item);
+                        $item.append("from " + start.format("h:mm") + " to " + end.format("h:mm"));
+                        $(".dayClasses." + date.format("ddd").toLowerCase() + "").append($item);
                     });
                 }, function() {
                     // session is expired
