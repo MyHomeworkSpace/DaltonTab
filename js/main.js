@@ -1,5 +1,6 @@
 DaltonTab = {
-	subjects: {}
+	subjects: {},
+	mustUpdateSectionPositions: false
 };
 window.daltonTab = DaltonTab;
 
@@ -94,6 +95,27 @@ $(document).ready(function() {
 
 	$("#sectionsButton, #settingsPaneClose, #manageOverlay").click(function() {
 		$("#settingsPane").toggleClass("opened");
+		if ($("#settingsPane").hasClass("opened")) {
+			// we just opened it
+			DaltonTab.mustUpdateSectionPositions = false;
+		} else {
+			// we just closed it
+			if (DaltonTab.mustUpdateSectionPositions) {
+				// update section stuff
+				var newOrder = [];
+				$("#currentSections li").each(function() {
+					var section = $(this).attr("data-section");
+					newOrder.push(section);
+				});
+				DaltonTab.SectionHandler.updateOrder(newOrder, function() {
+					chrome.storage.sync.set({
+						sections: newOrder
+					}, function() {
+						DaltonTab.SectionHandler.createSections();
+					});
+				});
+			}
+		}
 	});
 
 	chrome.storage.sync.get("backImgTog", function(storage) {
@@ -125,25 +147,10 @@ $(document).ready(function() {
 		}
 	});
 
-	for (var sectionIndex in DaltonTab.Sections) {
-		var section = DaltonTab.Sections[sectionIndex];
-		var $section = $('<div class="section container-fluid"></div>');
-			$section.attr("id", "section-" + sectionIndex);
-			$section.css("background-color", section.background);
-			var $header = $('<h1></h1>');
-				var $icon = $('<i class="fa"></i>');
-					$icon.addClass(section.icon);
-				$header.append($icon);
-				$header.append(" " + section.name);
-			$section.append($header);
-			$section.append(section.createHtml());
-		$("#sectionContainer").append($section);
-	}
-
-	for (var sectionIndex in DaltonTab.Sections) {
-		var section = DaltonTab.Sections[sectionIndex];
-		section.run();
-	}
+	DaltonTab.SectionHandler.init(function() {
+		DaltonTab.SectionHandler.updateSectionLists();
+		DaltonTab.SectionHandler.createSections();
+	});
 
 	$("#newTabDefault").click(function() {
 		window.location.href = "chrome-search://local-ntp/local-ntp.html"
@@ -180,7 +187,11 @@ $(document).ready(function() {
 	});
 
 	$(".sectionList").sortable({
-      connectWith: ".sectionList"
+		connectWith: ".sectionList",
+		placeholder: "ui-state-highlight",
+		change: function(e, ui) {
+			DaltonTab.mustUpdateSectionPositions = true;
+		}
     }).disableSelection();
 
 	chrome.storage.sync.get("backImgTog", function(storage) {
@@ -194,8 +205,20 @@ $(document).ready(function() {
 
 	var easter_egg = new Konami();
 	easter_egg.code = function() {
-		swal("Unexpected T_PAAMAYIM_NEKUDOTAYIM!", "MWAHHHAHAHAHAHAHAHAH\nConfused? Search on...\n This product uses Sapi, Papi, Capy, Wapi", "warning");
-	}
+		swal({
+			title: "Unexpected T_PAAMAYIM_NEKUDOTAYIM!",
+			text: "MWAHHHAHAHAHAHAHAHAH\nConfused? Search on...\n This product uses Sapi, Papi, Capy, Wapi",
+			type: "warning",
+			confirmButtonText: "Clear section data", // i had nowhere else to but it
+  			showCancelButton: true,
+			cancelButtonText: "What?",
+  			closeOnConfirm: false
+		}, function() {
+			chrome.storage.sync.remove("sections", function() {
+				swal("Deleted!", "Your section data has been deleted.", "success");
+			});
+		});
+	};
 	easter_egg.load();
 
 	setTimeout(function() {

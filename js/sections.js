@@ -25,6 +25,11 @@ DaltonTab.Sections = {
             			return;
             		}
 
+                    // update settings info
+        			$("#mhsSignInInfo").addClass("hidden");
+        			$("#mhsSignedIn").removeClass("hidden");
+        			$("#mhsAccountName").text(data.name + " (" + data.username + ")");
+
             		window.mhs.get("classes/get/", function(data) {
             			for (var i = 0; i < data.classes.length; i++) {
             				var itm = data.classes[i];
@@ -96,6 +101,7 @@ DaltonTab.Sections = {
                     $("#schedule").remove();
                     return;
                 }
+                DaltonTab.Schedule.reset();
                 DaltonTab.Schedule.init(storage.schedulesLogin, function() {
                     // yay it worked!
 

@@ -45,7 +45,7 @@ label {
 	z-index: 1;
 }
 #topSection.imageLoaded {
-	background-color: transparent;
+	/*background-color: transparent;*/
 }
 #topFiller {
 	width: 100%;
@@ -216,13 +216,13 @@ label {
 	height: 100%;
 	position: fixed;
 	top: 0;
-	right: -1000px;
+	right: -650px;
 	padding-left: 10px;
 	padding-right: 10px;
-	overflow-x: hidden;;
+	overflow-x: hidden;
 	overflow-y: auto;
 	z-index: 12;
-	transition: right 0.2s;
+	transition: right 0.3s;
 }
 #settingsPane.opened {
 	right: 0;

@@ -27,6 +27,7 @@
 
 	<script src="js/main.js"></script>
 
+	<script src="js/sectionHandler.js"></script>
 	<script src="js/feedback.js"></script>
 	<script src="js/schedule.js"></script>
 	<script src="js/sections.js"></script>
@@ -66,22 +67,25 @@
 			<div class="col-md-6">
 				<h4>Current sections</h4>
 				<ul id="currentSections" class="sectionList">
-					<li class="ui-state-default">Homework</li>
-					<li class="ui-state-default">Schedule</li>
-					<li class="ui-state-default">Classes</li>
+
 				</ul>
 			</div>
 			<div class="col-md-6">
 				<h4>Available sections</h4>
-				<ul id="possibleSections" class="sectionList">
-					<li class="ui-state-default">Weather</li>
+				<ul id="availableSections" class="sectionList">
+
 				</ul>
 			</div>
 		</div>
 
 		<h3>Connected accounts</h3>
-		<div id="planhubSignIn" class="account">
-			To sign into MyHomeworkSpace, go to <a href="https://myhomework.space">myhomework.space</a>.
+		<div id="mhsSignIn" class="account">
+			<div id="mhsSignedIn" class="hidden">
+				Signed in to MyHomeworkSpace as <strong id="mhsAccountName"></strong>
+			</div>
+			<div id="mhsSignInInfo">
+				To sign into MyHomeworkSpace, go to <a href="https://myhomework.space">myhomework.space</a>.
+			</div>
 		</div>
 		<div id="scheduleSignIn" class="account">
 			<div id="schedulesSignedIn" class="hidden">
