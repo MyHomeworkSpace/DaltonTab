@@ -165,6 +165,19 @@ DaltonTab.Sections = {
 					$("#schedule").remove();
                 }, function() {
                     // general failure, but session might not be bad
+					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Unable to connect to Schedules.');
+					$("#schedules-warning").css("font-size", "3em");
+					$("#schedule").remove();
+                }, function(newKey, callback) {
+                    // a new key!
+                    // update our storage
+                    storage.schedulesLogin.key = newKey;
+                    chrome.storage.sync.set({
+						schedulesLogin: storage.schedulesLogin
+					}, function() {
+                        // and inform it that we're done so it can try again
+                        callback();
+					});
                 });
             });
             //window.LoadSched();

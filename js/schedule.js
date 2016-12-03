@@ -1,8 +1,14 @@
 DaltonTab.Schedule = {
 	hasTried: false,
+	daltonTestUrl: "https://daltontabservices.myhomework.space/v1/isDalton.php",
+	extendUrl: "https://rouxkeyextend.myhomework.space/extend.php",
 	rouxUrl: "https://schedules.dalton.org/roux/index.php",
 	scheduleData: undefined,
-	init: function(schedulesLogin, successCallback, expiredCallback, failureCallback) {
+	reset: function() {
+		DaltonTab.Schedule.hasTried = false;
+		DaltonTab.Schedule.scheduleData = undefined;
+	},
+	init: function(schedulesLogin, successCallback, expiredCallback, failureCallback, keyChangeCallback) {
 		var key = schedulesLogin.key;
 		var owner = schedulesLogin.username;
 		var id = key.split(":")[3];
@@ -32,9 +38,58 @@ DaltonTab.Schedule = {
 		}, function(response) {
 			var $data = $(response);
 			if ($data.find("result").children("error").children("code").text() == "505") {
+				// session is no good
+
+				// have we been here before?
+				if (DaltonTab.Schedule.hasTried) {
+					// yes
+					console.warn("Giving up on session extension.");
+					expiredCallback();
+					return;
+				}
+
+				DaltonTab.Schedule.hasTried = true; // set a flag so we don't get stuck doing this forever
+
+				// no we haven't, let's try to extend it!
 				console.warn("Schedules session is expired, trying to extend...");
-				expiredCallback();
-				return;
+
+				// let's see if we're inside dalton first
+				$.get(DaltonTab.Schedule.daltonTestUrl, function(dataStr) {
+					var data = JSON.parse(dataStr);
+					if (data.result) {
+						// oh ok we are in dalton
+						// we can't renew the session because this means that schedules sees your ip as the local one
+						// and there is no easy way to get that
+						// this used to use printers.dalton.org, but that no longer exists
+						// TODO: find a way to get local ip from a *.dalton.org domain
+						console.warn("Can't extend session, we are at Dalton.");
+						expiredCallback();
+						return;
+					}
+					// ooh let's try and extend it then
+					var ip = data.remoteIp;
+					$.get(DaltonTab.Schedule.extendUrl, {
+						application: "schedules",
+						key: key,
+						ip: ip
+					}, function(dataStr) {
+						var data = JSON.parse(dataStr);
+						if (data.status != "ok") {
+							// didn't work :(
+							console.warn("RKE couldn't extend session!");
+							expiredCallback();
+							return;
+						}
+						// it worked!
+						var newKey = data.key;
+						keyChangeCallback(newKey, function() {
+							// try again
+							var loginObj = schedulesLogin;
+							loginObj.key = newKey;
+							DaltonTab.Schedule.init(loginObj, successCallback, expiredCallback, failureCallback, keyChangeCallback);
+						});
+					});
+				});
 			}
 
 			// yay it worked! set the scheduleData parameter
