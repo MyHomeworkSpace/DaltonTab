@@ -242,6 +242,17 @@ DaltonTab.Sections = {
                 var forecast = results.item.forecast;
                 console.log(results);
 
+                var fixStupidYahooTimeThing = function(time) {
+                    // sometimes yahoo's api gives times like "7:3 am".
+                    // this function takes those timesand fixes them
+                    var secondPart = time.split(":")[1];
+                    var minutes = secondPart.split(" ")[0];
+                    if (minutes.length == 1) {
+                        minutes = "0" + minutes;
+                    }
+                    return time.split(":")[0] + ":" + minutes + " " + secondPart.split(" ")[1];
+                };
+
                 // current conditions
                 $("#weatherCurrent").html("");
                 var $currentInfo = $('<h2 id="weatherCurrentInfo"></h2>');
@@ -253,6 +264,15 @@ DaltonTab.Sections = {
                         $infoLabel.text(results.item.condition.temp + "\xB0 - " + results.item.condition.text);
                     $currentInfo.append($infoLabel);
                 $("#weatherCurrent").append($currentInfo);
+                var $detailedInfo = $("<p></p>");
+                    $detailedInfo.append(document.createTextNode("Feels like: " + results.wind.chill + "\xB0"));
+                    $detailedInfo.append("<br />");
+                    $detailedInfo.append(document.createTextNode("Humidity: " + results.atmosphere.humidity + "%"));
+                    $detailedInfo.append("<br />");
+                    $detailedInfo.append(document.createTextNode("Sunrise: " + fixStupidYahooTimeThing(results.astronomy.sunrise)));
+                    $detailedInfo.append("<br />");
+                    $detailedInfo.append(document.createTextNode("Sunset: " + fixStupidYahooTimeThing(results.astronomy.sunset)));
+                $("#weatherCurrent").append($detailedInfo);
                 $("#weatherCurrent").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
 
                 // forecast
@@ -262,7 +282,6 @@ DaltonTab.Sections = {
                         break;
                     }
                     var dayForecast = forecast[forecastIndex];
-                    console.log(dayForecast);
                     var $dayForecast = $('<div class="col-md-2"></div>');
                         var $day = $('<h4></h4>');
                             $day.text(dayForecast.day);
