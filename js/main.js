@@ -1,6 +1,7 @@
-window.daltonTab = {
+DaltonTab = {
 	subjects: {}
 };
+window.daltonTab = DaltonTab;
 
 window.daltonTab.addEventToList = function(ev, list) {
 	var tag = window.utils.getPrefix(ev.name);
@@ -114,8 +115,8 @@ $(document).ready(function() {
 		}
 	});
 
-	for (var sectionIndex in window.sections) {
-		var section = window.sections[sectionIndex];
+	for (var sectionIndex in DaltonTab.Sections) {
+		var section = DaltonTab.Sections[sectionIndex];
 		var $section = $('<div class="section container-fluid"></div>');
 			$section.attr("id", "section-" + sectionIndex);
 			$section.css("background-color", section.background);
@@ -129,8 +130,8 @@ $(document).ready(function() {
 		$("#sectionContainer").append($section);
 	}
 
-	for (var sectionIndex in window.sections) {
-		var section = window.sections[sectionIndex];
+	for (var sectionIndex in DaltonTab.Sections) {
+		var section = DaltonTab.Sections[sectionIndex];
 		section.run();
 	}
 

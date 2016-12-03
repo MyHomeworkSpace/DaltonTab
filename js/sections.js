@@ -1,4 +1,4 @@
-window.sections = {
+DaltonTab.Sections = {
     myhomeworkspace: {
         name: "Homework",
         icon: "fa-file",
@@ -70,7 +70,41 @@ window.sections = {
             return $html;
         },
         run: function() {
-            window.LoadSched();
+            chrome.storage.sync.get(["schedulesLogin"], function(storage) {
+                if (storage.schedulesLogin == undefined) {
+                    // we aren't signed in
+                    $("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> You aren\'t signed in to Schedules. ');
+                    var $link = $('<a href="#">Sign in to continue.</a>');
+                        $link.click(function() {
+                            $("#settingsModal").modal();
+                            return false;
+                        });
+                    $("#schedules-warning").append($link);
+                    return;
+                }
+                DaltonTab.Schedule.init(storage.schedulesLogin, function() {
+                    // yay it worked!
+                    DaltonTab.Schedule.scheduleData.find("period").each(function() {
+                        var $item = $("<tr></tr>");
+                        var name = $(this).children("section").children("name").text().replace("<![CDATA[", "").replace("]]>");
+                        var instructor = $(this).children("instructor").children("name").text();
+                        var location = $(this).children("location").text();
+                        $item.append("<strong>" + name + " in " + location + "</strong><br />");
+                        if (instructor != "") {
+                            $item.append("with " + instructor);
+                        }
+                        $("[data-dow=" + moment($(this).children("date").text()).day() + "]").append($item);
+                    });
+                }, function() {
+                    // session is expired
+					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
+					$("#schedules-warning").css("font-size", "3em");
+					$("#schedulesTable").remove();
+                }, function() {
+                    // general failure, but session might not be bad
+                });
+            });
+            //window.LoadSched();
         }
     },
     classes: {

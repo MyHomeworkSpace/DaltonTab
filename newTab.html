@@ -16,13 +16,16 @@
 	<script src="js/moment.js"></script>
 	<script src="js/parallax.min.js"></script>
 	<script src="js/konami.js"></script>
-	<script src="js/utils.js"></script>
-	<script src="js/sections.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/coursesLib.js"></script>
 	<script src="js/sweetalert.min.js"></script>
-	<script src="js/LoadSched.js"></script>
+	<script src="js/coursesLib.js"></script>
 	<script src="js/mhsApi.js"></script>
+
+	<script src="js/main.js"></script>
+
+	<script src="js/schedule.js"></script>
+	<script src="js/sections.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/LoadSched.js"></script>
 	<script src="js/nav.js"></script>
 	<script src="js/feedback.js"></script>
 </head>
@@ -66,10 +69,10 @@
 					<div id="scheduleSignIn" class="account">
 						<div id="schedulesSignedIn" class="hidden">
 							Signed in to Schedules as <strong id="schedulesAccountName"></strong>
-							<button id="schedulesLogOut" class="btn btn-default btn-xs">Log out</button>
+							<button id="schedulesLogOut" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Log out</button>
 						</div>
 						<div id="schedulesSignIn">
-							<button id="schedulesAccountBtn" class="btn btn-primary">Sign in to Schedules</button>
+							<button id="schedulesAccountBtn" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Schedules</button>
 						</div>
 					</div>
 					<div id="planhubSignIn" class="account">
@@ -87,7 +90,7 @@
 							Disable Bing Image Background
 						</label>
 					</div>
-					
+
 					<h3>About DaltonTab</h3>
 					<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
 				</div>
