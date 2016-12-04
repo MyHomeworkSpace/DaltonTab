@@ -236,6 +236,13 @@ a:hover {
 	z-index: 11;
 	background: rgba(0, 0, 0, 0.7);
 }
+#settingsPane a {
+	color: #008cba;
+}
+#settingsPane a:hover {
+	color: #008cba;
+	text-decoration: underline;
+}
 #settingsPane h2, #settingsPane h3 {
 	margin-top: 5px;
 	margin-bottom: 5px;
