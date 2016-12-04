@@ -149,6 +149,91 @@ $(document).ready(function() {
 		DaltonTab.SectionHandler.createSections();
 	});
 
+	// weather code
+	// no real good place to put this yet...
+	$("#weatherModal").on("hide.bs.modal", function() {
+		DaltonTab.SectionHandler.createSections();
+	});
+	$("#weatherLocationSubmit").click(function() {
+		$("#weatherLocationUnset").addClass("hidden");
+		$("#weatherLocationLoading").removeClass("hidden");
+		$("#weatherLocationError").addClass("hidden");
+		$.get("https://daltontabservices.myhomework.space/v1/weather.php", {
+			units: "f",
+			place: $("#weatherLocationText").val()
+		}, function(data) {
+			if (data.query.count == 0) {
+				// invalid location
+				$("#weatherLocationUnset").removeClass("hidden");
+				$("#weatherLocationLoading").addClass("hidden");
+				$("#weatherLocationError").removeClass("hidden");
+				return;
+			}
+			// valid location!
+			var prettyName = data.query.results.channel.location.city + "," + data.query.results.channel.location.region;
+			chrome.storage.sync.set({
+				weather: {
+					query: $("#weatherLocationText").val(),
+					prettyName: prettyName
+				}
+			}, function() {
+				$("#weatherLocationLoading").addClass("hidden");
+				$("#weatherLocationSet").removeClass("hidden");
+				$("#weatherLocationName").text(prettyName);
+			});
+		});
+	});
+	$("#weatherLocationCurrent").click(function() {
+		if ($(this).hasClass("disabled")) {
+			return;
+		}
+		$(this).addClass("disabled");
+		$(this).text("Getting your location...");
+		navigator.geolocation.getCurrentPosition(function(pos) {
+			$("#weatherLocationCurrent").text("Use current location");
+			$("#weatherLocationCurrent").removeClass("disabled");
+			var yahooFmt = "(" + pos.coords.latitude + ", " + pos.coords.longitude + ")";
+			$("#weatherLocationText").val(yahooFmt);
+			$("#weatherLocationSubmit").click();
+		}, function() {
+			$("#weatherLocationCurrent").text("Use current location");
+			$("#weatherLocationCurrent").removeClass("disabled");
+		});
+	});
+	$("#weatherLocationChange").click(function() {
+		chrome.storage.sync.remove("weather", function() {
+			$("#weatherLocationUnset").removeClass("hidden");
+			$("#weatherLocationSet").addClass("hidden");
+			$("#weatherLocationError").addClass("hidden");
+			$("#weatherLocationText").val("");
+		});
+	});
+	chrome.storage.sync.get("weather", function(storage) {
+		var w = storage.weather;
+		if (w == undefined) {
+			return;
+		}
+		$("#weatherLocationUnset").addClass("hidden");
+		$("#weatherLocationSet").removeClass("hidden");
+		$("#weatherLocationName").text(w.prettyName);
+	});
+	chrome.storage.sync.get("weatherUnits", function(storage) {
+		var u = storage.weatherUnits;
+		if (u == undefined) {
+			return;
+		}
+		$("#weatherUnitsF").prop("checked", false);
+		$("#weatherUnits" + u.toUpperCase()).prop("checked", true);
+	});
+	$("#weatherUnitsF, #weatherUnitsC").change(function() {
+		var newUnit = $("input[name=weatherUnits]:checked").val();
+		chrome.storage.sync.set({
+			weatherUnits: newUnit
+		}, function() {
+
+		});
+	});
+
 	$("#newTabDefault").click(function() {
 		window.location.href = "chrome-search://local-ntp/local-ntp.html"
 	});

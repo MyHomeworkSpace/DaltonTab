@@ -1,0 +1,14 @@
+#weatherCurrent {
+	margin-top: -50px;
+}
+#weatherCurrentInfo {
+	font-size: 50px;
+}
+#weatherLocationText {
+	display: inline-block;
+	width: 500px;
+}
+#weatherLocationSubmit {
+	margin-top: -4px;
+	width: 50px;
+}
