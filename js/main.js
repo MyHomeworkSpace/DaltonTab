@@ -196,8 +196,8 @@ $(document).ready(function() {
 			$("#weatherLocationText").val(yahooFmt);
 			$("#weatherLocationSubmit").click();
 		}, function() {
-			$("#weatherLocationCurrent").text("Use current location");
-			$("#weatherLocationCurrent").removeClass("disabled");
+			$("#weatherLocationCurrent").text("Couldn't get location");
+			//$("#weatherLocationCurrent").removeClass("disabled");
 		});
 	});
 	$("#weatherLocationChange").click(function() {

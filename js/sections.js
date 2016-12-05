@@ -292,7 +292,6 @@ DaltonTab.Sections = {
                             $("#weatherModal").modal();
                         });
                     $("#weatherCurrent").append($options);
-                    $("#weatherCurrent").append('<br /><a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
 
                     // forecast
                     $("#weatherForecast").html("<h2>Forecast</h2><div class='row'></div>");
@@ -319,6 +318,7 @@ DaltonTab.Sections = {
                     var $fullForecast = $('<h3><a>View full forecast &raquo;</a></h3>');
                         $fullForecast.children("a").attr("href", results.link);
                     $("#weatherForecast").append($fullForecast);
+                    $("#weatherForecast").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
                 });
             });
         }
