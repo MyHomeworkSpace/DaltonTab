@@ -14,7 +14,7 @@ body {
 	text-align: center;
 }
 .section {
-	height: 200px;
+	height: 165px;
 	min-height: 0;
 	color: #fff;
 	opacity: 0.8;
@@ -22,4 +22,9 @@ body {
 #schedulesSection { background-color: #673ab7; }
 #coursesSection { background-color: #ff9800; }
 #myhomeworkspaceSection { background-color: #00bcd4; }
-#end { background-color: #009688; }
+#end {
+	background-color: #009688;
+	color: white;
+	text-align: center;
+	padding-bottom: 20px;
+}
