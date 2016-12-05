@@ -67,7 +67,7 @@ DaltonTab.Sections = {
         name: "Schedule",
         icon: "fa-calendar",
         description: "View your schedule from schedules.dalton.org.",
-        background: "rgba(121, 70, 26, 0.65)",
+        background: "rgba(121, 70, 26, 0.9)",
         createHtml: function() {
             var $html = $("<div></div>");
                 $html.append('<h3 id="schedules-warning" class="section-warning"></h3>');
@@ -94,7 +94,7 @@ DaltonTab.Sections = {
                     $("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> You aren\'t signed in to Schedules. ');
                     var $link = $('<a href="#">Sign in to continue.</a>');
                         $link.click(function() {
-                            $("#settingsModal").modal();
+                            $("#sectionsButton").click();
                             return false;
                         });
                     $("#schedules-warning").append($link);
@@ -193,7 +193,7 @@ DaltonTab.Sections = {
         name: "Classes",
         icon: "fa-list",
         description: "View and access your courses from courses.dalton.org.",
-        background: "rgba(57, 146, 108, 0.69)",
+        background: "rgba(57, 146, 108, 0.9)",
         createHtml: function() {
             var $html = $("<div></div>");
                 $html.append('<h3 id="classes-warning" class="section-warning"></h3>');
@@ -223,7 +223,7 @@ DaltonTab.Sections = {
         name: "Weather",
         icon: "fa-sun-o",
         description: "View the current weather.",
-        background: "rgba(14, 100, 18, 0.69)",
+        background: "rgba(14, 100, 18, 0.9)",
         createHtml: function() {
             var $html = $('<div id="weather" class="row"></div>');
                 var $current = $('<div id="weatherCurrent" class="col-md-6"><br /><br /><br />Loading weather...</div>');
