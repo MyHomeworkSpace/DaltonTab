@@ -6,7 +6,7 @@ window.coursesLib = {};
 
 window.coursesLib.baseUrl = "https://courses2017.dalton.org";
 
-window.coursesLib.checkLoggedIn = function(doneFunc) {
+window.coursesLib.checkLoggedIn = function(doneFunc, failFunc) {
 	$.get(window.coursesLib.baseUrl + "/login/index.php", function (resText) {
 		var $response = $(resText);
 		var respObj = {};
@@ -14,6 +14,8 @@ window.coursesLib.checkLoggedIn = function(doneFunc) {
 		respObj.isLoggedIn = ($response.find(".loginform").length == 0);
 
 		doneFunc(respObj);
+	}).fail(function() {
+		failFunc();
 	});
 };
 

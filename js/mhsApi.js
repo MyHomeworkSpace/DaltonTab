@@ -3,19 +3,19 @@ window.mhs = {
 	nonce: ""
 };
 
-window.mhs.init = function(callback) {
+window.mhs.init = function(callback, failCallback) {
 	window.mhs.getNonce(function(nonce) {
 		window.mhs.nonce = nonce;
 		callback();
-	});
+	}, failCallback);
 }
 
-window.mhs.getNonce = function(callback) {
+window.mhs.getNonce = function(callback, failCallback) {
 	$.get(window.mhs.basePath + "auth/csrf", function(data) {
 		$.get(window.mhs.basePath + "auth/csrf", function(data) {
 			callback(data.token);
-		});
-	});
+		}).fail(failCallback);
+	}).fail(failCallback);
 };
 
 window.mhs.get = function(url, callback) {

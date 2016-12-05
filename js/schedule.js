@@ -95,6 +95,6 @@ DaltonTab.Schedule = {
 			// yay it worked! set the scheduleData parameter
 			DaltonTab.Schedule.scheduleData = $data;
 			successCallback();
-		});
+		}).fail(failureCallback);
 	}
 };

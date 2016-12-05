@@ -64,6 +64,11 @@ DaltonTab.Sections = {
                 		});
             		});
             	});
+            }, function() {
+                $("#hw-warning").html('<i class="fa fa-chain-broken"></i> Could not reach MyHomeworkSpace.');
+                $("#hw-warning").css("font-size", "3em");
+                $("#hwLoadMsg").remove();
+                $("#hwRow").remove();
             });
         }
     },
@@ -182,7 +187,7 @@ DaltonTab.Sections = {
 					$("#schedule").remove();
                 }, function() {
                     // general failure, but session might not be bad
-					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Unable to connect to Schedules.');
+					$("#schedules-warning").html('<i class="fa fa-chain-broken"></i> Could not reach Schedules.');
 					$("#schedules-warning").css("font-size", "3em");
                     $("#scheduleLoadMsg").hide();
 					$("#schedule").remove();
@@ -231,7 +236,11 @@ DaltonTab.Sections = {
         				}
         			});
         		}
-        	});
+        	}, function() {
+                $("#classes-warning").html('<i class="fa fa-chain-broken"></i> Could not reach Courses.');
+                $("#classes-warning").css("font-size", "3em");
+                $("#classesLoadMsg").hide();
+            });
         }
     },
     weather: {
@@ -334,6 +343,11 @@ DaltonTab.Sections = {
                         $fullForecast.children("a").attr("href", results.link);
                     $("#weatherForecast").append($fullForecast);
                     $("#weatherForecast").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
+                }).fail(function() {
+                    $("#weather").removeClass("row");
+                    $("#weather").html("<span class='section-warning'><i class='fa fa-chain-broken'></i> Could not get weather.</span>");
+        			$("#weather .section-warning").css("font-size", "3em");
+        			$("#weather .section-warning").css("font-weight", "lighter");
                 });
             });
         }
