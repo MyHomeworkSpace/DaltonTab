@@ -1,6 +1,14 @@
 $(document).ready(function() {
 	var schedulesUrl = "https://schedules.dalton.org/roux/index.php";
+	$("#username, #password").keydown(function(e) {
+		if (e.keyCode == 13) { // 13 is Enter
+			$("#signIn").click();
+		}
+	});
 	$("#signIn").click(function() {
+		$("#signIn").prop("disabled", true);
+		$("#signIn").val("Signing in...");
+
 		var daltonid = $("#username").val();
 		var password = $("#password").val();
 
@@ -36,6 +44,8 @@ $(document).ready(function() {
 					var errMsg = $data.find("error").children("message").text();
 					if (errCode == "505") {
 						swal("Uh Oh...", "It seems like you put in the wrong credentials. Try again!", "warning");
+						$("#signIn").prop("disabled", false);
+						$("#signIn").val("Sign in");
 						$("#loginform").show();
 						$("#loggingin").hide();
 					} else {
@@ -45,6 +55,8 @@ $(document).ready(function() {
 			},
 			error: function() {
 				swal("Whoops! An error occured while connecting to Schedules.", "Try again later, or, if that doesn't work, send an email to emails@coursesplus.tk.", "error");
+				$("#signIn").prop("disabled", false);
+				$("#signIn").val("Sign in");
 			}
 		});
 	});
