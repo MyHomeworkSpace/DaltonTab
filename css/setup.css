@@ -1,0 +1,25 @@
+body {
+	position: relative;
+}
+.lead {
+	color: white;
+	margin: 0 auto;
+	width: 700px;
+}
+#topSetupSection.section {
+	height: 400px;
+	padding-top: 100px;
+	background-color: #808080;
+	opacity: 0.8;
+	text-align: center;
+}
+.section {
+	height: 200px;
+	min-height: 0;
+	color: #fff;
+	opacity: 0.8;
+}
+#schedulesSection { background-color: #673ab7; }
+#coursesSection { background-color: #ff9800; }
+#myhomeworkspaceSection { background-color: #00bcd4; }
+#end { background-color: #009688; }

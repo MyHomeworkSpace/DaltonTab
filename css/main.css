@@ -13,6 +13,9 @@ a {
 a:hover {
 	color: #bfbfbf;
 }
+a.btn {
+	text-decoration: none;
+}
 
 .section {
 	padding-bottom: 10px;
