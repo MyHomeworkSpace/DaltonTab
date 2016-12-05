@@ -274,3 +274,7 @@ a:hover {
 #schedules-warning {
 	font-size: 3em;
 }
+
+#hwTomorrow li h4:first-child, #hwSoon li h4:first-child, #hwLongTerm li h4:first-child {
+	display: inline;
+}

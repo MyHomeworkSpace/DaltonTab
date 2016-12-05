@@ -6,11 +6,12 @@ DaltonTab.Sections = {
         background: "rgba(60, 77, 99, 0.9)",
         createHtml: function() {
             var $html = $("<div></div>");
-                $html.append('<h3 id="hw-warning" class="section-warning"></h3>');
+                $html.append('<h3 id="hw-warning" class="section-warning"></h3><p id="hwLoadMsg"><i class="fa fa-refresh fa-spin"></i> Getting your homework...</p>');
                 var $hwRow = $('<div id="hwRow" class="row"></div>');
                     $hwRow.append('<div id="hwTomorrow" class="col-md-4"><h4>Due tomorrow</h4></div>');
                     $hwRow.append('<div id="hwSoon" class="col-md-4"><h4>Due soon</h4></div>');
                     $hwRow.append('<div id="hwLongTerm" class="col-md-4"><h4>Long-term</h4></div>');
+                    $hwRow.hide();
                 $html.append($hwRow);
             return $html;
         },
@@ -21,6 +22,7 @@ DaltonTab.Sections = {
             		if (data.status == "error") {
             			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://myhomework.space">MyHomeworkSpace</a> to view your homework.');
             			$("#hw-warning").css("font-size", "3em");
+                        $("#hwLoadMsg").remove();
             			$("#hwRow").remove();
             			return;
             		}
@@ -57,6 +59,8 @@ DaltonTab.Sections = {
                 				}
                 				window.daltonTab.addEventToList(evObj, list);
                 			};
+                            $("#hwLoadMsg").remove();
+                            $("#hwRow").show();
                 		});
             		});
             	});
@@ -71,6 +75,7 @@ DaltonTab.Sections = {
         createHtml: function() {
             var $html = $("<div></div>");
                 $html.append('<h3 id="schedules-warning" class="section-warning"></h3>');
+                $html.append('<div id="scheduleLoadMsg"><i class="fa fa-refresh fa-spin"></i> Loading your schedule...</div>');
                 var $schedule = $('<div id="schedule"></div>');
                     var $daysOfWeek = $('<div id="daysOfWeek"></div>');
                         $daysOfWeek.append('<div class="dayOfWeek">Monday</div>');
@@ -84,6 +89,7 @@ DaltonTab.Sections = {
                     $schedule.append('<div class="dayClasses wed"><div></div></div>');
                     $schedule.append('<div class="dayClasses thu"><div></div></div>');
                     $schedule.append('<div class="dayClasses fri"><div></div></div>');
+                    $schedule.hide();
                 $html.append($schedule);
             return $html;
         },
@@ -98,6 +104,7 @@ DaltonTab.Sections = {
                             return false;
                         });
                     $("#schedules-warning").append($link);
+                    $("#scheduleLoadMsg").hide();
                     $("#schedule").remove();
                     return;
                 }
@@ -164,15 +171,20 @@ DaltonTab.Sections = {
                         $item.append("from " + start.format("h:mm") + " to " + end.format("h:mm"));
                         $(".dayClasses." + date.format("ddd").toLowerCase() + "").append($item);
                     });
+
+                    $("#scheduleLoadMsg").hide();
+                    $("#schedule").show();
                 }, function() {
                     // session is expired
 					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Your Schedules session has expired. Please re-sign in using the DaltonTab settings page.');
 					$("#schedules-warning").css("font-size", "3em");
+                    $("#scheduleLoadMsg").hide();
 					$("#schedule").remove();
                 }, function() {
                     // general failure, but session might not be bad
 					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> Unable to connect to Schedules.');
 					$("#schedules-warning").css("font-size", "3em");
+                    $("#scheduleLoadMsg").hide();
 					$("#schedule").remove();
                 }, function(newKey, callback) {
                     // a new key!
@@ -197,6 +209,7 @@ DaltonTab.Sections = {
         createHtml: function() {
             var $html = $("<div></div>");
                 $html.append('<h3 id="classes-warning" class="section-warning"></h3>');
+                $html.append('<div id="classesLoadMsg"><i class="fa fa-refresh fa-spin"></i> Loading your classes...</div>');
                 $html.append('<ul id="courses"></ul>');
             return $html;
         },
@@ -205,6 +218,7 @@ DaltonTab.Sections = {
         		if (!response.isLoggedIn) {
         			$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">to Courses</a>.');
         			$("#classes-warning").css("font-size", "3em");
+                    $("#classesLoadMsg").hide();
         		} else {
         			window.coursesLib.getCourseList(function(response) {
         				for (var courseIndex in response.classes) {
@@ -213,6 +227,7 @@ DaltonTab.Sections = {
         					var $element = $("<li></li>");
         						$element.html('<a href="' + course.url + '" style="color:white">' + course.name + '</a>');
         					$("#courses").append($element);
+                            $("#classesLoadMsg").hide();
         				}
         			});
         		}
@@ -226,7 +241,7 @@ DaltonTab.Sections = {
         background: "rgba(14, 100, 18, 0.9)",
         createHtml: function() {
             var $html = $('<div id="weather" class="row"></div>');
-                var $current = $('<div id="weatherCurrent" class="col-md-6"><br /><br /><br />Loading weather...</div>');
+                var $current = $('<div id="weatherCurrent" class="col-md-6"><br /><br /><br /><i class="fa fa-refresh fa-spin"></i> Loading weather...</div>');
                 $html.append($current);
                 var $forecast = $('<div id="weatherForecast" class="col-md-6"></div>');
                 $html.append($forecast);
