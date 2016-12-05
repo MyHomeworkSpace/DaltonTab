@@ -102,7 +102,7 @@ a.btn {
 }
 #hwButton.flipped {
 	bottom: calc(100% - 100px);
-	text-shadow: -2px -2px black;
+	text-shadow: 2px 2px black;
 }
 #hwButton.flipped i:before {
 	content: "\f139";
@@ -240,11 +240,11 @@ a.btn {
 	z-index: 11;
 	background: rgba(0, 0, 0, 0.7);
 }
-#settingsPane a {
+#settingsPane a:not(.btn) {
 	color: #008cba;
 	text-decoration: none;
 }
-#settingsPane a:hover {
+#settingsPane a:not(.btn):hover {
 	color: #008cba;
 	text-decoration: underline;
 }
