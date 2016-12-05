@@ -8,6 +8,7 @@ label {
 
 a {
 	color: white;
+	text-decoration: underline;
 }
 a:hover {
 	color: #bfbfbf;
@@ -238,6 +239,7 @@ a:hover {
 }
 #settingsPane a {
 	color: #008cba;
+	text-decoration: none;
 }
 #settingsPane a:hover {
 	color: #008cba;
