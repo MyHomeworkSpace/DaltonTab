@@ -274,7 +274,7 @@ DaltonTab.Sections = {
                 }
                 $.get("https://daltontabservices.myhomework.space/v1/weather.php", {
                     units: units,
-                    place: "New York, NY"
+                    place: storage.weather.query
                 }, function(data) {
                     var results = data.query.results.channel;
                     var forecast = results.item.forecast;
