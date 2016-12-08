@@ -55,40 +55,42 @@ DaltonTab.Schedule = {
 
 				// let's see if we're inside dalton first
 				$.get(DaltonTab.Schedule.daltonTestUrl, function(dataStr) {
+					var extendKeyWithIp = function(ip) {
+						$.get(DaltonTab.Schedule.extendUrl, {
+							application: "schedules",
+							key: key,
+							ip: ip
+						}, function(dataStr) {
+							var data = JSON.parse(dataStr);
+							if (data.status != "ok") {
+								// didn't work :(
+								console.warn("RKE couldn't extend session!");
+								expiredCallback();
+								return;
+							}
+							// it worked!
+							var newKey = data.key;
+							keyChangeCallback(newKey, function() {
+								// try again
+								var loginObj = schedulesLogin;
+								loginObj.key = newKey;
+								DaltonTab.Schedule.init(loginObj, successCallback, expiredCallback, failureCallback, keyChangeCallback);
+							});
+						});
+					};
 					var data = JSON.parse(dataStr);
 					if (data.result) {
-						// oh ok we are in dalton
-						// we can't renew the session because this means that schedules sees your ip as the local one
-						// and there is no easy way to get that
-						// this used to use printers.dalton.org, but that no longer exists
-						// TODO: find a way to get local ip from a *.dalton.org domain
-						console.warn("Can't extend session, we are at Dalton.");
-						expiredCallback();
+						// we're at dalton
+						// find our local ip
+						DaltonTab.LocalIP.getLocalIP(function(ip) {
+							// and try and extend it with that
+							extendKeyWithIp(ip);
+							return;
+						});
 						return;
 					}
 					// ooh let's try and extend it then
-					var ip = data.remoteIp;
-					$.get(DaltonTab.Schedule.extendUrl, {
-						application: "schedules",
-						key: key,
-						ip: ip
-					}, function(dataStr) {
-						var data = JSON.parse(dataStr);
-						if (data.status != "ok") {
-							// didn't work :(
-							console.warn("RKE couldn't extend session!");
-							expiredCallback();
-							return;
-						}
-						// it worked!
-						var newKey = data.key;
-						keyChangeCallback(newKey, function() {
-							// try again
-							var loginObj = schedulesLogin;
-							loginObj.key = newKey;
-							DaltonTab.Schedule.init(loginObj, successCallback, expiredCallback, failureCallback, keyChangeCallback);
-						});
-					});
+					extendKeyWithIp(data.remoteIp);
 				});
 			}
 
