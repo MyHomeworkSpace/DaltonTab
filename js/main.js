@@ -71,7 +71,11 @@ window.daltonTab.findNextDay = function(offset) {
 $(document).ready(function() {
 	var timeUpdFunc = function() {
 		$(".current-time").text(moment().format("h:mm A"));
-		$(".current-date").text(moment().format("MMMM Do, YYYY"));
+		if (navigator.onLine) {
+			$(".current-date").text(moment().format("MMMM Do, YYYY"));
+		} else {
+			$(".current-date").text("You are not connected to the internet!")
+		}
 	};
 	timeUpdFunc();
 	setInterval(timeUpdFunc, 1000);
