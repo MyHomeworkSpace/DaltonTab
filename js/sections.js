@@ -7,17 +7,18 @@ DaltonTab.Sections = {
         createHtml: function() {
             var $html = $("<div></div>");
                 $html.append('<h3 id="hw-warning" class="section-warning"></h3><p id="hwLoadMsg"><i class="fa fa-refresh fa-spin"></i> Getting your homework...</p>');
-                var $hwRow = $('<div id="hwRow" class="row"></div>');
-                    $hwRow.append('<div id="hwTomorrow" class="col-md-4"><h4>Due tomorrow</h4></div>');
-                    $hwRow.append('<div id="hwSoon" class="col-md-4"><h4>Due soon</h4></div>');
-                    $hwRow.append('<div id="hwLongTerm" class="col-md-4"><h4>Long-term</h4></div>');
+                var $hwRow = $('<div id="myHWSpaceRow" class="row"></div>');
+                    $hwRow.append('<div id="myHWSpaceOverdue" class="myHWSpaceList hidden col-md-4"><div class="myHWSpaceListName">Overdue</div><ul></ul></div>');
+                    $hwRow.append('<div id="myHWSpaceTomorrow" class="myHWSpaceList col-md-4"><div class="myHWSpaceListName">Tomorrow</div><ul></ul></div>');
+                    $hwRow.append('<div id="myHWSpaceSoon" class="myHWSpaceList col-md-4"><div class="myHWSpaceListName">Soon</div><ul></ul></div>');
+                    $hwRow.append('<div id="myHWSpaceLongterm" class="myHWSpaceList col-md-4"><div class="myHWSpaceListName">Long-term</div><ul></ul></div>');
                     $hwRow.hide();
                 $html.append($hwRow);
             return $html;
         },
         run: function() {
-            window.mhs.init(function() {
-            	window.mhs.get("auth/me", function(data) {
+            MyHomeworkSpace.init(function() {
+            	MyHomeworkSpace.get("auth/me", function(data) {
             		console.log(data);
             		if (data.status == "error") {
             			$("#hw-warning").html('<i class="fa fa-exclamation-circle"></i> Sign into <a href="https://myhomework.space">MyHomeworkSpace</a> to view your homework.');
@@ -32,35 +33,94 @@ DaltonTab.Sections = {
         			$("#mhsSignedIn").removeClass("hidden");
         			$("#mhsAccountName").text(data.name + " (" + data.username + ")");
 
-            		window.mhs.get("classes/get/", function(data) {
+            		MyHomeworkSpace.get("classes/get/", function(data) {
+                        var classes = [];
             			for (var i = 0; i < data.classes.length; i++) {
             				var itm = data.classes[i];
-            				window.daltonTab.subjects[itm.id] = itm;
-            			};
-                        window.mhs.get("homework/getHWView", function(data) {
-                			var ev = data.homework;
-                			if (ev.length == 0) {
-                				return;
-                			}
-                			for (var evIndex in ev) {
-                				var evObj = {
-                					name: ev[evIndex].name,
-                					due: new Date(ev[evIndex].due),
-                					classId: ev[evIndex].classId,
-                					done: ev[evIndex].done
-                				};
-                				var list = "LongTerm";
-                				var dueMoment = moment(evObj.due).utcOffset(0);
-                				var tomorrow = moment(window.daltonTab.findNextDay(1)).date();
-                				if (dueMoment.date() == tomorrow && dueMoment.month() == moment(window.daltonTab.findNextDay(1)).month() && dueMoment.year() == moment(window.daltonTab.findNextDay(1)).year()) { // moment.isSame didn't work here. /shrug
-                					list = "Tomorrow";
-                				} else if (dueMoment.isBefore(moment(window.daltonTab.findNextDay(5)).subtract(1, "day"))) {
-                					list = "Soon";
-                				}
-                				window.daltonTab.addEventToList(evObj, list);
-                			};
+            				classes[itm.id] = itm;
+            			}
+                        MyHomeworkSpace.get("homework/getHWView", function(data) {
+                			var hw = data.homework;
+                            var showMonday = (moment().day() == 5 || moment().day() == 6);
+                            var tomorrowDaysToThreshold = 2;
+                            var showOverdue = false;
+                            if (showMonday) {
+                                $("#myHWSpaceTomorrowTitle").text("Monday");
+                                if (moment().day() == 5) {
+                                    tomorrowDaysToThreshold = 4;
+                                } else {
+                                    tomorrowDaysToThreshold = 3;
+                                }
+                            }
+                            for (var hwIndex in hw) {
+                                var hwItem = hw[hwIndex];
+
+                                var due = moment(hwItem.due);
+                                var dueText = due.calendar().split(" at ")[0];
+                                var daysTo = Math.ceil(due.diff(moment()) / 1000 / 60 / 60 / 24);
+                                var prefix = hwItem.name.split(" ")[0];
+
+                                if (daysTo < 1 && hwItem.complete == "1") {
+                                    continue;
+                                }
+
+                                if (dueText.indexOf(' ') > -1) {
+                                    dueText = dueText[0].toLowerCase() + dueText.substr(1);
+                                }
+
+                                var $item = $('<div class="myHWSpaceItem"></div>');
+
+                                    $item.attr("data-hwId", hwItem.id);
+                                    if (hwItem.complete == "1") {
+                                        $item.addClass("done");
+                                    }
+                                    var $name = $('<div class="myHWSpaceName"></div>');
+                                        $name.append($("<span></span>").text(prefix).addClass(MyHomeworkSpace.Prefixes.matchClass(prefix)));
+                                        if (hwItem.name.indexOf(" ") != -1) {
+                                            $name.append($("<span></span>").text(hwItem.name.substr(hwItem.name.indexOf(" "))));
+                                        }
+                                        if (daysTo < 1) {
+                                            $name.append(" (late)");
+                                        }
+                                    $item.append($name);
+                                    var $subtext = $('<div class="myHWSpaceSubText"></div>');
+                                        var keyword = "due ";
+                                        if (prefix.toLowerCase() == "test" || prefix.toLowerCase() == "exam" || prefix.toLowerCase() == "midterm" || prefix.toLowerCase() == "quiz" || prefix.toLowerCase() == "ica" || prefix.toLowerCase() == "lab" || prefix.toLowerCase() == "study") {
+                                            keyword = "on ";
+                                        }
+                                        if (keyword == "on " && (dueText.toLowerCase() == "today" || dueText.toLowerCase() == "tomorrow")) {
+                                            keyword = "";
+                                        }
+                                        $subtext.text(keyword + dueText);
+                                        for (var classIndex in classes) {
+                                            if (classes[classIndex].id == hwItem.classId) {
+                                                $subtext.append(" in " + classes[classIndex].name)
+                                            }
+                                        }
+                                    $item.append($subtext);
+
+                                    if (daysTo < 1) {
+                                        $item.addClass("myHWSpaceLate");
+                                    }
+
+                                if (daysTo < 1) {
+                                    showOverdue = true;
+                                    $("#myHWSpaceOverdue ul").append($item);
+                                } else if (daysTo < tomorrowDaysToThreshold) {
+                                    $("#myHWSpaceTomorrow ul").append($item);
+                                } else if (daysTo < 5) {
+                                    $("#myHWSpaceSoon ul").append($item);
+                                } else {
+                                    $("#myHWSpaceLongterm ul").append($item);
+                                }
+                            }
+                            if (showOverdue) {
+                                $("#myHWSpaceOverdue").removeClass("hidden");
+                                $(".myHWSpaceList").removeClass("col-md-4").addClass("col-md-3");
+                            }
+                            
                             $("#hwLoadMsg").remove();
-                            $("#hwRow").show();
+                            $("#myHWSpaceRow").show();
                 		});
             		});
             	});

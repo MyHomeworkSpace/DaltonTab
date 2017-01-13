@@ -1,72 +1,7 @@
 DaltonTab = {
-	subjects: {},
 	mustUpdateSectionPositions: false
 };
 window.daltonTab = DaltonTab;
-
-window.daltonTab.addEventToList = function(ev, list) {
-	var tag = window.utils.getPrefix(ev.name);
-	var name = ev.name.split(" ");
-	name.splice(0, 1);
-	name = name.join(" ");
-	var done = (ev.done == 1 ? true : false);
-
-	if (name.trim() == "") {
-		return;
-	}
-
-	var $item = $('<li></li>');
-		if (done) {
-			$item.addClass("daltonTab-done");
-		}
-		var $name = $('<h4></h4>');
-			$name.text(name);
-		$item.append($name);
-
-		var $lineTwo = $('<h4></h4>');
-			var $tag = $('<span></span>');
-				$tag.addClass("first-word");
-				if (tag.toLowerCase() == "read") {
-					tag = tag + "ing";
-				}
-				$tag.addClass(window.utils.getPrefixClass(tag));
-
-				$tag.text(tag);
-			$lineTwo.append($tag);
-
-			var $subject = $('<span></span>');
-				$subject.text(" in " + window.daltonTab.subjects[ev.classId].name);
-			$lineTwo.append($subject);
-
-			var $due = $('<span></span>');
-				var keyword = "due";
-				if (tag.toLowerCase() == "test" || tag.toLowerCase() == "exam" || tag.toLowerCase() == "midterm" || tag.toLowerCase() == "quiz" || tag.toLowerCase() == "ica" || tag.toLowerCase() == "lab") {
-					keyword = "on";
-				}
-				var dueText = window.utils.formatDate_pretty(moment(ev.due).add(1, "day").toDate());
-				if (moment(ev.due).add(1, "day").week() == moment().week()) {
-					dueText = window.utils.getDayOfWeek(moment(ev.due).add(1, "day").day());
-				}
-				$due.text(" " + keyword + " " + dueText);
-			$lineTwo.append($due);
-		$item.append($lineTwo);
-	$("#hw" + list).append($item);
-};
-window.daltonTab.findNextDay = function(offset) {
-	var retVal = moment(); //moment().add("days", offset);
-	if (retVal.day() == 6) {
-		// don't start on Saturday
-		retVal.add(1, "day");
-	}
-	for (var i = 0; i < offset; i++) {
-		retVal.add(1, "day"); //add a day
-		// is it a Saturday?
-		if (retVal.day() == 6) {
-			retVal.add(2, "day"); // skip the weekend
-		}
-	}
-	return retVal.toDate();
-};
 
 $(document).ready(function() {
 	var timeUpdFunc = function() {
