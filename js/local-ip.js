@@ -27,36 +27,36 @@ SOFTWARE.
 DaltonTab.LocalIP = {
 	getLocalIP: function(callback) {
 		var RTCPeerConnection = window.RTCPeerConnection
-                    || window.mozRTCPeerConnection
-                    || window.webkitRTCPeerConnection;
+					|| window.mozRTCPeerConnection
+					|| window.webkitRTCPeerConnection;
 		var pc = new RTCPeerConnection({
 			iceServers: [
 				{urls: "stun:stun.services.mozilla.com"}
 			]
 		}, {
-            optional: [
+			optional: [
 				{RtpDataChannels: true}
 			]
-        });
+		});
 		pc.onicecandidate = function(ice) {};
 		pc.createDataChannel("");
-        pc.createOffer(function(result){
-            pc.setLocalDescription(result, function(){}, function(){});
-        }, function(){});
+		pc.createOffer(function(result){
+			pc.setLocalDescription(result, function(){}, function(){});
+		}, function(){});
 		setTimeout(function(){
-	        var lines = pc.localDescription.sdp.split('\n');
-	        for (var lineIndex in lines) {
+			var lines = pc.localDescription.sdp.split('\n');
+			for (var lineIndex in lines) {
 				var line = lines[lineIndex];
-	            if (line.indexOf('a=candidate:') === 0) {
-	                var ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
-	                var ip_addr = ip_regex.exec(line)[1];
+				if (line.indexOf('a=candidate:') === 0) {
+					var ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
+					var ip_addr = ip_regex.exec(line)[1];
 					console.log("Found candidate IP: " + ip_addr);
 					if (ip_addr.match(/^(192\.168\.|169\.254\.|10\.|172\.(1[6-9]|2\d|3[01]))/)) {
 						callback(ip_addr);
 						return false;
 					}
 				}
-	        }
-	    }, 2000);
+			}
+		}, 2000);
 	}
 };
