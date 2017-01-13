@@ -12,7 +12,6 @@
 	"permissions": [
 		"storage",
 		"*://*.dalton.org/",
-		"*://*.planhub.me/",
 		"*://*.myhomework.space/",
 		"https://www.bing.com/"
 	],
