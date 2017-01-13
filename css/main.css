@@ -76,7 +76,7 @@ a.btn {
 	border-right: solid 4px white;
 }
 
-#timeTop h1, #timeTop h2 {
+#timeTop div {
 	font-weight: 400;
 }
 
@@ -144,6 +144,12 @@ a.btn {
 
 .mainTime {
 	font-size: 6em;
+}
+.mainTime .current-time-ampm {
+	font-size: 0.5em;
+	position: relative;
+	top: -32px;
+	left: 8px;
 }
 .mainDate {
 	font-size: 2em;

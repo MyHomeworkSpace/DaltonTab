@@ -70,7 +70,8 @@ window.daltonTab.findNextDay = function(offset) {
 
 $(document).ready(function() {
 	var timeUpdFunc = function() {
-		$(".current-time").text(moment().format("h:mm A"));
+		$(".current-time").text(moment().format("h:mm"));
+		$(".current-time-ampm").text(moment().format("A"));
 		if (navigator.onLine) {
 			$(".current-date").text(moment().format("MMMM Do, YYYY"));
 		} else {
