@@ -35,6 +35,7 @@
 	<script src="js/local-ip.js"></script>
 	<script src="js/schedule.js"></script>
 	<script src="js/sections.js"></script>
+	<script src="js/survey.js"></script>
 	<script src="js/utils.js"></script>
 </head>
 <body>
@@ -59,6 +60,56 @@
 					<button type="button" id="feedback-submit" class="btn btn-primary">Submit</button>
 				</div>
 				<div class="modal-footer feedback-footer-load hidden"><i class="fa fa-circle-o-notch fa-spin"></i><span> Loading...</span></div>
+			</div>
+		</div>
+	</div>
+	<div id="surveyModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 id="surveyTitle" class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<p id="surveyQuestion"></p>
+					<div id="surveyResponse">
+						<div id="surveyOptInQuestion">
+							<p>Would you like to get a response to your answers?</p>
+							<label><input type="radio" id="surveyOptInResponse-true" name="surveyOptInResponse" value="true"/> Yes</label> <br />
+							<label><input type="radio" id="surveyOptInResponse-false" name="surveyOptInResponse" value="false"/> No</label>
+							<div id="surveyOptInEmail">
+								<p>Type in your email below.</p>
+								<input type="email" id="surveyEmail" class="form-control" />
+							</div>
+						</div>
+						<textarea id="surveyTextResponse" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div id="surveyControls">
+						<button id="surveyCancel" type="button" class="btn btn-danger pull-left">Cancel</button>
+						<button id="surveyBack" type="button" class="btn btn-default">&larr;</button>
+						<button id="surveyNext" type="button" class="btn btn-primary">Next &rarr;</button>
+					</div>
+					<div id="surveySubmittionLoading" class="hidden align-right">
+						<i class="fa fa-refresh fa-spin"></i> Loading...
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="surveyThanksModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Thanks!</h4>
+				</div>
+				<div class="modal-body">
+					<p>Thanks for your answers!</p>
+					<p id="surveyThanksResponse">We'll try to respond as soon as we can.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -164,6 +215,17 @@
 			<div id="timeTop" class="col-md-12">
 				<h1 class="current-time mainTime"></h1>
 				<h2 class="current-date mainDate"></h2>
+				<div id="surveyPromptContainer" style="display: none">
+					<div id="surveyPrompt">
+						<div id="surveyPromptTitle">Help us make DaltonTab better</div>
+						<div id="surveyPromptSubtext">Take a short survey &rarr;</div>
+					</div>
+					<div id="surveyPromptSublinks">
+						<a id="surveyPromptLater">Ask me later</a>
+						&bull;
+						<a id="surveyPromptBlock">Don't ask me again</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
