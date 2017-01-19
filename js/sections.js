@@ -263,7 +263,6 @@ DaltonTab.Sections = {
 					});
 				});
 			});
-			//window.LoadSched();
 		}
 	},
 	classes: {

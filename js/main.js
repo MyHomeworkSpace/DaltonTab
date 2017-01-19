@@ -1,7 +1,6 @@
 DaltonTab = {
 	mustUpdateSectionPositions: false
 };
-window.daltonTab = DaltonTab;
 
 $(document).ready(function() {
 	var timeUpdFunc = function() {
