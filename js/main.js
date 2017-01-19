@@ -225,24 +225,6 @@ $(document).ready(function() {
 		});
 	});
 
-	var easter_egg = new Konami();
-	easter_egg.code = function() {
-		swal({
-			title: "Unexpected T_PAAMAYIM_NEKUDOTAYIM!",
-			text: "MWAHHHAHAHAHAHAHAHAH\nConfused? Search on...\n This product uses Sapi, Papi, Capy, Wapi",
-			type: "warning",
-			confirmButtonText: "Clear section data", // i had nowhere else to but it
-  			showCancelButton: true,
-			cancelButtonText: "What?",
-  			closeOnConfirm: false
-		}, function() {
-			chrome.storage.sync.remove("sections", function() {
-				swal("Deleted!", "Your section data has been deleted.", "success");
-			});
-		});
-	};
-	easter_egg.load();
-
 	setTimeout(function() {
 		$(window).trigger('resize');
 	}, 100);
