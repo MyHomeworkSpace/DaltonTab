@@ -77,9 +77,11 @@ a.btn {
 }
 
 #timeTop {
+	cursor: default;
 	text-align: center;
+	user-select: none;
 	padding-right: 30px;
-	border-right: solid 4px white;
+	/*border-right: solid 4px white;*/
 }
 
 #timeTop div {
@@ -97,6 +99,7 @@ a.btn {
 
 #hwButton {
 	color: white;
+	cursor: pointer;
 	font-size: 3em;
 	text-align: center;
 	text-shadow: 2px 2px black;
@@ -105,7 +108,7 @@ a.btn {
 	margin-left: -19px;
 	bottom: 60px;
 	z-index: 10;
-	transition: all 0.2s;
+	transition: all 0.25s ease-in-out;
 }
 #hwButton.flipped {
 	bottom: calc(100% - 100px);
@@ -113,6 +116,9 @@ a.btn {
 }
 #hwButton.flipped i:before {
 	content: "\f139";
+}
+#hwButton:hover {
+	color: #ccc;
 }
 
 #sectionsButton {
@@ -123,11 +129,14 @@ a.btn {
 	bottom: 110%;
 	right: 100px;
 	text-shadow: 2px 2px black;
-	transition: bottom 0.2s;
+	transition: all 0.25s ease-in-out;
 	z-index: 10;
 }
 #sectionsButton.visible {
 	bottom: calc(100% - 100px);
+}
+#sectionsButton:hover {
+	color: #ccc;
 }
 
 #setup1 {

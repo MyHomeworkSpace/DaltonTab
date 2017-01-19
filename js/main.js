@@ -202,8 +202,9 @@ $(document).ready(function() {
 
 	$("#schedulesLogOut").click(function() {
 		chrome.storage.sync.remove("schedulesLogin", function() {
-			swal("Logged Out", "You are now logged out of Schedules.", "success")
-			window.location.reload();
+			DaltonTab.mustUpdateSectionPositions = true;
+			$("#schedulesSignIn").removeClass("hidden");
+			$("#schedulesSignedIn").addClass("hidden");
 		});
 	});
 
