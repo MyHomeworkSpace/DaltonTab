@@ -249,4 +249,11 @@ $(document).ready(function() {
 	$(".daltontab-version").text(chrome.runtime.getManifest().version);
 
 	DaltonTab.Survey.init();
+
+	setTimeout(function() {
+		$("#loadOverlay").addClass("fade");
+		setTimeout(function() {
+			$("#loadOverlay").remove();
+		}, 300);
+	}, 200);
 });
