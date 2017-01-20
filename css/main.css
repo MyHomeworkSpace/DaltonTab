@@ -41,15 +41,18 @@ a.btn {
 	background-color: transparent;
 }
 
-#videoBg {
+#imageInfo {
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	z-index: -1;
-	object-fit: cover;
+	left: 60px;
+	bottom: 60px;
 }
+#imageDesc {
+	font-size: 1.4em;
+}
+#imageSubDesc {
+	font-size: 0.8em;
+}
+
 #topSection {
 	background-color: #1E88E5;
 	background-size: cover;

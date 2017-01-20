@@ -56,27 +56,31 @@ $(document).ready(function() {
 
 	chrome.storage.sync.get("backImgTog", function(storage) {
 		if (storage.backImgTog == undefined || !storage.backImgTog) {
-			$.get("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US&video=1", function(response) {
-				console.log("===START BING IMAGE STUFF===");
-				console.log(response);
-				console.log("===END BING IMAGE STUFF===");
-				var url = "https://www.bing.com" + response.images[0].url;
-				$("#topSection").css("background-image", "url(" + url + ")");
+			var channel = "normal";
+			if (localStorage.nc) {
+				console.log("Channel override set, using image channel " + localStorage.nc);
+				channel = localStorage.nc;
+				localStorage.removeItem("nc");
+			}
+			$.get("https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, function(data) {
+				var image = JSON.parse(data);
+
+				$("#topSection").css("background-image", "url(" + image.imgUrl + ")");
 				$("#topSection").addClass("imageLoaded");
-				$(window).trigger('resize');
-				$("#daltontab-image-caption").text(response.images[0].copyright);
-				$("#daltontab-image-link").attr("href", response.images[0].copyrightlink)
-				$("#daltontab-image-link").text("Learn more");
-				if (response.images[0].vid) {
-					// a video!
-					var vidUrl = response.images[0].vid.sources[1][2];
-					if (vidUrl[0] == "/") {
-						vidUrl = "https:" + vidUrl;
-					}
-					$("#videoBg").attr("src", vidUrl);
-					$("#videoBg")[0].play();
-					$("#topSection").css("background", "transparent");
+
+				if (!image.description) {
+					$("#imageDesc").text("");
+				} else {
+					$("#imageDesc").text(image.description);
 				}
+
+				$("#imageAuthor").attr("href", image.authorUrl);
+				$("#imageAuthor").text(image.authorName);
+
+				$("#imageSite").attr("href", image.siteUrl);
+				$("#imageSite").text(image.siteName);
+
+				$("#imageInfo").removeClass("hidden");
 			});
 		} else {
 			$("#daltontab-image-caption").text("You've disabled the image background!");

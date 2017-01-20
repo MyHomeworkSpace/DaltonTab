@@ -193,14 +193,10 @@
 		</div>
 
 		<h3>Background image</h3>
-		<h4>About this image</h4>
-		<span id="daltontab-image-caption">Loading information, please wait...</span>
-		<a id="daltontab-image-link"></a>
-		<h4>Image options</h4>
 		<div id="backgroundImage" class="account">
 			<input id="backImgTog" type="checkbox"/>
 			<label for="backImgTog">
-				Disable Bing Image Background
+				Disable background
 			</label>
 		</div>
 
@@ -208,7 +204,6 @@
 		<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
 	</div>
 	<div id="manageOverlay"></div>
-	<video id="videoBg" loop></video>
 	<div id="topSection" class="section container-fluid">
 		<div id="topSectionBackgroundFilter"></div>
 		<div id="mainRow" class="row">
@@ -227,6 +222,10 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id="imageInfo" class="hidden">
+			<div id="imageDesc"></div>
+			<div id="imageSubDesc">Photo by <a id="imageAuthor"></a> from <a id="imageSite"></a></div>
 		</div>
 	</div>
 	<a id="hwButton" href="#sectionContainer"><i class="fa fa-chevron-circle-down"></i></a>
