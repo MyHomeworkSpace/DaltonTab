@@ -229,9 +229,6 @@ $(document).ready(function() {
 		});
 	});
 
-	setTimeout(function() {
-		$(window).trigger('resize');
-	}, 100);
 	$(".daltontab-version").text(chrome.runtime.getManifest().version);
 
 	DaltonTab.Survey.init();
