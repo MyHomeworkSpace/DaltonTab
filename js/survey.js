@@ -48,7 +48,7 @@ DaltonTab.Survey = {
 
 		$("#surveyPromptLater").click(function() {
 			chrome.storage.sync.set({
-				surveyTabCount: "70"
+				surveyTabCount: "60"
 			}, function() {
 				$("#surveyPromptContainer").hide();
 			});
@@ -107,7 +107,7 @@ DaltonTab.Survey = {
 				surveyTabCount: count
 			}, function() {
 				// act on the count
-				if (count > 100) {
+				if (count > 80) {
 					// show it
 					$("#surveyPromptContainer").show();
 				}
