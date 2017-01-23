@@ -1,38 +1,38 @@
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 300;
-	src: url("/fonts/Lato-Light.ttf");
+	src: url("/fonts/OpenSans-Light.ttf");
 }
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 400;
-	src: url("/fonts/Lato-Regular.ttf");
+	src: url("/fonts/OpenSans-Regular.ttf");
 }
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: bold;
-	src: url("/fonts/Lato-Bold.ttf");
+	src: url("/fonts/OpenSans-Bold.ttf");
 }
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Open Sans';
 	font-style: italic;
 	font-weight: 300;
-	src: url("/fonts/Lato-LightItalic.ttf");
+	src: url("/fonts/OpenSans-LightItalic.ttf");
 }
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Open Sans';
 	font-style: italic;
 	font-weight: 400;
-	src: url("/fonts/Lato-Italic.ttf");
+	src: url("/fonts/OpenSans-Italic.ttf");
 }
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Open Sans';
 	font-style: italic;
 	font-weight: 700;
-	src: url("/fonts/Lato-BoldItalic.ttf");
+	src: url("/fonts/OpenSans-BoldItalic.ttf");
 }
 
 @font-face {
