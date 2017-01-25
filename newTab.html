@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="css/sweetalert.css">
 	<link rel="stylesheet" href="css/jquery-ui.min.css">
 
+	<link rel="stylesheet" href="css/layoutEditor.css">
 	<link rel="stylesheet" href="css/homework.css">
 	<link rel="stylesheet" href="css/schedule.css">
 	<link rel="stylesheet" href="css/settings.css">
@@ -33,7 +34,8 @@
 
 	<script src="js/sectionHandler.js"></script>
 	<script src="js/clock.js"></script>
-	<script src="js/feedback.js"></script>
+	<script src="js/layoutEditor.js"></script>
+	<script src="js/schedule.js"></script>
 	<script src="js/local-ip.js"></script>
 	<script src="js/schedule.js"></script>
 	<script src="js/sections.js"></script>
@@ -42,6 +44,36 @@
 </head>
 <body>
 	<div id="loadOverlay"></div>
+	<div id="layoutEditorOverlay" class="hidden">
+		<div id="layoutEditorContent">
+			<h1>Edit page layout</h1>
+			<div class="row">
+				<div class="col-md-10">
+					<div id="layoutEditorLayout">
+						<div id="layoutEditorTime">
+							<div id="layoutEditorTimeContainer">
+								<span class="current-time"></span><span class="current-time-ampm"></span>
+								<div class="current-date"></div>
+							</div>
+						</div>
+						<div id="layoutEditorSections" class='layoutEditorDropTarget'>
+							<ul>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="layoutEditorPane" class="col-md-2">
+					<ul id="layoutEditorUnusedSections">
+						<li>Weather</li>
+						<li>Homework</li>
+						<li>Schedule</li>
+						<li>Classes</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="feedback-modal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">

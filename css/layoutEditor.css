@@ -1,0 +1,83 @@
+#layoutEditorOverlay {
+	color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+}
+#layoutEditorContent {
+	width: calc(100% - 200px);
+	height: calc(100% - 200px);
+	padding-top: 50px;
+	padding-left: 100px;
+}
+
+#layoutEditorTime {
+	border: solid 1px white;
+	width: 100%;
+	height: 300px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+#layoutEditorTimeContainer {
+	width: 100%;
+	height: 150px;
+	position: relative;
+	top: 50%;
+	margin-top: -75px;
+}
+#layoutEditorTime .current-time {
+	font-size: 4em;
+}
+#layoutEditorTime .current-time-ampm {
+	font-size: 1.5em;
+	position: relative;
+	top: -24px;
+	left: 8px;
+}
+#layoutEditorTime .current-date {
+	font-size: 1.5em;
+}
+
+#layoutEditorSections {
+	border: solid 1px white;
+	width: 100%;
+	min-height: 50px;
+}
+#layoutEditorPane {
+	padding-left: 0;
+}
+#layoutEditorUnusedSections {
+	border: solid 1px white;
+	list-style-type: none;
+	height: 300px;
+	margin-left: 0;
+	padding-left: 0;
+}
+#layoutEditorUnusedSections li {
+	border: solid 1px white;
+	cursor: move;
+	margin: 2px;
+	padding: 2px;
+	user-select: none;
+}
+#layoutEditorUnusedSections li.animateToPosition {
+	transition: all 0.2s ease-in-out;	
+}
+.layoutEditorSectionPlaceholder {
+	background: #ddd;
+	width: 100%;
+	height: 50px;
+}
+#layoutEditorSections {
+	padding: 10px;
+}
+#layoutEditorSections ul {
+	list-style-type: none;
+	width: 100%;
+	height: 100%;
+	margin-left: 0;
+	padding-left: 0;
+}

@@ -171,6 +171,7 @@ $(document).ready(function() {
 	});
 
 	DaltonTab.Clock.init();
+	DaltonTab.LayoutEditor.init();
 	DaltonTab.Settings.init();
 	DaltonTab.Survey.init();
 
