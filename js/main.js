@@ -31,6 +31,7 @@ $(document).ready(function() {
 
 	$("#sectionsButton, #settingsPaneClose, #manageOverlay").click(function() {
 		$("#settingsPane").toggleClass("opened");
+		$("body").toggleClass("frozen");
 		if ($("#settingsPane").hasClass("opened")) {
 			// we just opened it
 			DaltonTab.mustUpdateSectionPositions = false;

@@ -1,6 +1,9 @@
 body {
 	z-index: 1;
 }
+body.frozen {
+	overflow: hidden;
+}
 
 label {
 	font-size: 1em;
