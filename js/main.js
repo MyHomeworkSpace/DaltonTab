@@ -185,6 +185,8 @@ $(document).ready(function() {
 	DaltonTab.Settings.init();
 	DaltonTab.Survey.init();
 
+	$('[data-toggle="tooltip"]').tooltip();
+
 	setTimeout(function() {
 		$("#loadOverlay").addClass("fade");
 		setTimeout(function() {

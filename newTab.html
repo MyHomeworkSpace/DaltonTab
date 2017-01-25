@@ -19,9 +19,10 @@
 	<link rel="stylesheet" href="css/main.css">
 
 	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.smooth-scroll.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.smooth-scroll.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
 	<script src="js/moment.js"></script>
 	<script src="js/parallax.min.js"></script>
 	<script src="js/sweetalert.min.js"></script>
@@ -153,7 +154,7 @@
 		</div>
 	</div>
 	<div id="settingsPane">
-		<h1>Modify page</h1>
+		<h1>Settings</h1>
 		<i id="settingsPaneClose" class="fa fa-times"></i>
 
 		<div id="settingsPanePages">
@@ -165,6 +166,10 @@
 				<li data-page="accounts">
 					<i class="fa fa-users"></i>
 					<span>Accounts</span>
+				</li>
+				<li data-page="clock">
+					<i class="fa fa-clock-o"></i>
+					<span>Clock</span>
 				</li>
 				<li data-page="background">
 					<i class="fa fa-picture-o"></i>
@@ -231,6 +236,18 @@
 						Disable background
 					</label>
 				</div>
+			</div>
+
+			<div id="settingsPanePage-clock" class="settingsPanePage hidden">
+				<h3>Clock</h3>
+				<p>
+					Clock type:
+					<label><input type="radio" name="clockMode" value="12hr"> 12 hour</label>
+					<label><input type="radio" name="clockMode" value="12hrnopm"> 12 hour without AM/PM</label>
+					<label><input type="radio" name="clockMode" value="24hr"> 24 hour</label>
+					<label><input type="radio" name="clockMode" value="percent"> Percent clock <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Displays the time as a percentage of the school day complete."></i></label>
+				</p>
+				<label><input type="checkbox" id="showDate"> Show current date underneath time</label>
 			</div>
 
 			<div id="settingsPanePage-about" class="settingsPanePage hidden">
