@@ -1,3 +1,9 @@
+.dragged {
+	position: absolute;
+	opacity: 0.5;
+	z-index: 2000;
+}
+
 #layoutEditorOverlay {
 	color: white;
 	position: fixed;
@@ -46,6 +52,21 @@
 	width: 100%;
 	min-height: 50px;
 }
+.layoutEditorSection {
+	background: white;
+	border: solid 1px white;
+	color: black;
+	cursor: move;
+	width: 100%;
+	margin: 2px;
+	padding: 2px;
+}
+.placeholder {
+	background: #555;
+	width: 100%;
+	margin: 2px;
+	height: 27px;
+}
 #layoutEditorPane {
 	padding-left: 0;
 }
@@ -54,17 +75,7 @@
 	list-style-type: none;
 	height: 300px;
 	margin-left: 0;
-	padding-left: 0;
-}
-#layoutEditorUnusedSections li {
-	border: solid 1px white;
-	cursor: move;
-	margin: 2px;
-	padding: 2px;
-	user-select: none;
-}
-#layoutEditorUnusedSections li.animateToPosition {
-	transition: all 0.2s ease-in-out;	
+	padding: 0 4px 0 0;
 }
 .layoutEditorSectionPlaceholder {
 	background: #ddd;
@@ -73,11 +84,8 @@
 }
 #layoutEditorSections {
 	padding: 10px;
-}
-#layoutEditorSections ul {
 	list-style-type: none;
 	width: 100%;
 	height: 100%;
 	margin-left: 0;
-	padding-left: 0;
 }

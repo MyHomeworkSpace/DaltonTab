@@ -2,6 +2,12 @@ DaltonTab.Settings = {
 	init: function() {
 		$("#settingsPanePages ul li").click(function() {
 			var newPage = $(this).attr("data-page");
+
+			if (newPage == "_layoutEditor") {
+				$("#settingsPane").removeClass("opened");
+				DaltonTab.LayoutEditor.open();
+				return;
+			}
 			
 			$("#settingsPanePages ul li.selected").removeClass("selected");
 			$(this).addClass("selected");

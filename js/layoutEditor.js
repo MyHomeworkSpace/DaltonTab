@@ -4,59 +4,39 @@ DaltonTab.LayoutEditor = {
 	mouse: { x: 0, y: 0 },
 
 	init: function() {
-		$("body").on("mousemove", function(e) {
-			DaltonTab.LayoutEditor.mouse.x = e.clientX;
-			DaltonTab.LayoutEditor.mouse.y = e.clientY;
-			if (!DaltonTab.LayoutEditor.draggingSomething) {
-				return;
+		$("ul.layoutEditorDropTarget").sortable({
+			group: 'layoutEditorDropTarget',
+			pullPlaceholder: false,
+			// animation on drop
+			onDrop: function  ($item, container, _super) {
+				var $clonedItem = $('<li/>').css({height: 0});
+				$item.before($clonedItem);
+				$clonedItem.animate({'height': $item.height()});
+
+				$item.animate($clonedItem.position(), function  () {
+					$clonedItem.detach();
+					_super($item, container);
+				});
+			},
+
+			// set $item relative to cursor position
+			onDragStart: function ($item, container, _super) {
+				var offset = $item.offset(),
+				pointer = container.rootGroup.pointer;
+
+				adjustment = {
+					left: pointer.left - offset.left,
+					top: pointer.top - offset.top
+				};
+
+				_super($item, container);
+			},
+			onDrag: function ($item, position) {
+				$item.css({
+					left: position.left - adjustment.left,
+					top: position.top - adjustment.top
+				});
 			}
-			$("li.dragging").css("position", "fixed");
-			$("li.dragging").css("z-index", "9999999");
-			$("li.dragging").css("left", e.clientX - DaltonTab.LayoutEditor.dragOffset.x + "px");
-			$("li.dragging").css("top", e.clientY - DaltonTab.LayoutEditor.dragOffset.y + "px");
-		});
-		$("#layoutEditorUnusedSections li").on("mousedown", function() {
-			$(this).css("width", "127px");
-			$(this).css("height", "27px");
-			var pos = $(this).offset();
-
-			DaltonTab.LayoutEditor.draggingSomething = true;
-			DaltonTab.LayoutEditor.dragOffset.x = DaltonTab.LayoutEditor.mouse.x - pos.left;
-			DaltonTab.LayoutEditor.dragOffset.y = DaltonTab.LayoutEditor.mouse.y - pos.top;
-			$(this).addClass("dragging");
-		}).on("mouseup", function() {
-			DaltonTab.LayoutEditor.draggingSomething = false;
-			var $dragTarget = $("li.dragging");
-			$dragTarget.removeClass("dragging");
-
-			var oldPos = $(this).offset();
-			$dragTarget.css("position", "relative");
-			$dragTarget.css("top", "0");
-			$dragTarget.css("left", "0");
-
-			var newPos = $(this).offset();
-			$dragTarget.css("position", "fixed");
-
-			$dragTarget.css("top", oldPos.top + "px");
-			$dragTarget.css("left", oldPos.left + "px");
-			setTimeout(function() {
-				$dragTarget.addClass("animateToPosition");
-				$dragTarget.css("top", newPos.top + "px");
-				$dragTarget.css("left", newPos.left + "px");
-
-				setTimeout(function() {
-					$(".animateToPosition").removeClass("animateToPosition");
-					$dragTarget.css("position", "relative");
-					$dragTarget.css("top", "0");
-					$dragTarget.css("left", "0");
-				}, 200);
-			}, 0);
-		});
-
-		$(".layoutEditorDropTarget").on("mouseover", function() {
-			$(this).children("ul").append('<li class="layoutEditorSectionPlaceholder"></li>');
-		}).on("mouseleave", function() {
-			$(".layoutEditorSectionPlaceholder").remove();
 		});
 	},
 	open: function() {
