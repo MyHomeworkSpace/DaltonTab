@@ -14,6 +14,7 @@
 
 	<link rel="stylesheet" href="css/homework.css">
 	<link rel="stylesheet" href="css/schedule.css">
+	<link rel="stylesheet" href="css/settings.css">
 	<link rel="stylesheet" href="css/weather.css">
 	<link rel="stylesheet" href="css/main.css">
 
@@ -34,6 +35,7 @@
 	<script src="js/local-ip.js"></script>
 	<script src="js/schedule.js"></script>
 	<script src="js/sections.js"></script>
+	<script src="js/settings.js"></script>
 	<script src="js/survey.js"></script>
 </head>
 <body>
@@ -154,54 +156,88 @@
 		<h1>Modify page</h1>
 		<i id="settingsPaneClose" class="fa fa-times"></i>
 
-		<h3>Manage sections</h3>
-		<div class="row">
-			<div class="col-md-6">
-				<h4>Current sections</h4>
-				<ul id="currentSections" class="sectionList">
-
-				</ul>
-			</div>
-			<div class="col-md-6">
-				<h4>Available sections</h4>
-				<ul id="availableSections" class="sectionList">
-
-				</ul>
-			</div>
+		<div id="settingsPanePages">
+			<ul>
+				<li data-page="sections" class="selected">
+					<i class="fa fa-list"></i>
+					<span>Sections</span>
+				</li>
+				<li data-page="accounts">
+					<i class="fa fa-users"></i>
+					<span>Accounts</span>
+				</li>
+				<li data-page="background">
+					<i class="fa fa-picture-o"></i>
+					<span>Background</span>
+				</li>
+				<li data-page="about">
+					<i class="fa fa-info-circle"></i>
+					<span>About</span>
+				</li>
+			</ul>
 		</div>
 
-		<h3>Connected accounts</h3>
-		<div id="mhsSignIn" class="account">
-			<div id="mhsSignedIn" class="hidden">
-				Signed in to MyHomeworkSpace as <strong id="mhsAccountName"></strong>
-			</div>
-			<div id="mhsSignInInfo">
-				<a href="https://myhomework.space" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to MyHomeworkSpace</a>
-			</div>
-		</div>
-		<div id="scheduleSignIn" class="account">
-			<div id="schedulesSignedIn" class="hidden">
-				Signed in to Schedules as <strong id="schedulesAccountName"></strong>
-				<button id="schedulesLogOut" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Log out</button>
-			</div>
-			<div id="schedulesSignIn">
-				<button id="schedulesAccountBtn" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Schedules</button>
-			</div>
-		</div>
-		<div id="coursesSignIn" class="account">
-			<a href="https://courses.dalton.org" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Courses</a>
-		</div>
+		<div id="settingsPanePageContainer">
+			<div id="settingsPanePage-sections" class="settingsPanePage">
+				<h3>Manage sections</h3>
+				<div class="row">
+					<div class="col-md-6">
+						<h4>Current sections</h4>
+						<ul id="currentSections" class="sectionList">
 
-		<h3>Background image</h3>
-		<div id="backgroundImage" class="account">
-			<input id="backImgTog" type="checkbox"/>
-			<label for="backImgTog">
-				Disable background
-			</label>
-		</div>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<h4>Available sections</h4>
+						<ul id="availableSections" class="sectionList">
 
-		<h3>About</h3>
-		<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div id="settingsPanePage-accounts" class="settingsPanePage hidden">
+				<h3>Connected accounts</h3>
+
+				<div id="mhsSignIn" class="account">
+					<div id="mhsSignedIn" class="hidden">
+						Signed in to MyHomeworkSpace as <strong id="mhsAccountName"></strong>
+					</div>
+					<div id="mhsSignInInfo">
+						<a href="https://myhomework.space" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to MyHomeworkSpace</a>
+					</div>
+				</div>
+
+				<div id="scheduleSignIn" class="account">
+					<div id="schedulesSignedIn" class="hidden">
+						Signed in to Schedules as <strong id="schedulesAccountName"></strong>
+						<button id="schedulesLogOut" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Log out</button>
+					</div>
+					<div id="schedulesSignIn">
+						<button id="schedulesAccountBtn" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Schedules</button>
+					</div>
+				</div>
+
+				<div id="coursesSignIn" class="account">
+					<a href="https://courses.dalton.org" class="btn btn-default btn-xs"><i class="fa fa-sign-in"></i> Sign in to Courses</a>
+				</div>
+			</div>
+
+			<div id="settingsPanePage-background" class="settingsPanePage hidden">
+				<h3>Background image</h3>
+				<div id="backgroundImage" class="account">
+					<input id="backImgTog" type="checkbox"/>
+					<label for="backImgTog">
+						Disable background
+					</label>
+				</div>
+			</div>
+
+			<div id="settingsPanePage-about" class="settingsPanePage hidden">
+				<h3>About</h3>
+				<p>You're running DaltonTab version <span class="daltontab-version"></span>.</p>
+			</div>
+		</div>
 	</div>
 	<div id="manageOverlay"></div>
 	<div id="topSection" class="section container-fluid">

@@ -206,52 +206,6 @@ a.btn {
 	resize: none;
 }
 
-#settingsPane {
-	background: rgba(255, 255, 255, 0.9);
-	border-left: solid 2px black;
-	width: 600px;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	right: -650px;
-	padding-left: 10px;
-	padding-right: 10px;
-	overflow-x: hidden;
-	overflow-y: auto;
-	z-index: 12;
-	transition: right 0.3s;
-}
-#settingsPane.opened {
-	right: 0;
-}
-#settingsPane.opened ~ #manageOverlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 11;
-	background: rgba(0, 0, 0, 0.7);
-}
-#settingsPane a:not(.btn) {
-	color: #008cba;
-	text-decoration: none;
-}
-#settingsPane a:not(.btn):hover {
-	color: #008cba;
-	text-decoration: underline;
-}
-#settingsPane h2, #settingsPane h3 {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-#settingsPaneClose {
-	cursor: pointer;
-	font-size: 3em;
-	position: absolute;
-	top: 20px;
-	right: 20px;
-}
 .sectionList {
 	border: solid 1px black;
 	list-style-type: none;
