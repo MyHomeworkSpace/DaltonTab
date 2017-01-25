@@ -3,18 +3,6 @@ DaltonTab = {
 };
 
 $(document).ready(function() {
-	var timeUpdFunc = function() {
-		$(".current-time").text(moment().format("h:mm"));
-		$(".current-time-ampm").text(moment().format("A"));
-		if (navigator.onLine) {
-			$(".current-date").text(moment().format("MMMM Do, YYYY"));
-		} else {
-			$(".current-date").text("You are not connected to the internet!")
-		}
-	};
-	timeUpdFunc();
-	setInterval(timeUpdFunc, 1000);
-
 	$(window).scroll(function() {
 		if ($(window).scrollTop() >= 20) {
 			$("#hwButton").attr("href", "#topFiller");
@@ -182,6 +170,7 @@ $(document).ready(function() {
 		window.location.href = "chrome-search://local-ntp/local-ntp.html"
 	});
 
+	DaltonTab.Clock.init();
 	DaltonTab.Settings.init();
 	DaltonTab.Survey.init();
 

@@ -1,5 +1,25 @@
 DaltonTab.Settings = {
 	init: function() {
+		$("#settingsPanePages ul li").click(function() {
+			var newPage = $(this).attr("data-page");
+			
+			$("#settingsPanePages ul li.selected").removeClass("selected");
+			$(this).addClass("selected");
+
+			$(".settingsPanePage:not(.hidden)").addClass("hidden");
+			$("#settingsPanePage-" + newPage).removeClass("hidden");
+		});
+
+		// === SECTIONS ===
+		$(".sectionList").sortable({
+			connectWith: ".sectionList",
+			placeholder: "ui-state-highlight",
+			change: function(e, ui) {
+				DaltonTab.mustUpdateSectionPositions = true;
+			}
+		}).disableSelection();
+
+		// === ACCOUNTS ===
 		$("#schedulesAccountBtn").click(function() {
 			var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
 			var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
@@ -31,14 +51,7 @@ DaltonTab.Settings = {
 			});
 		});
 
-		$(".sectionList").sortable({
-			connectWith: ".sectionList",
-			placeholder: "ui-state-highlight",
-			change: function(e, ui) {
-				DaltonTab.mustUpdateSectionPositions = true;
-			}
-	    }).disableSelection();
-
+		// === BACKGROUND ===
 		chrome.storage.sync.get("backImgTog", function(storage) {
 			$("#backImgTog").prop("checked", storage.backImgTog);
 		});
@@ -48,16 +61,34 @@ DaltonTab.Settings = {
 			});
 		});
 
-		$("#settingsPanePages ul li").click(function() {
-			var newPage = $(this).attr("data-page");
-			
-			$("#settingsPanePages ul li.selected").removeClass("selected");
-			$(this).addClass("selected");
-
-			$(".settingsPanePage:not(.hidden)").addClass("hidden");
-			$("#settingsPanePage-" + newPage).removeClass("hidden");
+		// === CLOCK ===
+		chrome.storage.sync.get("clockType", function(storage) {
+			var type = storage.clockType || "12hr";
+			$("input[name=clockMode][value=" + type + "]").prop("checked", true);
+		});
+		chrome.storage.sync.get("displayDate", function(storage) {
+			var displayDate = storage.displayDate;
+			if (displayDate === undefined) {
+				displayDate = true;
+			}
+			$("#showDate").prop("checked", displayDate);
+		});
+		$("input[name=clockMode]").change(function() {
+			DaltonTab.Clock.type = $(this).val();
+			DaltonTab.Clock.updateTime();
+			chrome.storage.sync.set({
+				clockType: $(this).val()
+			});
+		});
+		$("#showDate").change(function() {
+			DaltonTab.Clock.displayDate = $(this).prop("checked");
+			DaltonTab.Clock.updateTime();
+			chrome.storage.sync.set({
+				displayDate: $(this).prop("checked")
+			});
 		});
 
+		// === ABOUT ===
 		$(".daltontab-version").text(chrome.runtime.getManifest().version);
 	}
 };
