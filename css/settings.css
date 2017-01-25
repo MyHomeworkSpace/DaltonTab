@@ -81,6 +81,8 @@
 #settingsPanePageContainer {
 	border: solid 1px black;
 	margin-top: 10px;
+	height: calc(100% - 170px);
+	overflow: scroll;
 }
 
 .settingsPanePage {
