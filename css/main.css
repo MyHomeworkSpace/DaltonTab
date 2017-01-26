@@ -59,6 +59,7 @@ a.btn {
 #topSection {
 	background-color: #1E88E5;
 	background-size: cover;
+	background-position: center center;
 	transition: background-color 0.75s;
 	font-weight: bold;
 	text-shadow: 2px 2px black;
