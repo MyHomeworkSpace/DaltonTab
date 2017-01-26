@@ -20,27 +20,6 @@ $(document).ready(function() {
 	$("#sectionsButton, #settingsPaneClose, #manageOverlay").click(function() {
 		$("#settingsPane").toggleClass("opened");
 		$("body").toggleClass("frozen");
-		if ($("#settingsPane").hasClass("opened")) {
-			// we just opened it
-			DaltonTab.mustUpdateSectionPositions = false;
-		} else {
-			// we just closed it
-			if (DaltonTab.mustUpdateSectionPositions) {
-				// update section stuff
-				var newOrder = [];
-				$("#currentSections li").each(function() {
-					var section = $(this).attr("data-section");
-					newOrder.push(section);
-				});
-				DaltonTab.SectionHandler.updateOrder(newOrder, function() {
-					chrome.storage.sync.set({
-						sections: newOrder
-					}, function() {
-						DaltonTab.SectionHandler.createSections();
-					});
-				});
-			}
-		}
 	});
 
 	chrome.storage.sync.get("backImgTog", function(storage) {

@@ -17,6 +17,7 @@ DaltonTab.LayoutEditor = {
 					$clonedItem.detach();
 					_super($item, container);
 				});
+				DaltonTab.mustUpdateSectionPositions = true;
 			},
 
 			// set $item relative to cursor position
@@ -38,13 +39,45 @@ DaltonTab.LayoutEditor = {
 				});
 			}
 		});
+
+		$("#layoutEditorClose").click(function() {
+			DaltonTab.LayoutEditor.close();
+		});
 	},
 	open: function() {
+		DaltonTab.mustUpdateSectionPositions = false;
+
 		$("#layoutEditorOverlay").removeClass("hidden");
 
 		$("#topSection #mainRow").addClass("hidden");
 		$("#imageInfo").addClass("hidden");
 		$("#hwButton").addClass("hidden");
 		$("#aboveTop").addClass("hidden");
+	},
+	close: function() {
+		if (DaltonTab.mustUpdateSectionPositions) {
+			// update section stuff
+			var newOrder = [];
+			$("#layoutEditorSections li").each(function() {
+				var section = $(this).attr("data-section");
+				newOrder.push(section);
+			});
+			DaltonTab.SectionHandler.updateOrder(newOrder, function() {
+				chrome.storage.sync.set({
+					sections: newOrder
+				}, function() {
+					DaltonTab.SectionHandler.createSections();
+				});
+			});
+		}
+
+		$("#layoutEditorOverlay").addClass("hidden");
+
+		$("#topSection #mainRow").removeClass("hidden");
+		$("#imageInfo").removeClass("hidden");
+		$("#hwButton").removeClass("hidden");
+		$("#aboveTop").removeClass("hidden");
+		
+		$("body").removeClass("frozen");
 	}
 };

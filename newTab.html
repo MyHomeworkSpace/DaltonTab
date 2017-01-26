@@ -47,7 +47,7 @@
 	<div id="loadOverlay"></div>
 	<div id="layoutEditorOverlay" class="hidden">
 		<div id="layoutEditorContent">
-			<h1>Edit page layout</h1>
+			<h1>Edit page layout <i id="layoutEditorClose" class="fa fa-times"></i></h1>
 			<div class="row">
 				<div class="col-md-10">
 					<div id="layoutEditorLayout">
@@ -63,12 +63,7 @@
 					</div>
 				</div>
 				<div id="layoutEditorPane" class="col-md-2">
-					<ul id="layoutEditorUnusedSections" class="layoutEditorDropTarget">
-						<li class="layoutEditorSection">Weather</li>
-						<li class="layoutEditorSection">Homework</li>
-						<li class="layoutEditorSection">Schedule</li>
-						<li class="layoutEditorSection">Classes</li>
-					</ul>
+					<ul id="layoutEditorUnusedSections" class="layoutEditorDropTarget"></ul>
 				</div>
 			</div>
 		</div>
@@ -191,11 +186,7 @@
 
 		<div id="settingsPanePages">
 			<ul>
-				<li data-page="sections" class="selected">
-					<i class="fa fa-list"></i>
-					<span>Sections</span>
-				</li>
-				<li data-page="accounts">
+				<li data-page="accounts" class="selected">
 					<i class="fa fa-users"></i>
 					<span>Accounts</span>
 				</li>
@@ -219,25 +210,7 @@
 		</div>
 
 		<div id="settingsPanePageContainer">
-			<div id="settingsPanePage-sections" class="settingsPanePage">
-				<h3>Manage sections</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<h4>Current sections</h4>
-						<ul id="currentSections" class="sectionList">
-
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<h4>Available sections</h4>
-						<ul id="availableSections" class="sectionList">
-
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div id="settingsPanePage-accounts" class="settingsPanePage hidden">
+			<div id="settingsPanePage-accounts" class="settingsPanePage">
 				<h3>Connected accounts</h3>
 
 				<div id="mhsSignIn" class="account">

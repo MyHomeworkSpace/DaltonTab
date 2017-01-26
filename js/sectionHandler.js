@@ -55,7 +55,7 @@ DaltonTab.SectionHandler = {
 		$list.text("");
 		for (var section in sections) {
 			var sectionObj = DaltonTab.Sections[sections[section]];
-			var $section = $('<li class="ui-state-default"></li>');
+			var $section = $('<li class="layoutEditorSection"></li>');
 				var $icon = $('<i class="fa"></i>');
 					$icon.addClass(sectionObj.icon);
 				$section.append($icon);
@@ -65,7 +65,7 @@ DaltonTab.SectionHandler = {
 		}
 	},
 	updateSectionLists: function() {
-		DaltonTab.SectionHandler.updateSingleSectionList($("#currentSections"), DaltonTab.SectionHandler.order);
-		DaltonTab.SectionHandler.updateSingleSectionList($("#availableSections"), DaltonTab.SectionHandler.available);
+		DaltonTab.SectionHandler.updateSingleSectionList($("#layoutEditorSections"), DaltonTab.SectionHandler.order);
+		DaltonTab.SectionHandler.updateSingleSectionList($("#layoutEditorUnusedSections"), DaltonTab.SectionHandler.available);
 	}
 };

@@ -16,15 +16,6 @@ DaltonTab.Settings = {
 			$("#settingsPanePage-" + newPage).removeClass("hidden");
 		});
 
-		// === SECTIONS ===
-		$(".sectionList").sortable({
-			connectWith: ".sectionList",
-			placeholder: "ui-state-highlight",
-			change: function(e, ui) {
-				DaltonTab.mustUpdateSectionPositions = true;
-			}
-		}).disableSelection();
-
 		// === ACCOUNTS ===
 		$("#schedulesAccountBtn").click(function() {
 			var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
