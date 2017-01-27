@@ -9,14 +9,14 @@ DaltonTab.LayoutEditor = {
 			pullPlaceholder: false,
 			// animation on drop
 			onDrop: function  ($item, container, _super) {
-				var $clonedItem = $('<li/>').css({height: 0});
+				/*var $clonedItem = $('<li/>').css({height: 0});
 				$item.before($clonedItem);
 				$clonedItem.animate({'height': $item.height()});
 
 				$item.animate($clonedItem.position(), function  () {
-					$clonedItem.detach();
+					$clonedItem.detach();*/
 					_super($item, container);
-				});
+				//});
 				DaltonTab.mustUpdateSectionPositions = true;
 			},
 
@@ -37,6 +37,14 @@ DaltonTab.LayoutEditor = {
 					left: position.left - adjustment.left,
 					top: position.top - adjustment.top
 				});
+			}
+		});
+
+		$("body").keyup(function(e) {
+			if (e.keyCode == 27) { // escape key
+				if (!$("#layoutEditorOverlay").hasClass("hidden")) {
+					DaltonTab.LayoutEditor.close();
+				}
 			}
 		});
 
