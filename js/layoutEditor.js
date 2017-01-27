@@ -77,7 +77,7 @@ DaltonTab.LayoutEditor = {
 		$("#imageInfo").removeClass("hidden");
 		$("#hwButton").removeClass("hidden");
 		$("#aboveTop").removeClass("hidden");
-		
+
 		$("body").removeClass("frozen");
 	}
 };
