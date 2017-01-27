@@ -14,6 +14,11 @@ DaltonTab.Clock = {
 			DaltonTab.Clock.updateTime();
 			setInterval(DaltonTab.Clock.updateTime, 1000);
 		});
+
+		$("#timeTop").dblclick(function() {
+			$("#sectionsButton").click();
+			$("#settingsPanePages li[data-page=clock]").click();
+		});
 	},
 
 	updateTime: function() {
