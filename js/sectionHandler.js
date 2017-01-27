@@ -24,7 +24,7 @@ DaltonTab.SectionHandler = {
 			var $section = $('<div class="section container-fluid"></div>');
 				$section.attr("id", "section-" + sectionIndex);
 				$section.css("background-color", section.background);
-				var $header = $('<h1></h1>');
+				var $header = $('<div class="sectionTitle"></div>');
 					var $icon = $('<i class="fa"></i>');
 						$icon.addClass(section.icon);
 					$header.append($icon);

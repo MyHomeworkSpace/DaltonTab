@@ -44,6 +44,12 @@ a.btn {
 	background-color: transparent;
 }
 
+.sectionTitle {
+	font-size: 31px;
+	font-weight: 300;
+	margin-top: 21px;
+}
+
 #imageInfo {
 	position: fixed;
 	left: 60px;

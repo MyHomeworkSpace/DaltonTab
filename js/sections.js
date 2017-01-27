@@ -398,9 +398,11 @@ DaltonTab.Sections = {
 							$dayForecast.append($temps);
 						$("#weatherForecast .row").append($dayForecast);
 					}
-					var $fullForecast = $('<h3><a>View full forecast &raquo;</a></h3>');
+					var $fullForecast = $('<a class="btn btn-default">View full forecast &raquo;</a>');
 						$fullForecast.children("a").attr("href", results.link);
+					$("#weatherForecast").append("<br />");
 					$("#weatherForecast").append($fullForecast);
+					$("#weatherForecast").append("<br />");
 					$("#weatherForecast").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
 				}).fail(function() {
 					$("#weather").removeClass("row");
