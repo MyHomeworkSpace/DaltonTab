@@ -61,6 +61,11 @@ DaltonTab.Settings = {
 			$("#jumpingArrowTog").prop("checked", storage.jumpingArrowTog);
 		});
 		$("#jumpingArrowTog").change(function() {
+			if ($(this).prop("checked")) {
+				$("#hwButton").addClass("hidden");
+			} else {
+				$("#hwButton").removeClass("hidden");
+			}
 			chrome.storage.sync.set({"jumpingArrowTog": $(this).prop("checked")}, function() {
 
 			});
