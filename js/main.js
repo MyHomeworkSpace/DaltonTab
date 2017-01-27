@@ -1,3 +1,5 @@
+var jumpingArrow = document.getElementById('hwButton');
+
 DaltonTab = {
 	mustUpdateSectionPositions: false
 };
@@ -52,6 +54,14 @@ $(document).ready(function() {
 			});
 		} else {
 			$("#daltontab-image-caption").text("You've disabled the image background!");
+		}
+	});
+
+	chrome.storage.sync.get("jumpingArrowTog", function(storage) {
+		if (!(storage.jumpingArrowTog == undefined || !storage.jumpingArrowTog)) {
+			//jumpingArrow.style.display = 'none';
+			console.log("hiding jumping arrow")
+			$("#hwButton").addClass("hidden")
 		}
 	});
 

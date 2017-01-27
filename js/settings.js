@@ -57,6 +57,14 @@ DaltonTab.Settings = {
 
 			});
 		});
+		chrome.storage.sync.get("jumpingArrowTog", function(storage) {
+			$("#jumpingArrowTog").prop("checked", storage.jumpingArrowTog);
+		});
+		$("#jumpingArrowTog").change(function() {
+			chrome.storage.sync.set({"jumpingArrowTog": $(this).prop("checked")}, function() {
+
+			});
+		});
 
 		// === CLOCK ===
 		chrome.storage.sync.get("clockType", function(storage) {
