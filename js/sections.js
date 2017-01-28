@@ -285,14 +285,32 @@ DaltonTab.Sections = {
 					$("#classesLoadMsg").hide();
 				} else {
 					window.coursesLib.getCourseList(function(response) {
+						var rowIndex = 0;
+						var $row = null;
 						for (var courseIndex in response.classes) {
+							if (rowIndex == 0) {
+								$row = $('<div class="row"></div>');
+							}
+
 							var course = response.classes[courseIndex];
 							console.log(course);
-							var $element = $("<li></li>");
-								$element.html('<a href="' + course.url + '" style="color:white">' + course.name + '</a>');
-							$("#courses").append($element);
-							$("#classesLoadMsg").hide();
+
+							var $element = $('<a class="col-md-3 classesClass"></a>');
+								$element.attr("href", course.url);
+								$element.text(course.name);
+							$row.append($element);
+
+							rowIndex++;
+							if (rowIndex == 3) {
+								$("#courses").append($row);
+								rowIndex = 0;
+								$row = null;
+							}
 						}
+						if ($row) {
+							$("#courses").append($row);
+						}
+						$("#classesLoadMsg").hide();
 					});
 				}
 			}, function() {
