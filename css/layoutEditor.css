@@ -5,6 +5,7 @@
 }
 
 #layoutEditorOverlay {
+	background-color: rgba(0, 0, 0, 0.6);
 	color: white;
 	position: fixed;
 	top: 0;
@@ -37,6 +38,7 @@
 	height: 150px;
 	position: relative;
 	top: 50%;
+	text-shadow: 2px 2px black;
 	margin-top: -75px;
 }
 #layoutEditorTime .current-time {

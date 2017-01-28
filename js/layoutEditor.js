@@ -8,7 +8,7 @@ DaltonTab.LayoutEditor = {
 			group: 'layoutEditorDropTarget',
 			pullPlaceholder: false,
 			// animation on drop
-			onDrop: function  ($item, container, _super) {
+			onDrop: function($item, container, _super) {
 				/*var $clonedItem = $('<li/>').css({height: 0});
 				$item.before($clonedItem);
 				$clonedItem.animate({'height': $item.height()});
@@ -21,7 +21,7 @@ DaltonTab.LayoutEditor = {
 			},
 
 			// set $item relative to cursor position
-			onDragStart: function ($item, container, _super) {
+			onDragStart: function($item, container, _super) {
 				var offset = $item.offset(),
 				pointer = container.rootGroup.pointer;
 
@@ -32,7 +32,7 @@ DaltonTab.LayoutEditor = {
 
 				_super($item, container);
 			},
-			onDrag: function ($item, position) {
+			onDrag: function($item, position) {
 				$item.css({
 					left: position.left - adjustment.left,
 					top: position.top - adjustment.top
