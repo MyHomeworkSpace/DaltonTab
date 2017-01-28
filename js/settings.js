@@ -18,17 +18,6 @@ DaltonTab.Settings = {
 
 		// === ACCOUNTS ===
 		$("#schedulesAccountBtn").click(function() {
-			var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-			var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-			width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-			height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-			var w = 600;
-			var h = 400;
-
-			var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-			var top = ((height / 2) - (h / 2)) + dualScreenTop;
 			window.location.href = chrome.runtime.getURL("schedulesSignIn.html");
 		});
 
@@ -45,6 +34,53 @@ DaltonTab.Settings = {
 				DaltonTab.mustUpdateSectionPositions = true;
 				$("#schedulesSignIn").removeClass("hidden");
 				$("#schedulesSignedIn").addClass("hidden");
+			});
+		});
+
+		$("#coursesSignInBtn").click(function() {
+			$(".accountSignInService").text("Courses");
+			$("#accountSignInUsername").val("");
+			$("#accountSignInPassword").val("");
+			$("#accountSignInAlert").addClass("hidden");
+			$("#accountSignInModal").modal({
+				backdrop: "static",
+				keyboard: false
+			});
+		});
+
+		$("#accountSignInUsername, #accountSignInPassword").keyup(function(e) {
+			if (e.keyCode == 13) { // enter key
+				$("#accountSignInBtn").click();
+			}
+		});
+
+		$("#accountSignInBtn").click(function() {
+			$("#accountSignInLoadingFooter").removeClass("hidden");
+			$("#accountSignInButtonFooter").addClass("hidden");
+			CoursesLib.login($("#accountSignInUsername").val(), $("#accountSignInPassword").val(), function(response) {
+				if (response.error) {
+					$("#accountSignInLoadingFooter").addClass("hidden");
+					$("#accountSignInButtonFooter").removeClass("hidden");
+					$("#accountSignInAlert").removeClass("hidden");
+					$("#accountSignInAlert").text(response.error);
+					return;
+				}
+				chrome.storage.sync.set({
+					coursesToken: response.token
+				}, function() {
+					$("#accountSignInLoadingFooter").addClass("hidden");
+					$("#accountSignInButtonFooter").removeClass("hidden");
+					$("#accountSignInModal").modal("hide");
+					DaltonTab.SectionHandler.createSections();
+				});
+			});
+		});
+
+		$("#coursesLogOut").click(function() {
+			chrome.storage.sync.remove("coursesToken", function() {
+				DaltonTab.mustUpdateSectionPositions = true;
+				$("#coursesSignedIn").addClass("hidden");
+				$("#coursesSignInInfo").removeClass("hidden");
 			});
 		});
 

@@ -92,6 +92,30 @@
 			</div>
 		</div>
 	</div>
+	<div id="accountSignInModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Sign in to <span class="accountSignInService"></span></h4>
+				</div>
+				<div class="modal-body">
+					<div id="accountSignInAlert" class="alert alert-danger hidden"></div>
+					<p>Sign in with your Dalton account to <span class="accountSignInService"></span>.</p>
+					<input type="text" id="accountSignInUsername" placeholder="Username" class="form-control" />
+					<input type="password" id="accountSignInPassword" placeholder="Password" class="form-control" />
+				</div>
+				<div class="modal-footer">
+					<div id="accountSignInButtonFooter">
+						<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+						<button type="button" id="accountSignInBtn" class="btn btn-primary">Sign in</button>
+					</div>
+					<div id="accountSignInLoadingFooter" class="hidden align-right">
+						<i class="fa fa-refresh fa-spin"></i> Loading...
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="surveyModal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -216,6 +240,7 @@
 				<div id="mhsSignIn" class="account">
 					<div id="mhsSignedIn" class="hidden">
 						Signed in to MyHomeworkSpace as <strong id="mhsAccountName"></strong>
+						<a href="https://myhomework.space/app.html" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Manage</a>
 					</div>
 					<div id="mhsSignInInfo">
 						<a href="https://myhomework.space" class="btn btn-default btn-sm"><i class="fa fa-sign-in"></i> Sign in to MyHomeworkSpace</a>
@@ -233,7 +258,13 @@
 				</div>
 
 				<div id="coursesSignIn" class="account">
-					<a href="https://courses.dalton.org" class="btn btn-default btn-sm"><i class="fa fa-sign-in"></i> Sign in to Courses</a>
+					<div id="coursesSignedIn" class="hidden">
+						Signed in to Courses as <strong id="coursesAccountName"></strong>
+						<button id="coursesLogOut" class="btn btn-default btn-xs"><i class="fa fa-sign-out"></i> Log out</button>
+					</div>
+					<div id="coursesSignInInfo">
+						<button id="coursesSignInBtn" class="btn btn-default btn-sm"><i class="fa fa-sign-in"></i> Sign in to Courses</button>
+					</div>
 				</div>
 			</div>
 

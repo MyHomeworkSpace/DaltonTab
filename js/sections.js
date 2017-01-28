@@ -278,7 +278,63 @@ DaltonTab.Sections = {
 			return $html;
 		},
 		run: function() {
-			window.coursesLib.checkLoggedIn(function(response) {
+			var displayCoursesLoginMessage = function() {
+				$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in ');
+				var $link = $('<a href="#">to Courses</a>');
+					$link.click(function() {
+						$("#coursesSignInBtn").click();
+						return false;
+					});
+				$("#classes-warning").append($link);
+				$("#classes-warning").append(".");
+				$("#classesLoadMsg").hide();
+			};
+			chrome.storage.sync.get("coursesToken", function(storage) {
+				if (storage.coursesToken) {
+					var token = storage.coursesToken;
+					CoursesLib.token = token;
+					CoursesLib.getUserInfo(function(userInfo) { 
+						if (userInfo.errorcode) {
+							displayCoursesLoginMessage();
+							return;
+						}
+						$("#coursesAccountName").text(userInfo.fullname + " (" + userInfo.username + ")")
+						$("#coursesSignInInfo").addClass("hidden");
+						$("#coursesSignedIn").removeClass("hidden");
+						CoursesLib.getCourseList(function(courses) {
+							var rowIndex = 0;
+							var $row = null;
+							for (var courseIndex in courses) {
+								if (rowIndex == 0) {
+									$row = $('<div class="row"></div>');
+								}
+
+								var course = courses[courseIndex];
+								console.log(course);
+
+								var $element = $('<a class="col-md-3 classesClass"></a>');
+									$element.attr("href", CoursesLib.baseURL + "course/view.php?id=" + course.id);
+									$element.text(course.fullname);
+								$row.append($element);
+
+								rowIndex++;
+								if (rowIndex == 3) {
+									$("#courses").append($row);
+									rowIndex = 0;
+									$row = null;
+								}
+							}
+							if ($row) {
+								$("#courses").append($row);
+							}
+							$("#classesLoadMsg").hide();
+						});
+					});
+				} else {
+					displayCoursesLoginMessage();
+				}
+			});
+			/*window.coursesLib.checkLoggedIn(function(response) {
 				if (!response.isLoggedIn) {
 					$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">to Courses</a>.');
 					$("#classes-warning").css("font-size", "3em");
@@ -317,7 +373,7 @@ DaltonTab.Sections = {
 				$("#classes-warning").html('<i class="fa fa-chain-broken"></i> Could not reach Courses.');
 				$("#classes-warning").css("font-size", "3em");
 				$("#classesLoadMsg").hide();
-			});
+			});*/
 		}
 	},
 	weather: {

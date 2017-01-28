@@ -58,9 +58,7 @@ $(document).ready(function() {
 
 	chrome.storage.sync.get("jumpingArrowTog", function(storage) {
 		if (!(storage.jumpingArrowTog == undefined || !storage.jumpingArrowTog)) {
-			//jumpingArrow.style.display = 'none';
-			console.log("hiding jumping arrow")
-			$("#hwButton").addClass("hidden")
+			$("#hwButton").addClass("hidden");
 		}
 	});
 
