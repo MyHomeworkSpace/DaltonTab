@@ -310,7 +310,6 @@ DaltonTab.Sections = {
 								}
 
 								var course = courses[courseIndex];
-								console.log(course);
 
 								var $element = $('<a class="col-md-3 classesClass"></a>');
 									$element.attr("href", CoursesLib.baseURL + "course/view.php?id=" + course.id);
