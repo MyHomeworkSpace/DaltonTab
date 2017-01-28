@@ -375,6 +375,8 @@ DaltonTab.Sections = {
 							$("#weatherModal").modal();
 						});
 					$("#weatherCurrent").append($options);
+					$("#weatherCurrent").append("<br />");
+					$("#weatherCurrent").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank" id="weatherPoweredBy"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
 
 					// forecast
 					$("#weatherForecast").html("<h2>Forecast</h2><div class='row'></div>");
@@ -402,8 +404,6 @@ DaltonTab.Sections = {
 						$fullForecast.children("a").attr("href", results.link);
 					$("#weatherForecast").append("<br />");
 					$("#weatherForecast").append($fullForecast);
-					$("#weatherForecast").append("<br />");
-					$("#weatherForecast").append('<a href="https://weather.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/white.png" width="134" height="29"/> </a>');
 				}).fail(function() {
 					$("#weather").removeClass("row");
 					$("#weather").html("<span class='section-warning'><i class='fa fa-chain-broken'></i> Could not get weather.</span>");

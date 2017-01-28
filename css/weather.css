@@ -12,3 +12,8 @@
 	margin-top: -4px;
 	width: 50px;
 }
+#weatherPoweredBy {
+	position: relative;
+	top: 5px;
+	left: -7px;
+}

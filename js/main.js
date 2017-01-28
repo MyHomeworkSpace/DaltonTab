@@ -14,7 +14,6 @@ $(document).ready(function() {
 			$("#hwButton").attr("href", "#sectionContainer");
 			$("#hwButton").removeClass("flipped");
 			$("#sectionsButton").removeClass("visible");
-			$("#sectionsButton").removeClass("visible");
 		}
 	});
 	$("#hwButton").smoothScroll();
