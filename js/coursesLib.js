@@ -15,7 +15,7 @@ CoursesLib = {
 			callback(response);
 		});
 	},
-	getUserInfo: function(callback) {
+	getUserInfo: function(callback, failCallback) {
 		$.post(CoursesLib.baseURL + "webservice/rest/server.php?moodlewsrestformat=json", {
 			moodlewssettingfilter: true,
 			moodlewssettingfileurl: true,
@@ -26,6 +26,8 @@ CoursesLib = {
 				CoursesLib.userId = response.userid;
 			}
 			callback(response);
+		}).fail(function() {
+			failCallback();
 		});
 	},
 	getCourseList: function(callback) {

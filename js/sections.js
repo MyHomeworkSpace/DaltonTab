@@ -314,7 +314,7 @@ DaltonTab.Sections = {
 
 								var $element = $('<a class="col-md-3 classesClass"></a>');
 									$element.attr("href", CoursesLib.baseURL + "course/view.php?id=" + course.id);
-									$element.text(course.fullname);
+									$element.text(course.fullname.replace(/&amp;/g, "&"));
 								$row.append($element);
 
 								rowIndex++;
@@ -329,51 +329,14 @@ DaltonTab.Sections = {
 							}
 							$("#classesLoadMsg").hide();
 						});
+					}, function() {
+						$("#classes-warning").html('<i class="fa fa-chain-broken"></i> Could not reach Courses.');
+						$("#classesLoadMsg").hide();
 					});
 				} else {
 					displayCoursesLoginMessage();
 				}
 			});
-			/*window.coursesLib.checkLoggedIn(function(response) {
-				if (!response.isLoggedIn) {
-					$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in <a href="http://courses.dalton.org">to Courses</a>.');
-					$("#classes-warning").css("font-size", "3em");
-					$("#classesLoadMsg").hide();
-				} else {
-					window.coursesLib.getCourseList(function(response) {
-						var rowIndex = 0;
-						var $row = null;
-						for (var courseIndex in response.classes) {
-							if (rowIndex == 0) {
-								$row = $('<div class="row"></div>');
-							}
-
-							var course = response.classes[courseIndex];
-							console.log(course);
-
-							var $element = $('<a class="col-md-3 classesClass"></a>');
-								$element.attr("href", course.url);
-								$element.text(course.name);
-							$row.append($element);
-
-							rowIndex++;
-							if (rowIndex == 3) {
-								$("#courses").append($row);
-								rowIndex = 0;
-								$row = null;
-							}
-						}
-						if ($row) {
-							$("#courses").append($row);
-						}
-						$("#classesLoadMsg").hide();
-					});
-				}
-			}, function() {
-				$("#classes-warning").html('<i class="fa fa-chain-broken"></i> Could not reach Courses.');
-				$("#classes-warning").css("font-size", "3em");
-				$("#classesLoadMsg").hide();
-			});*/
 		}
 	},
 	weather: {
