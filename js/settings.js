@@ -100,5 +100,9 @@ DaltonTab.Settings = {
 
 		// === ABOUT ===
 		$(".daltontab-version").text(chrome.runtime.getManifest().version);
+	},
+	open: function(page) {
+		$("#sectionsButton").click();
+		$("#settingsPanePages li[data-page=" + page + "]").click();
 	}
 };

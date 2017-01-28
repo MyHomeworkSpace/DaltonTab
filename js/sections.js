@@ -165,7 +165,7 @@ DaltonTab.Sections = {
 					$("#schedules-warning").html('<i class="fa fa-exclamation-circle"></i> You aren\'t signed in to Schedules. ');
 					var $link = $('<a href="#">Sign in to continue.</a>');
 						$link.click(function() {
-							$("#sectionsButton").click();
+							DaltonTab.Settings.open("accounts");
 							return false;
 						});
 					$("#schedules-warning").append($link);
@@ -324,7 +324,7 @@ DaltonTab.Sections = {
 				}
 				if (storage.weather == undefined) {
 					$("#weatherCurrent").html("<br /><br /><br /><span style='font-size:2em;'>You haven't set your location.</span><br />");
-					var $options = $('<button class="btn btn-primary btn-lg">Set your location</button>');
+					var $options = $('<button class="btn btn-default btn-lg">Set your location</button>');
 						$options.click(function() {
 							$("#weatherModal").modal();
 						});

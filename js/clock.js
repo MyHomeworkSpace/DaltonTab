@@ -16,8 +16,7 @@ DaltonTab.Clock = {
 		});
 
 		$("#timeTop").dblclick(function() {
-			$("#sectionsButton").click();
-			$("#settingsPanePages li[data-page=clock]").click();
+			DaltonTab.Settings.open("clock");
 		});
 	},
 
