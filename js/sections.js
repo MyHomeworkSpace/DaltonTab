@@ -448,5 +448,19 @@ DaltonTab.Sections = {
 				});
 			});
 		}
+	},
+	tabCount: {
+		name: "Tab Count",
+		icon: "fa-clone",
+		description: "Count the number of tabs that you open in a day",
+		background: "rgb(255, 0, 255)", //bright pink as a reminder to pick a color
+		createHtml: function(){
+			var $html = $("<div class='tabCount'></div>");
+				$tabCount = $("<h1 id='tabs'>0</h1>");
+				$html.append($tabCount);
+				var $tabCountLabel = $("<h2 class='tabCountLabel'>Tabs</h2>");
+				$html.append($tabCountLabel);
+			return $html;
+		}
 	}
 };
