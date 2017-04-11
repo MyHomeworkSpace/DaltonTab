@@ -456,11 +456,22 @@ DaltonTab.Sections = {
 		background: "rgb(255, 0, 255)", //bright pink as a reminder to pick a color
 		createHtml: function(){
 			var $html = $("<div class='tabCount'></div>");
+				$html.append('<h3 id="tabs-warning" class="section-warning"></h3>');
 				$tabCount = $("<h1 id='tabs'>0</h1>");
 				$html.append($tabCount);
-				var $tabCountLabel = $("<h2 class='tabCountLabel'>Tabs</h2>");
+				var $tabCountLabel = $("<h2 class='tabCountLabel'>tabs opened today</h2>");
 				$html.append($tabCountLabel);
 			return $html;
+		},
+		run: function(){
+			chrome.permissions.contains({
+				permissions: ['tabs'],
+			}, function(result) {
+				if (!result) {
+					$("#tabs-warning").html('<i class="fa fa-lock"></i> You need to give DaltonTab the key to your tabs to be able to use this function. <a onclick="unlockTabs();"><i class="fa fa-key"></i> Give DaltonTab the key to your tabs</a>');
+					$("#tabs-warning").css("font-size", "3em");
+				}
+			});
 		}
 	}
 };

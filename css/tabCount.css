@@ -1,3 +1,11 @@
-#tabCount {
+.tabCount {
     text-align: center;
+}
+
+#tabs {
+    font-size: 150px;
+}
+
+#tabs-warning {
+    text-align: left;
 }
