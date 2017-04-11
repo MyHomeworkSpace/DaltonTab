@@ -16,6 +16,10 @@
 		"https://www.bing.com/"
 	],
 
+	"optional_permissions": [
+		"tabs",
+	],
+
 	"chrome_url_overrides" : {
 		"newtab": "newTab.html"
 	}
