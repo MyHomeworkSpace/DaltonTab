@@ -1,4 +1,5 @@
 var jumpingArrow = document.getElementById('hwButton');
+var backgroundImageURL = "";
 
 DaltonTab = {
 	mustUpdateSectionPositions: false
@@ -33,7 +34,7 @@ $(document).ready(function() {
 			}
 			$.get("https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, function(data) {
 				var image = JSON.parse(data);
-
+				var backgroundImageURL = image.imgUrl;
 				$("#topSection").css("background-image", "url(" + image.imgUrl + ")");
 				$("#topSection").addClass("imageLoaded");
 
@@ -50,6 +51,7 @@ $(document).ready(function() {
 				$("#imageSite").text(image.siteName);
 
 				$("#imageInfo").removeClass("hidden");
+				
 			});
 		} else {
 			$("#daltontab-image-caption").text("You've disabled the image background!");
@@ -169,4 +171,20 @@ $(document).ready(function() {
 			$("#loadOverlay").remove();
 		}, 300);
 	}, 200);
+
+	var backgroundImageVibrant = document.createElement('img');
+	$(backgroundImageVibrant).css({"display": "none"});
+	backgroundImageVibrant.setAttribute('src', backgroundImageURL);
+
+	backgroundImageVibrant.addEventListener('load', function(){
+		alert("I'm feeling vibrant!");
+		var vibrant = new Vibrant(backgroundImageVibrant);
+		var swatches = vibrant.swatches();
+		var swatch;
+		for (swatch in swatches){
+			if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
+				console.log(swatch, swatches[swatch].getHex());
+			}
+		}
+	});
 });
