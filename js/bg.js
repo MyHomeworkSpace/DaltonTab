@@ -7,3 +7,18 @@ function install_notice() {
     chrome.tabs.create({url: "./etc/setup.html"});
 }
 install_notice();
+
+chrome.tabs.onCreated.addListener(function(){
+    var tabCountLocal = 0;
+    chrome.storage.sync.get("tabCount", function(response) {
+        tabCountLocal = response.tabCount;
+        if (!tabCountLocal) {
+            tabCountLocal = 1;
+        } else {
+            tabCountLocal++;
+        }
+    });
+    chrome.storage.sync.set({tabCount: tabCountLocal}, function(){
+        alert("yay");
+    });
+});

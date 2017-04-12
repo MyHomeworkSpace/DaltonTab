@@ -457,20 +457,15 @@ DaltonTab.Sections = {
 		createHtml: function(){
 			var $html = $("<div class='tabCount'></div>");
 				$html.append('<h3 id="tabs-warning" class="section-warning"></h3>');
-				$tabCount = $("<h1 id='tabs'>0</h1>");
+				$tabCount = $("<h1 id='tabs'>Error</h1>");
 				$html.append($tabCount);
-				var $tabCountLabel = $("<h2 class='tabCountLabel'>tabs opened today</h2>");
+				var $tabCountLabel = $("<h2 class='tabCountLabel'>Sorry, but the tab count was unable to load. <a href='mailto:hello@myhomework.space'>Email</a> us to report this bug.</h2>");
 				$html.append($tabCountLabel);
 			return $html;
 		},
 		run: function(){
-			chrome.permissions.contains({
-				permissions: ['tabs'],
-			}, function(result) {
-				if (!result) {
-					$("#tabs-warning").html('<i class="fa fa-lock"></i> You need to give DaltonTab the key to your tabs to be able to use this function. <a onclick="unlockTabs();"><i class="fa fa-key"></i> Give DaltonTab the key to your tabs</a>');
-					$("#tabs-warning").css("font-size", "3em");
-				}
+			chrome.storage.sync.get("tabCount", function(response) {
+				$("#tabs").text(response.tabCount);
 			});
 		}
 	}
