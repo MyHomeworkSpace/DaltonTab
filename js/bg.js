@@ -19,6 +19,6 @@ chrome.tabs.onCreated.addListener(function(){
         }
     });
     chrome.storage.sync.set({tabCount: tabCountLocal}, function(){
-        alert("yay");
+        //alert("yay");
     });
 });
