@@ -23,7 +23,7 @@ DaltonTab.SectionHandler = {
 			var section = DaltonTab.Sections[DaltonTab.SectionHandler.order[sectionIndex]];
 			var $section = $('<div class="section container-fluid"></div>');
 				$section.attr("id", "section-" + sectionIndex);
-				$section.css("background-color", section.background);
+				$section.css("background-color", DaltonTab.Image.getSectionBackground(sectionIndex, section.background));
 				var $header = $('<div class="sectionTitle"></div>');
 					var $icon = $('<i class="fa"></i>');
 						$icon.addClass(section.icon);
@@ -38,6 +38,12 @@ DaltonTab.SectionHandler = {
 		for (var sectionIndex in DaltonTab.SectionHandler.order) {
 			var section = DaltonTab.Sections[DaltonTab.SectionHandler.order[sectionIndex]];
 			section.run();
+		}
+	},
+	updateColors: function() {
+		for (var sectionIndex in DaltonTab.SectionHandler.order) {
+			var section = DaltonTab.Sections[DaltonTab.SectionHandler.order[sectionIndex]];
+			$("#section-" + sectionIndex).css("background-color", DaltonTab.Image.getSectionBackground(sectionIndex, section.background));
 		}
 	},
 	updateOrder: function(newOrder, callback) {
