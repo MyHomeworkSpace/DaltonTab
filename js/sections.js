@@ -377,7 +377,7 @@ DaltonTab.Sections = {
 
 					var fixStupidYahooTimeThing = function(time) {
 						// sometimes yahoo's api gives times like "7:3 am".
-						// this function takes those timesand fixes them
+						// this function takes those times and fixes them
 						var secondPart = time.split(":")[1];
 						var minutes = secondPart.split(" ")[0];
 						if (minutes.length == 1) {

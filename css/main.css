@@ -1,5 +1,6 @@
 body {
 	z-index: 1;
+	-webkit-font-smoothing: antialiased;
 }
 body.frozen {
 	overflow: hidden;
@@ -54,6 +55,11 @@ a.btn {
 	position: fixed;
 	left: 60px;
 	bottom: 60px;
+	font-weight: normal;
+}
+#imageInfo a {
+	font-weight: bold;
+	text-decoration: none;
 }
 #imageDesc {
 	font-size: 1.4em;

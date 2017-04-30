@@ -33,8 +33,6 @@ $(document).ready(function() {
 				localStorage.removeItem("nc");
 			}
 			DaltonTab.Image.loadCurrentImage(channel);
-		} else {
-			$("#daltontab-image-caption").text("You've disabled the image background!");
 		}
 	});
 
