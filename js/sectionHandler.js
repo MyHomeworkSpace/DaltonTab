@@ -28,7 +28,7 @@ DaltonTab.SectionHandler = {
 					var $icon = $('<i class="fa"></i>');
 						$icon.addClass(section.icon);
 					$header.append($icon);
-					$header.append(" " + section.name);
+					$header.append(section.name);
 				$section.append($header);
 				$section.append(section.createHtml());
 			$("#sectionContainer").append($section);
