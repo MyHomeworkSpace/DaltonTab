@@ -134,6 +134,11 @@ a.btn {
 	padding-bottom: 10px;
 }
 
+.feedback-btn {
+	font-size: 20px;
+	padding: 4px 8px;
+}
+
 #hwButton {
 	color: white;
 	cursor: pointer;

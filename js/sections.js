@@ -437,7 +437,7 @@ DaltonTab.Sections = {
 						$("#weatherForecast .row").append($dayForecast);
 					}
 					var $fullForecast = $('<a class="btn btn-default">View full forecast &raquo;</a>');
-						$fullForecast.children("a").attr("href", results.link);
+						$fullForecast.attr("href", results.link);
 					$("#weatherForecast").append("<br />");
 					$("#weatherForecast").append($fullForecast);
 				}).fail(function() {
