@@ -28,4 +28,11 @@
 
 .dayClasses .class strong {
 	font-size: 1.1em;
+	display: inline-block;
+	width: 100%;
+	height: 17px;
+	margin-bottom: -3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

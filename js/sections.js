@@ -228,10 +228,14 @@ DaltonTab.Sections = {
 						$item.css("height", boxSize + "px");
 						$item.css("top", startOffset + "px");
 
-						$item.append("<strong>" + name + " in " + location + "</strong><br />");
+						var $className = $('<strong></strong>');
+							$className.text(name + " in " + location);
+							$className.attr("title", name + " in " + location);
+						$item.append($className);
 						if (instructor != "") {
-							$item.append("with " + instructor);
-							$item.append("<br />");
+							var $instructor = $("<div></div>");
+								$instructor.text("with " + instructor);
+							$item.append($instructor);
 						}
 						$item.append("from " + start.format("h:mm") + " to " + end.format("h:mm"));
 						$(".dayClasses." + date.format("ddd").toLowerCase() + "").append($item);
