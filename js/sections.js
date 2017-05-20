@@ -441,7 +441,8 @@ DaltonTab.Sections = {
 						$("#weatherForecast .row").append($dayForecast);
 					}
 					var $fullForecast = $('<a class="btn btn-default">View full forecast &raquo;</a>');
-						$fullForecast.attr("href", results.link);
+						var forecastUrl = results.link.split("*")[1]; // HACK: for some reason, the link Yahoo returns doesn't work, and it has to be split like this
+						$fullForecast.attr("href", forecastUrl);
 					$("#weatherForecast").append("<br />");
 					$("#weatherForecast").append($fullForecast);
 				}).fail(function() {
