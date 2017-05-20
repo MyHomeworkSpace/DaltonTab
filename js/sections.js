@@ -458,7 +458,7 @@ DaltonTab.Sections = {
 		name: "Tab Count",
 		icon: "fa-clone",
 		description: "Count the number of tabs that you open in a day",
-		background: "rgb(255, 0, 255)", //bright pink as a reminder to pick a color
+		background: "rgba(0, 140, 186, 0.9)",
 		createHtml: function(){
 			var $html = $("<div class='tabCount'></div>");
 				$html.append('<h3 id="tabs-warning" class="section-warning"></h3>');
