@@ -212,9 +212,9 @@ DaltonTab.Sections = {
 						var instructor = $(this).children("instructor").children("name").text();
 						var location = $(this).children("location").text();
 
-						var date = moment($(this).children("date").text());
-						var start = moment($(this).children("start").text());
-						var end = moment($(this).children("end").text());
+						var date = moment($(this).children("date").text(), "MM-DD-YYYY");
+						var start = moment($(this).children("start").text(), "YYYY-MM-DD HH:mm:ss");
+						var end = moment($(this).children("end").text(), "YYYY-MM-DD HH:mm:ss");
 						var startHour = start.hour() - 8;
 						var startMin = start.minutes();
 						var endHour = end.hour() - 8;
