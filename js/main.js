@@ -143,6 +143,8 @@ $(document).ready(function() {
 	DaltonTab.Settings.init();
 	DaltonTab.Survey.init();
 
+	DaltonTab.Analytics.ping();
+
 	$('[data-toggle="tooltip"]').tooltip();
 
 	setTimeout(function() {
