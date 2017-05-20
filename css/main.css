@@ -76,6 +76,9 @@ a.btn {
 #imageDesc {
 	font-size: 1.4em;
 }
+#imageDesc.loading {
+	font-size: 1em;
+}
 #imageSubDesc {
 	font-size: 0.8em;
 }

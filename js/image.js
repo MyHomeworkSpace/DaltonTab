@@ -44,7 +44,8 @@ DaltonTab.Image = {
 			$("#imageSite").attr("href", image.siteUrl);
 			$("#imageSite").text(image.siteName);
 
-			$("#imageInfo").removeClass("hidden");
+			$("#imageDesc").removeClass("loading");
+			$("#imageSubDesc").removeClass("hidden");
 		});
 	}
 };
