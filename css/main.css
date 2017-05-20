@@ -54,10 +54,19 @@ a.btn {
 	margin-right: 7px;
 }
 
+#imageInfoBar {
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);/*rgba(0, 0, 0, 0.25);*/
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 140px;
+}
+
 #imageInfo {
 	position: fixed;
-	left: 60px;
-	bottom: 60px;
+	left: 30px;
+	bottom: 30px;
 	font-weight: normal;
 }
 #imageInfo a {
@@ -147,14 +156,14 @@ a.btn {
 	text-shadow: 2px 2px black;
 	position: fixed;
 	left: 50%;
-	margin-left: -19px;
-	bottom: 60px;
+	margin-left: -22.5px;
+	bottom: 19px;
 	z-index: 10;
 	transition: all 0.25s ease-in-out;
 	text-decoration: none;
 }
 #hwButton.flipped {
-	bottom: calc(100% - 100px);
+	bottom: calc(100% - 83px);
 	text-shadow: 2px 2px black;
 }
 #hwButton.flipped i:before {
@@ -177,7 +186,7 @@ a.btn {
 	text-decoration: none;
 }
 #sectionsButton.visible {
-	bottom: calc(100% - 100px);
+	bottom: calc(100% - 83px);
 }
 #sectionsButton:hover {
 	color: #ccc;
