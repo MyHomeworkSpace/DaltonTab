@@ -2,7 +2,11 @@ DaltonTab.Image = {
 	colors: [],
 
 	getSectionBackground: function(index, fallback) {
-		var color = (DaltonTab.Image.colors[index] || fallback)
+		var colorIndex = index;
+		if (colorIndex >= DaltonTab.Image.colors.length) {
+			colorIndex = colorIndex % DaltonTab.Image.colors.length;
+		}
+		var color = (DaltonTab.Image.colors[colorIndex] || fallback);
 		if (color[0] == "#") {
 			var r = parseInt(color.substr(1, 2), 16);
 			var g = parseInt(color.substr(3, 2), 16);
