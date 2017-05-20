@@ -76,6 +76,15 @@
 	display: block;
 	font-size: 3.4em;
 	margin-bottom: 3px;
+	transition: transform 0.2s;
+}
+#settingsPanePages ul li.selected i, #settingsPanePages ul li:hover i {
+	transform: scale(1.15);
+}
+#settingsPanePages ul #settingsPanePagesEditLayout {
+	float: right;
+	border-left: solid 1px black;
+	border-right: none;
 }
 
 #settingsPanePageContainer {
