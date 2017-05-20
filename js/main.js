@@ -33,6 +33,8 @@ $(document).ready(function() {
 				localStorage.removeItem("nc");
 			}
 			DaltonTab.Image.loadCurrentImage(channel);
+		} else {
+			$("#imageInfoBar").addClass("hidden");
 		}
 	});
 

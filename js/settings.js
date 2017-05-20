@@ -86,10 +86,13 @@ DaltonTab.Settings = {
 
 		// === BACKGROUND ===
 		chrome.storage.sync.get("backImgTog", function(storage) {
-			$("#backImgTog").prop("checked", storage.backImgTog);
+			$("input[name=backgroundImageSource]").val([ (storage.backImgTog ? "none" : "live") ]);
 		});
-		$("#backImgTog").change(function() {
-			chrome.storage.sync.set({"backImgTog": $(this).prop("checked")}, function() {
+		$("input[name=backgroundImageSource]").change(function() {
+			$("#refreshWarn").show();
+			var value = $("input[name=backgroundImageSource]:checked").val();
+			var backImgTog = (value == "none" ? true : false);
+			chrome.storage.sync.set({"backImgTog": backImgTog}, function() {
 
 			});
 		});
@@ -97,6 +100,7 @@ DaltonTab.Settings = {
 			$("#jumpingArrowTog").prop("checked", storage.jumpingArrowTog);
 		});
 		$("#jumpingArrowTog").change(function() {
+			$("#refreshWarn").show();
 			if ($(this).prop("checked")) {
 				$("#hwButton").addClass("hidden");
 			} else {

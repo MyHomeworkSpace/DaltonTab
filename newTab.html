@@ -272,13 +272,15 @@
 			</div>
 
 			<div id="settingsPanePage-background" class="settingsPanePage hidden">
-				<h3>Background image</h3>
-				<div id="backgroundImage" class="account">
-					<input id="backImgTog" type="checkbox"/>
-					<label for="backImgTog">
-						Disable background
-					</label>
-					<br />
+				<h3>Background</h3>
+				<div id="backgroundImage">
+					<p id="refreshWarn" style="display: none">Refresh the page to see your changes.</p>
+
+					<h4>Image</h4>
+					<label><input type="radio" name="backgroundImageSource" value="live" /> DaltonTab image of the day</label><br />
+					<label><input type="radio" name="backgroundImageSource" value="none" /> No image</label>
+					
+					<h4>Other</h4>
 					<input id="jumpingArrowTog" type="checkbox"/>
 					<label for="jumpingArrowTog">
 						Disable Jumping Arrow
