@@ -4,6 +4,7 @@ var backgroundImageURL;
 DaltonTab = {
 	mustUpdateSectionPositions: false,
 	Components: {
+		Sections: {},
 		Settings: {}
 	}
 };
