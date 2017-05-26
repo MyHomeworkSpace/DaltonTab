@@ -96,33 +96,32 @@ DaltonTab.Settings = {
 
 			});
 		});
-		chrome.storage.sync.get("jumpingArrowTog", function(storage) {
-			$("#jumpingArrowTog").prop("checked", storage.jumpingArrowTog);
-		});
-		$("#jumpingArrowTog").change(function() {
-			$("#refreshWarn").show();
-			if ($(this).prop("checked")) {
-				$("#hwButton").addClass("hidden");
-			} else {
-				$("#hwButton").removeClass("hidden");
+		preact.render(h(DaltonTab.Components.Settings.SettingCheckbox, {
+			label: "Disable jumping arrow",
+			storageKey: "jumpingArrowTog",
+			change: function(buttonHidden) {
+				if (buttonHidden) {
+					$("#hwButton").addClass("hidden");
+				} else {
+					$("#hwButton").removeClass("hidden");
+				}
 			}
-			chrome.storage.sync.set({"jumpingArrowTog": $(this).prop("checked")}, function() {
-
-			});
-		});
+		}), null, document.querySelector("#jumpingArrowTog"));
 
 		// === CLOCK ===
 		chrome.storage.sync.get("clockType", function(storage) {
 			var type = storage.clockType || "12hr";
 			$("input[name=clockMode][value=" + type + "]").prop("checked", true);
 		});
-		chrome.storage.sync.get("displayDate", function(storage) {
-			var displayDate = storage.displayDate;
-			if (displayDate === undefined) {
-				displayDate = true;
+		preact.render(h(DaltonTab.Components.Settings.SettingCheckbox, {
+			label: "Show current date underneath time",
+			storageKey: "displayDate",
+			defaultValue: true,
+			change: function(displayDate) {
+				DaltonTab.Clock.displayDate = displayDate;
+				DaltonTab.Clock.updateTime();
 			}
-			$("#showDate").prop("checked", displayDate);
-		});
+		}), null, document.querySelector("#showDate"));
 		$("input[name=clockMode]").change(function() {
 			DaltonTab.Clock.type = $(this).val();
 			DaltonTab.Clock.updateTime();
@@ -130,19 +129,12 @@ DaltonTab.Settings = {
 				clockType: $(this).val()
 			});
 		});
-		$("#showDate").change(function() {
-			DaltonTab.Clock.displayDate = $(this).prop("checked");
-			DaltonTab.Clock.updateTime();
-			chrome.storage.sync.set({
-				displayDate: $(this).prop("checked")
-			});
-		});
 
 		// === ABOUT ===
 		$(".daltontab-version").text(chrome.runtime.getManifest().version);
 	},
 	open: function(page) {
-		$("#sectionsButton").click();
+		$("#settingsButton").click();
 		$("#settingsPanePages li[data-page=" + page + "]").click();
 	}
 };

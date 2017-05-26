@@ -2,7 +2,10 @@ var jumpingArrow = document.getElementById('hwButton');
 var backgroundImageURL;
 
 DaltonTab = {
-	mustUpdateSectionPositions: false
+	mustUpdateSectionPositions: false,
+	Components: {
+		Settings: {}
+	}
 };
 
 $(document).ready(function() {
@@ -10,16 +13,16 @@ $(document).ready(function() {
 		if ($(window).scrollTop() >= 20) {
 			$("#hwButton").attr("href", "#topFiller");
 			$("#hwButton").addClass("flipped");
-			$("#sectionsButton").addClass("visible");
+			$("#settingsButton").addClass("visible");
 		} else {
 			$("#hwButton").attr("href", "#sectionContainer");
 			$("#hwButton").removeClass("flipped");
-			$("#sectionsButton").removeClass("visible");
+			$("#settingsButton").removeClass("visible");
 		}
 	});
 	$("#hwButton").smoothScroll();
 
-	$("#sectionsButton, #settingsPaneClose, #manageOverlay").click(function() {
+	$("#settingsButton, #settingsPaneClose, #manageOverlay").click(function() {
 		$("#settingsPane").toggleClass("opened");
 		$("body").toggleClass("frozen");
 	});
@@ -154,3 +157,23 @@ $(document).ready(function() {
 		}, 300);
 	}, 200);
 });
+
+window.c = function(obj) {
+	// sub-class Component:
+	function F() {
+		this.state = {};
+		preact.Component.call(this);
+	}
+	var p = F.prototype = new preact.Component;
+	// copy our skeleton into the prototype:
+	for (var i in obj) {
+		if (i === 'getDefaultProps' && typeof obj.getDefaultProps === 'function') {
+			F.defaultProps = obj.getDefaultProps() || {};
+		} else {
+			p[i] = obj[i];
+		}
+	}
+	// restore constructor:
+	return p.constructor = F;
+};
+window.h = preact.h;
