@@ -182,8 +182,16 @@ $(document).ready(function() {
 						// TODO: ok technically this would be an issue if you were to have multiple tabs open with messages with different campaigns
 						// but i don't care
 						dismissedMessages.push(message.campaign);
-						chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function() {
-							$("#frontMessageContainer").addClass("hidden");
+						DaltonTab.Analytics.getClientID(function(clientID) {
+							chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function() {
+								$("#frontMessageContainer").addClass("hidden");
+								$.post("https://daltontabservices.myhomework.space/v1/analytics/dismiss.php", {
+									clientID: clientID,
+									campaign: message.campaign
+								}, function() {
+
+								});
+							});
 						});
 						return false;
 					});
