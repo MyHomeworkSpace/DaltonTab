@@ -1,0 +1,37 @@
+#frontMessageContainer {
+	margin-top: 10px;
+}
+
+#frontMessage, #frontMessageSublinks {
+	background: rgba(36, 118, 145, 0.9);
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: normal;
+	margin: 0 auto;
+	padding: 5px;
+	text-align: left;
+	text-shadow: none;
+	transition: all 0.2s;
+	width: 325px;
+}
+#frontMessage {
+	cursor: pointer;
+}
+#frontMessage:hover {
+	background: rgba(16, 98, 125, 1);
+}
+#frontMessage .fa {
+	margin-right: 1px;
+}
+#frontMessageHeader {
+	font-size: 18px;
+}
+#frontMessageSublinks {
+	margin-top: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.eoy-email-suffix {
+	width: 111px;
+}

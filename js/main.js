@@ -4,6 +4,7 @@ var backgroundImageURL;
 DaltonTab = {
 	mustUpdateSectionPositions: false,
 	Components: {
+		Other: {},
 		Sections: {},
 		Settings: {}
 	}
@@ -145,9 +146,62 @@ $(document).ready(function() {
 	DaltonTab.Clock.init();
 	DaltonTab.LayoutEditor.init();
 	DaltonTab.Settings.init();
-	DaltonTab.Survey.init();
 
-	DaltonTab.Analytics.ping();
+	DaltonTab.Analytics.ping(function(message) {
+		if (message) {
+			// there's a message
+			chrome.storage.sync.get("dismissedMessages", function(storage) {
+				var dismissedMessages = storage.dismissedMessages || [];
+				if (!message.campaign || dismissedMessages.indexOf(message.campaign) == -1) {
+					$("#frontMessageHeader").text(message.header);
+					$("#frontMessageHeader").prepend($('<i class="fa"><i>').addClass(message.icon));
+					$("#frontMessageSubtext").text(message.subtext);
+
+					$("#frontMessage").click(function() {
+						if (message.type == "url") {
+							window.location.href = message.url;
+						} else if (message.type == "eoy") {
+							preact.render(h(DaltonTab.Components.Other.EndOfYearModal, {
+								
+							}), null, document.querySelector("#endOfYearModal .modal-dialog"));
+							$("#endOfYearModal").modal();
+							setTimeout(function() {
+								$(".eoy-email-input").focus();
+							}, 500);
+						} else {
+							if (message.url) {
+								// fallback url
+								window.location.href = message.url;
+							} else {
+								alert("To view this message, please update DaltonTab.");
+							}
+						}
+					});
+
+					$("#frontMessageDismiss").click(function() {
+						// TODO: ok technically this would be an issue if you were to have multiple tabs open with messages with different campaigns
+						// but i don't care
+						dismissedMessages.push(message.campaign);
+						chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function() {
+							$("#frontMessageContainer").addClass("hidden");
+						});
+						return false;
+					});
+
+					if (message.canDismiss) {
+						$("#frontMessageSublinks").removeClass("hidden");
+					}
+
+					$("#frontMessageContainer").removeClass("hidden");
+				} else {
+					console.log("Message with campaign " + message.campaign + " ignored because user dismissed it.");
+				}
+			});
+		} else {
+			// only init survey module if no message
+			DaltonTab.Survey.init();
+		}
+	});
 
 	$('[data-toggle="tooltip"]').tooltip();
 

@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="css/classes.css">
 	<link rel="stylesheet" href="css/weather.css">
 	<link rel="stylesheet" href="css/tabCount.css">
+	<link rel="stylesheet" href="css/message.css">
 	<link rel="stylesheet" href="css/main.css">
 
 	<script src="js/jquery.min.js"></script>
@@ -37,6 +38,7 @@
 
 	<script src="js/sectionHandler.js"></script>
 
+	<script src="js/other/EndOfYearModal.js"></script>
 	<script src="js/sections/LunchMenu.js"></script>
 	<script src="js/settings/SettingCheckbox.js"></script>
 
@@ -123,6 +125,11 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div id="endOfYearModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			
 		</div>
 	</div>
 	<div id="surveyModal" class="modal fade" tabindex="-1" role="dialog">
@@ -321,6 +328,15 @@
 			<div id="timeTop" class="col-md-12">
 				<div class="mainTime"><span class="current-time"></span><span class="current-time-ampm"></span></div>
 				<div class="current-date mainDate"></div>
+				<div id="frontMessageContainer" class="hidden">
+					<div id="frontMessage">
+						<div id="frontMessageHeader"></div>
+						<div id="frontMessageSubtext"></div>
+					</div>
+					<div id="frontMessageSublinks" class="hidden">
+						<a id="frontMessageDismiss" href="#">Dismiss message</a>
+					</div>
+				</div>
 				<div id="surveyPromptContainer" style="display: none">
 					<div id="surveyPrompt">
 						<div id="surveyPromptTitle"><i class="fa fa-file-text"></i> Help us make DaltonTab better</div>

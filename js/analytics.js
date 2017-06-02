@@ -41,7 +41,7 @@ DaltonTab.Analytics = {
 		return randomString;
 	},
 
-	ping: function() {
+	ping: function(messageCallback) {
 		DaltonTab.Analytics.getClientID(function(clientID) {
 			DaltonTab.Analytics.collectPingPayload(function(pingPayload) {
 				chrome.storage.sync.get("pingPayloadHash", function(storage) {
@@ -62,6 +62,11 @@ DaltonTab.Analytics = {
 							}, function(data) {
 								chrome.storage.sync.set({ pingPayloadHash: pingPayloadHash }, function() {});
 							});
+						}
+						if (data.isMessage) {
+							messageCallback(data.message);
+						} else {
+							messageCallback(undefined);
 						}
 					});
 				});
