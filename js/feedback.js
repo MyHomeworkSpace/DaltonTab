@@ -3,20 +3,24 @@ window.feedback = {
 };
 
 window.feedback.submitFeedback = function(type, message, done, err) {
-	var version = chrome.runtime.getManifest().version;
-	var metadata = {};
-	$.post(window.feedback.url, {
-		type: type,
-		message: message,
-		version: version,
-		metadata: JSON.stringify(metadata)
-	}, function(response_str) {
-		var response = JSON.parse(response_str);
-		if (response.status == "ok") {
-			done(response);
-		} else {
-			err(response);
-		}
+	DaltonTab.Analytics.getClientID(function(clientID) {
+		var version = chrome.runtime.getManifest().version;
+		var metadata = {
+			clientID: clientID
+		};
+		$.post(window.feedback.url, {
+			type: type,
+			message: message,
+			version: version,
+			metadata: JSON.stringify(metadata)
+		}, function(response_str) {
+			var response = JSON.parse(response_str);
+			if (response.status == "ok") {
+				done(response);
+			} else {
+				err(response);
+			}
+		});
 	});
 };
 
