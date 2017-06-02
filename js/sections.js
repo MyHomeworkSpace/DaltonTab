@@ -473,7 +473,7 @@ DaltonTab.Sections = {
 				$("#tabs").text(response.tabCount);
 			});
 		}
-	},
+	}/*,
 	lunchMenu: {
 		name: "Lunch Menu",
 		icon: "fa-file-text-o",
@@ -487,5 +487,5 @@ DaltonTab.Sections = {
 		run: function(){
 			
 		}
-	}
+	}*/
 };
