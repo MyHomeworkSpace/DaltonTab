@@ -2,6 +2,7 @@ DaltonTab.Analytics = {
 	collectPingPayload: function(callback) {
 		chrome.storage.sync.get([ "sections", "schedulesLogin", "coursesToken" ], function(storage) {
 			callback({
+				prod: (chrome.runtime.id == "ggfjkmflbbjndabmnngilkfpmdegbfkm"),
 				sections: (storage.sections || "default"),
 				coursesLoggedIn: (storage.coursesToken ? true : false),
 				schedulesLoggedIn: (storage.schedulesLogin ? true : false)
