@@ -1,30 +1,36 @@
 MyHomeworkSpace = {
 	basePath: "https://api-v2.myhomework.space/",
-	csrfToken: "",
+	clientID: "PA2QtTk14dimr5jY-W7BlNZKiGuL2HY-zrNQZ3vP16P2XasErsleyOXT",
 
-	init: function(callback) {
-		$.get(MyHomeworkSpace.basePath + "auth/csrf", function() {
-			$.get(MyHomeworkSpace.basePath + "auth/csrf", function(response) {
-				MyHomeworkSpace.csrfToken = response.token;
-				callback();
-			});
+	getAuthURL: function() {
+		return MyHomeworkSpace.basePath + "application/requestAuth/" + MyHomeworkSpace.clientID;
+	},
+
+	get: function(token, url, data, callback) {
+		$.ajax({
+			method: "GET",
+			url: MyHomeworkSpace.basePath + url,
+			data: data,
+			complete: function(data) {
+				callback(data.responseJSON);
+			},
+			headers: {
+				Authorization: "Bearer " + token
+			}
 		});
 	},
 
-	get: function(url, callback) {
-		var callbackFunc = function(data) {
-			if (data.responseJSON) {
+	post: function(token, url, data, callback) {
+		$.ajax({
+			method: "POST",
+			url: MyHomeworkSpace.basePath + url,
+			data: data,
+			complete: function(data) {
 				callback(data.responseJSON);
-				return;
+			},
+			headers: {
+				Authorization: "Bearer " + token
 			}
-			callback(data);
-		};
-		$.get(MyHomeworkSpace.basePath + url + "?csrfToken=" + MyHomeworkSpace.csrfToken, callbackFunc).fail(callbackFunc);
-	},
-
-	post: function(url, data, callback) {
-		$.post(MyHomeworkSpace.basePath + url + "?csrfToken=" + MyHomeworkSpace.csrfToken, data, function(data) {
-			callback(data);
 		});
 	}
 };

@@ -17,6 +17,9 @@ DaltonTab.Settings = {
 		});
 
 		// === ACCOUNTS ===
+		preact.render(h(DaltonTab.Components.Settings.AccountPane, {
+
+		}), null, document.querySelector("#settingsPanePage-accounts > div"));
 
 		// === BACKGROUND ===
 		chrome.storage.sync.get("backImgTog", function(storage) {
