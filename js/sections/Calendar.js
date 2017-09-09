@@ -71,6 +71,26 @@ DaltonTab.Components.Sections.Calendar = c({
 
 		var currentDay = moment(state.monday);
 
+		var sortedEvents = [
+			[], [], [], [], [], [], []
+		];
+
+		if (!state.loadingWeek) {
+			state.weekInfo.events.map(function(e){
+				var newEvent = e;
+				newEvent.type = "event";
+				return newEvent;
+			}).concat(state.weekInfo.hwEvents.map(function(e){
+				var newEvent = e;
+				newEvent.type = "homework";
+				return newEvent;
+			})).forEach(function(calendarEvent) {
+				var start = moment.unix(calendarEvent.start);
+				var dow = start.isoWeekday() - 1;
+				sortedEvents[dow].push(calendarEvent);
+			});
+		}
+
 		for (var dayNumber = 0; dayNumber < 7; dayNumber++) {
 			// create list of all events
 			var allEvents = [];
@@ -80,6 +100,8 @@ DaltonTab.Components.Sections.Calendar = c({
 					event.type = "schedule";
 					allEvents.push(event);
 				});
+
+				allEvents = allEvents.concat(sortedEvents[dayNumber]);
 			}
 
 			// group events that occur at same time
