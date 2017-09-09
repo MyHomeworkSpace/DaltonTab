@@ -28,6 +28,19 @@ DaltonTab.Components.Settings.AccountPane = c({
 		window.location.href = MyHomeworkSpace.getAuthURL();
 	},
 
+	disconnect: function() {
+		if (!confirm("Are you sure? You'll need to reconnect your account if you want to see your schedule, classes, and homework.")) {
+			return;
+		}
+		this.setState({
+			loaded: false
+		}, function() {
+			MyHomeworkSpace.post(this.state.token, "application/revokeSelf", {}, function(data) {
+				window.location.reload();
+			});
+		});
+	},
+
 	render: function(props, state) {
 		if (!state.loaded) {
 			return h("div", {}, "Loading, please wait...");
@@ -36,9 +49,12 @@ DaltonTab.Components.Settings.AccountPane = c({
 		var details;
 		if (state.loggedIn) {
 			details = h("div", {},
-				"Connected to MyHomeworkSpace as ",
-				h("strong", {}, state.user.name),
-				"."
+				h("div", {},
+					"Connected to MyHomeworkSpace as ",
+					h("strong", {}, state.user.name),
+					"."
+				),
+				h("button", { class: "btn btn-default btn-sm", onClick: this.disconnect.bind(this) }, "Disconnect")
 			);
 		} else {
 			details = h("div", {},
