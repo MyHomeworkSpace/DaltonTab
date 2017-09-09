@@ -34,9 +34,18 @@ DaltonTab.Components.Sections.Calendar = c({
 					loadingWeek: true
 				}, function() {
 					that.loadCurrentWeek.call(that);
+					that.setInitialScroll.call(that);
 				});
 			});
 		});
+	},
+	setInitialScroll: function() {
+		var time = Math.floor((moment().unix() - moment("00:00:00", "HH:mm:ss").unix()) / 60);
+		var scrollPos = time - 150;
+		if (scrollPos < 0) {
+			scrollPos = 0;
+		}
+		document.querySelector(".calendarViewport").scrollTop = scrollPos;
 	},
 	loadCurrentWeek: function() {
 		var that = this;
