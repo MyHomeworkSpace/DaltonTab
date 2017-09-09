@@ -148,7 +148,7 @@ DaltonTab.Sections = {
 	classes: {
 		name: "Classes",
 		icon: "fa-list",
-		description: "View and access your courses from courses.dalton.org.",
+		description: "View and access your classes.",
 		background: "rgba(57, 146, 108, 0.9)",
 		createHtml: function() {
 			var $html = $("<div>This also doesn't work right now :/</div>");
