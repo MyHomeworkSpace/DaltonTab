@@ -131,12 +131,13 @@ DaltonTab.Components.Sections.Calendar = c({
 			var eventElements = [];
 			groupsForDay.forEach(function(eventGroup) {
 				eventGroup.forEach(function(eventItem, eventGroupIndex) {
-					eventElements.push(h("div", {}, eventItem.name));
+					eventElements.push(h(DaltonTab.Components.Calendar.CalendarEvent, {
+						event: eventItem,
+						type: eventItem.type,
+						groupIndex: eventGroupIndex,
+						groupLength: eventGroup.length
+					}));
 				});
-			});
-
-			allEvents.forEach(function(event) {
-				eventElements.push(event.name);
 			});
 
 			dayHeaders.push(h("div", { class: "calendarDayHeader" }, names[dayNumber] + " " + currentDay.format("M/D")));

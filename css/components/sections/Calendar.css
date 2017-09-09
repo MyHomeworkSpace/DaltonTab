@@ -2,7 +2,7 @@
 	border: solid 1px white;
 	overflow-y: scroll;
 	width: 100%;
-	height: 400px;
+	height: 500px;
 }
 .calendarWeek {
 	display: flex;
@@ -23,4 +23,19 @@
 	border-left: solid 1px white;
 	height: 1440px;
 	position: relative;
+}
+.calendarEvent {
+	position: absolute;
+	border: solid 1px white;
+	padding: 2px;
+	overflow: hidden;
+}
+.calendarEventName {
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.calendarEventTime {
+	font-size: 13px;
 }
