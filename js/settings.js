@@ -17,26 +17,6 @@ DaltonTab.Settings = {
 		});
 
 		// === ACCOUNTS ===
-		$("#schedulesAccountBtn").click(function() {
-			window.location.href = chrome.runtime.getURL("schedulesSignIn.html");
-		});
-
-		chrome.storage.sync.get(["schedulesLogin"], function(response) {
-			if (response.schedulesLogin != undefined) {
-				$("#schedulesSignIn").addClass("hidden");
-				$("#schedulesSignedIn").removeClass("hidden");
-				$("#schedulesAccountName").text(response.schedulesLogin.username);
-			}
-		});
-
-		$("#schedulesLogOut").click(function() {
-			chrome.storage.sync.remove("schedulesLogin", function() {
-				DaltonTab.mustUpdateSectionPositions = true;
-				$("#schedulesSignIn").removeClass("hidden");
-				$("#schedulesSignedIn").addClass("hidden");
-			});
-		});
-
 		$("#coursesSignInBtn").click(function() {
 			$(".accountSignInService").text("Courses");
 			$("#accountSignInUsername").val("");
