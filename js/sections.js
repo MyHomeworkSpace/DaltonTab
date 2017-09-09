@@ -32,11 +32,12 @@ DaltonTab.Sections = {
 		description: "View and access your classes.",
 		background: "rgba(57, 146, 108, 0.9)",
 		createHtml: function() {
-			var $html = $("<div>This also doesn't work right now :/</div>");
+			var $html = $("<div></div>");
+				preact.render(h(DaltonTab.Components.Sections.Classes, {}), null, $html[0]);
 			return $html;
 		},
 		run: function() {
-			
+
 		}
 	},
 	weather: {
