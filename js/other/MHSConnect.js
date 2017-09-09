@@ -10,7 +10,7 @@ DaltonTab.Components.Sections.MHSConnect = c({
 	render: function(props, state) {
 		var title = "You haven't connected DaltonTab to MyHomeworkSpace!";
 		var subtitle = "We need access to your MyHomeworkSpace account so we can get your schedule, classes, and homework.";
-		var button = "ConnecT";
+		var button = "Connect";
 
 		if (props.type == "calendar") {
 			title = "Enable calendar";
@@ -18,7 +18,7 @@ DaltonTab.Components.Sections.MHSConnect = c({
 			button = "Enable";
 		}
 
-		return h("div", {}, 
+		return h("div", { class: "mhsConnect" }, 
 			h("h3", {}, title),
 			h("h4", {}, subtitle),
 			h("button", { class: "btn btn-primary btn-lg", onClick: this.connect.bind(this) }, button)
