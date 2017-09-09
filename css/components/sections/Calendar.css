@@ -1,0 +1,26 @@
+.calendarViewport {
+	border: solid 1px white;
+	overflow-y: scroll;
+	width: 100%;
+	height: 400px;
+}
+.calendarWeek {
+	display: flex;
+	width: 100%;
+}
+.calendarDayHeader, .calendarDayContents {
+	flex: 1;
+	width: 100%;
+}
+.calendarDayHeader {
+	height: 25px;
+	text-align: center;
+}
+.calendarDayContents.day0 {
+	border-left: none;
+}
+.calendarDayContents {
+	border-left: solid 1px white;
+	height: 1440px;
+	position: relative;
+}

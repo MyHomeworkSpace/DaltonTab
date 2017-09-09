@@ -14,12 +14,13 @@ DaltonTab.Sections = {
 		}
 	},
 	schedule: {
-		name: "Schedule",
+		name: "Calendar",
 		icon: "fa-calendar",
-		description: "View your schedule from schedules.dalton.org.",
+		description: "View your calendar from MyHomeworkSpace.",
 		background: "rgba(121, 70, 26, 0.9)",
 		createHtml: function() {
-			var $html = $("<div>This doesn't work right now :/</div>");
+			var $html = $("<div></div>");
+				preact.render(h(DaltonTab.Components.Sections.Calendar, {}), null, $html[0]);
 			return $html;
 		},
 		run: function() {
