@@ -1,0 +1,8 @@
+.homeworkColumn {
+	flex: 1;
+}
+
+.homeworkColumn .homeworkColumnTitle {
+	font-size: 24px;
+	margin-bottom: 10px;
+}

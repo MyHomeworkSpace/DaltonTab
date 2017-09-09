@@ -5,7 +5,8 @@ DaltonTab.Sections = {
 		description: "View your homework information from MyHomeworkSpace.",
 		background: "rgba(60, 77, 99, 0.9)",
 		createHtml: function() {
-			var $html = $("<div>This too doesn't work right now :/</div>");
+			var $html = $("<div></div>");
+				preact.render(h(DaltonTab.Components.Sections.Homework, {}), null, $html[0]);
 			return $html;
 		},
 		run: function() {
