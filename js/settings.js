@@ -17,52 +17,6 @@ DaltonTab.Settings = {
 		});
 
 		// === ACCOUNTS ===
-		$("#coursesSignInBtn").click(function() {
-			$(".accountSignInService").text("Courses");
-			$("#accountSignInUsername").val("");
-			$("#accountSignInPassword").val("");
-			$("#accountSignInAlert").addClass("hidden");
-			$("#accountSignInModal").modal({
-				backdrop: "static",
-				keyboard: false
-			});
-		});
-
-		$("#accountSignInUsername, #accountSignInPassword").keyup(function(e) {
-			if (e.keyCode == 13) { // enter key
-				$("#accountSignInBtn").click();
-			}
-		});
-
-		$("#accountSignInBtn").click(function() {
-			$("#accountSignInLoadingFooter").removeClass("hidden");
-			$("#accountSignInButtonFooter").addClass("hidden");
-			CoursesLib.login($("#accountSignInUsername").val(), $("#accountSignInPassword").val(), function(response) {
-				if (response.error) {
-					$("#accountSignInLoadingFooter").addClass("hidden");
-					$("#accountSignInButtonFooter").removeClass("hidden");
-					$("#accountSignInAlert").removeClass("hidden");
-					$("#accountSignInAlert").text(response.error);
-					return;
-				}
-				chrome.storage.sync.set({
-					coursesToken: response.token
-				}, function() {
-					$("#accountSignInLoadingFooter").addClass("hidden");
-					$("#accountSignInButtonFooter").removeClass("hidden");
-					$("#accountSignInModal").modal("hide");
-					DaltonTab.SectionHandler.createSections();
-				});
-			});
-		});
-
-		$("#coursesLogOut").click(function() {
-			chrome.storage.sync.remove("coursesToken", function() {
-				DaltonTab.mustUpdateSectionPositions = true;
-				$("#coursesSignedIn").addClass("hidden");
-				$("#coursesSignInInfo").removeClass("hidden");
-			});
-		});
 
 		// === BACKGROUND ===
 		chrome.storage.sync.get("backImgTog", function(storage) {

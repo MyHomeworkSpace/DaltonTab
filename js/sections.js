@@ -151,71 +151,11 @@ DaltonTab.Sections = {
 		description: "View and access your courses from courses.dalton.org.",
 		background: "rgba(57, 146, 108, 0.9)",
 		createHtml: function() {
-			var $html = $("<div></div>");
-				$html.append('<h3 id="classes-warning" class="section-warning"></h3>');
-				$html.append('<div id="classesLoadMsg"><i class="fa fa-refresh fa-spin"></i> Loading your classes...</div>');
-				$html.append('<ul id="courses"></ul>');
+			var $html = $("<div>This also doesn't work right now :/</div>");
 			return $html;
 		},
 		run: function() {
-			var displayCoursesLoginMessage = function() {
-				$("#classes-warning").html('<i class="fa fa-exclamation-circle"></i> Please log in ');
-				var $link = $('<a href="#">to Courses</a>');
-					$link.click(function() {
-						$("#coursesSignInBtn").click();
-						return false;
-					});
-				$("#classes-warning").append($link);
-				$("#classes-warning").append(".");
-				$("#classesLoadMsg").hide();
-			};
-			chrome.storage.sync.get("coursesToken", function(storage) {
-				if (storage.coursesToken) {
-					var token = storage.coursesToken;
-					CoursesLib.token = token;
-					CoursesLib.getUserInfo(function(userInfo) { 
-						if (userInfo.errorcode) {
-							displayCoursesLoginMessage();
-							return;
-						}
-						$("#coursesAccountName").text(userInfo.fullname + " (" + userInfo.username + ")")
-						$("#coursesSignInInfo").addClass("hidden");
-						$("#coursesSignedIn").removeClass("hidden");
-						CoursesLib.getCourseList(function(courses) {
-							var rowIndex = 0;
-							var $row = null;
-							for (var courseIndex in courses) {
-								if (rowIndex == 0) {
-									$row = $('<div class="row"></div>');
-								}
-
-								var course = courses[courseIndex];
-
-								var $element = $('<a class="col-md-3 classesClass"></a>');
-									$element.attr("href", CoursesLib.baseURL + "course/view.php?id=" + course.id);
-									$element.text(course.fullname.replace(/&amp;/g, "&"));
-								$row.append($element);
-
-								rowIndex++;
-								if (rowIndex == 3) {
-									$("#courses").append($row);
-									rowIndex = 0;
-									$row = null;
-								}
-							}
-							if ($row) {
-								$("#courses").append($row);
-							}
-							$("#classesLoadMsg").hide();
-						});
-					}, function() {
-						$("#classes-warning").html('<i class="fa fa-chain-broken"></i> Could not reach Courses.');
-						$("#classesLoadMsg").hide();
-					});
-				} else {
-					displayCoursesLoginMessage();
-				}
-			});
+			
 		}
 	},
 	weather: {
