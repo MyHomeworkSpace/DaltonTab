@@ -24,7 +24,6 @@ DaltonTab.Components.Sections.Calendar = c({
 				while (mondayDate.day() != 1) {
 					mondayDate.subtract(1, "day");
 				}
-				mondayDate.add(1, "week");
 				
 				that.setState({
 					loaded: true,
@@ -42,7 +41,8 @@ DaltonTab.Components.Sections.Calendar = c({
 	loadCurrentWeek: function() {
 		var that = this;
 		this.setState({
-			loadingWeek: true
+			loadingWeek: true,
+			weekInfo: null
 		}, function() {
 			MyHomeworkSpace.get(that.state.token, "calendar/events/getWeek/" + that.state.monday.format("YYYY-MM-DD"), {}, function(data) {
 				that.setState({
@@ -50,6 +50,26 @@ DaltonTab.Components.Sections.Calendar = c({
 					weekInfo: data
 				});
 			});
+		});
+	},
+	jumpToday: function() {
+		var mondayDate = moment();
+		while (mondayDate.day() != 1) {
+			mondayDate.subtract(1, "day");
+		}
+		this.setState({
+			monday: mondayDate
+		}, function() {
+			this.loadCurrentWeek();
+		});
+	},
+	jumpWeek: function(amount) {
+		var newDate = moment(this.state.monday);
+		newDate.add(amount, "week"); 
+		this.setState({
+			monday: newDate
+		}, function() {
+			this.loadCurrentWeek();
 		});
 	},
 	render: function(props, state) {
@@ -96,7 +116,11 @@ DaltonTab.Components.Sections.Calendar = c({
 			var allEvents = [];
 
 			if (!state.loadingWeek) {
-				(state.weekInfo.scheduleEvents[dayNumber] || []).forEach(function(event) {
+				var scheduleEvents = state.weekInfo.scheduleEvents && state.weekInfo.scheduleEvents[dayNumber];
+				if (!scheduleEvents) {
+					scheduleEvents = [];
+				}
+				scheduleEvents.forEach(function(event) {
 					event.type = "schedule";
 					allEvents.push(event);
 				});
@@ -170,9 +194,16 @@ DaltonTab.Components.Sections.Calendar = c({
 
 		return (
 			h("div", { class: "calendarSection" }, 
-				h("div", { class: "calendarHeader" },
-					"Week of " + state.monday.format("MMMM D, YYYY"),
-					(state.loadingWeek ? " Loading week, please wait...": "")
+				h("div", { class: "calendarHeader row" },
+					h("div", { class: "col-md-6 calendarHeaderLeft" },
+						"Week of " + state.monday.format("MMMM D, YYYY"),
+						h("span", { class: "calendarHeaderLoading" }, (state.loadingWeek ? " Loading week, please wait...": ""))
+					),
+					h("div", { class: "col-md-6 calendarHeaderRight" }, 
+						h("button", { class: "btn btn-default", onClick: this.jumpWeek.bind(this, -1) }, h("i", { class: "fa fa-chevron-left" })),
+						h("button", { class: "btn btn-default", onClick: this.jumpToday.bind(this) }, "Today"),
+						h("button", { class: "btn btn-default", onClick: this.jumpWeek.bind(this, 1) }, h("i", { class: "fa fa-chevron-right" })),
+					)
 				),
 				h("div", { class: "calendarWeek" }, dayHeaders),
 				h("div", { class: "calendarViewport" },
