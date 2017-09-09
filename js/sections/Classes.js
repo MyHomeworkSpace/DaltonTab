@@ -3,18 +3,29 @@ DaltonTab.Components.Sections.Classes = c({
 		var that = this;
 		chrome.storage.sync.get("mhsToken", function(storage) {
 			var token = storage["mhsToken"] || "";
-			MyHomeworkSpace.get(token, "calendar/getClasses", {}, function(data) {
-				if (data.status != "ok") {
+			MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
+				if (statusData.status != "ok") {
 					that.setState({
 						loaded: true,
 						loggedIn: false
 					});
 					return;
 				}
-				that.setState({
-					loaded: true,
-					loggedIn: true,
-					classes: data.classes
+				if (statusData.statusNum != 1) {
+					that.setState({
+						loaded: true,
+						loggedIn: true,
+						calendarEnabled: false
+					});
+					return;
+				}
+				MyHomeworkSpace.get(token, "calendar/getClasses", {}, function(data) {
+					that.setState({
+						loaded: true,
+						loggedIn: true,
+						calendarEnabled: true,
+						classes: data.classes
+					});
 				});
 			});
 		});
@@ -25,6 +36,9 @@ DaltonTab.Components.Sections.Classes = c({
 		}
 		if (!state.loggedIn) {
 			return h(DaltonTab.Components.Sections.MHSConnect, {});
+		}
+		if (!state.calendarEnabled) {
+			return h(DaltonTab.Components.Sections.MHSConnect, { type: "calendar" });
 		}
 
 		var classItems = state.classes.map(function(classItem) {

@@ -1,13 +1,27 @@
 DaltonTab.Components.Sections.MHSConnect = c({
 	connect: function() {
-		window.location.href = MyHomeworkSpace.getAuthURL();
+		if (this.props.type == "calendar") {
+			window.location.href = "https://myhomework.space/app.html#!calendar";
+		} else {
+			window.location.href = MyHomeworkSpace.getAuthURL();
+		}
 	},
 
 	render: function(props, state) {
+		var title = "You haven't connected DaltonTab to MyHomeworkSpace!";
+		var subtitle = "We need access to your MyHomeworkSpace account so we can get your schedule, classes, and homework.";
+		var button = "ConnecT";
+
+		if (props.type == "calendar") {
+			title = "Enable calendar";
+			subtitle = "To get your classes and schedule, you'll have to enable the Calendar feature on MyHomeworkSpace.";
+			button = "Enable";
+		}
+
 		return h("div", {}, 
-			h("h3", {}, "You haven't connected DaltonTab to MyHomeworkSpace!"),
-			h("h4", {}, "We need access to your MyHomeworkSpace account so we can get your schedule, classes, and homework."),
-			h("button", { class: "btn btn-primary btn-lg", onClick: this.connect.bind(this) }, "Connect")
+			h("h3", {}, title),
+			h("h4", {}, subtitle),
+			h("button", { class: "btn btn-primary btn-lg", onClick: this.connect.bind(this) }, button)
 		);
 	}
 });
