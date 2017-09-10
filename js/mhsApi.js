@@ -1,5 +1,5 @@
 MyHomeworkSpace = {
-	basePath: "https://api-v2.staging2.myhomework.space/",
+	basePath: "https://api-v2.myhomework.space/",
 	clientID: "PA2QtTk14dimr5jY-W7BlNZKiGuL2HY-zrNQZ3vP16P2XasErsleyOXT",
 
 	getAuthURL: function() {
