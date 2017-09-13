@@ -59,6 +59,8 @@ DaltonTab.Components.Sections.Homework = c({
 
 			if (daysTo < 1 && !hw.complete) {
 				overdue.push(hw);
+			} else if (daysTo < 1) {
+				// it's due today but done, just ignore it
 			} else if (daysTo < tomorrowDaysToThreshold) {
 				tomorrow.push(hw);
 			} else if (daysTo < 5) {
