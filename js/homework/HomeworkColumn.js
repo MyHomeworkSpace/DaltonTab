@@ -35,8 +35,8 @@ DaltonTab.Components.Sections.HomeworkColumn = c({
 				}
 			}
 
-			var element = h("div", { class: "homeworkColumnItem " + (late ? "homeworkColumnItemLate " : "")  + (state.complete == "1" ? "homeworkColumnItemDone" : "") }, 
-				h("div", {}, h("span", { style: "background-color:" + prefixInfo.background + ";color:" + prefixInfo.color }, prefix), " " + notPrefix),
+			var element = h("div", { class: "homeworkColumnItem " + (late ? "homeworkColumnItemLate " : "")  + (hw.complete ? "homeworkColumnItemDone" : "") }, 
+				h("div", { class: "homeworkColumnItemName" }, h("span", { style: "background-color:" + prefixInfo.background + ";color:" + prefixInfo.color }, prefix), " " + notPrefix),
 				h("div", {}, keyword + dueText + " in " + classObject.name)
 			);
 			homework.push(element);

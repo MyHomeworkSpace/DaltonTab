@@ -6,3 +6,16 @@
 	font-size: 24px;
 	margin-bottom: 10px;
 }
+
+.homeworkColumnItem {
+	margin-bottom: 10px;
+}
+
+.homeworkColumnItemName {
+	font-size: 16px;
+}
+
+.homeworkColumnItem.homeworkColumnItemDone {
+	color: #bbb;
+	text-decoration: line-through;
+}
