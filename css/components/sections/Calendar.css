@@ -40,15 +40,16 @@
 .calendarEvent {
 	position: absolute;
 	border: solid 1px white;
-	padding: 2px;
+	padding: 4px;
 	overflow: hidden;
 }
 .calendarEventName {
-	font-size: 14px;
+	font-size: 13px;
+	font-weight: bold;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 .calendarEventTime {
-	font-size: 13px;
+	font-size: 11px;
 }

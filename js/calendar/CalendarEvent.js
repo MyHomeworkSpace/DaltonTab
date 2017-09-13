@@ -34,6 +34,9 @@ DaltonTab.Components.Calendar.CalendarEvent = c({
 		}
 
 		var timeDisplay = startDisplay + " to " + endDisplay;
+		if (props.type == "schedule") {
+			timeDisplay += " in " + props.event.roomNumber;
+		}
 
 		return h("div", {
 			class: "calendarEvent",
