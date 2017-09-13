@@ -57,7 +57,7 @@ DaltonTab.Components.Sections.Homework = c({
 			var due = moment(hw.due);
 			var daysTo = Math.ceil(due.diff(moment()) / 1000 / 60 / 60 / 24);
 
-			if (daysTo < 1) {
+			if (daysTo < 1 && !hw.complete) {
 				overdue.push(hw);
 			} else if (daysTo < tomorrowDaysToThreshold) {
 				tomorrow.push(hw);
