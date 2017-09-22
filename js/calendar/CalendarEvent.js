@@ -40,7 +40,7 @@ DaltonTab.Components.Calendar.CalendarEvent = c({
 
 		return h("div", {
 			class: "calendarEvent",
-			style: `top: ${offset}px; left:${groupWidth*props.groupIndex}%; width: ${groupWidth}%; height: ${height}px;`
+			style: `top: ${offset-props.earliestEvent}px; left:${groupWidth*props.groupIndex}%; width: ${groupWidth}%; height: ${height}px;`
 		},
 			h("div", { class: "calendarEventName", title: displayName }, displayName),
 			h("div", { class: "calendarEventTime", title: timeDisplay }, timeDisplay),
