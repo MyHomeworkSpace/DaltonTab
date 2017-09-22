@@ -37,6 +37,8 @@
 .calendarEvent {
 	position: absolute;
 	border: solid 1px white;
+	border-left: solid 3px white;
+	margin-left: 1px;
 	padding: 4px;
 	overflow: hidden;
 }
