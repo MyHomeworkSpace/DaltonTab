@@ -53,7 +53,7 @@ DaltonTab.Analytics = {
 					$.post("https://daltontabservices.myhomework.space/v1/analytics/ping.php", {
 						clientID: clientID,
 						extensionVersion: chrome.runtime.getManifest().version,
-						browserVersion: navigator.appVersion.split("/")[2].replace(" Safari", "")
+						browserVersion: navigator.userAgent.split("/")[3].replace(" Safari", "")
 					}, function(data) {
 						if (shouldUpdatePingPayload) {
 							$.post("https://daltontabservices.myhomework.space/v1/analytics/updatePayload.php", {
