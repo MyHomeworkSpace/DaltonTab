@@ -1,14 +1,17 @@
-function install_notice() {
-	if (localStorage.getItem('install_time'))
-		return;
-
-	var now = new Date().getTime();
-	localStorage.setItem('install_time', now);
-	chrome.tabs.create({
-		url: "./etc/setup.html"
-	});
-}
-install_notice();
+chrome.runtime.onInstalled.addListener(function(details){
+    if(details.reason == "install"){
+		console.log("DaltonTab Instalation Complete!");
+		chrome.tabs.create({
+			url: "./etc/setup.html"
+		});
+    }else if(details.reason == "update"){
+        var version = chrome.runtime.getManifest().version;
+		console.log("DaltonTab updated from " + details.previousVersion + " to " + thisVersion + "!");
+		if(parseFloat(details.previousVersion) < 0.7 ){
+			url: "./etc/setup.html" //we need the user's name if the version is less than 7
+		}
+    }
+});
 
 chrome.tabs.onCreated.addListener(function() {
 	var today = new Date().getDay();

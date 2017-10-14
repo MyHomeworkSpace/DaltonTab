@@ -1,28 +1,22 @@
-body {
-	position: relative;
+#name {
+	background-color: transparent;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 5px solid white;
+	text-shadow: 2px 2px black;
+	width: 500px;
 }
-.lead {
-	color: white;
-	margin: 0 auto;
-	width: 700px;
+
+#name:focus {
+	outline: none;
+	border-bottom: none;
 }
-#topSetupSection.section {
-	height: 400px;
-	padding-top: 100px;
-	background-color: #808080;
-	opacity: 0.8;
-	text-align: center;
+
+#submit, #mhssignin {
+	text-decoration: none;
 }
-.section {
-	height: 165px;
-	min-height: 0;
-	color: #fff;
-	opacity: 0.8;
-}
-#myhomeworkspaceSection { background-color: #00bcd4; }
-#end {
-	background-color: #009688;
-	color: white;
-	text-align: center;
-	padding-bottom: 20px;
+
+#submit:hover, #mhssignin:hover {
+	cursor: pointer;
 }
