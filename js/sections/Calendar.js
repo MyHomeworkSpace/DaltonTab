@@ -120,6 +120,11 @@ DaltonTab.Components.Sections.Calendar = c({
 			});
 		}
 
+		var earliestEvent = 1440;
+		var latestEvent = 0;
+
+		var allGroupsForDays = {};
+
 		for (var dayNumber = 0; dayNumber < 7; dayNumber++) {
 			// create list of all events
 			var allEvents = [];
@@ -140,16 +145,12 @@ DaltonTab.Components.Sections.Calendar = c({
 			// group events that occur at same time
 			var groupsForDay = [];
 			allEvents = allEvents.map(function(eventItem) {
-				var isScheduleItem = (props.type == "schedule"); 
+				var isScheduleItem = (eventItem.type == "schedule"); 
 				eventItem.groupInfo = {
-					dayStart: (isScheduleItem ? moment.unix(0).utc() : moment.unix(eventItem.start).startOf("day")),
-					start: moment.unix(eventItem.start),
-					end: moment.unix(eventItem.end),
+					dayStart: (isScheduleItem ? moment.unix(0).utc() : moment.unix(eventItem.start).startOf("day").utc()),
+					start: moment.unix(eventItem.start).utc(),
+					end: moment.unix(eventItem.end).utc(),
 				};
-				if (isScheduleItem) {
-					eventItem.groupInfo.start = eventItem.groupInfo.start.utc();
-					eventItem.groupInfo.end = eventItem.groupInfo.end.utc();
-				}
 				eventItem.groupInfo.offset = eventItem.groupInfo.start.diff(eventItem.groupInfo.dayStart, "minutes");
 				eventItem.groupInfo.durationInMinutes = eventItem.groupInfo.end.diff(eventItem.groupInfo.start, "minutes");
 				eventItem.groupInfo.height = (eventItem.groupInfo.durationInMinutes < 10 ? 10: eventItem.groupInfo.durationInMinutes);
@@ -158,6 +159,18 @@ DaltonTab.Components.Sections.Calendar = c({
 				return eventItem;
 			});
 			allEvents.forEach(function(eventItem, eventItemIndex) {
+				// if the earliest time we've found so far is after this
+				if (earliestEvent > eventItem.groupInfo.offset) {
+					// update the earliest event
+					earliestEvent = eventItem.groupInfo.offset;
+				}
+
+				// if the latest time we've found so far is before this
+				if (latestEvent < eventItem.groupInfo.endOffset) {
+					// update the latest event
+					latestEvent = eventItem.groupInfo.endOffset;
+				}
+
 				// find which group this event belongs to
 				var foundGroupIndex = -1;
 				for (var groupIndex in groupsForDay) {
@@ -181,22 +194,29 @@ DaltonTab.Components.Sections.Calendar = c({
 					groupsForDay.push([ eventItem ]);
 				}
 			});
+
+			allGroupsForDays[dayNumber] = groupsForDay;
+		}
+		
+		var height = latestEvent - earliestEvent;
 	
+		for (var dayNumber = 0; dayNumber < 7; dayNumber++) {
 			// make the elements
 			var eventElements = [];
-			groupsForDay.forEach(function(eventGroup) {
+			allGroupsForDays[dayNumber].forEach(function(eventGroup) {
 				eventGroup.forEach(function(eventItem, eventGroupIndex) {
 					eventElements.push(h(DaltonTab.Components.Calendar.CalendarEvent, {
 						event: eventItem,
 						type: eventItem.type,
 						groupIndex: eventGroupIndex,
-						groupLength: eventGroup.length
+						groupLength: eventGroup.length,
+						earliestEvent: earliestEvent
 					}));
 				});
 			});
 
 			dayHeaders.push(h("div", { class: "calendarDayHeader" }, names[dayNumber] + " " + currentDay.format("M/D")));
-			dayContents.push(h("div", { class: "calendarDayContents day" + dayNumber }, eventElements));
+			dayContents.push(h("div", { class: "calendarDayContents day" + dayNumber, style: "height: " + height + "px" }, eventElements));
 			
 			currentDay.add(1, "day");
 		}
@@ -215,7 +235,7 @@ DaltonTab.Components.Sections.Calendar = c({
 					)
 				),
 				h("div", { class: "calendarWeek" }, dayHeaders),
-				h("div", { class: "calendarViewport" },
+				h("div", { class: "calendarViewport", style: "height: " + height + "px" },
 					h("div", { class: "calendarWeek" }, dayContents)
 				)
 			)

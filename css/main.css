@@ -6,6 +6,11 @@ body.frozen {
 	overflow: hidden;
 }
 
+/* workaround for Vibrant.js not cleaning up canvas in Firefox */
+body > canvas {
+	display: none;
+}
+
 label {
 	font-size: 1em;
 }
