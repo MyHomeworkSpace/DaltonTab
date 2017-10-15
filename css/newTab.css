@@ -1,0 +1,10 @@
+#timeTop {
+    text-align: right;
+    border-right: white 4px solid;
+}
+
+#sentenceTop {
+    text-align: left;
+    font-size: 25px;
+    width: 320px;
+}
