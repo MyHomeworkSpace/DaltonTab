@@ -34,12 +34,12 @@ $(document).ready(function() {
                         })
                     } else if (assignmentsDone > 0) {
                         sentence = "Hi " + name + "! You have " + assignmentsDue + " assignments due " + nextDayName + ". " + assignmentsDone + " of those assignments have been completed.";
-                        sentenceContainer.text(sentence);
-                    } else if (assignmentsDone == assignmentsDue){
-                        sentence = "Hi " + name + "! You have completed all of your assignments due tomorrow. Congrats!";
                         sentenceContainer.text(sentence);                        
                     } else if (assignmentsDue == 0){
                         sentence = "Hi " + name + "! You don't have any assignments due tomorrow. Enjoy your free night!";
+                        sentenceContainer.text(sentence);
+                    } else if (assignmentsDone == assignmentsDue){
+                        sentence = "Hi " + name + "! You have completed all of your assignments due tomorrow. Congrats!";
                         sentenceContainer.text(sentence);
                     } else {
                         sentence = "Hi " + name + "! You have " + assignmentsDue + " assignments due " + nextDayName + ".";
