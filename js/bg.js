@@ -8,7 +8,9 @@ chrome.runtime.onInstalled.addListener(function(details){
         var version = chrome.runtime.getManifest().version;
 		console.log("DaltonTab updated from " + details.previousVersion + " to " + thisVersion + "!");
 		if(parseFloat(details.previousVersion) < 0.7 ){
-			url: "./etc/setup.html" //we need the user's name if the version is less than 7
+			chrome.tabs.create({
+				url: "./etc/setup.html"
+			});
 		}
     }
 });
