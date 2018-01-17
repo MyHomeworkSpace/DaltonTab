@@ -6,6 +6,7 @@ import EndOfYearModal from "other/EndOfYearModal.jsx";
 import MHSConnect from "other/MHSConnect.jsx";
 
 import Calendar from "sections/calendar/Calendar.jsx";
+import Classes from "sections/classes/Classes.jsx";
 import Homework from "sections/homework/Homework.jsx";
 
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
@@ -29,8 +30,9 @@ export default {
 		MHSConnect: MHSConnect
 	},
 	sections: {
-		Homework: Homework,
-		Calendar: Calendar
+		Calendar: Calendar,
+		Classes: Classes,
+		Homework: Homework
 	},
 	settings: {
 		SettingCheckbox: SettingCheckbox

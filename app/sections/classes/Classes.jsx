@@ -1,5 +1,11 @@
-DaltonTab.Components.Sections.Classes = c({
-	componentDidMount: function() {
+import "sections/classes/Classes.styl";
+
+import { h, Component } from "preact";
+
+import MHSConnect from "other/MHSConnect.jsx";
+
+export default class Classes extends Component {
+	componentDidMount() {
 		var that = this;
 		chrome.storage.sync.get("mhsToken", function(storage) {
 			var token = storage["mhsToken"] || "";
@@ -29,30 +35,31 @@ DaltonTab.Components.Sections.Classes = c({
 				});
 			});
 		});
-	},
-	render: function(props, state) {
+	}
+
+	render(props, state) {
 		if (!state.loaded) {
-			return h("div", {}, "Loading, please wait...");
+			return <div>Loading, please wait...</div>;
 		}
 		if (!state.loggedIn) {
-			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, {});
+			return <MHSConnect />;
 		}
 		if (!state.calendarEnabled) {
-			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, { type: "calendar" });
+			return <MHSConnect type="calendar" />;
 		}
 
 		var classItems = state.classes.map(function(classItem) {
 			var linkURL = "https://dalton.myschoolapp.com/app/student#academicclass/" + classItem.sectionId + "/0/bulletinboard";
-			return h("div", { class: "classesSectionItem" }, 
-				h("a", { href: linkURL }, 
-					h("div", { class: "classesSectionItemName" }, classItem.name),
-					h("div", { class: "classesSectionOwnerName" }, classItem.ownerName)
-				)
-			);
+			return <div class="classesSectionItem">
+				<a href={linkURL}>
+					<div class="classesSectionItemName">{classItem.name}</div>
+					<div class="classesSectionOwnerName">{classItem.ownerName}</div>
+				</a>
+			</div>;
 		});
 
 		return (
-			h("div", { class: "classesSection" }, classItems)
+			<div class="classesSection">{classItems}</div>
 		);
 	}
-});
+};

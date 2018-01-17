@@ -2,6 +2,7 @@ import "sections/calendar/Calendar.styl";
 
 import { h, Component } from "preact";
 
+import MHSConnect from "other/MHSConnect.jsx";
 import CalendarEvent from "sections/calendar/CalendarEvent.jsx";
 
 export default class Calendar extends Component {
@@ -94,13 +95,13 @@ export default class Calendar extends Component {
 
 	render(props, state) {
 		if (!state.loaded) {
-			return h("div", {}, "Loading, please wait...");
+			return <div>Loading, please wait...</div>;
 		}
 		if (!state.loggedIn) {
-			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, {});
+			return <MHSConnect />;
 		}
 		if (!state.calendarEnabled) {
-			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, { type: "calendar" });
+			return <MHSConnect type="calendar" />;
 		}
 
 		var fridayIndex = (state.loadingWeek ? -1 : state.weekInfo.friday.index);
