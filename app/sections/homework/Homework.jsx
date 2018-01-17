@@ -1,5 +1,13 @@
-DaltonTab.Components.Sections.Homework = c({
-	componentDidMount: function() {
+import "sections/homework/Homework.styl";
+
+import { h, Component } from "preact";
+
+import MHSConnect from "other/MHSConnect.jsx";
+
+import HomeworkColumn from "sections/homework/HomeworkColumn.jsx";
+
+export default class Homework extends Component {
+	componentDidMount() {
 		var that = this;
 		chrome.storage.sync.get("mhsToken", function(storage) {
 			var token = storage["mhsToken"] || "";
@@ -28,13 +36,14 @@ DaltonTab.Components.Sections.Homework = c({
 				});
 			});
 		});
-	},
-	render: function(props, state) {
+	}
+
+	render(props, state) {
 		if (!state.loaded) {
-			return h("div", {}, "Loading, please wait...");
+			return <div>Loading, please wait...</div>;
 		}
 		if (!state.loggedIn) {
-			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, {});
+			return <MHSConnect />;
 		}
 
 		var showMonday = (moment().day() == 5 || moment().day() == 6);
@@ -70,13 +79,11 @@ DaltonTab.Components.Sections.Homework = c({
 			}
 		});
 
-		return (
-			h("div", { class: "homeworkSection" },
-				(overdue.length > 0 ? h(DaltonTab.Components.Sections.HomeworkColumn, { classes: state.classes, title: "Overdue", homework: overdue }) : undefined),
-				h(DaltonTab.Components.Sections.HomeworkColumn, { classes: state.classes, title: (showMonday ? "Monday": "Tomorrow"), homework: tomorrow }),
-				h(DaltonTab.Components.Sections.HomeworkColumn, { classes: state.classes, title: "Soon", homework: soon }),
-				h(DaltonTab.Components.Sections.HomeworkColumn, { classes: state.classes, title: "Long-term", homework: longterm })
-			)
-		);
+		return <div class="homeworkSection">
+			{overdue.length > 0 ? <HomeworkColumn classes={state.classes} title="Overdue" homework={overdue}/> : undefined}
+			<HomeworkColumn classes={state.classes} title={(showMonday ? "Monday": "Tomorrow")} homework={tomorrow} />
+			<HomeworkColumn classes={state.classes} title="Soon" homework={soon} />
+			<HomeworkColumn classes={state.classes} title="Long-term" homework={longterm} />
+		</div>;
 	}
-});
+};

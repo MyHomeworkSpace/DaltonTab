@@ -6,7 +6,7 @@ DaltonTab.Sections = {
 		background: "rgba(60, 77, 99, 0.9)",
 		createHtml: function() {
 			var $html = $("<div></div>");
-				preact.render(h(DaltonTab.Components.Sections.Homework, {}), null, $html[0]);
+				DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.sections.Homework, {}), null, $html[0]);
 			return $html;
 		},
 		run: function() {

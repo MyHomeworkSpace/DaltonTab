@@ -1,5 +1,9 @@
-DaltonTab.Components.Sections.HomeworkColumn = c({
-	render: function(props, state) {
+import "sections/homework/HomeworkColumn.styl";
+
+import { h, Component } from "preact";
+
+export default class HomeworkColumn extends Component {
+	render(props, state) {
 		var homework = [];
 
 		props.homework.forEach(function(hw) {
@@ -35,16 +39,18 @@ DaltonTab.Components.Sections.HomeworkColumn = c({
 				}
 			}
 
-			var element = h("div", { class: "homeworkColumnItem " + (late ? "homeworkColumnItemLate " : "")  + (hw.complete ? "homeworkColumnItemDone" : "") }, 
-				h("div", { class: "homeworkColumnItemName" }, h("span", { style: "background-color:" + prefixInfo.background + ";color:" + prefixInfo.color }, prefix), " " + notPrefix),
-				h("div", {}, keyword + dueText + " in " + classObject.name)
-			);
+			var element = <div class={"homeworkColumnItem " + (late ? "homeworkColumnItemLate " : "") + (hw.complete ? "homeworkColumnItemDone" : "")}>
+				<div class="homeworkColumnItemName">
+					<span style={"background-color:" + prefixInfo.background + ";color:" + prefixInfo.color}>{prefix}</span> {" " + notPrefix}
+				</div>
+				<div>{keyword + dueText + " in " + classObject.name}</div>
+			</div>;
 			homework.push(element);
 		});
 
-		return h("div", { class: "homeworkColumn" }, 
-			h("div", { class: "homeworkColumnTitle" }, props.title),
-			h("div", { class: "homeworkColumnItems" }, homework)
-		);
+		return <div class="homeworkColumn">
+			<div class="homeworkColumnTitle">{props.title}</div>
+			<div class="homeworkColumnItems">{homework}</div>
+		</div>;
 	}
-});
+};
