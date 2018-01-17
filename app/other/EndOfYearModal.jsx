@@ -54,60 +54,60 @@ export default class EndOfYearModal extends Component {
 	render(props, state) {
 		if (state.done) {
 			return (
-				h("div", { class: "modal-dialog", role: "document" },
-					h("div", { class: "modal-content" },
-						h("div", { class: "modal-header" },
-							h("h4", { class: "modal-title" }, "Start of year reminder")
-						),
-						h("div", { class: "modal-body" },
-							h("p", {}, "Thanks for signing up! We'll email you at the start of the next school year, reminding you to download DaltonTab. If you'd like to cancel your reminder, please email c19as3@dalton.org.")
-						),
-						h("div", { class: "modal-footer" },
-							h("button", { type: "button", "data-dismiss": "modal", class: "btn btn-default" }, "Close")
-						)
-					)
-				)
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Start of year reminder</h4>
+						</div>
+						<div class="modal-body">
+							<p>Thanks for signing up! We'll email you at the start of the next school year, reminding you to download DaltonTab. If you'd like to cancel your reminder, please email c19as3@dalton.org.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+						</div>
+					</div>
+				</div>
 			);
 		}
 
 		return (
-			h("div", { class: "modal-dialog", role: "document" },
-				h("div", { class: "modal-content" },
-					h("div", { class: "modal-header" },
-						h("h4", { class: "modal-title" }, "Start of year reminder")
-					),
-					h("div", { class: "modal-body" },
-						(state.error && h("div", { class: "alert alert-danger" }, state.error)),
-						h("p", {}, "Sign up to receive a reminder email at the start of the next school year to download DaltonTab onto your new school laptop."),
-						h("div", { class: "input-group"},
-							h("input", {
-								type: "text",
-								class: "form-control eoy-email-input",
-								placeholder: "Dalton username",
-								value: state.email || "",
-								disabled: !!state.loading,
-								onChange: (function(e) {
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Start of year reminder</h4>
+					</div>
+					<div class="modal-body">
+						{state.error && <div class="alert alert-danger">{state.error}</div>}
+						<p>Sign up to receive a reminder email at the start of the next school year to download DaltonTab onto your new school laptop.</p>
+						<div class="input-group">
+							<input
+								type="text"
+								class="form-control eoy-email-input"
+								placeholder="Dalton username"
+								value={state.email || ""}
+								disabled={!!state.loading}
+								onChange={(function(e) {
 									this.setState({
 										email: e.target.value
 									});
-								}).bind(this),
-								onKeyup: (function(e) {
+								}).bind(this)}
+								onKeyup={(function(e) {
 									if (e.keyCode == 13) {
 										this.submit();
 									}
-								}).bind(this)
-							}),
-							h("div", { class: "input-group-addon eoy-email-suffix" }, "@dalton.org")
-						),
-						h("p", {}, "We will only send one email, and your email address will not be used for any other purpose.")
-					),
-					h("div", { class: "modal-footer" },
-						(!state.loading && h("button", { type: "button", "data-dismiss": "modal", class: "btn btn-default" }, "Close")),
-						(!state.loading && h("button", { class: "btn btn-primary", onClick: this.submit.bind(this) }, "Submit")),
-						(state.loading && "Loading...")
-					)
-				)
-			)
+								}).bind(this)}
+							/>
+							<div class="input-group-addon eoy-email-suffix">@dalton.org</div>
+						</div>
+						<p>We will only send one email, and your email address will not be used for any other purpose.</p>
+					</div>
+					<div class="modal-footer">
+						{!state.loading && <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>}
+						{!state.loading && <button class="btn btn-primary" onClick={this.submit.bind(this)}>Submit</button>}
+						{state.loading && "Loading..."}
+					</div>
+				</div>
+			</div>
 		);
 	}
 };

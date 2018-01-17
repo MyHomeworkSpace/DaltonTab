@@ -22,10 +22,10 @@ export default class MHSConnect extends Component {
 			button = "Enable";
 		}
 
-		return h("div", { class: "mhsConnect" }, 
-			h("h3", {}, title),
-			h("h4", {}, subtitle),
-			h("button", { class: "btn btn-primary btn-lg", onClick: this.connect.bind(this) }, button)
-		);
+		return <div class="mhsConnect">
+			<h3>{title}</h3>
+			<h4>{subtitle}</h4>
+			<button class="btn btn-primary btn-lg" onClick={this.connect.bind(this)}>{button}</button>
+		</div>;
 	}
 }
