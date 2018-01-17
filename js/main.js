@@ -1,6 +1,3 @@
-var jumpingArrow = document.getElementById('hwButton');
-var backgroundImageURL;
-
 DaltonTab = {
 	mustUpdateSectionPositions: false,
 	Components: {
@@ -139,10 +136,6 @@ $(document).ready(function() {
 		}, function() {
 
 		});
-	});
-
-	$("#newTabDefault").click(function() {
-		window.location.href = "chrome-search://local-ntp/local-ntp.html"
 	});
 
 	DaltonTab.Clock.init();
