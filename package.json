@@ -22,6 +22,10 @@
   },
   "dependencies": {
     "linkstate": "^1.1.0",
-    "preact": "^8.2.7"
+    "preact": "^8.2.7",
+    "preact-compat": "^3.17.0",
+    "react": "github:preact-compat/react",
+    "react-dom": "github:preact-compat/react-dom",
+    "react-scrollchor": "^4.2.1"
   }
 }
