@@ -159,18 +159,12 @@ DaltonTab.Sections = {
 		description: "Count the number of tabs that you open in a day",
 		background: "rgba(0, 140, 186, 0.9)",
 		createHtml: function(){
-			var $html = $("<div class='tabCount'></div>");
-				$html.append('<h3 id="tabs-warning" class="section-warning"></h3>');
-				$tabCount = $("<h1 id='tabs'>Error</h1>");
-				$html.append($tabCount);
-				var $tabCountLabel = $("<h2 class='tabCountLabel'>tabs opened today</h2>");
-				$html.append($tabCountLabel);
+			var $html = $("<div></div>");
+				DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.sections.TabCount, {}), null, $html[0]);
 			return $html;
 		},
 		run: function(){
-			chrome.storage.sync.get("tabCount", function(response) {
-				$("#tabs").text(response.tabCount);
-			});
+			
 		}
 	}/*,
 	lunchMenu: {

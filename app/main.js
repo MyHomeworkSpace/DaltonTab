@@ -9,6 +9,7 @@ import Calendar from "sections/calendar/Calendar.jsx";
 import Classes from "sections/classes/Classes.jsx";
 import Homework from "sections/homework/Homework.jsx";
 import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
+import TabCount from "sections/tabCount/TabCount.jsx";
 
 import AccountPane from "settings/AccountPane.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
@@ -35,7 +36,8 @@ export default {
 		Calendar: Calendar,
 		Classes: Classes,
 		Homework: Homework,
-		LunchMenu: LunchMenu
+		LunchMenu: LunchMenu,
+		TabCount: TabCount
 	},
 	settings: {
 		AccountPane: AccountPane,
