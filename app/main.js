@@ -1,4 +1,4 @@
-import { h, render } from "preact";
+import { h, render, Component } from "preact";
 
 import analytics from "analytics.js";
 
@@ -12,6 +12,12 @@ import App from "App.jsx";
 // window.onload = function() {
 // 	render(h(App, {}), document.querySelector("body"));
 // };
+
+window.preact = {
+	Component: Component,
+	h: h,
+	render: render
+};
 
 export default {
 	analytics: analytics,
