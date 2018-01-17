@@ -1,5 +1,7 @@
-DaltonTab.Components.Sections.LunchMenu = c({
-	componentDidMount: function() {
+import { h, Component } from "preact";
+
+export default class LunchMenu extends Component {
+	componentDidMount() {
 		var that = this;
 		$.get("https://daltontabservices.myhomework.space/v1/lunch.php", function(data) {
 			console.log(data);
@@ -8,19 +10,16 @@ DaltonTab.Components.Sections.LunchMenu = c({
 				menu: data["meal periods"][0]["menu items"]
 			});
 		});
-	},
-	render: function(props, state) {
+	}
+
+	render(props, state) {
 		if (!state.menu) {
-			return (
-				h("div", {}, "Loading, please wait...")
-			);
+			return <div>Loading, please wait...</div>;
 		}
 		var that = this;
 		var menuItems = state.menu.map(function(item) {
-			return h("div", {}, item.name);
+			return <div>{item.name}</div>;
 		});
-		return (
-			h("div", {}, menuItems)
-		);
+		return <div>{menuItems}</div>;
 	}
-});
+};

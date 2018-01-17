@@ -180,7 +180,7 @@ DaltonTab.Sections = {
 		background: "rgba(0, 140, 186, 0.9)",
 		createHtml: function(){
 			var $html = $("<div></div>");
-				preact.render(h(DaltonTab.Components.Sections.LunchMenu, {}), null, $html[0]);
+				DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.sections.LunchMenu, {}), null, $html[0]);
 			return $html;
 		},
 		run: function(){

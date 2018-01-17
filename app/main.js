@@ -8,6 +8,7 @@ import MHSConnect from "other/MHSConnect.jsx";
 import Calendar from "sections/calendar/Calendar.jsx";
 import Classes from "sections/classes/Classes.jsx";
 import Homework from "sections/homework/Homework.jsx";
+import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 
@@ -32,7 +33,8 @@ export default {
 	sections: {
 		Calendar: Calendar,
 		Classes: Classes,
-		Homework: Homework
+		Homework: Homework,
+		LunchMenu: LunchMenu
 	},
 	settings: {
 		SettingCheckbox: SettingCheckbox
