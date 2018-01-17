@@ -1,3 +1,5 @@
+import "other/MHSConnect.styl";
+
 import { h, Component } from "preact";
 
 export default class MHSConnect extends Component {

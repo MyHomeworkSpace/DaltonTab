@@ -2,6 +2,7 @@ import { h, render } from "preact";
 
 import analytics from "analytics.js";
 
+import EndOfYearModal from "other/EndOfYearModal.jsx";
 import MHSConnect from "other/MHSConnect.jsx";
 
 import App from "App.jsx";
@@ -13,6 +14,7 @@ import App from "App.jsx";
 export default {
 	analytics: analytics,
 	other: {
+		EndOfYearModal: EndOfYearModal,
 		MHSConnect: MHSConnect
 	},
 

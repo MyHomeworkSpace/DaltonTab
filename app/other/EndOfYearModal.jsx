@@ -1,12 +1,14 @@
-DaltonTab.Components.Other.EndOfYearModal = c({
-	componentDidMount: function() {
+import { h, Component } from "preact";
+
+export default class EndOfYearModal extends Component {
+	componentDidMount() {
 		this.setState({
 			error: "",
 			email: "",
 			loading: false
 		});
-	},
-	submit: function() {
+	}
+	submit() {
 		var that = this;
 
 		if (this.state.email.trim() == "") {
@@ -47,8 +49,9 @@ DaltonTab.Components.Other.EndOfYearModal = c({
 				});
 			});
 		});
-	},
-	render: function(props, state) {
+	}
+
+	render(props, state) {
 		if (state.done) {
 			return (
 				h("div", { class: "modal-dialog", role: "document" },
@@ -107,4 +110,4 @@ DaltonTab.Components.Other.EndOfYearModal = c({
 			)
 		);
 	}
-});
+};

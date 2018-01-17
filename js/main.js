@@ -156,7 +156,7 @@ $(document).ready(function() {
 						if (message.type == "url") {
 							window.location.href = message.url;
 						} else if (message.type == "eoy") {
-							preact.render(h(DaltonTab.Components.Other.EndOfYearModal, {
+							DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.other.EndOfYearModal, {
 								
 							}), null, document.querySelector("#endOfYearModal .modal-dialog"));
 							$("#endOfYearModal").modal();
