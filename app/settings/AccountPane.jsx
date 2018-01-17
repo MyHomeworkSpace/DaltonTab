@@ -1,5 +1,7 @@
-DaltonTab.Components.Settings.AccountPane = c({
-	componentDidMount: function() {
+import { h, Component } from "preact";
+
+export default class AccountPane extends Component {
+	componentDidMount() {
 		var that = this;
 		chrome.storage.sync.get("mhsToken", function(storage) {
 			var token = storage["mhsToken"] || "";
@@ -22,13 +24,13 @@ DaltonTab.Components.Settings.AccountPane = c({
 				});
 			});
 		})
-	},
+	}
 
-	connect: function() {
+	connect() {
 		window.location.href = MyHomeworkSpace.getAuthURL();
-	},
+	}
 
-	disconnect: function() {
+	disconnect() {
 		if (!confirm("Are you sure? You'll need to reconnect your account if you want to see your schedule, classes, and homework.")) {
 			return;
 		}
@@ -39,37 +41,33 @@ DaltonTab.Components.Settings.AccountPane = c({
 				window.location.reload();
 			});
 		});
-	},
+	}
 
-	render: function(props, state) {
+	render(props, state) {
 		if (!state.loaded) {
-			return h("div", {}, "Loading, please wait...");
+			return <div>Loading, please wait...</div>;
 		}
 
 		var details;
 		if (state.loggedIn) {
-			details = h("div", {},
-				h("div", {},
-					"Connected to MyHomeworkSpace as ",
-					h("strong", {}, state.user.name),
-					"."
-				),
-				h("button", { class: "btn btn-default btn-sm", onClick: this.disconnect.bind(this) }, "Disconnect")
-			);
+			details = <div>
+				<div>
+					Connected to MyHomeworkSpace as <strong>{state.user.name}</strong>.
+				</div>
+				<button class="btn btn-default btn-sm" onClick={this.disconnect.bind(this)}>Disconnect</button>
+			</div>;
 		} else {
-			details = h("div", {},
-				h("p", {}, "You haven't connected your MyHomeworkSpace account! Connecting your MyHomeworkSpace account lets DaltonTab access your classes, schedule, and homework."),
-				h("button", { class: "btn btn-primary", onClick: this.connect.bind(this) },
-					h("i", { class: "fa fa-plug" }, ""), " Connect account"
-				)
-			);
+			details = <div>
+				<p>You haven't connected your MyHomeworkSpace account! Connecting your MyHomeworkSpace account lets DaltonTab access your classes, schedule, and homework.</p>
+				<button class="btn btn-primary" onClick={this.connect.bind(this)}>
+					<i class="fa fa-plug" /> Connect account
+				</button>
+			</div>;
 		}
 		
-		return (
-			h("div", {},
-				h("h3", {}, "Connected accounts"),
-				details
-			)
-		);
+		return <div>
+			<h3>Connected accounts</h3>
+			{details}
+		</div>;
 	}
-});
+};

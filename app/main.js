@@ -10,6 +10,7 @@ import Classes from "sections/classes/Classes.jsx";
 import Homework from "sections/homework/Homework.jsx";
 import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 
+import AccountPane from "settings/AccountPane.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 
 import App from "App.jsx";
@@ -37,6 +38,7 @@ export default {
 		LunchMenu: LunchMenu
 	},
 	settings: {
+		AccountPane: AccountPane,
 		SettingCheckbox: SettingCheckbox
 	},
 

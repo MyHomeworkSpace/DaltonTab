@@ -17,7 +17,7 @@ DaltonTab.Settings = {
 		});
 
 		// === ACCOUNTS ===
-		preact.render(h(DaltonTab.Components.Settings.AccountPane, {
+		DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.settings.AccountPane, {
 
 		}), null, document.querySelector("#settingsPanePage-accounts > div"));
 
