@@ -1,13 +1,15 @@
-DaltonTab.Components.Sections.MHSConnect = c({
-	connect: function() {
+import { h, Component } from "preact";
+
+export default class MHSConnect extends Component {
+	connect() {
 		if (this.props.type == "calendar") {
 			window.location.href = "https://myhomework.space/app.html#!calendar";
 		} else {
 			window.location.href = MyHomeworkSpace.getAuthURL();
 		}
-	},
+	}
 
-	render: function(props, state) {
+	render(props, state) {
 		var title = "You haven't connected DaltonTab to MyHomeworkSpace!";
 		var subtitle = "We need access to your MyHomeworkSpace account so we can get your schedule, classes, and homework.";
 		var button = "Connect";
@@ -24,4 +26,4 @@ DaltonTab.Components.Sections.MHSConnect = c({
 			h("button", { class: "btn btn-primary btn-lg", onClick: this.connect.bind(this) }, button)
 		);
 	}
-});
+}

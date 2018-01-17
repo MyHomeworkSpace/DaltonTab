@@ -35,10 +35,10 @@ DaltonTab.Components.Sections.Classes = c({
 			return h("div", {}, "Loading, please wait...");
 		}
 		if (!state.loggedIn) {
-			return h(DaltonTab.Components.Sections.MHSConnect, {});
+			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, {});
 		}
 		if (!state.calendarEnabled) {
-			return h(DaltonTab.Components.Sections.MHSConnect, { type: "calendar" });
+			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, { type: "calendar" });
 		}
 
 		var classItems = state.classes.map(function(classItem) {

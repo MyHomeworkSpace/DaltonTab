@@ -86,10 +86,10 @@ DaltonTab.Components.Sections.Calendar = c({
 			return h("div", {}, "Loading, please wait...");
 		}
 		if (!state.loggedIn) {
-			return h(DaltonTab.Components.Sections.MHSConnect, {});
+			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, {});
 		}
 		if (!state.calendarEnabled) {
-			return h(DaltonTab.Components.Sections.MHSConnect, { type: "calendar" });
+			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, { type: "calendar" });
 		}
 
 		var fridayIndex = (state.loadingWeek ? -1 : state.weekInfo.friday.index);

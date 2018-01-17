@@ -2,6 +2,8 @@ import { h, render } from "preact";
 
 import analytics from "analytics.js";
 
+import MHSConnect from "other/MHSConnect.jsx";
+
 import App from "App.jsx";
 
 // window.onload = function() {
@@ -10,6 +12,9 @@ import App from "App.jsx";
 
 export default {
 	analytics: analytics,
+	other: {
+		MHSConnect: MHSConnect
+	},
 
 	h: h,
 	render: render

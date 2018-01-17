@@ -34,7 +34,7 @@ DaltonTab.Components.Sections.Homework = c({
 			return h("div", {}, "Loading, please wait...");
 		}
 		if (!state.loggedIn) {
-			return h(DaltonTab.Components.Sections.MHSConnect, {});
+			return DaltonTabBridge.default.h(DaltonTabBridge.default.other.MHSConnect, {});
 		}
 
 		var showMonday = (moment().day() == 5 || moment().day() == 6);
