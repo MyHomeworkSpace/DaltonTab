@@ -44,7 +44,10 @@ module.exports = {
 				from: path.resolve(__dirname, "manifests", process.env.BROWSER + ".json"),
 				to: "manifest.json"
 			},
-			"128.png",
+			{
+				from: "img",
+				to: "img"
+			},
 			"bg.js"
 		])
 	],

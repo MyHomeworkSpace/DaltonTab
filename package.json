@@ -1,7 +1,8 @@
 {
   "name": "DaltonTab",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev-firefox": "cross-env BROWSER=firefox webpack- --watch",
+    "dev-chrome": "cross-env BROWSER=chrome webpack --watch",
     "build-firefox": "cross-env NODE_ENV=production BROWSER=firefox webpack",
     "build-chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack"
   },
