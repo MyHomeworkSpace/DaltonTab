@@ -1,5 +1,7 @@
 import { h, Component } from "preact";
 
+import Modal from "ui/Modal.jsx";
+
 export default class EndOfYearModal extends Component {
 	componentDidMount() {
 		this.setState({
@@ -8,6 +10,11 @@ export default class EndOfYearModal extends Component {
 			loading: false
 		});
 	}
+
+	close() {
+		this.props.openModal("");
+	}
+
 	submit() {
 		var that = this;
 
@@ -53,61 +60,47 @@ export default class EndOfYearModal extends Component {
 
 	render(props, state) {
 		if (state.done) {
-			return (
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Start of year reminder</h4>
-						</div>
-						<div class="modal-body">
-							<p>Thanks for signing up! We'll email you at the start of the next school year, reminding you to download DaltonTab. If you'd like to cancel your reminder, please email c19as3@dalton.org.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-						</div>
-					</div>
+			return <Modal title="Start of year reminder" openModal={props.openModal} class="endOfYearModal">
+				<div class="modal-body">
+					<p>Thanks for signing up! We'll email you at the start of the next school year, reminding you to download DaltonTab. If you'd like to cancel your reminder, please email c19as3@dalton.org.</p>
 				</div>
-			);
+				<div class="modal-footer">
+					<button class="btn btn-default" onClick={this.close.bind(this)}>Close</button>
+				</div>
+			</Modal>;
 		}
 
-		return (
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Start of year reminder</h4>
-					</div>
-					<div class="modal-body">
-						{state.error && <div class="alert alert-danger">{state.error}</div>}
-						<p>Sign up to receive a reminder email at the start of the next school year to download DaltonTab onto your new school laptop.</p>
-						<div class="input-group">
-							<input
-								type="text"
-								class="form-control eoy-email-input"
-								placeholder="Dalton username"
-								value={state.email || ""}
-								disabled={!!state.loading}
-								onChange={(function(e) {
-									this.setState({
-										email: e.target.value
-									});
-								}).bind(this)}
-								onKeyup={(function(e) {
-									if (e.keyCode == 13) {
-										this.submit();
-									}
-								}).bind(this)}
-							/>
-							<div class="input-group-addon eoy-email-suffix">@dalton.org</div>
-						</div>
-						<p>We will only send one email, and your email address will not be used for any other purpose.</p>
-					</div>
-					<div class="modal-footer">
-						{!state.loading && <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>}
-						{!state.loading && <button class="btn btn-primary" onClick={this.submit.bind(this)}>Submit</button>}
-						{state.loading && "Loading..."}
-					</div>
+		return <Modal title="Start of year reminder" openModal={props.openModal} class="endOfYearModal">
+			<div class="modal-body">
+				{state.error && <div class="alert alert-danger">{state.error}</div>}
+				<p>Sign up to receive a reminder email at the start of the next school year to download DaltonTab onto your new school laptop.</p>
+				<div class="input-group">
+					<input
+						type="text"
+						class="form-control eoy-email-input"
+						placeholder="Dalton username"
+						value={state.email || ""}
+						disabled={!!state.loading}
+						onChange={(function(e) {
+							this.setState({
+								email: e.target.value
+							});
+						}).bind(this)}
+						onKeyup={(function(e) {
+							if (e.keyCode == 13) {
+								this.submit();
+							}
+						}).bind(this)}
+					/>
+					<div class="input-group-addon eoy-email-suffix">@dalton.org</div>
 				</div>
+				<p>We will only send one email, and your email address will not be used for any other purpose.</p>
 			</div>
-		);
+			<div class="modal-footer">
+				{!state.loading && <button class="btn btn-default" onClick={this.close.bind(this)}>Close</button>}
+				{!state.loading && <button class="btn btn-primary" onClick={this.submit.bind(this)}>Submit</button>}
+				{state.loading && "Loading..."}
+			</div>
+		</Modal>;
 	}
 };

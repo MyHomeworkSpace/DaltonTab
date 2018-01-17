@@ -138,6 +138,8 @@ $(document).ready(function() {
 		});
 	});
 
+	DaltonTabBridge.default.init();
+
 	DaltonTab.Clock.init();
 	DaltonTab.LayoutEditor.init();
 	DaltonTab.Settings.init();
@@ -156,10 +158,7 @@ $(document).ready(function() {
 						if (message.type == "url") {
 							window.location.href = message.url;
 						} else if (message.type == "eoy") {
-							DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.other.EndOfYearModal, {
-								
-							}), null, document.querySelector("#endOfYearModal .modal-dialog"));
-							$("#endOfYearModal").modal();
+							DaltonTabBridge.default.openModal("endOfYear");
 							setTimeout(function() {
 								$(".eoy-email-input").focus();
 							}, 500);
