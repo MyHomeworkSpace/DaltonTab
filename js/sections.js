@@ -20,7 +20,7 @@ DaltonTab.Sections = {
 		background: "rgba(121, 70, 26, 0.9)",
 		createHtml: function() {
 			var $html = $("<div></div>");
-				preact.render(h(DaltonTab.Components.Sections.Calendar, {}), null, $html[0]);
+				DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.sections.Calendar, {}), null, $html[0]);
 			return $html;
 		},
 		run: function() {

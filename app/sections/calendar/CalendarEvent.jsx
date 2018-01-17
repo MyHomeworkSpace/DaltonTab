@@ -1,5 +1,9 @@
-DaltonTab.Components.Calendar.CalendarEvent = c({
-	render: function(props, state) {
+import "sections/calendar/CalendarEvent.styl";
+
+import { h, Component } from "preact";
+
+export default class CalendarEvent extends Component {
+	render(props, state) {
 		var isScheduleItem = (props.type == "schedule");
 		
 		var dayStart = moment.unix(props.event.start).startOf("day");
@@ -38,12 +42,12 @@ DaltonTab.Components.Calendar.CalendarEvent = c({
 			timeDisplay += " in " + props.event.roomNumber;
 		}
 
-		return h("div", {
-			class: "calendarEvent",
-			style: `top: ${offset-props.earliestEvent}px; left:${groupWidth*props.groupIndex}%; width: ${groupWidth}%; height: ${height}px;`
-		},
-			h("div", { class: "calendarEventName", title: displayName }, displayName),
-			h("div", { class: "calendarEventTime", title: timeDisplay }, timeDisplay),
-		);
+		return <div
+			class="calendarEvent"
+			style={`top: ${offset-props.earliestEvent}px; left:${groupWidth*props.groupIndex}%; width: ${groupWidth}%; height: ${height}px;`}
+		>
+			<div class="calendarEventName" title={displayName}>{displayName}</div>
+			<div class="calendarEventTime" title={timeDisplay}>{timeDisplay}</div>
+		</div>;
 	}
-});
+};

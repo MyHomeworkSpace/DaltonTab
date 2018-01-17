@@ -5,6 +5,8 @@ import analytics from "analytics.js";
 import EndOfYearModal from "other/EndOfYearModal.jsx";
 import MHSConnect from "other/MHSConnect.jsx";
 
+import Calendar from "sections/calendar/Calendar.jsx";
+
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 
 import App from "App.jsx";
@@ -24,6 +26,9 @@ export default {
 	other: {
 		EndOfYearModal: EndOfYearModal,
 		MHSConnect: MHSConnect
+	},
+	sections: {
+		Calendar: Calendar
 	},
 	settings: {
 		SettingCheckbox: SettingCheckbox

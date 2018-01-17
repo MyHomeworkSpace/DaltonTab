@@ -1,5 +1,11 @@
-DaltonTab.Components.Sections.Calendar = c({
-	componentDidMount: function() {
+import "sections/calendar/Calendar.styl";
+
+import { h, Component } from "preact";
+
+import CalendarEvent from "sections/calendar/CalendarEvent.jsx";
+
+export default class Calendar extends Component {
+	componentDidMount() {
 		var that = this;
 		chrome.storage.sync.get("mhsToken", function(storage) {
 			var token = storage["mhsToken"] || "";
@@ -38,16 +44,18 @@ DaltonTab.Components.Sections.Calendar = c({
 				});
 			});
 		});
-	},
-	setInitialScroll: function() {
+	}
+
+	setInitialScroll() {
 		var time = Math.floor((moment().unix() - moment("00:00:00", "HH:mm:ss").unix()) / 60);
 		var scrollPos = time - 150;
 		if (scrollPos < 0) {
 			scrollPos = 0;
 		}
 		document.querySelector(".calendarViewport").scrollTop = scrollPos;
-	},
-	loadCurrentWeek: function() {
+	}
+
+	loadCurrentWeek() {
 		var that = this;
 		this.setState({
 			loadingWeek: true,
@@ -60,8 +68,9 @@ DaltonTab.Components.Sections.Calendar = c({
 				});
 			});
 		});
-	},
-	jumpToday: function() {
+	}
+
+	jumpToday() {
 		var mondayDate = moment();
 		while (mondayDate.day() != 1) {
 			mondayDate.subtract(1, "day");
@@ -71,8 +80,9 @@ DaltonTab.Components.Sections.Calendar = c({
 		}, function() {
 			this.loadCurrentWeek();
 		});
-	},
-	jumpWeek: function(amount) {
+	}
+
+	jumpWeek(amount) {
 		var newDate = moment(this.state.monday);
 		newDate.add(amount, "week"); 
 		this.setState({
@@ -80,8 +90,9 @@ DaltonTab.Components.Sections.Calendar = c({
 		}, function() {
 			this.loadCurrentWeek();
 		});
-	},
-	render: function(props, state) {
+	}
+
+	render(props, state) {
 		if (!state.loaded) {
 			return h("div", {}, "Loading, please wait...");
 		}
@@ -205,13 +216,13 @@ DaltonTab.Components.Sections.Calendar = c({
 			var eventElements = [];
 			allGroupsForDays[dayNumber].forEach(function(eventGroup) {
 				eventGroup.forEach(function(eventItem, eventGroupIndex) {
-					eventElements.push(h(DaltonTab.Components.Calendar.CalendarEvent, {
-						event: eventItem,
-						type: eventItem.type,
-						groupIndex: eventGroupIndex,
-						groupLength: eventGroup.length,
-						earliestEvent: earliestEvent
-					}));
+					eventElements.push(<CalendarEvent
+						event={eventItem}
+						type={eventItem.type}
+						groupIndex={eventGroupIndex}
+						groupLength={eventGroup.length}
+						earliestEvent={earliestEvent}
+					/>);
 				});
 			});
 
@@ -222,23 +233,27 @@ DaltonTab.Components.Sections.Calendar = c({
 		}
 
 		return (
-			h("div", { class: "calendarSection" }, 
-				h("div", { class: "calendarHeader row" },
-					h("div", { class: "col-md-6 calendarHeaderLeft" },
-						"Week of " + state.monday.format("MMMM D, YYYY"),
-						h("span", { class: "calendarHeaderLoading" }, (state.loadingWeek ? " Loading week, please wait...": ""))
-					),
-					h("div", { class: "col-md-6 calendarHeaderRight" }, 
-						h("button", { class: "btn btn-default", onClick: this.jumpWeek.bind(this, -1) }, h("i", { class: "fa fa-chevron-left" })),
-						h("button", { class: "btn btn-default", onClick: this.jumpToday.bind(this) }, "Today"),
-						h("button", { class: "btn btn-default", onClick: this.jumpWeek.bind(this, 1) }, h("i", { class: "fa fa-chevron-right" })),
-					)
-				),
-				h("div", { class: "calendarWeek" }, dayHeaders),
-				h("div", { class: "calendarViewport", style: "height: " + height + "px" },
-					h("div", { class: "calendarWeek" }, dayContents)
-				)
-			)
+			<div class="calendarSection">
+				<div class="calendarHeader row">
+					<div class="col-md-6 calendarHeaderLeft">
+						Week of {state.monday.format("MMMM D, YYYY")}
+						<span class="calendarHeaderLoading">{(state.loadingWeek ? " Loading week, please wait...": "")}</span>
+					</div>
+					<div class="col-md-6 calendarHeaderRight">
+						<button class="btn btn-default" onClick={this.jumpWeek.bind(this, -1) }>
+							<i class="fa fa-chevron-left" />
+						</button>
+						<button class="btn btn-default" onClick={this.jumpToday.bind(this) }>Today</button>
+						<button class="btn btn-default" onClick={this.jumpWeek.bind(this, 1) }>
+							<i class="fa fa-chevron-right" />
+						</button>
+					</div>
+				</div>
+				<div class="calendarWeek">{dayHeaders}</div>
+				<div class="calendarViewport" style={"height: " + height + "px"}>
+					<div class="calendarWeek">{dayContents}</div>
+				</div>
+			</div>
 		);
 	}
-});
+};
