@@ -1,4 +1,4 @@
-DaltonTab.Analytics = {
+var analytics = {
 	collectPingPayload: function(callback) {
 		chrome.storage.sync.get([ "sections", "mhsToken" ], function(storage) {
 			callback({
@@ -14,7 +14,7 @@ DaltonTab.Analytics = {
 			if (result.clientID) {
 				callback(result.clientID);
 			} else {
-				var generatedID = DaltonTab.Analytics.randomString(36);
+				var generatedID = analytics.randomString(36);
 				chrome.storage.sync.set({ clientID: generatedID }, function() {
 					callback(generatedID);
 				});
@@ -25,7 +25,7 @@ DaltonTab.Analytics = {
 		var hash = 0;
 		if (str.length == 0) return hash;
 		for (var i = 0; i < str.length; i++) {
-			char = str.charCodeAt(i);
+			var char = str.charCodeAt(i);
 			hash = ((hash<<5)-hash)+char;
 			hash = hash & hash; // Convert to 32bit integer
 		}
@@ -42,11 +42,11 @@ DaltonTab.Analytics = {
 	},
 
 	ping: function(messageCallback) {
-		DaltonTab.Analytics.getClientID(function(clientID) {
-			DaltonTab.Analytics.collectPingPayload(function(pingPayload) {
+		analytics.getClientID(function(clientID) {
+			analytics.collectPingPayload(function(pingPayload) {
 				chrome.storage.sync.get("pingPayloadHash", function(storage) {
 					var pingPayloadStr = JSON.stringify(pingPayload);
-					var pingPayloadHash = DaltonTab.Analytics.hashCode(pingPayloadStr);
+					var pingPayloadHash = analytics.hashCode(pingPayloadStr);
 					var lastPingPayloadHash = storage.pingPayloadHash;
 					var shouldUpdatePingPayload = (!storage.pingPayloadHash || (pingPayloadHash != lastPingPayloadHash));
 
@@ -74,3 +74,5 @@ DaltonTab.Analytics = {
 		});
 	}
 };
+
+export default analytics;

@@ -26,7 +26,7 @@ DaltonTab.Components.Other.EndOfYearModal = c({
 			loading: true,
 			error: ""
 		}, function() {
-			DaltonTab.Analytics.getClientID(function(clientID) {
+			DaltonTabBridge.default.analytics.getClientID(function(clientID) {
 				$.post("https://daltontabservices.myhomework.space/v1/eoy/submitEmail.php", {
 					clientID: clientID,
 					email: normalizedEmail + "@dalton.org"

@@ -16,7 +16,8 @@ module.exports = {
 
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'build-' + process.env.BROWSER)
+		path: path.resolve(__dirname, 'build-' + process.env.BROWSER),
+		library: "DaltonTabBridge"
 	},
 
 	module: {
@@ -44,11 +45,13 @@ module.exports = {
 				from: path.resolve(__dirname, "manifests", process.env.BROWSER + ".json"),
 				to: "manifest.json"
 			},
-			{
-				from: "img",
-				to: "img"
-			},
-			"bg.js"
+			{ from: "css", to: "css" },
+			{ from: "etc", to: "etc" },
+			{ from: "fonts", to: "fonts" },
+			{ from: "img", to: "img" },
+			{ from: "js", to: "js" },
+			"bg.js",
+			"newTab.html"
 		])
 	],
 

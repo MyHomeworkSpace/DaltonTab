@@ -3,7 +3,7 @@ window.feedback = {
 };
 
 window.feedback.submitFeedback = function(type, message, done, err) {
-	DaltonTab.Analytics.getClientID(function(clientID) {
+	DaltonTabBridge.default.analytics.getClientID(function(clientID) {
 		var version = chrome.runtime.getManifest().version;
 		var metadata = {
 			clientID: clientID

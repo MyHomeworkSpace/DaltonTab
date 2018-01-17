@@ -149,7 +149,7 @@ $(document).ready(function() {
 	DaltonTab.LayoutEditor.init();
 	DaltonTab.Settings.init();
 
-	DaltonTab.Analytics.ping(function(message) {
+	DaltonTabBridge.default.analytics.ping(function(message) {
 		if (message) {
 			// there's a message
 			chrome.storage.sync.get("dismissedMessages", function(storage) {
@@ -184,7 +184,7 @@ $(document).ready(function() {
 						// TODO: ok technically this would be an issue if you were to have multiple tabs open with messages with different campaigns
 						// but i don't care
 						dismissedMessages.push(message.campaign);
-						DaltonTab.Analytics.getClientID(function(clientID) {
+						DaltonTabBridge.default.analytics.getClientID(function(clientID) {
 							chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function() {
 								$("#frontMessageContainer").addClass("hidden");
 								$.post("https://daltontabservices.myhomework.space/v1/analytics/dismiss.php", {
