@@ -207,9 +207,6 @@ $(document).ready(function() {
 					console.log("Message with campaign " + message.campaign + " ignored because user dismissed it.");
 				}
 			});
-		} else {
-			// only init survey module if no message
-			DaltonTab.Survey.init();
 		}
 	});
 
