@@ -1,5 +1,7 @@
-DaltonTab.Components.Settings.SettingCheckbox = c({
-	componentDidMount: function() {
+import { h, Component } from "preact";
+
+export default class SettingCheckbox extends Component {
+	componentDidMount() {
 		var storageKey = this.props.storageKey;
 		var defaultValue = this.props.defaultValue;
 		var that = this;
@@ -9,15 +11,16 @@ DaltonTab.Components.Settings.SettingCheckbox = c({
 				value: (value !== undefined ? value : defaultValue || false)
 			});
 		})
-	},
-	render: function(props, state) {
+	}
+
+	render(props, state) {
 		var that = this;
 		return (
-			h("label", {},
-				h("input", {
-					type: "checkbox",
-					checked: state.value,
-					onChange: (function(e) {
+			<label>
+				<input
+					type="checkbox"
+					checked={state.value}
+					onChange={(function(e) {
 						that.setState({
 							value: e.target.checked
 						}, function() {
@@ -29,10 +32,10 @@ DaltonTab.Components.Settings.SettingCheckbox = c({
 								}
 							});
 						});
-					}).bind(this)
-				}),
-				" " + props.label
-			)
+					}).bind(this)}
+				/>
+				{" " + props.label}
+			</label>
 		);
 	}
-});
+};

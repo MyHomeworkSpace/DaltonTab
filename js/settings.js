@@ -33,7 +33,7 @@ DaltonTab.Settings = {
 
 			});
 		});
-		preact.render(h(DaltonTab.Components.Settings.SettingCheckbox, {
+		DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.settings.SettingCheckbox, {
 			label: "Disable jumping arrow",
 			storageKey: "jumpingArrowTog",
 			change: function(buttonHidden) {
@@ -50,7 +50,7 @@ DaltonTab.Settings = {
 			var type = storage.clockType || "12hr";
 			$("input[name=clockMode][value=" + type + "]").prop("checked", true);
 		});
-		preact.render(h(DaltonTab.Components.Settings.SettingCheckbox, {
+		DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.settings.SettingCheckbox, {
 			label: "Show current date underneath time",
 			storageKey: "displayDate",
 			defaultValue: true,

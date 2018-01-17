@@ -5,6 +5,8 @@ import analytics from "analytics.js";
 import EndOfYearModal from "other/EndOfYearModal.jsx";
 import MHSConnect from "other/MHSConnect.jsx";
 
+import SettingCheckbox from "settings/SettingCheckbox.jsx";
+
 import App from "App.jsx";
 
 // window.onload = function() {
@@ -16,6 +18,9 @@ export default {
 	other: {
 		EndOfYearModal: EndOfYearModal,
 		MHSConnect: MHSConnect
+	},
+	settings: {
+		SettingCheckbox: SettingCheckbox
 	},
 
 	h: h,
