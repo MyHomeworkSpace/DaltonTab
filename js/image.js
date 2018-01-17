@@ -23,32 +23,22 @@ DaltonTab.Image = {
 			$("#topSection").css("background-image", "url(" + image.imgUrl + ")");
 			$("#topSection").addClass("imageLoaded");
 
-			var backgroundImageVibrant = document.createElement('img');
-			backgroundImageVibrant.setAttribute('src', image.imgUrl);
-			backgroundImageVibrant.addEventListener('load', function(){
-				var vibrant = new Vibrant(backgroundImageVibrant);
-				var swatches = vibrant.swatches();
-				for (var swatch in swatches){
-					if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
-						DaltonTab.Image.colors.push(swatches[swatch].getHex());
-					}
-				}
-				DaltonTab.SectionHandler.updateColors();
+			DaltonTab.Image.colors = image.colors;
+			DaltonTab.SectionHandler.updateColors();
 
-				var messageBackground = DaltonTab.Image.getSectionBackground(0, "rgba(36,118,145,0.9)");
-				var messageBackgroundParts = messageBackground.substr(4).replace("(", "").replace(")", "").split(",").map(function(i) { return parseInt(i.trim()); });
-				var messageHoverR = ((messageBackgroundParts[0] - 20) > 0 ? (messageBackgroundParts[0] - 20) : 0);
-				var messageHoverG = ((messageBackgroundParts[1] - 20) > 0 ? (messageBackgroundParts[1] - 20) : 0);
-				var messageHoverB = ((messageBackgroundParts[2] - 20) > 0 ? (messageBackgroundParts[2] - 20) : 0);
-				var messageHover = "rgba(" + messageHoverR + "," + messageHoverG + "," + messageHoverB + ",0.9)";
-				// HACK: set the message colors by adding an inline style because there's no easy way to set :hover from js
-				var messageStyle = "";
-				messageStyle += "#frontMessage, #frontMessageSublinks { background-color: " + messageBackground + "; } ";
-				messageStyle += "#frontMessage:hover { background-color: " + messageHover + "; }";
-				var $messageStyle = $("<style></style>");
-					$messageStyle.html(messageStyle);
-				$("body").append($messageStyle);
-			});
+			var messageBackground = DaltonTab.Image.getSectionBackground(0, "rgba(36,118,145,0.9)");
+			var messageBackgroundParts = messageBackground.substr(4).replace("(", "").replace(")", "").split(",").map(function(i) { return parseInt(i.trim()); });
+			var messageHoverR = ((messageBackgroundParts[0] - 20) > 0 ? (messageBackgroundParts[0] - 20) : 0);
+			var messageHoverG = ((messageBackgroundParts[1] - 20) > 0 ? (messageBackgroundParts[1] - 20) : 0);
+			var messageHoverB = ((messageBackgroundParts[2] - 20) > 0 ? (messageBackgroundParts[2] - 20) : 0);
+			var messageHover = "rgba(" + messageHoverR + "," + messageHoverG + "," + messageHoverB + ",0.9)";
+			// HACK: set the message colors by adding an inline style because there's no easy way to set :hover from js
+			var messageStyle = "";
+			messageStyle += "#frontMessage, #frontMessageSublinks { background-color: " + messageBackground + "; } ";
+			messageStyle += "#frontMessage:hover { background-color: " + messageHover + "; }";
+			var $messageStyle = $("<style></style>");
+				$messageStyle.html(messageStyle);
+			$("body").append($messageStyle);
 
 			if (!image.description) {
 				$("#imageDesc").text("");
