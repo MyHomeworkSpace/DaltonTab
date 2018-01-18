@@ -30,14 +30,12 @@ DaltonTab.SectionHandler = {
 					$header.append($icon);
 					$header.append(section.name);
 				$section.append($header);
-				$section.append(section.createHtml());
+				var $sectionDiv = $('<div></div>');
+					DaltonTabBridge.default.render(DaltonTabBridge.default.h(section.component, {
+						openModal: DaltonTabBridge.default.openModal
+					}), null, $sectionDiv[0]);
+				$section.append($sectionDiv);
 			$("#sectionContainer").append($section);
-		}
-
-		// run the sections
-		for (var sectionIndex in DaltonTab.SectionHandler.order) {
-			var section = DaltonTab.Sections[DaltonTab.SectionHandler.order[sectionIndex]];
-			section.run();
 		}
 	},
 	updateColors: function() {
