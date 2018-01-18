@@ -17,7 +17,8 @@ var renderIconButtons = function() {
 	DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.IconButton, {
 		icon: "fa-chevron-circle-down",
 		class: "hwButton" + (iconButtonsScrollDown ? " flipped" : "") + (hwButtonVisible ? "": " hidden"),
-		href: hwButtonHref
+		href: hwButtonHref,
+		scroll: true
 	}), null, document.querySelector(".hwButton"));
 	DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.IconButton, {
 		icon: "fa-gear",
@@ -29,6 +30,8 @@ var renderIconButtons = function() {
 };
 
 $(document).ready(function() {
+	renderIconButtons();
+
 	$(window).scroll(function() {
 		if ($(window).scrollTop() >= 20) {
 			hwButtonHref = "#topFiller";
@@ -39,7 +42,6 @@ $(document).ready(function() {
 		}
 		renderIconButtons();
 	});
-	$("#hwButton").smoothScroll();
 
 	$("#settingsPaneClose, #manageOverlay").click(function() {
 		$("#settingsPane").toggleClass("opened");
