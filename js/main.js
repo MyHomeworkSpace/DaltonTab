@@ -56,9 +56,11 @@ $(document).ready(function() {
 				channel = localStorage.nc;
 				localStorage.removeItem("nc");
 			}
-			DaltonTab.Image.loadCurrentImage(channel);
-		} else {
-			$("#imageInfoBar").addClass("hidden");
+			DaltonTabBridge.default.image.fetchImage(channel, function(image) {
+				DaltonTabBridge.default.image.setImage(image);
+				DaltonTabBridge.default.image.renderImageInfoBar();
+				DaltonTab.SectionHandler.updateColors();
+			});
 		}
 	});
 

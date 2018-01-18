@@ -58,7 +58,7 @@ DaltonTab.LayoutEditor = {
 		$("#layoutEditorOverlay").removeClass("hidden");
 
 		$("#topSection #mainRow").addClass("hidden");
-		$("#imageInfo").addClass("hidden");
+		$(".imageInfo").addClass("hidden");
 		$(".iconButton").addClass("hidden");
 		$("#aboveTop").addClass("hidden");
 	},
@@ -82,8 +82,8 @@ DaltonTab.LayoutEditor = {
 		$("#layoutEditorOverlay").addClass("hidden");
 
 		$("#topSection #mainRow").removeClass("hidden");
-		$("#imageInfo").removeClass("hidden");
-		$("#.iconButton").removeClass("hidden");
+		$(".imageInfo").removeClass("hidden");
+		$(".iconButton").removeClass("hidden");
 		$("#aboveTop").removeClass("hidden");
 
 		$("body").removeClass("frozen");
