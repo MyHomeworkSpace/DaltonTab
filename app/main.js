@@ -1,18 +1,15 @@
 import { h, render, Component } from "preact";
 
 import analytics from "analytics.js";
+import image from "image.js";
+import sections from "sections.js";
 
 import FeedbackControls from "feedback/FeedbackControls.jsx";
 
 import EndOfYearModal from "other/EndOfYearModal.jsx";
 import MHSConnect from "other/MHSConnect.jsx";
 
-import Calendar from "sections/calendar/Calendar.jsx";
-import Classes from "sections/classes/Classes.jsx";
-import Homework from "sections/homework/Homework.jsx";
-import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
-import TabCount from "sections/tabCount/TabCount.jsx";
-import Weather from "sections/weather/Weather.jsx";
+import SectionContainer from "sections/SectionContainer.jsx";
 
 import AccountPane from "settings/AccountPane.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
@@ -59,6 +56,10 @@ var openModal = function(name, state) {
 
 export default {
 	analytics: analytics,
+	image: image,
+	sections: sections,
+
+	SectionContainer: SectionContainer,
 
 	init: function() {
 		renderModalManager();
@@ -72,14 +73,6 @@ export default {
 	other: {
 		EndOfYearModal: EndOfYearModal,
 		MHSConnect: MHSConnect
-	},
-	sections: {
-		Calendar: Calendar,
-		Classes: Classes,
-		Homework: Homework,
-		LunchMenu: LunchMenu,
-		TabCount: TabCount,
-		Weather: Weather
 	},
 	settings: {
 		AccountPane: AccountPane,

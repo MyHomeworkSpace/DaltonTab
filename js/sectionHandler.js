@@ -15,34 +15,14 @@ DaltonTab.SectionHandler = {
 			DaltonTab.SectionHandler.updateOrder(order, callback);
 		});
 	},
-	createSections: function() {
-		$("#sectionContainer").text("");
-
-		// create the html containers
-		for (var sectionIndex in DaltonTab.SectionHandler.order) {
-			var section = DaltonTab.Sections[DaltonTab.SectionHandler.order[sectionIndex]];
-			var $section = $('<div class="section container-fluid"></div>');
-				$section.attr("id", "section-" + sectionIndex);
-				$section.css("background-color", DaltonTab.Image.getSectionBackground(sectionIndex, section.background));
-				var $header = $('<div class="sectionTitle"></div>');
-					var $icon = $('<i class="fa"></i>');
-						$icon.addClass(section.icon);
-					$header.append($icon);
-					$header.append(section.name);
-				$section.append($header);
-				var $sectionDiv = $('<div></div>');
-					DaltonTabBridge.default.render(DaltonTabBridge.default.h(section.component, {
-						openModal: DaltonTabBridge.default.openModal
-					}), null, $sectionDiv[0]);
-				$section.append($sectionDiv);
-			$("#sectionContainer").append($section);
-		}
+	createSections: function(shouldUpdate) {
+		DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.SectionContainer, {
+			sections: DaltonTab.SectionHandler.order,
+			openModal: DaltonTabBridge.default.openModal
+		}), null, document.querySelector(".sectionContainer"));
 	},
 	updateColors: function() {
-		for (var sectionIndex in DaltonTab.SectionHandler.order) {
-			var section = DaltonTab.Sections[DaltonTab.SectionHandler.order[sectionIndex]];
-			$("#section-" + sectionIndex).css("background-color", DaltonTab.Image.getSectionBackground(sectionIndex, section.background));
-		}
+		DaltonTab.SectionHandler.createSections();
 	},
 	updateOrder: function(newOrder, callback) {
 		DaltonTab.SectionHandler.order = newOrder;
