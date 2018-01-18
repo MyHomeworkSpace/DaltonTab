@@ -16,7 +16,7 @@ DaltonTab.SectionHandler = {
 		});
 	},
 	createSections: function(shouldUpdate) {
-		var storageKeys = [];
+		var storageKeys = [ "mhsToken" ];
 		DaltonTab.SectionHandler.order.forEach(function(sectionName) {
 			var section = DaltonTabBridge.default.sections[sectionName];
 			storageKeys = storageKeys.concat(section.storage);

@@ -8,41 +8,39 @@ import CalendarEvent from "sections/calendar/CalendarEvent.jsx";
 export default class Calendar extends Component {
 	componentDidMount() {
 		var that = this;
-		chrome.storage.sync.get("mhsToken", function(storage) {
-			var token = storage["mhsToken"] || "";
-			MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
-				if (statusData.status != "ok") {
-					that.setState({
-						loaded: true,
-						loggedIn: false
-					});
-					return;
-				}
-				if (statusData.statusNum != 1) {
-					that.setState({
-						loaded: true,
-						loggedIn: true,
-						calendarEnabled: false
-					});
-					return;
-				}
-
-				var mondayDate = moment();
-				while (mondayDate.day() != 1) {
-					mondayDate.subtract(1, "day");
-				}
-				
+		var token = this.props.storage.mhsToken || "";
+		MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
+			if (statusData.status != "ok") {
+				that.setState({
+					loaded: true,
+					loggedIn: false
+				});
+				return;
+			}
+			if (statusData.statusNum != 1) {
 				that.setState({
 					loaded: true,
 					loggedIn: true,
-					calendarEnabled: true,
-					token: token,
-					monday: mondayDate,
-					loadingWeek: true
-				}, function() {
-					that.loadCurrentWeek.call(that);
-					that.setInitialScroll.call(that);
+					calendarEnabled: false
 				});
+				return;
+			}
+
+			var mondayDate = moment();
+			while (mondayDate.day() != 1) {
+				mondayDate.subtract(1, "day");
+			}
+			
+			that.setState({
+				loaded: true,
+				loggedIn: true,
+				calendarEnabled: true,
+				token: token,
+				monday: mondayDate,
+				loadingWeek: true
+			}, function() {
+				that.loadCurrentWeek.call(that);
+				that.setInitialScroll.call(that);
 			});
 		});
 	}

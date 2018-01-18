@@ -7,31 +7,29 @@ import MHSConnect from "other/MHSConnect.jsx";
 export default class Classes extends Component {
 	componentDidMount() {
 		var that = this;
-		chrome.storage.sync.get("mhsToken", function(storage) {
-			var token = storage["mhsToken"] || "";
-			MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
-				if (statusData.status != "ok") {
-					that.setState({
-						loaded: true,
-						loggedIn: false
-					});
-					return;
-				}
-				if (statusData.statusNum != 1) {
-					that.setState({
-						loaded: true,
-						loggedIn: true,
-						calendarEnabled: false
-					});
-					return;
-				}
-				MyHomeworkSpace.get(token, "calendar/getClasses", {}, function(data) {
-					that.setState({
-						loaded: true,
-						loggedIn: true,
-						calendarEnabled: true,
-						classes: data.classes
-					});
+		var token = this.props.storage.mhsToken || "";
+		MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
+			if (statusData.status != "ok") {
+				that.setState({
+					loaded: true,
+					loggedIn: false
+				});
+				return;
+			}
+			if (statusData.statusNum != 1) {
+				that.setState({
+					loaded: true,
+					loggedIn: true,
+					calendarEnabled: false
+				});
+				return;
+			}
+			MyHomeworkSpace.get(token, "calendar/getClasses", {}, function(data) {
+				that.setState({
+					loaded: true,
+					loggedIn: true,
+					calendarEnabled: true,
+					classes: data.classes
 				});
 			});
 		});
