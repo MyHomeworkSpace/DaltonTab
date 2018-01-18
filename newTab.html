@@ -93,44 +93,6 @@
 			</div>
 		</div>
 	</div>
-	<div id="weatherModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Weather options</h4>
-				</div>
-				<div class="modal-body">
-					<h4>Location</h4>
-					<div id="weatherLocationUnset">
-						<div id="weatherLocationError" class="alert alert-danger hidden">Invalid location. You might have to be more specific.</div>
-						<input type="text" id="weatherLocationText" placeholder="Enter a location to use" class="form-control"/>
-						<button id="weatherLocationSubmit" class="btn btn-primary">Go</button>
-						<button id="weatherLocationCurrent" class="btn btn-primary">Use current location</button>
-					</div>
-					<div id="weatherLocationLoading" class="hidden">
-						<i class="fa fa-refresh fa-spin"></i> Loading...
-					</div>
-					<div id="weatherLocationSet" class="hidden">
-						<p>Weather location is set to <strong id="weatherLocationName">somewhere</strong>. <button id="weatherLocationChange" class="btn btn-default btn-xs">Change</button></p>
-					</div>
-
-					<h4>Units</h4>
-					<input type="radio" name="weatherUnits" value="f" id="weatherUnitsF" checked/>
-					<label for="weatherUnitsF">Fahrenheit</label>
-
-					<br />
-
-					<input type="radio" name="weatherUnits" value="c" id="weatherUnitsC" />
-					<label for="weatherUnitsC">Celsius</label>
-
-				</div>
-				<div class="modal-footer feedback-footer-normal">
-					<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div id="settingsPane">
 		<h1>Settings</h1>
 		<i id="settingsPaneClose" class="fa fa-times"></i>
