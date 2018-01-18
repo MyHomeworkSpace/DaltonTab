@@ -30,13 +30,18 @@ module.exports = {
 					jsx: "h"
 				}
 			},
-			{test: /\.(styl)$/, use: [ 'style-loader', 'css-loader', 'stylus-loader' ]},
-			{test: /\.(css)$/, use: 'css-loader'}
+			{
+				test: /\.(styl)$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [ 'css-loader', 'stylus-loader' ]
+				})
+			}
 		]
 	},
 
 	plugins: [
-		new ExtractTextPlugin("style.css"),
+		new ExtractTextPlugin("bundle.css"),
 		new HtmlWebpackPlugin({
 			title: "New tab"
 		}),
