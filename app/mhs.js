@@ -1,3 +1,5 @@
+import ajax from "ajax.js";
+
 var basePath = "https://api-v2.myhomework.space/";
 var clientID = "PA2QtTk14dimr5jY-W7BlNZKiGuL2HY-zrNQZ3vP16P2XasErsleyOXT";
 
@@ -5,13 +7,9 @@ var prefixes = [];
 var fallback = {};
 
 var request = function(method, token, url, data, callback) {
-	$.ajax({
-		method: method,
-		url: basePath + url,
-		data: data,
-		complete: function(data) {
-			callback(data.responseJSON);
-		},
+	ajax.request(method, basePath + url, data, function(data) {
+		callback(data);
+	}, {
 		headers: {
 			Authorization: "Bearer " + token
 		}

@@ -1,3 +1,5 @@
+import ajax from "ajax.js";
+
 var analytics = {
 	collectPingPayload: function(callback) {
 		chrome.storage.sync.get([ "sections", "mhsToken" ], function(storage) {
@@ -50,13 +52,13 @@ var analytics = {
 					var lastPingPayloadHash = storage.pingPayloadHash;
 					var shouldUpdatePingPayload = (!storage.pingPayloadHash || (pingPayloadHash != lastPingPayloadHash));
 
-					$.post("https://daltontabservices.myhomework.space/v1/analytics/ping.php", {
+					ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/ping.php", {
 						clientID: clientID,
 						extensionVersion: chrome.runtime.getManifest().version,
 						browserVersion: navigator.userAgent.split("/")[3].replace(" Safari", "")
 					}, function(data) {
 						if (shouldUpdatePingPayload) {
-							$.post("https://daltontabservices.myhomework.space/v1/analytics/updatePayload.php", {
+							ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/updatePayload.php", {
 								clientID: clientID,
 								payload: pingPayloadStr
 							}, function(data) {

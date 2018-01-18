@@ -2,6 +2,8 @@ import "sections/weather/Weather.styl";
 
 import { h, Component } from "preact";
 
+import ajax from "ajax.js";
+
 export default class Weather extends Component {
 	constructor(){
 		super();
@@ -29,19 +31,21 @@ export default class Weather extends Component {
 				return;
 			}
 
-			$.get("https://daltontabservices.myhomework.space/v1/weather.php", {
+			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather.php", {
 				units: units,
 				place: nextProps.storage.weather.query
 			}, function(data) {
-				that.setState({
-					loading: false,
-					results: data.query.results.channel
-				});
-			}).fail(function() {
-				that.setState({
-					loading: false,
-					error: true
-				});
+				if (data) {
+					that.setState({
+						loading: false,
+						results: data.query.results.channel
+					});
+				} else {
+					that.setState({
+						loading: false,
+						error: true
+					});
+				}
 			});
 		});
 	}

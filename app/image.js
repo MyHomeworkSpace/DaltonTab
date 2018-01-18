@@ -1,5 +1,7 @@
 import { render, h } from "preact";
 
+import ajax from "ajax.js";
+
 import ImageInfoBar from "main/ImageInfoBar.jsx";
 
 var colors = [];
@@ -53,8 +55,7 @@ export default {
 	fetchImage: function(channel, callback) {
 		colors = [];
 		imageLoading = true;
-		$.get("https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, function(data) {
-			var image = JSON.parse(data);
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, {}, function(image) {
 			$("#topSection").css("background-image", "url(" + image.imgUrl + ")");
 			$("#topSection").addClass("imageLoaded");
 

@@ -1,5 +1,8 @@
 import { h, Component } from "preact";
 
+import ajax from "ajax.js";
+import analytics from "analytics.js";
+
 import Modal from "ui/Modal.jsx";
 
 export default class EndOfYearModal extends Component {
@@ -35,8 +38,8 @@ export default class EndOfYearModal extends Component {
 			loading: true,
 			error: ""
 		}, function() {
-			DaltonTabBridge.default.analytics.getClientID(function(clientID) {
-				$.post("https://daltontabservices.myhomework.space/v1/eoy/submitEmail.php", {
+			analytics.getClientID(function(clientID) {
+				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/eoy/submitEmail.php", {
 					clientID: clientID,
 					email: normalizedEmail + "@dalton.org"
 				}, function(data) {

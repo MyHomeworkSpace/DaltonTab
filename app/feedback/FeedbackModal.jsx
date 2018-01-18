@@ -5,6 +5,7 @@ import linkState from "linkstate";
 
 import Modal from "ui/Modal.jsx";
 
+import ajax from "ajax.js";
 import analytics from "analytics.js";
 
 export default class FeedbackModal extends Component {
@@ -33,13 +34,12 @@ export default class FeedbackModal extends Component {
 				var metadata = {
 					clientID: clientID
 				};
-				$.post("https://daltontabservices.myhomework.space/v1/submitFeedback.php", {
+				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/submitFeedback.php", {
 					type: feedbackType,
 					message: feedbackMessage,
 					version: version,
 					metadata: JSON.stringify(metadata)
-				}, function(responseStr) {
-					var response = JSON.parse(responseStr);
+				}, function(response) {
 					if (response.status == "ok") {
 						that.setState({
 							loading: false,

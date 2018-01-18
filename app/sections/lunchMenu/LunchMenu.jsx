@@ -1,9 +1,11 @@
 import { h, Component } from "preact";
 
+import ajax from "ajax.js";
+
 export default class LunchMenu extends Component {
 	componentDidMount() {
 		var that = this;
-		$.get("https://daltontabservices.myhomework.space/v1/lunch.php", function(data) {
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/lunch.php", {}, function(data) {
 			console.log(data);
 			console.log(data["meal periods"][0]);
 			that.setState({

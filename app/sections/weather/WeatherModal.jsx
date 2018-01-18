@@ -3,6 +3,8 @@ import "sections/weather/WeatherModal.styl";
 import { h, Component } from "preact";
 import linkState from "linkstate";
 
+import ajax from "ajax.js";
+
 import Modal from "ui/Modal.jsx";
 
 export default class WeatherModal extends Component {
@@ -35,7 +37,7 @@ export default class WeatherModal extends Component {
 			loadingError: null,
 			locationLoading: true
 		}, function() {
-			$.get("https://daltontabservices.myhomework.space/v1/weather.php", {
+			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather.php", {
 				units: "f",
 				place: locationName
 			}, function(data) {
