@@ -9,7 +9,7 @@ DaltonTab = {
 	}
 };
 
-var hwButtonHref;
+var hwButtonHref = "#sectionContainer";
 var iconButtonsScrollDown;
 var hwButtonVisible = true;
 
