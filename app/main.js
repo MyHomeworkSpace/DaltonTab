@@ -10,6 +10,7 @@ import Classes from "sections/classes/Classes.jsx";
 import Homework from "sections/homework/Homework.jsx";
 import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 import TabCount from "sections/tabCount/TabCount.jsx";
+import Weather from "sections/weather/Weather.jsx";
 
 import AccountPane from "settings/AccountPane.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
@@ -68,7 +69,8 @@ export default {
 		Classes: Classes,
 		Homework: Homework,
 		LunchMenu: LunchMenu,
-		TabCount: TabCount
+		TabCount: TabCount,
+		Weather: Weather
 	},
 	settings: {
 		AccountPane: AccountPane,

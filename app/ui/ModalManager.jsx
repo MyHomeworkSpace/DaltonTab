@@ -2,6 +2,8 @@ import "ui/ModalManager.styl";
 
 import { h, Component } from "preact";
 
+import WeatherModal from "sections/weather/WeatherModal.jsx";
+
 import EndOfYearModal from "other/EndOfYearModal.jsx";
 
 export default class ModalManager extends Component {
@@ -14,6 +16,8 @@ export default class ModalManager extends Component {
 
 		if (props.modalName == "endOfYear") {
 			modal = <EndOfYearModal modalState={props.modalState} openModal={props.openModal} />;
+		} else if (props.modalName == "weather") {
+			modal = <WeatherModal modalState={props.modalState} openModal={props.openModal} />;
 		}
 
 		return <div>
