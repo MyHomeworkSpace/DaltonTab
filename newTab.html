@@ -36,7 +36,6 @@
 
 	<script src="js/analytics.js"></script>
 	<script src="js/clock.js"></script>
-	<script src="js/feedback.js"></script>
 	<script src="js/image.js"></script>
 	<script src="js/layoutEditor.js"></script>
 	<script src="js/sections.js"></script>
@@ -68,31 +67,6 @@
 		</div>
 	</div>
 	<div id="modalManager"><div></div></div>
-	<div id="feedback-modal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><span id="feedback-modal-title-first">Send a </span><span class="feedback-type"> </span></h4>
-				</div>
-				<div class="modal-body">
-					<p class="feedback-desc"></p>
-					<textarea id="feedback-msg" placeholder="Write your message here..."></textarea><strong>The following information will be sent with your feedback:</strong>
-					<ul>
-						<li>Your DaltonTab version (<strong class="daltontab-version"></strong>)</li>
-						<li>Your Chrome version</li>
-						<li>Information about what services you've enabled and are signed into</li>
-					</ul>
-					<p>Thanks for the feedback! Click "Submit" to send it!</p>
-				</div>
-				<div class="modal-footer feedback-footer-normal">
-					<button type="button" data-dismiss="modal" class="btn btn-default">Close without submitting</button>
-					<button type="button" id="feedback-submit" class="btn btn-primary">Submit</button>
-				</div>
-				<div class="modal-footer feedback-footer-load hidden"><i class="fa fa-circle-o-notch fa-spin"></i><span> Loading...</span></div>
-			</div>
-		</div>
-	</div>
 	<div id="settingsPane">
 		<h1>Settings</h1>
 		<i id="settingsPaneClose" class="fa fa-times"></i>
@@ -202,9 +176,7 @@
 
 		</div>
 		<div id="bottomBar">
-			<button class="btn btn-default feedback-btn" data-type="smile"><i class="fa fa-smile-o"></i></button>
-			<button class="btn btn-default feedback-btn" data-type="frown"><i class="fa fa-frown-o"></i></button>
-			<button class="btn btn-default feedback-btn" data-type="idea"><i class="fa fa-lightbulb-o"></i></button>
+			<div class="feedbackControls"></div>
 		</div>
 	</div>
 </body>

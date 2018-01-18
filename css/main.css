@@ -146,11 +146,6 @@ a.btn {
 	padding-bottom: 10px;
 }
 
-.feedback-btn {
-	font-size: 20px;
-	padding: 4px 8px;
-}
-
 #hwButton {
 	color: white;
 	cursor: pointer;
@@ -232,12 +227,6 @@ a.btn {
 
 .account {
 	padding-bottom: 10px;
-}
-
-#feedback-msg {
-	width: 100%;
-	height: 100px;
-	resize: none;
 }
 
 .sectionList {

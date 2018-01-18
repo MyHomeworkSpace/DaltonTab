@@ -2,6 +2,8 @@ import { h, render, Component } from "preact";
 
 import analytics from "analytics.js";
 
+import FeedbackControls from "feedback/FeedbackControls.jsx";
+
 import EndOfYearModal from "other/EndOfYearModal.jsx";
 import MHSConnect from "other/MHSConnect.jsx";
 
@@ -64,6 +66,9 @@ export default {
 
 	openModal: openModal,
 
+	feedback: {
+		FeedbackControls: FeedbackControls
+	},
 	other: {
 		EndOfYearModal: EndOfYearModal,
 		MHSConnect: MHSConnect

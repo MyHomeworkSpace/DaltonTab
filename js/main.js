@@ -55,6 +55,10 @@ $(document).ready(function() {
 
 	DaltonTabBridge.default.init();
 
+	DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.feedback.FeedbackControls, {
+		openModal: DaltonTabBridge.default.openModal
+	}), null, document.querySelector(".feedbackControls"));
+
 	DaltonTab.Clock.init();
 	DaltonTab.LayoutEditor.init();
 	DaltonTab.Settings.init();

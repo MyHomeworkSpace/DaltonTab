@@ -32,37 +32,12 @@
 
 	<script src="../js/analytics.js"></script>
 	<!-- <script src="../js/clock.js"></script> -->
-	<script src="../js/feedback.js"></script>
 	<script src="../js/image.js"></script>
 	<script src="../js/layoutEditor.js"></script>
 	<script src="../js/sections.js"></script>
 	<script src="../js/settings.js"></script>
 </head>
-	<div id="feedback-modal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><span id="feedback-modal-title-first">Send a </span><span class="feedback-type"> </span></h4>
-				</div>
-				<div class="modal-body">
-					<p class="feedback-desc"></p>
-					<textarea id="feedback-msg" placeholder="Write your message here..."></textarea><strong>The following information will be sent with your feedback:</strong>
-					<ul>
-						<li>Your DaltonTab version (<strong class="daltontab-version"></strong>)</li>
-						<li>Your Chrome version</li>
-						<li>Information about what services you've enabled and are signed into</li>
-					</ul>
-					<p>Thanks for the feedback! Click "Submit" to send it!</p>
-				</div>
-				<div class="modal-footer feedback-footer-normal">
-					<button type="button" data-dismiss="modal" class="btn btn-default">Close without submitting</button>
-					<button type="button" id="feedback-submit" class="btn btn-primary">Submit</button>
-				</div>
-				<div class="modal-footer feedback-footer-load hidden"><i class="fa fa-circle-o-notch fa-spin"></i><span> Loading...</span></div>
-			</div>
-		</div>
-	</div>
+<body>
 	<div id="manageOverlay"></div>
 	<div id="topSection" class="section container-fluid">
 		<div id="topSectionBackgroundFilter"></div>
