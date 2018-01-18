@@ -11,6 +11,7 @@ export default {
 		icon: "fa-file",
 		description: "View your homework information from MyHomeworkSpace.",
 		background: "rgba(60, 77, 99, 0.9)",
+		storage: [],
 		component: Homework
 	},
 	schedule: {
@@ -18,6 +19,7 @@ export default {
 		icon: "fa-calendar",
 		description: "View your calendar from MyHomeworkSpace.",
 		background: "rgba(121, 70, 26, 0.9)",
+		storage: [],
 		component: Calendar
 	},
 	classes: {
@@ -25,6 +27,7 @@ export default {
 		icon: "fa-list",
 		description: "View and access your classes.",
 		background: "rgba(57, 146, 108, 0.9)",
+		storage: [],
 		component: Classes
 	},
 	weather: {
@@ -32,6 +35,7 @@ export default {
 		icon: "fa-sun-o",
 		description: "View the current weather.",
 		background: "rgba(14, 100, 18, 0.9)",
+		storage: ["weather", "weatherUnits"],
 		component: Weather
 	},
 	tabCount: {
@@ -39,6 +43,7 @@ export default {
 		icon: "fa-clone",
 		description: "Count the number of tabs that you open in a day",
 		background: "rgba(0, 140, 186, 0.9)",
+		storage: [],
 		component: TabCount
 	}/*,
 	lunchMenu: {

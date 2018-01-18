@@ -10,7 +10,7 @@ export default class SectionContainer extends Component {
 		var sectionElements = props.sections.map(function(sectionName, sectionIndex) {
 			var section = sections[sectionName];
 			var background = image.getSectionBackground(sectionIndex, section.background);
-			return <Section section={section} background={background} openModal={props.openModal} />;
+			return <Section section={section} background={background} storage={props.storage} openModal={props.openModal} />;
 		});
 		return <div class="sectionContainer">
 			<div id="sectionContainer"></div>

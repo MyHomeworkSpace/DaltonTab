@@ -10,15 +10,18 @@ export default class Weather extends Component {
 		};
 	}
 
-	componentDidMount() {
+	componentWillReceiveProps(nextProps) {
 		var that = this;
-		chrome.storage.sync.get(["weather", "weatherUnits"], function(storage) {
+		this.setState({
+			loading: true,
+			results: null
+		}, function() {
 			var units = "f";
-			if (storage.weatherUnits != undefined) {
-				units = storage.weatherUnits;
+			if (nextProps.storage.weatherUnits != undefined) {
+				units = nextProps.storage.weatherUnits;
 			}
 
-			if (storage.weather == undefined) {
+			if (nextProps.storage.weather == undefined) {
 				that.setState({
 					loading: false,
 					noLocation: true
@@ -28,7 +31,7 @@ export default class Weather extends Component {
 
 			$.get("https://daltontabservices.myhomework.space/v1/weather.php", {
 				units: units,
-				place: storage.weather.query
+				place: nextProps.storage.weather.query
 			}, function(data) {
 				that.setState({
 					loading: false,

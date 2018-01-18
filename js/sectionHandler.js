@@ -16,10 +16,18 @@ DaltonTab.SectionHandler = {
 		});
 	},
 	createSections: function(shouldUpdate) {
-		DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.SectionContainer, {
-			sections: DaltonTab.SectionHandler.order,
-			openModal: DaltonTabBridge.default.openModal
-		}), null, document.querySelector(".sectionContainer"));
+		var storageKeys = [];
+		DaltonTab.SectionHandler.order.forEach(function(sectionName) {
+			var section = DaltonTabBridge.default.sections[sectionName];
+			storageKeys = storageKeys.concat(section.storage);
+		});
+		chrome.storage.sync.get(storageKeys, function(storage) {
+			DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.SectionContainer, {
+				sections: DaltonTab.SectionHandler.order,
+				openModal: DaltonTabBridge.default.openModal,
+				storage: storage
+			}), null, document.querySelector(".sectionContainer"));
+		});
 	},
 	updateColors: function() {
 		DaltonTab.SectionHandler.createSections();
