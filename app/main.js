@@ -14,6 +14,7 @@ import SectionContainer from "sections/SectionContainer.jsx";
 import AccountPane from "settings/AccountPane.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 
+import IconButton from "ui/IconButton.jsx";
 import ModalManager from "ui/ModalManager.jsx";
 
 import App from "App.jsx";
@@ -59,6 +60,7 @@ export default {
 	image: image,
 	sections: sections,
 
+	IconButton: IconButton,
 	SectionContainer: SectionContainer,
 
 	init: function() {

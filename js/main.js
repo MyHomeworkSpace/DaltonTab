@@ -9,21 +9,39 @@ DaltonTab = {
 	}
 };
 
+var hwButtonHref;
+var iconButtonsScrollDown;
+var hwButtonVisible = true;
+
+var renderIconButtons = function() {
+	DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.IconButton, {
+		icon: "fa-chevron-circle-down",
+		class: "hwButton" + (iconButtonsScrollDown ? " flipped" : "") + (hwButtonVisible ? "": " hidden"),
+		href: hwButtonHref
+	}), null, document.querySelector(".hwButton"));
+	DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.IconButton, {
+		icon: "fa-gear",
+		class: "settingsButton" + (iconButtonsScrollDown ? " visible" : ""),
+		onClick: function() {
+			$("#settingsPaneClose").click();
+		}
+	}), null, document.querySelector(".settingsButton"));
+};
+
 $(document).ready(function() {
 	$(window).scroll(function() {
 		if ($(window).scrollTop() >= 20) {
-			$("#hwButton").attr("href", "#topFiller");
-			$("#hwButton").addClass("flipped");
-			$("#settingsButton").addClass("visible");
+			hwButtonHref = "#topFiller";
+			iconButtonsScrollDown = true;
 		} else {
-			$("#hwButton").attr("href", "#sectionContainer");
-			$("#hwButton").removeClass("flipped");
-			$("#settingsButton").removeClass("visible");
+			hwButtonHref = "#sectionContainer";
+			iconButtonsScrollDown = false;
 		}
+		renderIconButtons();
 	});
 	$("#hwButton").smoothScroll();
 
-	$("#settingsButton, #settingsPaneClose, #manageOverlay").click(function() {
+	$("#settingsPaneClose, #manageOverlay").click(function() {
 		$("#settingsPane").toggleClass("opened");
 		$("body").toggleClass("frozen");
 	});
@@ -44,7 +62,7 @@ $(document).ready(function() {
 
 	chrome.storage.sync.get("jumpingArrowTog", function(storage) {
 		if (!(storage.jumpingArrowTog == undefined || !storage.jumpingArrowTog)) {
-			$("#hwButton").addClass("hidden");
+			hwButtonVisible = false;
 		}
 	});
 

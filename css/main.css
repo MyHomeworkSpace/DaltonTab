@@ -128,48 +128,28 @@ a.btn {
 	padding-bottom: 10px;
 }
 
-#hwButton {
-	color: white;
-	cursor: pointer;
-	font-size: 3em;
+.hwButton {
 	text-align: center;
-	text-shadow: 2px 2px black;
 	position: fixed;
 	left: 50%;
 	margin-left: -22.5px;
 	bottom: 19px;
-	z-index: 10;
-	transition: all 0.25s ease-in-out;
-	text-decoration: none;
 }
-#hwButton.flipped {
+.hwButton.flipped {
 	bottom: calc(100% - 83px);
 	text-shadow: 2px 2px black;
 }
-#hwButton.flipped i:before {
+.hwButton.flipped i:before {
 	content: "\f183";
 }
-#hwButton:hover {
-	color: #ccc;
-}
 
-#settingsButton {
-	color: white;
-	cursor: pointer;
-	font-size: 3em;
+.settingsButton {
 	position: fixed;
 	bottom: 110%;
 	right: 100px;
-	text-shadow: 2px 2px black;
-	transition: all 0.25s ease-in-out;
-	z-index: 10;
-	text-decoration: none;
 }
-#settingsButton.visible, #settingsButton.zoneVisible {
+.settingsButton.visible, .settingsButton.zoneVisible {
 	bottom: calc(100% - 83px);
-}
-#settingsButton:hover {
-	color: #ccc;
 }
 
 #setup1 {

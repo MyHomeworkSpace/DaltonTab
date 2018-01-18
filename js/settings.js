@@ -38,9 +38,9 @@ DaltonTab.Settings = {
 			storageKey: "jumpingArrowTog",
 			change: function(buttonHidden) {
 				if (buttonHidden) {
-					$("#hwButton").addClass("hidden");
+					$(".hwButton").addClass("hidden");
 				} else {
-					$("#hwButton").removeClass("hidden");
+					$(".hwButton").removeClass("hidden");
 				}
 			}
 		}), null, document.querySelector("#jumpingArrowTog"));
@@ -71,7 +71,7 @@ DaltonTab.Settings = {
 		$(".daltontab-version").text(chrome.runtime.getManifest().version);
 	},
 	open: function(page) {
-		$("#settingsButton").click();
+		$("#settingsPaneClose").click();
 		$("#settingsPanePages li[data-page=" + page + "]").click();
 	}
 };
