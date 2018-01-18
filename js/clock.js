@@ -1,64 +1,32 @@
-DaltonTab.Clock = {
-	type: "12hr",
-	displayDate: true,
+var type = "12hr";
+var displayDate = true;
 
+DaltonTab.Clock = {
 	init: function() {
 		chrome.storage.sync.get(["clockType", "displayDate"], function(storage) {
-			DaltonTab.Clock.type = storage.clockType || "12hr";
-			DaltonTab.Clock.displayDate = storage.displayDate;
+			type = storage.clockType || "12hr";
+			displayDate = storage.displayDate;
 
-			if (DaltonTab.Clock.displayDate === undefined) {
-				DaltonTab.Clock.displayDate = true;
+			if (displayDate === undefined) {
+				displayDate = true;
 			}
 
-			DaltonTab.Clock.updateTime();
-			setInterval(DaltonTab.Clock.updateTime, 1000);
-		});
-
-		$("#timeTop").dblclick(function() {
-			DaltonTab.Settings.open("clock");
+			DaltonTab.Clock.render();
 		});
 	},
 
-	updateTime: function() {
-		if (DaltonTab.Clock.type == "12hr" || DaltonTab.Clock.type == "12hrnopm") {
-			$(".current-time").text(moment().format("h:mm"));
-		} else if (DaltonTab.Clock.type == "24hr") {
-			$(".current-time").text(moment().format("k:mm"));
-		} else if (DaltonTab.Clock.type == "percent") {
-			// TODO: make this an option
-			var start = moment().set("hour", 8);
-			var end = moment().set("hour", 12 + 3).set("minute", 15);
-			var now = moment();
+	render: function() {
+		DaltonTabBridge.default.render(DaltonTabBridge.default.h(DaltonTabBridge.default.Clock, {
+			type: type,
+			showDate: displayDate
+		}), null, document.querySelector(".clock"));
+	},
 
-			if (start.diff(now, "hours") > 0) {
-				// day hasn't started yet
-				$(".current-time").text("0%");
-			} else if (end.diff(now, "hours") < 0) {
-				// day is over
-				$(".current-time").text("100%");
-			} else {
-				var secondsToEnd = now.diff(start);
-				var secondsTotal = end.diff(start);
-				var percent = Math.floor((secondsToEnd / secondsTotal) * 100);
-				$(".current-time").text(percent + "%");
-			}
-		}
+	setDisplayDate: function(newDisplayDate) {
+		displayDate = newDisplayDate;
+	},
 
-		if (DaltonTab.Clock.type == "12hr") {
-			$(".current-time-ampm").text(moment().format("A"));
-		} else {
-			$(".current-time-ampm").text("");
-		}
-
-		if (DaltonTab.Clock.displayDate) {
-			if (navigator.onLine) {
-				$(".current-date").text(moment().format("MMMM Do, YYYY"));
-			} else {
-				$(".current-date").text("You are not connected to the internet!");
-			}
-		} else {
-			$(".current-date").text("");
-		}
+	setType: function(newType) {
+		type = newType;
 	}
 };

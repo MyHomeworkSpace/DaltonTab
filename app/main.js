@@ -5,6 +5,8 @@ import analytics from "analytics.js";
 import image from "image.js";
 import sections from "sections.js";
 
+import Clock from "main/Clock.jsx";
+
 import FeedbackControls from "feedback/FeedbackControls.jsx";
 
 import EndOfYearModal from "other/EndOfYearModal.jsx";
@@ -64,6 +66,7 @@ export default {
 	image: image,
 	sections: sections,
 
+	Clock: Clock,
 	IconButton: IconButton,
 	SectionContainer: SectionContainer,
 

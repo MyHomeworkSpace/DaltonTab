@@ -86,7 +86,7 @@ a.btn {
 	/*border-right: solid 4px white;*/
 }
 
-#timeTop .mainTime, #timeTop .mainDate {
+#timeTop .clock {
 	font-weight: 400;
 }
 
@@ -139,19 +139,6 @@ a.btn {
 
 .center {
 	text-align: center;
-}
-
-.mainTime {
-	font-size: 6em;
-}
-.mainTime .current-time-ampm {
-	font-size: 0.5em;
-	position: relative;
-	top: -32px;
-	left: 8px;
-}
-.mainDate {
-	font-size: 2em;
 }
 
 .section-warning {

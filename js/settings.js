@@ -55,13 +55,13 @@ DaltonTab.Settings = {
 			storageKey: "displayDate",
 			defaultValue: true,
 			change: function(displayDate) {
-				DaltonTab.Clock.displayDate = displayDate;
-				DaltonTab.Clock.updateTime();
+				DaltonTab.Clock.setDisplayDate(displayDate);
+				DaltonTab.Clock.render();
 			}
 		}), null, document.querySelector("#showDate"));
 		$("input[name=clockMode]").change(function() {
-			DaltonTab.Clock.type = $(this).val();
-			DaltonTab.Clock.updateTime();
+			DaltonTab.Clock.setType($(this).val());
+			DaltonTab.Clock.render();
 			chrome.storage.sync.set({
 				clockType: $(this).val()
 			});

@@ -3,6 +3,8 @@ import { h, Component } from "preact";
 import mhs from "mhs.js";
 import sections from "sections.js";
 
+import Clock from "main/Clock.jsx";
+
 import SectionContainer from "sections/SectionContainer.jsx";
 
 const defaultOrder = ["myhomeworkspace", "schedule", "classes"];
@@ -37,6 +39,7 @@ export default class App extends Component {
 		}
 
 		return <div>
+			<Clock type="12hr" showDate={true} />
 			<SectionContainer sections={state.order} storage={state.sectionStorage} />
 		</div>;
 	}
