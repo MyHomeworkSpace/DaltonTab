@@ -3,6 +3,8 @@ import "sections/calendar/Calendar.styl";
 import { h, Component } from "preact";
 import moment from "moment";
 
+import mhs from "mhs.js";
+
 import MHSConnect from "other/MHSConnect.jsx";
 import CalendarEvent from "sections/calendar/CalendarEvent.jsx";
 
@@ -10,7 +12,7 @@ export default class Calendar extends Component {
 	componentDidMount() {
 		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
+		mhs.get(token, "calendar/getStatus", {}, function(statusData) {
 			if (statusData.status != "ok") {
 				that.setState({
 					loaded: true,
@@ -61,7 +63,7 @@ export default class Calendar extends Component {
 			loadingWeek: true,
 			weekInfo: null
 		}, function() {
-			MyHomeworkSpace.get(that.state.token, "calendar/events/getWeek/" + that.state.monday.format("YYYY-MM-DD"), {}, function(data) {
+			mhs.get(that.state.token, "calendar/events/getWeek/" + that.state.monday.format("YYYY-MM-DD"), {}, function(data) {
 				that.setState({
 					loadingWeek: false,
 					weekInfo: data

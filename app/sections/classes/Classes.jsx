@@ -2,13 +2,15 @@ import "sections/classes/Classes.styl";
 
 import { h, Component } from "preact";
 
+import mhs from "mhs.js";
+
 import MHSConnect from "other/MHSConnect.jsx";
 
 export default class Classes extends Component {
 	componentDidMount() {
 		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		MyHomeworkSpace.get(token, "calendar/getStatus", {}, function(statusData) {
+		mhs.get(token, "calendar/getStatus", {}, function(statusData) {
 			if (statusData.status != "ok") {
 				that.setState({
 					loaded: true,
@@ -24,7 +26,7 @@ export default class Classes extends Component {
 				});
 				return;
 			}
-			MyHomeworkSpace.get(token, "calendar/getClasses", {}, function(data) {
+			mhs.get(token, "calendar/getClasses", {}, function(data) {
 				that.setState({
 					loaded: true,
 					loggedIn: true,

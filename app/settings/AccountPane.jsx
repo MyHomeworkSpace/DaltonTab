@@ -1,5 +1,7 @@
 import { h, Component } from "preact";
 
+import mhs from "mhs.js";
+
 export default class AccountPane extends Component {
 	componentDidMount() {
 		var that = this;
@@ -8,7 +10,7 @@ export default class AccountPane extends Component {
 			that.setState({
 				token: token
 			}, function() {
-				MyHomeworkSpace.get(token, "auth/me", {}, function(data) {
+				mhs.get(token, "auth/me", {}, function(data) {
 					if (data.status == "ok") {
 						that.setState({
 							loaded: true,
@@ -27,7 +29,7 @@ export default class AccountPane extends Component {
 	}
 
 	connect() {
-		window.location.href = MyHomeworkSpace.getAuthURL();
+		window.location.href = mhs.getAuthURL();
 	}
 
 	disconnect() {
@@ -37,7 +39,7 @@ export default class AccountPane extends Component {
 		this.setState({
 			loaded: false
 		}, function() {
-			MyHomeworkSpace.post(this.state.token, "application/revokeSelf", {}, function(data) {
+			mhs.post(this.state.token, "application/revokeSelf", {}, function(data) {
 				window.location.reload();
 			});
 		});

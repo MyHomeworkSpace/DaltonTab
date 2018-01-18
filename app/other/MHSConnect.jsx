@@ -2,12 +2,14 @@ import "other/MHSConnect.styl";
 
 import { h, Component } from "preact";
 
+import mhs from "mhs.js";
+
 export default class MHSConnect extends Component {
 	connect() {
 		if (this.props.type == "calendar") {
 			window.location.href = "https://myhomework.space/app.html#!calendar";
 		} else {
-			window.location.href = MyHomeworkSpace.getAuthURL();
+			window.location.href = mhs.getAuthURL();
 		}
 	}
 

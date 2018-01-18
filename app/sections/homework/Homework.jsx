@@ -3,6 +3,8 @@ import "sections/homework/Homework.styl";
 import { h, Component } from "preact";
 import moment from "moment";
 
+import mhs from "mhs.js";
+
 import MHSConnect from "other/MHSConnect.jsx";
 
 import HomeworkColumn from "sections/homework/HomeworkColumn.jsx";
@@ -11,28 +13,30 @@ export default class Homework extends Component {
 	componentDidMount() {
 		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		MyHomeworkSpace.get(token, "classes/get", {}, function(classesData) {
-			if (classesData.status != "ok") {
-				that.setState({
-					loaded: true,
-					loggedIn: false
-				});
-				return;
-			}
-			MyHomeworkSpace.get(token, "homework/getHWView", {}, function(data) {
-				if (data.status == "ok") {
-					that.setState({
-						loaded: true,
-						loggedIn: true,
-						classes: classesData.classes,
-						homework: data.homework
-					});
-				} else {
+		mhs.initPrefixes(token, function() {
+			mhs.get(token, "classes/get", {}, function(classesData) {
+				if (classesData.status != "ok") {
 					that.setState({
 						loaded: true,
 						loggedIn: false
 					});
+					return;
 				}
+				mhs.get(token, "homework/getHWView", {}, function(data) {
+					if (data.status == "ok") {
+						that.setState({
+							loaded: true,
+							loggedIn: true,
+							classes: classesData.classes,
+							homework: data.homework
+						});
+					} else {
+						that.setState({
+							loaded: true,
+							loggedIn: false
+						});
+					}
+				});
 			});
 		});
 	}

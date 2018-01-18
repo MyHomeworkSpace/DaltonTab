@@ -3,6 +3,8 @@ import "sections/homework/HomeworkColumn.styl";
 import { h, Component } from "preact";
 import moment from "moment";
 
+import mhs from "mhs.js";
+
 export default class HomeworkColumn extends Component {
 	render(props, state) {
 		var homework = [];
@@ -13,7 +15,7 @@ export default class HomeworkColumn extends Component {
 			var prefix = nameParts[0];
 			var notPrefix = nameParts.slice(1).join(" ");
 
-			var prefixInfo = MyHomeworkSpace.Prefixes.matchPrefix(prefix);
+			var prefixInfo = mhs.matchPrefix(prefix);
 
 			var due = moment(hw.due);
 			var dueText = due.calendar().split(" at ")[0];
@@ -42,7 +44,7 @@ export default class HomeworkColumn extends Component {
 
 			var element = <div class={"homeworkColumnItem " + (late ? "homeworkColumnItemLate " : "") + (hw.complete ? "homeworkColumnItemDone" : "")}>
 				<div class="homeworkColumnItemName">
-					<span style={"background-color:" + prefixInfo.background + ";color:" + prefixInfo.color}>{prefix}</span> {" " + notPrefix}
+					<span style={"background-color:#" + prefixInfo.background + ";color:#" + prefixInfo.color}>{prefix}</span> {" " + notPrefix}
 				</div>
 				<div>{keyword + dueText + " in " + classObject.name}</div>
 			</div>;
