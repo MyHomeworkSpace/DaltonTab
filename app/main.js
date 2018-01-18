@@ -20,9 +20,11 @@ import ModalManager from "ui/ModalManager.jsx";
 
 import App from "App.jsx";
 
-// window.onload = function() {
-// 	render(h(App, {}), document.querySelector("body"));
-// };
+window.onload = function() {
+	if (window.location.href.indexOf("index.html") > -1) {
+		render(h(App, {}), document.querySelector("body"));
+	}
+};
 
 var modalName = "";
 var modalState;
