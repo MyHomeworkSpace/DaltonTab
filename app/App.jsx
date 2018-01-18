@@ -1,9 +1,11 @@
 import { h, Component } from "preact";
 
+import image from "image.js";
 import mhs from "mhs.js";
 import sections from "sections.js";
 
 import Clock from "main/Clock.jsx";
+import ImageInfoBar from "main/ImageInfoBar.jsx";
 
 import SectionContainer from "sections/SectionContainer.jsx";
 
@@ -12,10 +14,11 @@ const defaultOrder = ["myhomeworkspace", "schedule", "classes"];
 export default class App extends Component {
 	componentWillMount() {
 		var that = this;
-		chrome.storage.sync.get(["sections", "mhsToken"], function(tabStorage) {
+		// get tab storage
+		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate"], function(tabStorage) {
 			var order = tabStorage.sections || defaultOrder;
 
-			// create list of storage keys
+			// get section storage keys
 			var storageKeys = [];
 			order.forEach(function(sectionName) {
 				var section = sections[sectionName];
@@ -25,9 +28,24 @@ export default class App extends Component {
 				sectionStorage.mhsToken = tabStorage.mhsToken;
 				that.setState({
 					loaded: true,
+
+					imageLoading: true,
+
 					order: order,
-					storage: tabStorage,
+					tabStorage: tabStorage,
 					sectionStorage: sectionStorage
+				}, function() {
+					// get image
+					var channel = localStorage.nc || "normal";
+					if (channel != "normal") {
+						console.log("Using image channel '" + channel + "'");
+					}
+					image.fetchImage(channel, function(imageData) {
+						that.setState({
+							imageLoading: false,
+							imageData: imageData
+						});
+					});
 				});
 			});
 		});
@@ -39,7 +57,10 @@ export default class App extends Component {
 		}
 
 		return <div>
-			<Clock type="12hr" showDate={true} />
+			<div class="top" style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
+				<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
+				<ImageInfoBar loading={state.imageLoading} image={state.imageData} />
+			</div>
 			<SectionContainer sections={state.order} storage={state.sectionStorage} />
 		</div>;
 	}

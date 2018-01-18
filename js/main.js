@@ -57,6 +57,9 @@ $(document).ready(function() {
 				localStorage.removeItem("nc");
 			}
 			DaltonTabBridge.default.image.fetchImage(channel, function(image) {
+				$("#topSection").css("background-image", "url(" + image.imgUrl + ")");
+				$("#topSection").addClass("imageLoaded");
+
 				DaltonTabBridge.default.image.setImage(image);
 				DaltonTabBridge.default.image.renderImageInfoBar();
 				DaltonTab.SectionHandler.updateColors();

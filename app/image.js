@@ -56,8 +56,7 @@ export default {
 		colors = [];
 		imageLoading = true;
 		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, {}, function(image) {
-			$("#topSection").css("background-image", "url(" + image.imgUrl + ")");
-			$("#topSection").addClass("imageLoaded");
+			colors = image.colors;
 
 			imageLoading = false;
 
