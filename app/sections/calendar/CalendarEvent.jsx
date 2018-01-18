@@ -1,6 +1,7 @@
 import "sections/calendar/CalendarEvent.styl";
 
 import { h, Component } from "preact";
+import moment from "moment";
 
 export default class CalendarEvent extends Component {
 	render(props, state) {

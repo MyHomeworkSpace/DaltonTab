@@ -1,6 +1,7 @@
 import "sections/homework/Homework.styl";
 
 import { h, Component } from "preact";
+import moment from "moment";
 
 import MHSConnect from "other/MHSConnect.jsx";
 

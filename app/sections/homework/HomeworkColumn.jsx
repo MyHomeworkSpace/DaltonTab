@@ -1,6 +1,7 @@
 import "sections/homework/HomeworkColumn.styl";
 
 import { h, Component } from "preact";
+import moment from "moment";
 
 export default class HomeworkColumn extends Component {
 	render(props, state) {

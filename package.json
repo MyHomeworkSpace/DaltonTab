@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "linkstate": "^1.1.0",
+    "moment": "^2.20.1",
     "preact": "^8.2.7",
     "preact-compat": "^3.17.0",
     "react": "github:preact-compat/react",

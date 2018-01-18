@@ -1,6 +1,7 @@
 import "sections/calendar/Calendar.styl";
 
 import { h, Component } from "preact";
+import moment from "moment";
 
 import MHSConnect from "other/MHSConnect.jsx";
 import CalendarEvent from "sections/calendar/CalendarEvent.jsx";

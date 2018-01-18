@@ -1,4 +1,5 @@
 import { h, render, Component } from "preact";
+import moment from "moment";
 
 import analytics from "analytics.js";
 import image from "image.js";
@@ -31,6 +32,7 @@ window.preact = {
 	h: h,
 	render: render
 };
+window.moment = moment;
 
 var renderModalManager = function() {
 	render(h(ModalManager, {
