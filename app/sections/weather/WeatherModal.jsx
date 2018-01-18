@@ -108,7 +108,7 @@ export default class WeatherModal extends Component {
 	}
 
 	render(props, state) {
-		return <Modal title="Weather options" openModal={props.openModal} class="weatherModal">
+		return <Modal reloadSectionsOnClose title="Weather options" openModal={props.openModal} class="weatherModal">
 			<div class="modal-body">
 				<h4>Location</h4>
 				{!state.weather && !state.locationLoading && <div>

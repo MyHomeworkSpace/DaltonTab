@@ -41,6 +41,10 @@ var renderModalManager = function() {
 };
 
 var openModal = function(name, state) {
+	if (document.querySelector(".modal") && document.querySelector(".modal").classList.contains("reloadSectionsOnClose")) {
+		DaltonTab.SectionHandler.createSections();
+	}
+
 	modalName = name;
 	modalState = state;
 	renderModalManager();
