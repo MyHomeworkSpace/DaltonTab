@@ -31,11 +31,18 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(styl)$/,
+				test: /\.(css|styl)$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: [ 'css-loader', 'stylus-loader' ]
 				})
+			},
+			{
+				test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+				loader: 'url-loader',
+				options: {
+					limit: 10000
+				}
 			}
 		]
 	},

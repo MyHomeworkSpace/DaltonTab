@@ -1,5 +1,7 @@
 import "App.styl";
 
+import "font-awesome/css/font-awesome.min.css";
+
 import { h, Component } from "preact";
 
 import image from "image.js";
