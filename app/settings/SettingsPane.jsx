@@ -3,6 +3,7 @@ import "settings/SettingsPane.styl";
 import { h, Component } from "preact";
 
 import AccountSettings from "settings/AccountSettings.jsx";
+import LayoutSettings from "settings/LayoutSettings.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 
 export default class SettingsPane extends Component {
@@ -19,8 +20,7 @@ export default class SettingsPane extends Component {
 			</div>
 			<h3 class="settingsPaneTitle">Settings</h3>
 
-			<h4>MyHomeworkSpace</h4>
-			<AccountSettings tabStorage={props.tabStorage} />
+			<LayoutSettings storage={props.tabStorage} updateStorage={props.updateStorage} />
 
 			<h4>Clock</h4>
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "12hr")} checked={props.tabStorage.clockType == "12hr" || !props.tabStorage.clockType} /> 12 hour</label>
@@ -42,7 +42,8 @@ export default class SettingsPane extends Component {
 				label="Show section arrow" storageKey="jumpingArrowTog" defaultValue={true}
 			/>
 
-			<h4>Layout</h4>
+			<h4>MyHomeworkSpace</h4>
+			<AccountSettings tabStorage={props.tabStorage} />
 
 			<h4>About</h4>
 			<p>You're running DaltonTab version {chrome.runtime.getManifest().version}.</p>

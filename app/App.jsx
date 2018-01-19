@@ -21,8 +21,6 @@ import SettingsPane from "settings/SettingsPane.jsx";
 import IconButton from "ui/IconButton.jsx";
 import ModalManager from "ui/ModalManager.jsx";
 
-const defaultOrder = ["myhomeworkspace", "schedule", "classes"];
-
 export default class App extends Component {
 	componentWillMount() {
 		var that = this;
@@ -34,7 +32,7 @@ export default class App extends Component {
 
 		// get tab storage
 		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog"], function(tabStorage) {
-			var order = tabStorage.sections || defaultOrder;
+			var order = tabStorage.sections || sections.defaultOrder;
 
 			// get section storage keys
 			var storageKeys = [];
@@ -119,6 +117,7 @@ export default class App extends Component {
 		this.setState({
 			tabStorage: storage
 		}, function() {
+			console.log(newStorage);
 			chrome.storage.sync.set(newStorage, function() {
 				
 			});

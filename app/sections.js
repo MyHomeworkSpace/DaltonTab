@@ -6,6 +6,7 @@ import TabCount from "sections/tabCount/TabCount.jsx";
 import Weather from "sections/weather/Weather.jsx";
 
 export default {
+	defaultOrder: ["myhomeworkspace", "schedule", "classes"],
 	myhomeworkspace: {
 		name: "Homework",
 		icon: "fa-file",
