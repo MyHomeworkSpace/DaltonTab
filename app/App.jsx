@@ -1,3 +1,5 @@
+import "App.styl";
+
 import { h, Component } from "preact";
 
 import image from "image.js";
@@ -56,9 +58,11 @@ export default class App extends Component {
 			return <div></div>;
 		}
 
-		return <div>
-			<div class="top" style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
-				<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
+		return <div class="app" style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
+			<div class="top">
+				<div class="topCenter">
+					<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
+				</div>
 				<ImageInfoBar loading={state.imageLoading} image={state.imageData} />
 			</div>
 			<SectionContainer sections={state.order} storage={state.sectionStorage} />
