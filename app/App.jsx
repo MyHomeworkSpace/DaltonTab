@@ -14,6 +14,11 @@ import ImageInfoBar from "main/ImageInfoBar.jsx";
 
 import SectionContainer from "sections/SectionContainer.jsx";
 
+import SettingsPane from "settings/SettingsPane.jsx";
+
+import IconButton from "ui/IconButton.jsx";
+import ModalManager from "ui/ModalManager.jsx";
+
 const defaultOrder = ["myhomeworkspace", "schedule", "classes"];
 
 export default class App extends Component {
@@ -56,19 +61,51 @@ export default class App extends Component {
 		});
 	}
 
+	openModal(modalName, modalState) {
+		this.setState({
+			modalName: modalName,
+			modalState: modalState
+		});
+	}
+
+	toggleSettings() {
+		this.setState({
+			settingsOpen: !this.state.settingsOpen
+		});
+	}
+	
+	updateStorage(newStorage) {
+		console.log(newStorage);
+		var storage = this.state.tabStorage;
+		for (var key in newStorage) {
+			storage[key] = newStorage[key];
+		}
+		this.setState({
+			tabStorage: storage
+		}, function() {
+			chrome.storage.sync.set(newStorage, function() {
+				
+			});
+		});
+	}
+
 	render(props, state) {
 		if (!state.loaded) {
 			return <div></div>;
 		}
 
 		return <div class="app" style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
+			<ModalManager modalName={state.modalName} modalState={state.modalState} openModal={this.openModal.bind(this)} />
+			{state.settingsOpen && <SettingsPane tabStorage={state.tabStorage} toggleSettings={this.toggleSettings.bind(this)} updateStorage={this.updateStorage.bind(this)} />}
+
+			<IconButton class="settingsButton" icon="fa-gear" onClick={this.toggleSettings.bind(this)} />
 			<div class="top">
 				<div class="topCenter">
 					<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
 				</div>
 				<ImageInfoBar loading={state.imageLoading} image={state.imageData} />
 			</div>
-			<SectionContainer sections={state.order} storage={state.sectionStorage} />
+			<SectionContainer sections={state.order} storage={state.sectionStorage} openModal={this.openModal.bind(this)} />
 		</div>;
 	}
 };

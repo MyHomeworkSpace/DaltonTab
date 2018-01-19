@@ -14,7 +14,7 @@ import MHSConnect from "other/MHSConnect.jsx";
 
 import SectionContainer from "sections/SectionContainer.jsx";
 
-import AccountPane from "settings/AccountPane.jsx";
+import AccountSettings from "settings/AccountSettings.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 
 import IconButton from "ui/IconButton.jsx";
@@ -84,7 +84,7 @@ export default {
 		MHSConnect: MHSConnect
 	},
 	settings: {
-		AccountPane: AccountPane,
+		AccountPane: AccountSettings,
 		SettingCheckbox: SettingCheckbox
 	},
 

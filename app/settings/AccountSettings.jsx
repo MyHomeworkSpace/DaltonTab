@@ -2,30 +2,23 @@ import { h, Component } from "preact";
 
 import mhs from "mhs.js";
 
-export default class AccountPane extends Component {
+export default class AccountSettings extends Component {
 	componentDidMount() {
 		var that = this;
-		chrome.storage.sync.get("mhsToken", function(storage) {
-			var token = storage["mhsToken"] || "";
-			that.setState({
-				token: token
-			}, function() {
-				mhs.get(token, "auth/me", {}, function(data) {
-					if (data.status == "ok") {
-						that.setState({
-							loaded: true,
-							loggedIn: true,
-							user: data
-						});
-					} else {
-						that.setState({
-							loaded: true,
-							loggedIn: false
-						});
-					}
+		mhs.get(this.props.tabStorage.mhsToken, "auth/me", {}, function(data) {
+			if (data.status == "ok") {
+				that.setState({
+					loaded: true,
+					loggedIn: true,
+					user: data
 				});
-			});
-		})
+			} else {
+				that.setState({
+					loaded: true,
+					loggedIn: false
+				});
+			}
+		});
 	}
 
 	connect() {
@@ -39,7 +32,7 @@ export default class AccountPane extends Component {
 		this.setState({
 			loaded: false
 		}, function() {
-			mhs.post(this.state.token, "application/revokeSelf", {}, function(data) {
+			mhs.post(props.tabStorage.mhsToken, "application/revokeSelf", {}, function(data) {
 				window.location.reload();
 			});
 		});
@@ -68,7 +61,6 @@ export default class AccountPane extends Component {
 		}
 		
 		return <div>
-			<h3>Connected accounts</h3>
 			{details}
 		</div>;
 	}
