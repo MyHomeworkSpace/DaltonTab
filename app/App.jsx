@@ -1,6 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
+import "fonts/weather.styl";
+
 import "App.styl";
 
 import { h, Component } from "preact";
@@ -75,7 +77,6 @@ export default class App extends Component {
 	}
 	
 	updateStorage(newStorage) {
-		console.log(newStorage);
 		var storage = this.state.tabStorage;
 		for (var key in newStorage) {
 			storage[key] = newStorage[key];
