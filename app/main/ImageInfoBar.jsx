@@ -4,7 +4,7 @@ import { h, Component } from "preact";
 
 export default class ImageInfoBar extends Component {
 	render(props, state) {
-		return <div class={`imageInfoBar ${props.visible ? "" : "hidden"}`}>
+		return <div class="imageInfoBar">
 			<div class="imageInfo">
 				{props.loading && <div class="imageDesc loading">
 					<i class="fa fa-refresh fa-spin" /> loading image...

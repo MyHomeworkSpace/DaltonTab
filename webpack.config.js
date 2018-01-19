@@ -31,10 +31,17 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(css|styl)$/,
+				test: /\.(styl)$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: [ 'css-loader', 'stylus-loader' ]
+				})
+			},
+			{
+				test: /\.(css)$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [ 'css-loader' ]
 				})
 			},
 			{

@@ -1,6 +1,7 @@
-import "App.styl";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
+
+import "App.styl";
 
 import { h, Component } from "preact";
 
