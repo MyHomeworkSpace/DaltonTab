@@ -117,7 +117,6 @@ export default class App extends Component {
 		this.setState({
 			tabStorage: storage
 		}, function() {
-			console.log(newStorage);
 			chrome.storage.sync.set(newStorage, function() {
 				
 			});
@@ -129,12 +128,17 @@ export default class App extends Component {
 			return <div></div>;
 		}
 
-		return <div class="app" style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
+		return <div class={`app ${state.scrolled ? "scrolled" : ""} ${state.settingsOpen ? "settingsOpen" : ""}`} style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
 			<ModalManager modalName={state.modalName} modalState={state.modalState} openModal={this.openModal.bind(this)} />
 			{state.settingsOpen && <SettingsPane tabStorage={state.tabStorage} toggleSettings={this.toggleSettings.bind(this)} updateStorage={this.updateStorage.bind(this)} />}
 
+			{state.settingsOpen && <div class="settingsOverlay" onClick={this.toggleSettings.bind(this)}></div>}
+
 			<IconButton class="settingsButton" icon="fa-gear" onClick={this.toggleSettings.bind(this)} />
-			<div class="top">
+			{(state.tabStorage.jumpingArrowTog || state.tabStorage.jumpingArrowTog === undefined) &&
+				<IconButton class="sectionButton" icon="fa-arrow-circle-o-down" href={state.scrolled ? "#top" : "#sectionContainer"} scroll />
+			}
+			<div id="top" class="top">
 				<div class="topCenter">
 					<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
 				</div>
