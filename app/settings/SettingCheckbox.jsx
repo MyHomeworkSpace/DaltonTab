@@ -1,3 +1,5 @@
+import "settings/SettingCheckbox.styl";
+
 import { h, Component } from "preact";
 
 export default class SettingCheckbox extends Component {
@@ -8,13 +10,13 @@ export default class SettingCheckbox extends Component {
 		}
 
 		return (
-			<label>
+			<label class="settingCheckbox">
 				<input
 					type="checkbox"
-					checked={value}
+					checked={(props.inverted ? !value : value)}
 					onChange={(function(e) {
 						var newStorage = {}
-						newStorage[props.storageKey] = e.target.checked;
+						newStorage[props.storageKey] = (props.inverted ? !e.target.checked : e.target.checked);
 						this.props.updateStorage(newStorage);
 					}).bind(this)}
 				/>

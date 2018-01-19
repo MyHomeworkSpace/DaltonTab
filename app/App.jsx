@@ -26,8 +26,14 @@ const defaultOrder = ["myhomeworkspace", "schedule", "classes"];
 export default class App extends Component {
 	componentWillMount() {
 		var that = this;
+
+		// add scroll listener
+		this._scrollListener = this.onScroll.bind(this);
+		window.addEventListener("scroll", this._scrollListener);
+		this.onScroll();
+
 		// get tab storage
-		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate"], function(tabStorage) {
+		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog"], function(tabStorage) {
 			var order = tabStorage.sections || defaultOrder;
 
 			// get section storage keys
@@ -38,26 +44,55 @@ export default class App extends Component {
 			});
 			chrome.storage.sync.get(storageKeys, function(sectionStorage) {
 				sectionStorage.mhsToken = tabStorage.mhsToken;
+				var imageEnabled = true;
+				if (tabStorage.backImgTog) {
+					imageEnabled = false;
+				}
 				that.setState({
 					loaded: true,
 
-					imageLoading: true,
+					imageEnabled: imageEnabled,
+					imageLoading: imageEnabled,
 
 					order: order,
 					tabStorage: tabStorage,
 					sectionStorage: sectionStorage
 				}, function() {
-					// get image
-					var channel = localStorage.nc || "normal";
-					if (channel != "normal") {
-						console.log("Using image channel '" + channel + "'");
+					if (imageEnabled) {
+						that.loadImage.call(that);
 					}
-					image.fetchImage(channel, function(imageData) {
-						that.setState({
-							imageLoading: false,
-							imageData: imageData
-						});
-					});
+				});
+			});
+		});
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("scroll", this._scrollListener);
+	}
+
+	onScroll(e) {
+		var scrolled = (window.scrollY > 0);
+		if (scrolled !== this.state.scrolled) {
+			this.setState({
+				scrolled: scrolled
+			});
+		}
+	}
+
+	loadImage() {
+		var that = this;
+		this.setState({
+			imageLoading: true,
+		}, function() {
+			// get image
+			var channel = localStorage.nc || "normal";
+			if (channel != "normal") {
+				console.log("Using image channel '" + channel + "'");
+			}
+			image.fetchImage(channel, function(imageData) {
+				that.setState({
+					imageLoading: false,
+					imageData: imageData
 				});
 			});
 		});
@@ -104,7 +139,7 @@ export default class App extends Component {
 				<div class="topCenter">
 					<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
 				</div>
-				<ImageInfoBar loading={state.imageLoading} image={state.imageData} />
+				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} image={state.imageData} />}
 			</div>
 			<SectionContainer sections={state.order} storage={state.sectionStorage} openModal={this.openModal.bind(this)} />
 		</div>;
