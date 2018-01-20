@@ -1,4 +1,5 @@
 .settingsPane
+	animation: settingsPaneOpen 0.3s ease-in-out
 	background: white
 	border-left: solid 1px black
 	color: black
@@ -25,3 +26,12 @@
 
 	label
 		display: block
+
+@keyframes settingsPaneOpen
+	from
+		right: -400px
+		opacity: 0
+
+	to
+		right: 0
+		opacity: 1

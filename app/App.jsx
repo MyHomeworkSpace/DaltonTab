@@ -11,6 +11,8 @@ import image from "image.js";
 import mhs from "mhs.js";
 import sections from "sections.js";
 
+import FeedbackControls from "feedback/FeedbackControls.jsx";
+
 import Clock from "main/Clock.jsx";
 import ImageInfoBar from "main/ImageInfoBar.jsx";
 
@@ -145,6 +147,9 @@ export default class App extends Component {
 				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} image={state.imageData} />}
 			</div>
 			<SectionContainer sections={state.order} storage={state.sectionStorage} openModal={this.openModal.bind(this)} />
+			<div class="feedbackRow">
+				<FeedbackControls openModal={this.openModal.bind(this)} />
+			</div>
 		</div>;
 	}
 };

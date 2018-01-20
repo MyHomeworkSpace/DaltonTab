@@ -81,7 +81,7 @@ export default class FeedbackModal extends Component {
 			<div class="modal-body">
 				{state.error && <div class="alert alert-danger">{state.error}</div>}
 				<p>{desc}</p>
-				<textarea disabled={state.loading} placeholder="Write your message here..." value={state.message} onChange={linkState(this, "message")} />
+				<textarea class="form-control" disabled={state.loading} placeholder="Write your message here..." value={state.message} onChange={linkState(this, "message")} />
 				<strong>The following information will be sent with your feedback:</strong>
 				<ul>
 					<li>Your DaltonTab version (<strong>{chrome.runtime.getManifest().version}</strong>)</li>
