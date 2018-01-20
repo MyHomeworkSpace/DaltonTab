@@ -52,6 +52,7 @@ export default {
 		icon: "fa-cutlery",
 		description: "Displays the lunch menu for the day.",
 		background: "rgba(0, 140, 186, 0.9)",
+		storage: [],
 		component: LunchMenu
 	}
 };

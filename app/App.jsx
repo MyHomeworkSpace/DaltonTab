@@ -112,15 +112,34 @@ export default class App extends Component {
 	}
 	
 	updateStorage(newStorage) {
+		var that = this;
+		var keysToFetch = [];
 		var storage = this.state.tabStorage;
 		for (var key in newStorage) {
 			storage[key] = newStorage[key];
+			if (key == "sections") {
+				// we've updated the section order, make sure to fetch keys related to those sections
+				var newOrder = newStorage.sections;
+				newOrder.forEach(function(sectionName) {
+					keysToFetch = keysToFetch.concat(sections[sectionName].storage);
+				});
+			}
 		}
 		this.setState({
 			tabStorage: storage
 		}, function() {
 			chrome.storage.sync.set(newStorage, function() {
-				
+				if (keysToFetch.length > 0) {
+					chrome.storage.sync.get(keysToFetch, function(storageUpdates) {
+						var storage = that.state.tabStorage;
+						for (var key in storageUpdates) {
+							storage[key] = storageUpdates[key];
+						}
+						that.setState({
+							tabStorage: storage
+						});
+					});
+				}
 			});
 		});
 	}
