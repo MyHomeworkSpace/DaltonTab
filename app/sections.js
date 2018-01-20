@@ -46,12 +46,12 @@ export default {
 		background: "rgba(0, 140, 186, 0.9)",
 		storage: [],
 		component: TabCount
-	}/*,
+	},
 	lunchMenu: {
 		name: "Lunch Menu",
-		icon: "fa-file-text-o",
+		icon: "fa-cutlery",
 		description: "Displays the lunch menu for the day.",
 		background: "rgba(0, 140, 186, 0.9)",
 		component: LunchMenu
-	}*/
+	}
 };
