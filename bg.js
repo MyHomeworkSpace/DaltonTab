@@ -1,17 +1,8 @@
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
-		console.log("DaltonTab Instalation Complete!");
 		chrome.tabs.create({
-			url: "./etc/setup.html"
+			url: "./index.html"
 		});
-    }else if(details.reason == "update"){
-        var version = chrome.runtime.getManifest().version;
-		console.log("DaltonTab updated from " + details.previousVersion + " to " + thisVersion + "!");
-		if(parseFloat(details.previousVersion) < 0.7 ){
-			chrome.tabs.create({
-				url: "./etc/setup.html"
-			});
-		}
     }
 });
 

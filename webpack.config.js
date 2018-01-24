@@ -64,7 +64,6 @@ module.exports = {
 				from: path.resolve(__dirname, "manifests", process.env.BROWSER + ".json"),
 				to: "manifest.json"
 			},
-			{ from: "fonts", to: "fonts" },
 			{ from: "img", to: "img" },
 			"bg.js",
 			"newTab.html"
