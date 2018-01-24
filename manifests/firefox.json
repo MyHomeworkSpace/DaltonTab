@@ -1,0 +1,29 @@
+{
+	"manifest_version": 2,
+	"name": "DaltonTab",
+	"version": "0.7.0",
+
+	"icons": {"128": "img/128.png"},
+
+	"background": {
+		"scripts": ["bg.js"]
+	},
+
+	"applications": {
+		"gecko": {
+			"id": "daltontab@myhomework.space",
+			"strict_min_version": "57.0"
+		}
+	},
+
+	"permissions": [
+		"tabs",
+		"storage",
+		"*://*.dalton.org/",
+		"*://*.myhomework.space/"
+	],
+
+	"chrome_url_overrides" : {
+		"newtab": "index.html"
+	}
+}
