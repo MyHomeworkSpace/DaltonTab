@@ -2,4 +2,6 @@
 node_modules/
 build-firefox/
 build-chrome/
+prod-firefox/
+prod-chrome/
 npm-debug.log
