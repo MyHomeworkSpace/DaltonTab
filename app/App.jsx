@@ -201,7 +201,7 @@ export default class App extends Component {
 			}
 			<div id="top" class="top">
 				<div class="topCenter">
-					<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
+					<Clock type={state.tabStorage.clockType || "12hr"} showDate={(state.tabStorage.displayDate !== undefined ? state.tabStorage.displayDate : true)} />
 					{state.message && <InfoMessage message={state.message} image={state.imageData} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />}
 				</div>
 				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} image={state.imageData} />}

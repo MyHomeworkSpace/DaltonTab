@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
 		chrome.tabs.create({
-			url: "./index.html"
+			url: chrome.runtime.getURL("index.html")
 		});
     }
 });
@@ -38,7 +38,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 				mhsToken: token
 			}, function() {
 				// redirect
-				var newURL = chrome.runtime.getURL("newTab.html#mhsComplete");
+				var newURL = chrome.runtime.getURL("index.html#mhsComplete");
 				chrome.tabs.update(tabId, {
 					url: newURL
 				}, function() {
