@@ -47,7 +47,7 @@ export default class LayoutSettings extends Component {
 
 		return <div class="layoutSettings">
 			<h4>
-				Layout
+				<i class="fa fa-fw fa-th-large" /> Layout
 				<div class={`dropdown ${state.addOpen ? "open" : ""}`}>
 					<button class="btn btn-default btn-xs dropdown-toggle" type="button" onClick={this.toggleAdd.bind(this)}>
 						<i class="fa fa-plus" /> add

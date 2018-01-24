@@ -22,7 +22,7 @@ export default class SettingsPane extends Component {
 
 			<LayoutSettings storage={props.tabStorage} updateStorage={props.updateStorage} />
 
-			<h4>Clock</h4>
+			<h4><i class="fa fa-fw fa-clock-o" /> Clock</h4>
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "12hr")} checked={props.tabStorage.clockType == "12hr" || !props.tabStorage.clockType} /> 12 hour</label>
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "12hrnopm")} checked={props.tabStorage.clockType == "12hrnopm"} /> 12 hour (without AM/PM)</label>
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "24hr")} checked={props.tabStorage.clockType == "24hr"} /> 24 hour</label>
@@ -32,7 +32,7 @@ export default class SettingsPane extends Component {
 				label="Show current date underneath time" storageKey="displayDate" defaultValue={true}
 			/>
 
-			<h4>Background</h4>
+			<h4><i class="fa fa-fw fa-picture-o" /> Background</h4>
 			<SettingCheckbox 
 				storage={props.tabStorage} updateStorage={props.updateStorage}
 				label="Show DaltonTab image of the day" storageKey="backImgTog" defaultValue={false} inverted
@@ -42,10 +42,10 @@ export default class SettingsPane extends Component {
 				label="Show section arrow" storageKey="jumpingArrowTog" defaultValue={true}
 			/>
 
-			<h4>MyHomeworkSpace</h4>
+			<h4><i class="fa fa-fw fa-link" /> MyHomeworkSpace</h4>
 			<AccountSettings tabStorage={props.tabStorage} />
 
-			<h4>About</h4>
+			<h4><i class="fa fa-fw fa-info-circle" /> About</h4>
 			<p>You're running DaltonTab version {chrome.runtime.getManifest().version}.</p>
 			<a href="https://github.com/ULTIMATHEXERS/DaltonTab" class="btn btn-default btn-sm">View on GitHub</a>
 			<p>We collect some data about the services you've enabled and your web browser's version. We use this to improve DaltonTab, and the data cannot be linked back to your account, as anything that could identify you (such as your username) is not sent.</p>

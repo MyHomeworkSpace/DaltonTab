@@ -7,6 +7,7 @@ import "App.styl";
 
 import { h, Component } from "preact";
 
+import analytics from "analytics.js";
 import image from "image.js";
 import mhs from "mhs.js";
 import sections from "sections.js";
@@ -15,6 +16,7 @@ import FeedbackControls from "feedback/FeedbackControls.jsx";
 
 import Clock from "main/Clock.jsx";
 import ImageInfoBar from "main/ImageInfoBar.jsx";
+import InfoMessage from "main/InfoMessage.jsx";
 
 import SectionContainer from "sections/SectionContainer.jsx";
 
@@ -63,6 +65,24 @@ export default class App extends Component {
 					}
 				});
 			});
+		});
+
+		// analytics
+		analytics.ping(function(message) {
+			if (message) {
+				// there is a message
+				chrome.storage.sync.get("dismissedMessages", function(storage) {
+					var dismissedMessages = storage.dismissedMessages || [];
+					if (!message.campaign || dismissedMessages.indexOf(message.campaign) == -1) {
+						// should show the message
+						that.setState({
+							message: message
+						});
+					} else {
+						console.log("Message with campaign " + message.campaign + " ignored because user dismissed it.");
+					}
+				});
+			}
 		});
 	}
 
@@ -144,6 +164,25 @@ export default class App extends Component {
 		});
 	}
 
+	dismissMessage() {
+		var that = this;
+		var message = this.state.message;
+		chrome.storage.sync.get("dismissedMessages", function(storage) {
+			var dismissedMessages = storage.dismissedMessages || [];
+			dismissedMessages.push(message.campaign);
+			analytics.getClientID(function(clientID) {
+				chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function() {
+					that.setState({
+						message: null
+					});
+					analytics.dismissMessage(clientID, message.campaign, function() {
+
+					});
+				});
+			});
+		});
+	}
+
 	render(props, state) {
 		if (!state.loaded) {
 			return <div></div>;
@@ -162,6 +201,7 @@ export default class App extends Component {
 			<div id="top" class="top">
 				<div class="topCenter">
 					<Clock type={state.tabStorage.clockType} showDate={state.tabStorage.displayDate} />
+					{state.message && <InfoMessage message={state.message} image={state.imageData} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />}
 				</div>
 				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} image={state.imageData} />}
 			</div>

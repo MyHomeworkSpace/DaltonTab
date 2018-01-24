@@ -74,6 +74,15 @@ var analytics = {
 				});
 			});
 		});
+	},
+
+	dismissMessage: function(clientID, campaign, callback) {
+		ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/dismiss.php", {
+			clientID: clientID,
+			campaign: campaign
+		}, function(data) {
+			callback();
+		});
 	}
 };
 
