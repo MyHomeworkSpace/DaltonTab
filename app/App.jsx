@@ -190,7 +190,7 @@ export default class App extends Component {
 		}
 
 		return <div class={`app ${state.scrolled ? "scrolled" : ""} ${state.settingsOpen ? "settingsOpen" : ""}`} style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
-			<ModalManager modalName={state.modalName} modalState={state.modalState} openModal={this.openModal.bind(this)} />
+			<ModalManager modalName={state.modalName} modalState={state.modalState} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />
 			{state.settingsOpen && <SettingsPane tabStorage={state.tabStorage} toggleSettings={this.toggleSettings.bind(this)} updateStorage={this.updateStorage.bind(this)} />}
 
 			{state.settingsOpen && <div class="settingsOverlay" onClick={this.toggleSettings.bind(this)}></div>}

@@ -48,7 +48,7 @@ export default class EndOfYearModal extends Component {
 							loading: false,
 							done: true
 						}, function() {
-							$("#frontMessageContainer").addClass("hidden");
+							that.props.dismissMessage.call(that);
 						});
 					} else {
 						that.setState({

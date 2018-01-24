@@ -17,7 +17,7 @@ export default class ModalManager extends Component {
 		var modal;
 
 		if (props.modalName == "endOfYear") {
-			modal = <EndOfYearModal modalState={props.modalState} openModal={props.openModal} />;
+			modal = <EndOfYearModal modalState={props.modalState} dismissMessage={props.dismissMessage} openModal={props.openModal} />;
 		} else if (props.modalName == "weather") {
 			modal = <WeatherModal modalState={props.modalState} openModal={props.openModal} />;
 		} else if (props.modalName == "feedback") {
