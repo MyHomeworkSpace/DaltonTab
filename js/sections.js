@@ -1,1 +1,0 @@
-DaltonTab.Sections = DaltonTabBridge.default.sections;

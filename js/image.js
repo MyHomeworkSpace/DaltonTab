@@ -1,1 +1,0 @@
-DaltonTab.Image = DaltonTabBridge.default.image;
