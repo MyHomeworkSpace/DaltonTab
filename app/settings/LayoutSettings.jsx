@@ -30,7 +30,7 @@ export default class LayoutSettings extends Component {
 		var order = this.props.storage.sections || sections.defaultOrder;
 		order.push(sectionName);
 		this.props.updateStorage({
-			order: order
+			sections: order
 		});
 	}
 

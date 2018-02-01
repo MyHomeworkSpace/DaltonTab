@@ -36,12 +36,12 @@ export default class App extends Component {
 		this.onScroll();
 
 		// get tab storage
-		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog"], function(tabStorage) {
-			var order = tabStorage.sections || sections.defaultOrder;
+		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog", "jumpingArrowTog"], function(tabStorage) {
+			var sectionOrder = tabStorage.sections || sections.defaultOrder;
 
 			// get section storage keys
 			var storageKeys = [];
-			order.forEach(function(sectionName) {
+			sectionOrder.forEach(function(sectionName) {
 				var section = sections[sectionName];
 				storageKeys = storageKeys.concat(section.storage);
 			});
@@ -57,7 +57,7 @@ export default class App extends Component {
 					imageEnabled: imageEnabled,
 					imageLoading: imageEnabled,
 
-					order: order,
+					sections: sectionOrder,
 					tabStorage: tabStorage,
 					sectionStorage: sectionStorage
 				}, function() {
@@ -206,7 +206,7 @@ export default class App extends Component {
 				</div>
 				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} image={state.imageData} />}
 			</div>
-			<SectionContainer sections={state.order} storage={state.sectionStorage} openModal={this.openModal.bind(this)} />
+			<SectionContainer sections={state.sections} storage={state.sectionStorage} openModal={this.openModal.bind(this)} />
 			<div class="feedbackRow">
 				<FeedbackControls openModal={this.openModal.bind(this)} />
 			</div>
