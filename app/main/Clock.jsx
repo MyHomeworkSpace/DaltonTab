@@ -45,7 +45,7 @@ export default class Clock extends Component {
 				var secondsToEnd = state.now.diff(start);
 				var secondsTotal = end.diff(start);
 				var percent = Math.floor((secondsToEnd / secondsTotal) * 100);
-				timeText = percent + "%";
+				timeText = Math.max(percent, 0) + "%";
 			}
 		}
 
