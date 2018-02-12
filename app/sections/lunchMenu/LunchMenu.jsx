@@ -6,15 +6,22 @@ export default class LunchMenu extends Component {
 	componentDidMount() {
 		var that = this;
 		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/lunch.php", {}, function(data) {
-			console.log(data);
-			console.log(data["meal periods"][0]);
-			that.setState({
-				menu: data["meal periods"][0]["menu items"]
-			});
+			if (!data) {
+				that.setState({
+					noLunch: true
+				});
+			} else {
+				that.setState({
+					menu: data["meal periods"][0]["menu items"]
+				});
+			}
 		});
 	}
 
 	render(props, state) {
+		if (state.noLunch) {
+			return <div>There's no lunch today.</div>;
+		}
 		if (!state.menu) {
 			return <div>Loading, please wait...</div>;
 		}

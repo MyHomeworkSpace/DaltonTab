@@ -32,7 +32,7 @@ export default {
 		request.open(method, buildURL(url, method, data), true);
 
 		request.onload = function() {
-			callback(JSON.parse(request.responseText), request);
+			callback((request.responseText == "" ? null : JSON.parse(request.responseText)), request);
 		};
 		request.onerror = function() {
 			callback(null, request);
