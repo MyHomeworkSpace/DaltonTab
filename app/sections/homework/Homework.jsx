@@ -22,13 +22,15 @@ export default class Homework extends Component {
 					});
 					return;
 				}
-				mhs.get(token, "homework/getHWView", {}, function(data) {
+				mhs.get(token, "homework/getHWViewSorted", {
+					showToday: true
+				}, function(data) {
 					if (data.status == "ok") {
 						that.setState({
 							loaded: true,
 							loggedIn: true,
 							classes: classesData.classes,
-							homework: data.homework
+							homework: data
 						});
 					} else {
 						that.setState({
@@ -49,44 +51,12 @@ export default class Homework extends Component {
 			return <MHSConnect />;
 		}
 
-		var showMonday = (moment().day() == 5 || moment().day() == 6);
-		var tomorrowDaysToThreshold = 2;
-
-		if (showMonday) {
-			if (moment().day() == 5) {
-				tomorrowDaysToThreshold = 4;
-			} else {
-				tomorrowDaysToThreshold = 3;
-			}
-		}
-
-		var overdue = [];
-		var tomorrow = [];
-		var soon = [];
-		var longterm = [];
-
-		state.homework.forEach(function(hw) {
-			var due = moment(hw.due);
-			var daysTo = Math.ceil(due.diff(moment()) / 1000 / 60 / 60 / 24);
-
-			if (daysTo < 1 && !hw.complete) {
-				overdue.push(hw);
-			} else if (daysTo < 1) {
-				// it's due today but done, just ignore it
-			} else if (daysTo < tomorrowDaysToThreshold) {
-				tomorrow.push(hw);
-			} else if (daysTo < 5) {
-				soon.push(hw);
-			} else {
-				longterm.push(hw);
-			}
-		});
-
 		return <div class="homeworkSection">
-			{overdue.length > 0 ? <HomeworkColumn classes={state.classes} title="Overdue" homework={overdue}/> : undefined}
-			<HomeworkColumn classes={state.classes} title={(showMonday ? "Monday": "Tomorrow")} homework={tomorrow} />
-			<HomeworkColumn classes={state.classes} title="Soon" homework={soon} />
-			<HomeworkColumn classes={state.classes} title="Long-term" homework={longterm} />
+			{state.homework.overdue.length > 0 ? <HomeworkColumn classes={state.classes} title="Overdue" homework={state.homework.overdue}/> : undefined}
+			{state.homework.showToday > 0 ? <HomeworkColumn classes={state.classes} title="Today" homework={state.homework.today}/> : undefined}
+			<HomeworkColumn classes={state.classes} title={state.homework.tomorrowName} homework={state.homework.tomorrow} />
+			<HomeworkColumn classes={state.classes} title="Soon" homework={state.homework.soon} />
+			<HomeworkColumn classes={state.classes} title="Long-term" homework={state.homework.longterm} />
 		</div>;
 	}
 };
