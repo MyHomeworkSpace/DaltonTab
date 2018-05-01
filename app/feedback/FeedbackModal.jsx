@@ -85,7 +85,7 @@ export default class FeedbackModal extends Component {
 				<strong>The following information will be sent with your feedback:</strong>
 				<ul>
 					<li>Your DaltonTab version (<strong>{chrome.runtime.getManifest().version}</strong>)</li>
-					<li>Information about your browser (<strong>{chrome.runtime.getBrowserInfo().vendor} {chrome.runtime.getBrowserInfo().name}, {chrome.runtime.getBrowserInfo().version}</strong>)</li>
+					<li>Your {navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"} version</li>
 					<li>Information about what services you've enabled and are signed into</li>
 				</ul>
 				<p>Thanks for the feedback! Click "Submit" to send it!</p>
