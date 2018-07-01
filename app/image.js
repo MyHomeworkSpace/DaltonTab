@@ -50,11 +50,15 @@ export default {
 		colors = [];
 		imageLoading = true;
 		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, {}, function(image) {
-			colors = image.colors;
+			if (image) {
+				colors = image.colors;
 
-			imageLoading = false;
+				imageLoading = false;
 
-			callback(image);
+				callback(true, image);
+			} else {
+				callback(false);
+			}
 		});
 	}
 };

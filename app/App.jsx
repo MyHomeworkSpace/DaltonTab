@@ -56,6 +56,7 @@ export default class App extends Component {
 
 					imageEnabled: imageEnabled,
 					imageLoading: imageEnabled,
+					imageFailed: false,
 
 					sections: sectionOrder,
 					tabStorage: tabStorage,
@@ -104,15 +105,17 @@ export default class App extends Component {
 		var that = this;
 		this.setState({
 			imageLoading: true,
+			imageFailed: false
 		}, function() {
 			// get image
 			var channel = localStorage.nc || "normal";
 			if (channel != "normal") {
 				console.log("Using image channel '" + channel + "'");
 			}
-			image.fetchImage(channel, function(imageData) {
+			image.fetchImage(channel, function(success, imageData) {
 				that.setState({
 					imageLoading: false,
+					imageFailed: !success,
 					imageData: imageData
 				});
 			});
@@ -204,7 +207,7 @@ export default class App extends Component {
 					<Clock type={state.tabStorage.clockType || "12hr"} showDate={(state.tabStorage.displayDate !== undefined ? state.tabStorage.displayDate : true)} />
 					{state.message && <InfoMessage message={state.message} image={state.imageData} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />}
 				</div>
-				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} image={state.imageData} />}
+				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} error={state.imageFailed} image={state.imageData} />}
 			</div>
 			<SectionContainer sections={state.sections} storage={state.sectionStorage} openModal={this.openModal.bind(this)} />
 			<div class="feedbackRow">
