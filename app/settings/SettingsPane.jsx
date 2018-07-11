@@ -46,11 +46,12 @@ export default class SettingsPane extends Component {
 			<AccountSettings tabStorage={props.tabStorage} />
 
 			<h4><i class="fa fa-fw fa-info-circle" /> About</h4>
-			<p>You're running DaltonTab version {chrome.runtime.getManifest().version}.</p>
-			<a href="https://github.com/ULTIMATHEXERS/DaltonTab" class="btn btn-default btn-sm">View on GitHub</a>
-			<p>This program uses the Lato font, which is copyright (c) 2010-2014 by tyPoland Lukasz Dziedzic (team@latofonts.com) with Reserved Font Name "Lato"</p>
-			<p>We collect some data about the services you've enabled and your web browser's version. We use this to improve DaltonTab, and the data cannot be linked back to your account, as anything that could identify you (such as your username) is not sent.</p>
-			
+			<p>You're running DaltonTab version {chrome.runtime.getManifest().version} on {navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"}. DaltonTab was created for the TigerHacks NYC Hackathon, and is currently maintained by the MyHomeworkSpace team.</p>
+
+			<a href="https://github.com/MyHomeworkSpace/DaltonTab" class="btn btn-default btn-sm">View on GitHub</a>
+
+			<p class="small">This program uses the Lato font, which is copyright (c) 2010-2014 by tyPoland Lukasz Dziedzic (team@latofonts.com) with Reserved Font Name "Lato"</p>
+			<p class="small">We collect some data about the services you've enabled and your web browser's version. We use this to improve DaltonTab, and the data cannot be linked back to your account, as anything that could identify you (such as your username) is not sent.</p>
 		</div>;
 	}
 };
