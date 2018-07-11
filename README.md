@@ -1,7 +1,14 @@
-# DaltonTab [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ggfjkmflbbjndabmnngilkfpmdegbfkm.svg)](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm) [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/ggfjkmflbbjndabmnngilkfpmdegbfkm.svg)](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm) [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/ggfjkmflbbjndabmnngilkfpmdegbfkm.svg)](https://chrome.google.com/webstore/detail/ggfjkmflbbjndabmnngilkfpmdegbfkmi/reviews)
+# DaltonTab
 DaltonTab is a new tab page built to be a hub for Dalton School students. It collects everything you need in one spot, and connects to your MyHomeworkSpace account.
 
-[Download it](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm)
+## Get it!
+DaltonTab is available on Firefox and Chrome.
+
+### [Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/daltontab/)
+![Firefox Version](https://img.shields.io/amo/v/daltontab.svg) ![Firefox Rating](https://img.shields.io/amo/stars/daltontab.svg)
+
+### [Download for Chrome](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm)
+![Chrome Version](https://img.shields.io/chrome-web-store/v/ggfjkmflbbjndabmnngilkfpmdegbfkm.svg) ![Chrome Ratings](https://img.shields.io/chrome-web-store/stars/nimelepbpejjlbmoobocpfnjhihnpked.svg)
 
 ## Development
 Make sure you've run `npm install` first! 
