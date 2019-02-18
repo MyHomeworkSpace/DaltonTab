@@ -63,7 +63,10 @@ export default class Calendar extends Component {
 			loadingWeek: true,
 			weekInfo: null
 		}, function() {
-			mhs.get(that.state.token, "calendar/events/getWeek/" + that.state.monday.format("YYYY-MM-DD"), {}, function(data) {
+			mhs.get(that.state.token, "calendar/getView", {
+				start: that.state.monday.format("YYYY-MM-DD"),
+				end: moment(that.state.monday).add(7, "days").format("YYYY-MM-DD")
+			}, function(data) {
 				that.setState({
 					loadingWeek: false,
 					weekInfo: data
@@ -105,34 +108,13 @@ export default class Calendar extends Component {
 			return <MHSConnect type="calendar" />;
 		}
 
-		var fridayIndex = (state.loadingWeek ? -1 : state.weekInfo.friday.index);
+		var fridayIndex = (state.loadingWeek ? -1 : state.weekInfo.view.days[4].shiftingIndex);
 
 		var dayHeaders = [];
 		var dayContents = [];
 		var names = [ "Monday", "Tuesday", "Wednesday", "Thursday", (fridayIndex > 0 ? "Friday " + fridayIndex : "Friday"), "Saturday", "Sunday" ];
 
 		var currentDay = moment(state.monday);
-
-		var sortedEvents = [
-			[], [], [], [], [], [], []
-		];
-
-		if (!state.loadingWeek) {
-			state.weekInfo.events.map(function(e){
-				var newEvent = e;
-				newEvent.type = "event";
-				return newEvent;
-			}).concat(state.weekInfo.hwEvents.map(function(e){
-				var newEvent = e;
-				newEvent.type = "homework";
-				return newEvent;
-			})).forEach(function(calendarEvent) {
-				var start = moment.unix(calendarEvent.start);
-				var dow = start.isoWeekday() - 1;
-				sortedEvents[dow].push(calendarEvent);
-			});
-		}
-
 		var earliestEvent = 1440;
 		var latestEvent = 0;
 
@@ -143,26 +125,16 @@ export default class Calendar extends Component {
 			var allEvents = [];
 
 			if (!state.loadingWeek) {
-				var scheduleEvents = state.weekInfo.scheduleEvents && state.weekInfo.scheduleEvents[dayNumber];
-				if (!scheduleEvents) {
-					scheduleEvents = [];
-				}
-				scheduleEvents.forEach(function(event) {
-					event.type = "schedule";
-					allEvents.push(event);
-				});
-
-				allEvents = allEvents.concat(sortedEvents[dayNumber]);
+				allEvents = state.weekInfo.view.days[dayNumber].events;
 			}
 
 			// group events that occur at same time
 			var groupsForDay = [];
 			allEvents = allEvents.map(function(eventItem) {
-				var isScheduleItem = (eventItem.type == "schedule"); 
 				eventItem.groupInfo = {
-					dayStart: (isScheduleItem ? moment.unix(0).utc() : moment.unix(eventItem.start).startOf("day").utc()),
-					start: moment.unix(eventItem.start).utc(),
-					end: moment.unix(eventItem.end).utc(),
+					dayStart: moment.unix(eventItem.start).startOf("day"),
+					start: moment.unix(eventItem.start),
+					end: moment.unix(eventItem.end),
 				};
 				eventItem.groupInfo.offset = eventItem.groupInfo.start.diff(eventItem.groupInfo.dayStart, "minutes");
 				eventItem.groupInfo.durationInMinutes = eventItem.groupInfo.end.diff(eventItem.groupInfo.start, "minutes");
@@ -233,6 +205,8 @@ export default class Calendar extends Component {
 			
 			currentDay.add(1, "day");
 		}
+
+		console.log(allGroupsForDays);
 
 		return (
 			<div class="calendarSection">

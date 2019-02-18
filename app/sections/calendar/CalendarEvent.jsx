@@ -3,21 +3,14 @@ import "sections/calendar/CalendarEvent.styl";
 import { h, Component } from "preact";
 import moment from "moment";
 
+import consts from "consts.js";
+
 export default class CalendarEvent extends Component {
-	render(props, state) {
-		var isScheduleItem = (props.type == "schedule");
-		
+	render(props, state) {		
 		var dayStart = moment.unix(props.event.start).startOf("day");
-		if (isScheduleItem) {
-			dayStart = moment.unix(0).utc();
-		}
 
 		var start = moment.unix(props.event.start);
 		var end = moment.unix(props.event.end);
-		if (isScheduleItem) {
-			start = start.utc();
-			end = end.utc();
-		}
 
 		var offset = start.diff(dayStart, "minutes");
 		var durationInMinutes = end.diff(start, "minutes");
@@ -25,9 +18,9 @@ export default class CalendarEvent extends Component {
 		var startDisplay = start.format("h:mm a");
 		var endDisplay = end.format("h:mm a");
 
-		var displayName = (props.type == "homework" ? props.event.homework.name : props.event.name);
+		var displayName = (props.event.type == consts.EVENT_TYPE_HOMEWORK ? props.event.data.homework.name : props.event.name);
 
-		if (isScheduleItem) {
+		if (props.event.type == consts.EVENT_TYPE_SCHEDULE) {
 			var displayNameSectionless = displayName.replace(/ -(.*)\(.*\)/g, "");
 			displayName = displayNameSectionless.trim();
 		}
@@ -39,8 +32,8 @@ export default class CalendarEvent extends Component {
 		}
 
 		var timeDisplay = startDisplay + " to " + endDisplay;
-		if (props.type == "schedule") {
-			timeDisplay += " in " + props.event.roomNumber;
+		if (props.event.type == consts.EVENT_TYPE_SCHEDULE) {
+			timeDisplay += " in " + props.event.data.roomNumber;
 		}
 
 		return <div

@@ -1,0 +1,5 @@
+export default {
+	EVENT_TYPE_PLAIN: 0,
+	EVENT_TYPE_HOMEWORK: 1,
+	EVENT_TYPE_SCHEDULE: 2
+};
