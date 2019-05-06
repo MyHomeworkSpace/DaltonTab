@@ -46,6 +46,14 @@ export default {
 		currentImage = newImage;
 	},
 
+	trackView: function(imageData, callback) {
+		ajax.request("GET", imageData.beaconUrl, {}, function() {
+			if (callback) {
+				callback();
+			}
+		});
+	},
+
 	fetchImage: function(channel, callback) {
 		colors = [];
 		imageLoading = true;

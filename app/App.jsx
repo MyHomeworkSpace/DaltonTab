@@ -113,6 +113,15 @@ export default class App extends Component {
 				console.log("Using image channel '" + channel + "'");
 			}
 			image.fetchImage(channel, function(success, imageData) {
+				if (imageData.beaconUrl) {
+					// unsplash requires us to report image views
+					// this is normally done just by hotlinking the image; however, we can't do that because of permissions
+					// so, this uses the special magic unsplash partner api to call their view beacon thing
+					// except we can't directly call that either, so this function call proxies that request through a daltontab server
+					image.trackView(imageData);
+				}
+
+				// update state
 				that.setState({
 					imageLoading: false,
 					imageFailed: !success,
