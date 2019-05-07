@@ -25,7 +25,6 @@ export default class Articles extends Component {
     }
 
     render(props, state) {
-        console.log(state)
         if (state.loading) {
             return <Loading section="stories" />
         } else {

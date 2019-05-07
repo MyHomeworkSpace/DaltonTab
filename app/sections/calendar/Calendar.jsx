@@ -207,8 +207,6 @@ export default class Calendar extends Component {
 			currentDay.add(1, "day");
 		}
 
-		console.log(allGroupsForDays);
-
 		return (
 			<div class="calendarSection">
 				<div class="calendarHeader row">
