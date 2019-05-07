@@ -4,6 +4,7 @@ import Homework from "sections/homework/Homework.jsx";
 import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 import TabCount from "sections/tabCount/TabCount.jsx";
 import Weather from "sections/weather/Weather.jsx";
+import Articles from "sections/articles/Articles.jsx"
 
 export default {
 	defaultOrder: ["myhomeworkspace", "schedule", "classes"],
@@ -54,5 +55,13 @@ export default {
 		background: "rgba(0, 140, 186, 0.9)",
 		storage: [],
 		component: LunchMenu
+	},
+	articles: {
+		name: "Articles",
+		icon: "fa-newspaper-o",
+		description: "Displays stories from Pocket",
+		background: "rgba(0, 140, 186, 0.9)",
+		storage: [],
+		component: Articles
 	}
 };
