@@ -7,12 +7,13 @@ import mhs from "mhs.js";
 
 import MHSConnect from "other/MHSConnect.jsx";
 import CalendarEvent from "sections/calendar/CalendarEvent.jsx";
+import Loading from "ui/Loading.jsx"
 
 export default class Calendar extends Component {
 	componentDidMount() {
 		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		mhs.get(token, "calendar/getStatus", {}, function(statusData) {
+		mhs.get(token, "calendar/getStatus", {}, function (statusData) {
 			if (statusData.status != "ok") {
 				that.setState({
 					loaded: true,
@@ -33,7 +34,7 @@ export default class Calendar extends Component {
 			while (mondayDate.day() != 1) {
 				mondayDate.subtract(1, "day");
 			}
-			
+
 			that.setState({
 				loaded: true,
 				loggedIn: true,
@@ -41,7 +42,7 @@ export default class Calendar extends Component {
 				token: token,
 				monday: mondayDate,
 				loadingWeek: true
-			}, function() {
+			}, function () {
 				that.loadCurrentWeek.call(that);
 				that.setInitialScroll.call(that);
 			});
@@ -62,11 +63,11 @@ export default class Calendar extends Component {
 		this.setState({
 			loadingWeek: true,
 			weekInfo: null
-		}, function() {
+		}, function () {
 			mhs.get(that.state.token, "calendar/getView", {
 				start: that.state.monday.format("YYYY-MM-DD"),
 				end: moment(that.state.monday).add(7, "days").format("YYYY-MM-DD")
-			}, function(data) {
+			}, function (data) {
 				that.setState({
 					loadingWeek: false,
 					weekInfo: data
@@ -82,24 +83,24 @@ export default class Calendar extends Component {
 		}
 		this.setState({
 			monday: mondayDate
-		}, function() {
+		}, function () {
 			this.loadCurrentWeek();
 		});
 	}
 
 	jumpWeek(amount) {
 		var newDate = moment(this.state.monday);
-		newDate.add(amount, "week"); 
+		newDate.add(amount, "week");
 		this.setState({
 			monday: newDate
-		}, function() {
+		}, function () {
 			this.loadCurrentWeek();
 		});
 	}
 
 	render(props, state) {
 		if (!state.loaded) {
-			return <div>Loading, please wait...</div>;
+			return <Loading section="calendar" />
 		}
 		if (!state.loggedIn) {
 			return <MHSConnect />;
@@ -112,7 +113,7 @@ export default class Calendar extends Component {
 
 		var dayHeaders = [];
 		var dayContents = [];
-		var names = [ "Monday", "Tuesday", "Wednesday", "Thursday", (fridayIndex > 0 ? "Friday " + fridayIndex : "Friday"), "Saturday", "Sunday" ];
+		var names = ["Monday", "Tuesday", "Wednesday", "Thursday", (fridayIndex > 0 ? "Friday " + fridayIndex : "Friday"), "Saturday", "Sunday"];
 
 		var currentDay = moment(state.monday);
 		var earliestEvent = 1440;
@@ -130,7 +131,7 @@ export default class Calendar extends Component {
 
 			// group events that occur at same time
 			var groupsForDay = [];
-			allEvents = allEvents.map(function(eventItem) {
+			allEvents = allEvents.map(function (eventItem) {
 				eventItem.groupInfo = {
 					dayStart: moment.unix(eventItem.start).startOf("day"),
 					start: moment.unix(eventItem.start),
@@ -138,12 +139,12 @@ export default class Calendar extends Component {
 				};
 				eventItem.groupInfo.offset = eventItem.groupInfo.start.diff(eventItem.groupInfo.dayStart, "minutes");
 				eventItem.groupInfo.durationInMinutes = eventItem.groupInfo.end.diff(eventItem.groupInfo.start, "minutes");
-				eventItem.groupInfo.height = (eventItem.groupInfo.durationInMinutes < 10 ? 10: eventItem.groupInfo.durationInMinutes);
+				eventItem.groupInfo.height = (eventItem.groupInfo.durationInMinutes < 10 ? 10 : eventItem.groupInfo.durationInMinutes);
 				eventItem.groupInfo.endOffset = eventItem.groupInfo.offset + eventItem.groupInfo.durationInMinutes;
 				eventItem.groupInfo.endOffsetHeight = eventItem.groupInfo.offset + eventItem.groupInfo.height;
 				return eventItem;
 			});
-			allEvents.forEach(function(eventItem, eventItemIndex) {
+			allEvents.forEach(function (eventItem, eventItemIndex) {
 				// if the earliest time we've found so far is after this
 				if (earliestEvent > eventItem.groupInfo.offset) {
 					// update the earliest event
@@ -176,20 +177,20 @@ export default class Calendar extends Component {
 				if (foundGroupIndex != -1) {
 					groupsForDay[foundGroupIndex].push(eventItem);
 				} else {
-					groupsForDay.push([ eventItem ]);
+					groupsForDay.push([eventItem]);
 				}
 			});
 
 			allGroupsForDays[dayNumber] = groupsForDay;
 		}
-		
+
 		var height = latestEvent - earliestEvent;
-	
+
 		for (var dayNumber = 0; dayNumber < 7; dayNumber++) {
 			// make the elements
 			var eventElements = [];
-			allGroupsForDays[dayNumber].forEach(function(eventGroup) {
-				eventGroup.forEach(function(eventItem, eventGroupIndex) {
+			allGroupsForDays[dayNumber].forEach(function (eventGroup) {
+				eventGroup.forEach(function (eventItem, eventGroupIndex) {
 					eventElements.push(<CalendarEvent
 						event={eventItem}
 						type={eventItem.type}
@@ -202,7 +203,7 @@ export default class Calendar extends Component {
 
 			dayHeaders.push(h("div", { class: "calendarDayHeader" }, names[dayNumber] + " " + currentDay.format("M/D")));
 			dayContents.push(h("div", { class: "calendarDayContents day" + dayNumber, style: "height: " + height + "px" }, eventElements));
-			
+
 			currentDay.add(1, "day");
 		}
 
@@ -213,14 +214,14 @@ export default class Calendar extends Component {
 				<div class="calendarHeader row">
 					<div class="col-md-6 calendarHeaderLeft">
 						Week of {state.monday.format("MMMM D, YYYY")}
-						<span class="calendarHeaderLoading">{(state.loadingWeek ? " Loading week, please wait...": "")}</span>
+						<span class="calendarHeaderLoading">{(state.loadingWeek ? " Loading week, please wait..." : "")}</span>
 					</div>
 					<div class="col-md-6 calendarHeaderRight">
-						<button class="btn btn-default" onClick={this.jumpWeek.bind(this, -1) }>
+						<button class="btn btn-default" onClick={this.jumpWeek.bind(this, -1)}>
 							<i class="fa fa-chevron-left" />
 						</button>
-						<button class="btn btn-default" onClick={this.jumpToday.bind(this) }>Today</button>
-						<button class="btn btn-default" onClick={this.jumpWeek.bind(this, 1) }>
+						<button class="btn btn-default" onClick={this.jumpToday.bind(this)}>Today</button>
+						<button class="btn btn-default" onClick={this.jumpWeek.bind(this, 1)}>
 							<i class="fa fa-chevron-right" />
 						</button>
 					</div>

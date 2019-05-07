@@ -3,6 +3,7 @@ import "sections/articles/Articles.styl"
 import { h, Component } from "preact";
 
 import ajax from "ajax.js"
+import Loading from "ui/Loading.jsx"
 
 export default class Articles extends Component {
     constructor() {
@@ -26,7 +27,7 @@ export default class Articles extends Component {
     render(props, state) {
         console.log(state)
         if (state.loading) {
-            return <p>Loading</p>
+            return <Loading section="stories" />
         } else {
             return <div class="articles-section">
                 <div class="articles">
