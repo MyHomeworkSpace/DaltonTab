@@ -11,9 +11,7 @@
 
 	"permissions": [
 		"storage",
-		"*://*.dalton.org/",
-		"*://*.myhomework.space/",
-		"https://www.bing.com/"
+		"*://*.dalton.org/"
 	],
 
 	"chrome_url_overrides" : {
