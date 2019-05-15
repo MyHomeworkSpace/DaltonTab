@@ -5,6 +5,7 @@ import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 import TabCount from "sections/tabCount/TabCount.jsx";
 import Weather from "sections/weather/Weather.jsx";
 import Articles from "sections/articles/Articles.jsx"
+import Transit from "sections/transit/Transit.jsx";
 
 export default {
 	defaultOrder: ["myhomeworkspace", "schedule", "classes"],
@@ -63,5 +64,13 @@ export default {
 		background: "rgba(0, 140, 186, 0.9)",
 		storage: [],
 		component: Articles
+	},
+	transit: {
+		name: "Transit",
+		icon: "fa-train",
+		description: "Displays bus and train status from the MTA",
+		background: "rgba(0, 140, 186, 0.9)",
+		storage: [],
+		component: Transit
 	}
 };
