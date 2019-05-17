@@ -5,13 +5,14 @@ import { h, Component } from "preact";
 import mhs from "mhs.js";
 
 import MHSConnect from "other/MHSConnect.jsx";
-import Loading from "ui/Loading.jsx"
+
+import Loading from "ui/Loading.jsx";
 
 export default class Classes extends Component {
 	componentDidMount() {
 		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		mhs.get(token, "calendar/getStatus", {}, function (statusData) {
+		mhs.get(token, "calendar/getStatus", {}, function(statusData) {
 			if (statusData.status != "ok") {
 				that.setState({
 					loaded: true,
@@ -27,7 +28,7 @@ export default class Classes extends Component {
 				});
 				return;
 			}
-			mhs.get(token, "calendar/getClasses", {}, function (data) {
+			mhs.get(token, "calendar/getClasses", {}, function(data) {
 				that.setState({
 					loaded: true,
 					loggedIn: true,
@@ -40,7 +41,7 @@ export default class Classes extends Component {
 
 	render(props, state) {
 		if (!state.loaded) {
-			return <Loading section="classes" />
+			return <Loading section="classes" />;
 		}
 		if (!state.loggedIn) {
 			return <MHSConnect />;
@@ -49,7 +50,7 @@ export default class Classes extends Component {
 			return <MHSConnect type="calendar" />;
 		}
 
-		var classItems = state.classes.map(function (classItem) {
+		var classItems = state.classes.map(function(classItem) {
 			var linkURL = "https://dalton.myschoolapp.com/app/student#academicclass/" + classItem.sectionId + "/0/bulletinboard";
 			return <div class="classesSectionItem">
 				<a href={linkURL}>

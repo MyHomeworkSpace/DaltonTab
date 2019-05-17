@@ -1,7 +1,7 @@
 import "ui/IconButton.styl";
 
 import { h, Component } from "preact";
-import Scrollchor from 'react-scrollchor';
+import Scrollchor from "react-scrollchor";
 
 export default class IconButton extends Component {
 	click() {

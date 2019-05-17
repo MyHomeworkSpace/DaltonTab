@@ -26,13 +26,16 @@ export default class AccountSettings extends Component {
 	}
 
 	disconnect() {
+		var that = this;
+
 		if (!confirm("Are you sure? You'll need to reconnect your account if you want to see your schedule, classes, and homework.")) {
 			return;
 		}
+
 		this.setState({
 			loaded: false
 		}, function() {
-			mhs.post(props.tabStorage.mhsToken, "application/revokeSelf", {}, function(data) {
+			mhs.post(that.props.tabStorage.mhsToken, "application/revokeSelf", {}, function(data) {
 				window.location.reload();
 			});
 		});

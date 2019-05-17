@@ -4,7 +4,7 @@ import { h, Component } from "preact";
 
 import ajax from "ajax.js";
 
-import Loading from "ui/Loading.jsx"
+import Loading from "ui/Loading.jsx";
 
 export default class Weather extends Component {
 	constructor() {
@@ -19,7 +19,7 @@ export default class Weather extends Component {
 		this.setState({
 			loading: true,
 			results: null
-		}, function () {
+		}, function() {
 			var units = "f";
 			if (nextProps.storage.weatherUnits != undefined) {
 				units = nextProps.storage.weatherUnits;
@@ -36,7 +36,7 @@ export default class Weather extends Component {
 			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather.php", {
 				units: units,
 				place: nextProps.storage.weather.query
-			}, function (data) {
+			}, function(data) {
 				if (data) {
 					that.setState({
 						loading: false,
@@ -78,7 +78,7 @@ export default class Weather extends Component {
 		var forecastUrl = state.results && state.results.link.split("*")[1]; // HACK: for some reason, the link Yahoo returns doesn't work, and it has to be split like this
 
 		if (state.loading) {
-			return <Loading section="weather" />
+			return <Loading section="weather" />;
 		}
 
 		return <div class="weather row">
@@ -100,7 +100,7 @@ export default class Weather extends Component {
 					</div>
 					<button class="btn btn-default btn-xs" onClick={this.openSettingsModal.bind(this)}>Weather options</button>
 					<div>
-						<a href="https://weather.yahoo.com/?ilc=401" target="_blank" class="weatherPoweredBy">
+						<a href="https://weather.yahoo.com/?ilc=401" target="_blank" rel="noopener noreferrer" class="weatherPoweredBy">
 							<img src="https://poweredby.yahoo.com/white.png" width="134" height="29" />
 						</a>
 					</div>
@@ -109,7 +109,7 @@ export default class Weather extends Component {
 			{state.results && <div class="col-md-6">
 				<h2>Forecast</h2>
 				<div class="row">
-					{forecast.map(function (dayForecast, index) {
+					{forecast.map(function(dayForecast, index) {
 						if (index > 4) {
 							return;
 						}

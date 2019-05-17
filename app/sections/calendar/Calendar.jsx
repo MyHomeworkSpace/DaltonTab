@@ -6,14 +6,16 @@ import moment from "moment";
 import mhs from "mhs.js";
 
 import MHSConnect from "other/MHSConnect.jsx";
+
 import CalendarEvent from "sections/calendar/CalendarEvent.jsx";
-import Loading from "ui/Loading.jsx"
+
+import Loading from "ui/Loading.jsx";
 
 export default class Calendar extends Component {
 	componentDidMount() {
 		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		mhs.get(token, "calendar/getStatus", {}, function (statusData) {
+		mhs.get(token, "calendar/getStatus", {}, function(statusData) {
 			if (statusData.status != "ok") {
 				that.setState({
 					loaded: true,
@@ -42,7 +44,7 @@ export default class Calendar extends Component {
 				token: token,
 				monday: mondayDate,
 				loadingWeek: true
-			}, function () {
+			}, function() {
 				that.loadCurrentWeek.call(that);
 				that.setInitialScroll.call(that);
 			});
@@ -63,11 +65,11 @@ export default class Calendar extends Component {
 		this.setState({
 			loadingWeek: true,
 			weekInfo: null
-		}, function () {
+		}, function() {
 			mhs.get(that.state.token, "calendar/getView", {
 				start: that.state.monday.format("YYYY-MM-DD"),
 				end: moment(that.state.monday).add(7, "days").format("YYYY-MM-DD")
-			}, function (data) {
+			}, function(data) {
 				that.setState({
 					loadingWeek: false,
 					weekInfo: data
@@ -83,7 +85,7 @@ export default class Calendar extends Component {
 		}
 		this.setState({
 			monday: mondayDate
-		}, function () {
+		}, function() {
 			this.loadCurrentWeek();
 		});
 	}
@@ -93,14 +95,14 @@ export default class Calendar extends Component {
 		newDate.add(amount, "week");
 		this.setState({
 			monday: newDate
-		}, function () {
+		}, function() {
 			this.loadCurrentWeek();
 		});
 	}
 
 	render(props, state) {
 		if (!state.loaded) {
-			return <Loading section="calendar" />
+			return <Loading section="calendar" />;
 		}
 		if (!state.loggedIn) {
 			return <MHSConnect />;
@@ -131,7 +133,7 @@ export default class Calendar extends Component {
 
 			// group events that occur at same time
 			var groupsForDay = [];
-			allEvents = allEvents.map(function (eventItem) {
+			allEvents = allEvents.map(function(eventItem) {
 				eventItem.groupInfo = {
 					dayStart: moment.unix(eventItem.start).startOf("day"),
 					start: moment.unix(eventItem.start),
@@ -144,7 +146,7 @@ export default class Calendar extends Component {
 				eventItem.groupInfo.endOffsetHeight = eventItem.groupInfo.offset + eventItem.groupInfo.height;
 				return eventItem;
 			});
-			allEvents.forEach(function (eventItem, eventItemIndex) {
+			allEvents.forEach(function(eventItem, eventItemIndex) {
 				// if the earliest time we've found so far is after this
 				if (earliestEvent > eventItem.groupInfo.offset) {
 					// update the earliest event
@@ -186,11 +188,11 @@ export default class Calendar extends Component {
 
 		var height = latestEvent - earliestEvent;
 
-		for (var dayNumber = 0; dayNumber < 7; dayNumber++) {
+		for (dayNumber = 0; dayNumber < 7; dayNumber++) {
 			// make the elements
 			var eventElements = [];
-			allGroupsForDays[dayNumber].forEach(function (eventGroup) {
-				eventGroup.forEach(function (eventItem, eventGroupIndex) {
+			allGroupsForDays[dayNumber].forEach(function(eventGroup) {
+				eventGroup.forEach(function(eventItem, eventGroupIndex) {
 					eventElements.push(<CalendarEvent
 						event={eventItem}
 						type={eventItem.type}

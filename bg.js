@@ -1,9 +1,9 @@
-chrome.runtime.onInstalled.addListener(function(details){
-    if(details.reason == "install"){
+chrome.runtime.onInstalled.addListener(function(details) {
+	if (details.reason == "install") {
 		chrome.tabs.create({
 			url: chrome.runtime.getURL("index.html")
 		});
-    }
+	}
 });
 
 chrome.tabs.onCreated.addListener(function() {
@@ -17,10 +17,10 @@ chrome.tabs.onCreated.addListener(function() {
 				} else {
 					tabCountLocal++;
 				}
-				chrome.storage.sync.set({tabCount: tabCountLocal}, function(){});
+				chrome.storage.sync.set({tabCount: tabCountLocal}, function() {});
 			} else {
-				chrome.storage.sync.set({tabCount: 1}, function(){});
-				chrome.storage.sync.set({lastDate: today}, function(){});
+				chrome.storage.sync.set({tabCount: 1}, function() {});
+				chrome.storage.sync.set({lastDate: today}, function() {});
 			}
 		});
 	});

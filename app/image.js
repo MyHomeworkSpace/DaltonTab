@@ -2,13 +2,10 @@ import { render, h } from "preact";
 
 import ajax from "ajax.js";
 
-import ImageInfoBar from "main/ImageInfoBar.jsx";
-
 var colors = [];
 
 var imageLoading = true;
 var currentImage;
-var imageInfoBarVisible = true;
 
 var getSectionBackground = function(index, fallback) {
 	var colorIndex = index;
@@ -39,7 +36,7 @@ export default {
 		return {
 			normal: messageBackground,
 			hover: messageHover
-		}
+		};
 	},
 
 	setImage: function(newImage) {

@@ -39,7 +39,7 @@ export default {
 		};
 
 		if (method == "POST") {
-			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 		}
 		if (options) {
 			if (options.cors) {

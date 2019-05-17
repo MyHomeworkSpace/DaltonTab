@@ -22,7 +22,7 @@ export default class HomeworkColumn extends Component {
 			var daysTo = Math.ceil(due.diff(moment()) / 1000 / 60 / 60 / 24);
 			var late = (daysTo < 1);
 
-			if (dueText.indexOf(' ') > -1) {
+			if (dueText.indexOf(" ") > -1) {
 				dueText = dueText[0].toLowerCase() + dueText.substr(1);
 			}
 

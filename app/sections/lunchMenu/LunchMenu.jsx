@@ -2,12 +2,12 @@ import { h, Component } from "preact";
 
 import ajax from "ajax.js";
 
-import Loading from "ui/Loading.jsx"
+import Loading from "ui/Loading.jsx";
 
 export default class LunchMenu extends Component {
 	componentDidMount() {
 		var that = this;
-		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/lunch.php", {}, function (data) {
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/lunch.php", {}, function(data) {
 			if (!data) {
 				that.setState({
 					noLunch: true
@@ -27,8 +27,7 @@ export default class LunchMenu extends Component {
 		if (!state.menu) {
 			return <Loading section="lunch menu" />;
 		}
-		var that = this;
-		var menuItems = state.menu.map(function (item) {
+		var menuItems = state.menu.map(function(item) {
 			return <div>{item.name}</div>;
 		});
 		return <div>{menuItems}</div>;
