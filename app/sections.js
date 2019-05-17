@@ -1,11 +1,11 @@
+import Articles from "sections/articles/Articles.jsx";
 import Calendar from "sections/calendar/Calendar.jsx";
 import Classes from "sections/classes/Classes.jsx";
 import Homework from "sections/homework/Homework.jsx";
 import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 import TabCount from "sections/tabCount/TabCount.jsx";
-import Weather from "sections/weather/Weather.jsx";
-import Articles from "sections/articles/Articles.jsx"
 import Transit from "sections/transit/Transit.jsx";
+import Weather from "sections/weather/Weather.jsx";
 
 export default {
 	defaultOrder: ["myhomeworkspace", "schedule", "classes"],
