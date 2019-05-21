@@ -14,7 +14,7 @@ export default class SettingCheckbox extends Component {
 				<input
 					type="checkbox"
 					checked={(props.inverted ? !value : value)}
-					onChange={(function(e) {
+					onChange={(function (e) {
 						var newStorage = {};
 						newStorage[props.storageKey] = (props.inverted ? !e.target.checked : e.target.checked);
 						this.props.updateStorage(newStorage);

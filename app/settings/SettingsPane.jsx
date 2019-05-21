@@ -27,17 +27,25 @@ export default class SettingsPane extends Component {
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "12hrnopm")} checked={props.tabStorage.clockType == "12hrnopm"} /> 12 hour (without AM/PM)</label>
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "24hr")} checked={props.tabStorage.clockType == "24hr"} /> 24 hour</label>
 			<label><input type="radio" name="clockType" onChange={this.setStorage.bind(this, "clockType", "percent")} checked={props.tabStorage.clockType == "percent"} /> Percentage clock</label>
-			<SettingCheckbox 
+			<SettingCheckbox
 				storage={props.tabStorage} updateStorage={props.updateStorage}
 				label="Show current date underneath time" storageKey="displayDate" defaultValue={true}
 			/>
+			<SettingCheckbox
+				storage={props.tabStorage} updateStorage={props.updateStorage}
+				label="Show a progress bar with your progress through the day" storageKey="progressBar" defaultValue={false}
+			/>
+			<SettingCheckbox
+				storage={props.tabStorage} updateStorage={props.updateStorage}
+				label="Show the percent you are through the day" storageKey="showPercent" defaultValue={false}
+			/>
 
 			<h4><i class="fa fa-fw fa-picture-o" /> Background</h4>
-			<SettingCheckbox 
+			<SettingCheckbox
 				storage={props.tabStorage} updateStorage={props.updateStorage}
 				label="Show DaltonTab image of the day" storageKey="backImgTog" defaultValue={false} inverted
 			/>
-			<SettingCheckbox 
+			<SettingCheckbox
 				storage={props.tabStorage} updateStorage={props.updateStorage}
 				label="Show section arrow" storageKey="jumpingArrowTog" defaultValue={true}
 			/>

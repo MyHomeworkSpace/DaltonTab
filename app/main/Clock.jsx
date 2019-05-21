@@ -12,7 +12,7 @@ export default class Clock extends Component {
 	}
 
 	componentWillMount() {
-		this._timer = setInterval((function() {
+		this._timer = setInterval((function () {
 			this.setState({
 				now: moment()
 			});
@@ -26,6 +26,23 @@ export default class Clock extends Component {
 	render(props, state) {
 		var timeText;
 
+		var start = moment().set("hour", 8);
+		var end = moment().set("hour", 12 + 3).set("minute", 15);
+
+		var percent;
+		if (start.diff(state.now, "hours") > 0) {
+			// day hasn't started yet
+			percent = 0;
+		} else if (end.diff(state.now, "hours") < 0) {
+			// day is over
+			percent = 100;
+		} else {
+			var secondsToEnd = state.now.diff(start);
+			var secondsTotal = end.diff(start);
+			var percentUnrounded = Math.floor((secondsToEnd / secondsTotal) * 100);
+			percent = Math.max(percentUnrounded, 0);
+		}
+
 		if (props.type == "12hr" || props.type == "12hrnopm") {
 			timeText = state.now.format("h:mm");
 		} else if (props.type == "24hr") {
@@ -35,28 +52,23 @@ export default class Clock extends Component {
 			var start = moment().set("hour", 8);
 			var end = moment().set("hour", 12 + 3).set("minute", 15);
 
-			if (start.diff(state.now, "hours") > 0) {
-				// day hasn't started yet
-				timeText = "0%";
-			} else if (end.diff(state.now, "hours") < 0) {
-				// day is over
-				timeText = "100%";
-			} else {
-				var secondsToEnd = state.now.diff(start);
-				var secondsTotal = end.diff(start);
-				var percent = Math.floor((secondsToEnd / secondsTotal) * 100);
-				timeText = Math.max(percent, 0) + "%";
-			}
+			timeText = percent + "%"
 		}
 
-		return <div class="clock">
-			<div class="clockTime">
-				{timeText}
-				{props.type == "12hr" && <div class="clockTimeAMPM">
-					{state.now.format("A")}
-				</div>}
+		// percent = 50
+
+		return <div>
+			<div class="clock">
+				<div class="clockTime">
+					{timeText}
+					{props.type == "12hr" && <div class="clockTimeAMPM">
+						{state.now.format("A")}
+					</div>}
+				</div>
+				{props.showDate && <div class="clockDate">{state.now.format("MMMM Do, YYYY")}</div>}
+				{props.progressBar && <div class="progressBarContainer"><div class="progressBar" style={`width: ${percent}%`}></div></div>}
+				{props.showPercent && <h4>{percent}%</h4>}
 			</div>
-			{props.showDate && <div class="clockDate">{state.now.format("MMMM Do, YYYY")}</div>}
 		</div>;
 	}
 };

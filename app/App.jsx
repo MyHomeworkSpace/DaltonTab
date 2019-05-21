@@ -38,16 +38,16 @@ export default class App extends Component {
 		this.onScroll();
 
 		// get tab storage
-		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog", "jumpingArrowTog"], function(tabStorage) {
+		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog", "jumpingArrowTog", "progressBar", "showPercent"], function (tabStorage) {
 			var sectionOrder = tabStorage.sections || sections.defaultOrder;
 
 			// get section storage keys
 			var storageKeys = [];
-			sectionOrder.forEach(function(sectionName) {
+			sectionOrder.forEach(function (sectionName) {
 				var section = sections[sectionName];
 				storageKeys = storageKeys.concat(section.storage);
 			});
-			chrome.storage.sync.get(storageKeys, function(sectionStorage) {
+			chrome.storage.sync.get(storageKeys, function (sectionStorage) {
 				sectionStorage.mhsToken = tabStorage.mhsToken;
 				var imageEnabled = true;
 				if (tabStorage.backImgTog) {
@@ -63,7 +63,7 @@ export default class App extends Component {
 					sections: sectionOrder,
 					tabStorage: tabStorage,
 					sectionStorage: sectionStorage
-				}, function() {
+				}, function () {
 					if (imageEnabled) {
 						that.loadImage.call(that);
 					}
@@ -72,10 +72,10 @@ export default class App extends Component {
 		});
 
 		// analytics
-		analytics.ping(function(message) {
+		analytics.ping(function (message) {
 			if (message) {
 				// there is a message
-				chrome.storage.sync.get("dismissedMessages", function(storage) {
+				chrome.storage.sync.get("dismissedMessages", function (storage) {
 					var dismissedMessages = storage.dismissedMessages || [];
 					if (!message.campaign || dismissedMessages.indexOf(message.campaign) == -1) {
 						// should show the message
@@ -108,13 +108,13 @@ export default class App extends Component {
 		this.setState({
 			imageLoading: true,
 			imageFailed: false
-		}, function() {
+		}, function () {
 			// get image
 			var channel = localStorage.nc || "normal";
 			if (channel != "normal") {
 				console.log("Using image channel '" + channel + "'");
 			}
-			image.fetchImage(channel, function(success, imageData) {
+			image.fetchImage(channel, function (success, imageData) {
 				if (imageData.beaconUrl) {
 					// unsplash requires us to report image views
 					// this is normally done just by hotlinking the image; however, we can't do that because of permissions
@@ -145,7 +145,7 @@ export default class App extends Component {
 			settingsOpen: !this.state.settingsOpen
 		});
 	}
-	
+
 	updateStorage(newStorage) {
 		var that = this;
 		var keysToFetch = [];
@@ -155,17 +155,17 @@ export default class App extends Component {
 			if (key == "sections") {
 				// we've updated the section order, make sure to fetch keys related to those sections
 				var newOrder = newStorage.sections;
-				newOrder.forEach(function(sectionName) {
+				newOrder.forEach(function (sectionName) {
 					keysToFetch = keysToFetch.concat(sections[sectionName].storage);
 				});
 			}
 		}
 		this.setState({
 			tabStorage: storage
-		}, function() {
-			chrome.storage.sync.set(newStorage, function() {
+		}, function () {
+			chrome.storage.sync.set(newStorage, function () {
 				if (keysToFetch.length > 0) {
-					chrome.storage.sync.get(keysToFetch, function(storageUpdates) {
+					chrome.storage.sync.get(keysToFetch, function (storageUpdates) {
 						var storage = that.state.tabStorage;
 						for (var key in storageUpdates) {
 							storage[key] = storageUpdates[key];
@@ -182,15 +182,15 @@ export default class App extends Component {
 	dismissMessage() {
 		var that = this;
 		var message = this.state.message;
-		chrome.storage.sync.get("dismissedMessages", function(storage) {
+		chrome.storage.sync.get("dismissedMessages", function (storage) {
 			var dismissedMessages = storage.dismissedMessages || [];
 			dismissedMessages.push(message.campaign);
-			analytics.getClientID(function(clientID) {
-				chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function() {
+			analytics.getClientID(function (clientID) {
+				chrome.storage.sync.set({ dismissedMessages: dismissedMessages }, function () {
 					that.setState({
 						message: null
 					});
-					analytics.dismissMessage(clientID, message.campaign, function() {
+					analytics.dismissMessage(clientID, message.campaign, function () {
 
 					});
 				});
@@ -215,7 +215,7 @@ export default class App extends Component {
 			}
 			<div id="top" class="top">
 				<div class="topCenter">
-					<Clock type={state.tabStorage.clockType || "12hr"} showDate={(state.tabStorage.displayDate !== undefined ? state.tabStorage.displayDate : true)} />
+					<Clock type={state.tabStorage.clockType || "12hr"} progressBar={state.tabStorage.progressBar} showPercent={state.tabStorage.showPercent} showDate={(state.tabStorage.displayDate !== undefined ? state.tabStorage.displayDate : true)} />
 					{state.message && <InfoMessage message={state.message} image={state.imageData} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />}
 				</div>
 				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} error={state.imageFailed} image={state.imageData} />}
