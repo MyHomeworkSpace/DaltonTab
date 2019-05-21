@@ -31,7 +31,8 @@ export default {
 		description: "View and access your classes.",
 		background: "rgba(57, 146, 108, 0.9)",
 		storage: [],
-		component: Classes
+		component: Classes,
+		hidden: true
 	},
 	weather: {
 		name: "Weather",
