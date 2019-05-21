@@ -8,7 +8,7 @@ import Transit from "sections/transit/Transit.jsx";
 import Weather from "sections/weather/Weather.jsx";
 
 export default {
-	defaultOrder: ["myhomeworkspace", "schedule", "classes"],
+	defaultOrder: ["myhomeworkspace", "schedule", "weather"],
 	myhomeworkspace: {
 		name: "Homework",
 		icon: "fa-file",
