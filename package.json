@@ -2,6 +2,7 @@
 	"name": "DaltonTab",
 	"scripts": {
 		"lint": "eslint --ext js,jsx .",
+		"lint:fix": "eslint --ext js,jsx . --fix",
 		"dev-firefox": "cross-env BROWSER=firefox webpack --watch",
 		"dev-chrome": "cross-env BROWSER=chrome webpack --watch",
 		"prod-firefox": "cross-env NODE_ENV=production BROWSER=firefox webpack",
