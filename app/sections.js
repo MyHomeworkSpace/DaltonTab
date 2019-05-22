@@ -6,6 +6,7 @@ import LunchMenu from "sections/lunchMenu/LunchMenu.jsx";
 import TabCount from "sections/tabCount/TabCount.jsx";
 import Transit from "sections/transit/Transit.jsx";
 import Weather from "sections/weather/Weather.jsx";
+import Todo from "sections/todo/Todo.jsx";
 
 export default {
 	defaultOrder: ["myhomeworkspace", "schedule", "weather"],
@@ -73,5 +74,13 @@ export default {
 		background: "rgba(0, 140, 186, 0.9)",
 		storage: [],
 		component: Transit
+	},
+	todo: {
+		name: "Todo List",
+		icon: "fa-check-square-o",
+		description: "Add tasks that you need to complete",
+		background: "rgba(0, 140, 186, 0.9)",
+		storage: ["todoList"],
+		component: Todo
 	}
 };
