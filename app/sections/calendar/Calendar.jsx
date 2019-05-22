@@ -111,11 +111,10 @@ export default class Calendar extends Component {
 			return <MHSConnect type="calendar" />;
 		}
 
-		var fridayIndex = (state.loadingWeek ? -1 : state.weekInfo.view.days[4].shiftingIndex);
-
 		var dayHeaders = [];
 		var dayContents = [];
-		var names = ["Monday", "Tuesday", "Wednesday", "Thursday", (fridayIndex > 0 ? "Friday " + fridayIndex : "Friday"), "Saturday", "Sunday"];
+		var announcementContents = [];
+		var names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 		var currentDay = moment(state.monday);
 		var earliestEvent = 1440;
@@ -188,7 +187,13 @@ export default class Calendar extends Component {
 
 		var height = latestEvent - earliestEvent;
 
+		var announcements = [];
+
 		for (dayNumber = 0; dayNumber < 7; dayNumber++) {
+			if (!state.loadingWeek) {
+				announcements = state.weekInfo.view.days[dayNumber].announcements;
+			}
+
 			// make the elements
 			var eventElements = [];
 			allGroupsForDays[dayNumber].forEach(function(eventGroup) {
@@ -202,6 +207,12 @@ export default class Calendar extends Component {
 					/>);
 				});
 			});
+			
+			announcementContents.push(<div class={`calendarAnnouncements day${dayNumber}`}>
+				{announcements.map(function(announcement) {
+					return <div>{announcement.text}</div>;
+				})}
+			</div>);
 
 			dayHeaders.push(h("div", { class: "calendarDayHeader" }, names[dayNumber] + " " + currentDay.format("M/D")));
 			dayContents.push(h("div", { class: "calendarDayContents day" + dayNumber, style: "height: " + height + "px" }, eventElements));
@@ -228,6 +239,7 @@ export default class Calendar extends Component {
 				</div>
 				<div class="calendarWeek">{dayHeaders}</div>
 				<div class="calendarViewport" style={"height: " + height + "px"}>
+					<div class="calendarWeek">{announcementContents}</div>
 					<div class="calendarWeek">{dayContents}</div>
 				</div>
 			</div>

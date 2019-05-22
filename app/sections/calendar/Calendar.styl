@@ -18,7 +18,7 @@
 	display: flex
 	width: 100%
 
-.calendarDayHeader, .calendarDayContents
+.calendarDayHeader, .calendarDayContents, .calendarAnnouncements
 	flex: 1
 	width: 100%
 
@@ -26,9 +26,16 @@
 	height: 25px
 	text-align: center
 
-.calendarDayContents.day0
+.calendarDayContents.day0, .calendarAnnouncements.day0
 	border-left: none
 
 .calendarDayContents
 	border-left: solid 1px white
 	position: relative
+
+.calendarAnnouncements
+	border-left: solid 1px white
+	border-bottom: solid 1px white
+	font-weight: bold
+	min-height: 2rem
+	text-align: center
