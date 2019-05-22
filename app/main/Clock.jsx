@@ -12,7 +12,7 @@ export default class Clock extends Component {
 	}
 
 	componentWillMount() {
-		this._timer = setInterval((function () {
+		this._timer = setInterval((function() {
 			this.setState({
 				now: moment()
 			});
@@ -45,9 +45,9 @@ export default class Clock extends Component {
 			var percentUnrounded = Math.floor((secondsToEnd / secondsTotal) * 100);
 			percent = Math.max(percentUnrounded, 0);
 			if (percent > 100) {
-				percent = 100
+				percent = 100;
 			} else if (percent < 0) {
-				percent = 0
+				percent = 0;
 			}
 		}
 
