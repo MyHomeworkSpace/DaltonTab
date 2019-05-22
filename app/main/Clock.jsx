@@ -12,7 +12,7 @@ export default class Clock extends Component {
 	}
 
 	componentWillMount() {
-		this._timer = setInterval((function () {
+		this._timer = setInterval((function() {
 			this.setState({
 				now: moment()
 			});
@@ -24,7 +24,6 @@ export default class Clock extends Component {
 	}
 
 	render(props, state) {
-		console.log(props)
 		var timeText;
 		var dayStartString = !props.dayStart || props.dayStart == "" ? "8:10" : props.dayStart;
 		var dayEndString = !props.dayEnd || props.dayEnd == "" ? "8:10" : props.dayEnd;
@@ -52,7 +51,7 @@ export default class Clock extends Component {
 		} else if (props.type == "24hr") {
 			timeText = state.now.format("k:mm");
 		} else if (props.type == "percent") {
-			timeText = percent + "%"
+			timeText = percent + "%";
 		}
 
 		return <div>

@@ -16,7 +16,6 @@ export default class SettingsPane extends Component {
 
 	setDayStart(event) {
 		this.setStorage.bind(this, "dayStartTime", event.target.value)();
-		console.log(event.target.value)
 	}
 
 	setDayEnd(event) {
