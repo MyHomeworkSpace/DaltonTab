@@ -55,8 +55,6 @@ export default class Clock extends Component {
 			timeText = percent + "%"
 		}
 
-		// percent = 50
-
 		return <div>
 			<div class="clock">
 				<div class="clockTime">

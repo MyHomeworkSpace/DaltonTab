@@ -18,9 +18,9 @@ export default class CalendarEvent extends Component {
 		var startDisplay = start.format("h:mm a");
 		var endDisplay = end.format("h:mm a");
 
-		var displayName = (props.event.type == consts.EVENT_TYPE_HOMEWORK ? props.event.data.homework.name : props.event.name);
+		var displayName = props.event.name;
 
-		if (props.event.type == consts.EVENT_TYPE_SCHEDULE) {
+		if (props.event.tags[consts.EVENT_TAG_CLASS_ID]) {
 			var displayNameSectionless = displayName.replace(/ -(.*)\(.*\)/g, "");
 			displayName = displayNameSectionless.trim();
 		}
@@ -32,8 +32,8 @@ export default class CalendarEvent extends Component {
 		}
 
 		var timeDisplay = startDisplay + " to " + endDisplay;
-		if (props.event.type == consts.EVENT_TYPE_SCHEDULE) {
-			timeDisplay += " in " + props.event.data.roomNumber;
+		if (props.event.tags[consts.EVENT_TAG_ROOM_NUMBER]) {
+			timeDisplay += " in " + props.event.tags[consts.EVENT_TAG_ROOM_NUMBER];
 		}
 
 		return <div

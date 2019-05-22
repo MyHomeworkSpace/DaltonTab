@@ -62,6 +62,9 @@ export default class LayoutSettings extends Component {
 								return;
 							}
 							var section = sections[sectionName];
+							if (section.hidden) {
+								return;
+							}
 							return <li onClick={that.addSection.bind(that, sectionName)}>
 								<a href="#">
 									<i class={`fa fa-fw ${section.icon}`} />

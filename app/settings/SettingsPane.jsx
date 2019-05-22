@@ -43,11 +43,11 @@ export default class SettingsPane extends Component {
 			/>
 			<SettingCheckbox
 				storage={props.tabStorage} updateStorage={props.updateStorage}
-				label="Show a progress bar with your progress through the day" storageKey="progressBar" defaultValue={false}
+				label="Show a progress bar of your completion of the day" storageKey="progressBar" defaultValue={false}
 			/>
 			<SettingCheckbox
 				storage={props.tabStorage} updateStorage={props.updateStorage}
-				label="Show the percent you are through the day" storageKey="showPercent" defaultValue={false}
+				label="Show a percentage of your completion of the day" storageKey="showPercent" defaultValue={false}
 			/>
 
 			{/* Time inputs arent widely supported (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#Browser_compatibility) */}
