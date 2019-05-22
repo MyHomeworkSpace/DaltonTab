@@ -24,10 +24,14 @@ export default class Clock extends Component {
 	}
 
 	render(props, state) {
+		console.log(props)
 		var timeText;
-
-		var start = moment().set("hour", 8);
-		var end = moment().set("hour", 12 + 3).set("minute", 15);
+		var dayStartString = !props.dayStart || props.dayStart == "" ? "8:10" : props.dayStart;
+		var dayEndString = !props.dayEnd || props.dayEnd == "" ? "8:10" : props.dayEnd;
+		var dayStart = dayStartString.split(":");
+		var dayEnd = dayEndString.split(":");
+		var start = moment().set("hour", dayStart[0]).set("minute", dayStart[1]);
+		var end = moment().set("hour", dayEnd[0]).set("minute", dayEnd[1]);
 
 		var percent;
 		if (start.diff(state.now, "hours") > 0) {
@@ -48,10 +52,6 @@ export default class Clock extends Component {
 		} else if (props.type == "24hr") {
 			timeText = state.now.format("k:mm");
 		} else if (props.type == "percent") {
-			// TODO: allow changing start/end
-			var start = moment().set("hour", 8);
-			var end = moment().set("hour", 12 + 3).set("minute", 15);
-
 			timeText = percent + "%"
 		}
 

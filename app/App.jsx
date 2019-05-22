@@ -38,7 +38,7 @@ export default class App extends Component {
 		this.onScroll();
 
 		// get tab storage
-		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog", "jumpingArrowTog", "progressBar", "showPercent"], function (tabStorage) {
+		chrome.storage.sync.get(["sections", "mhsToken", "clockType", "displayDate", "backImgTog", "jumpingArrowTog", "progressBar", "showPercent", "dayStartTime", "dayEndTime"], function (tabStorage) {
 			var sectionOrder = tabStorage.sections || sections.defaultOrder;
 
 			// get section storage keys
@@ -202,7 +202,6 @@ export default class App extends Component {
 		if (!state.loaded) {
 			return <div></div>;
 		}
-
 		return <div class={`app ${state.scrolled ? "scrolled" : ""} ${state.settingsOpen ? "settingsOpen" : ""}`} style={`background-image: url(${state.imageData ? state.imageData.imgUrl : ""})`}>
 			<ModalManager modalName={state.modalName} modalState={state.modalState} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />
 			{state.settingsOpen && <SettingsPane tabStorage={state.tabStorage} toggleSettings={this.toggleSettings.bind(this)} updateStorage={this.updateStorage.bind(this)} />}
@@ -215,7 +214,7 @@ export default class App extends Component {
 			}
 			<div id="top" class="top">
 				<div class="topCenter">
-					<Clock type={state.tabStorage.clockType || "12hr"} progressBar={state.tabStorage.progressBar} showPercent={state.tabStorage.showPercent} showDate={(state.tabStorage.displayDate !== undefined ? state.tabStorage.displayDate : true)} />
+					<Clock type={state.tabStorage.clockType || "12hr"} progressBar={state.tabStorage.progressBar} showPercent={state.tabStorage.showPercent} showDate={(state.tabStorage.displayDate !== undefined ? state.tabStorage.displayDate : true)} dayStart={state.tabStorage.dayStartTime} dayEnd={state.tabStorage.dayEndTime} />
 					{state.message && <InfoMessage message={state.message} image={state.imageData} dismissMessage={this.dismissMessage.bind(this)} openModal={this.openModal.bind(this)} />}
 				</div>
 				{state.imageEnabled && <ImageInfoBar scrolled={state.scrolled} loading={state.imageLoading} error={state.imageFailed} image={state.imageData} />}

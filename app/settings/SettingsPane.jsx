@@ -5,12 +5,22 @@ import { h, Component } from "preact";
 import AccountSettings from "settings/AccountSettings.jsx";
 import LayoutSettings from "settings/LayoutSettings.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
+import SettingTimeInput from "settings/SettingTimeInput.jsx";
 
 export default class SettingsPane extends Component {
 	setStorage(key, value) {
 		var newStorage = {};
 		newStorage[key] = value;
 		this.props.updateStorage(newStorage);
+	}
+
+	setDayStart(event) {
+		this.setStorage.bind(this, "dayStartTime", event.target.value)();
+		console.log(event.target.value)
+	}
+
+	setDayEnd(event) {
+		this.setStorage.bind(this, "dayEndTime", event.target.value)();
 	}
 
 	render(props, state) {
@@ -38,6 +48,17 @@ export default class SettingsPane extends Component {
 			<SettingCheckbox
 				storage={props.tabStorage} updateStorage={props.updateStorage}
 				label="Show the percent you are through the day" storageKey="showPercent" defaultValue={false}
+			/>
+
+			{/* Time inputs arent widely supported (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#Browser_compatibility) */}
+			{/* but they work in both Firefox and Chrome, which makes them okay to use in this extension. */}
+			<SettingTimeInput
+				storage={props.tabStorage} onChange={this.setDayStart.bind(this)}
+				label="Day start time" storageKey="dayStartTime" defaultValue="08:10"
+			/>
+			<SettingTimeInput
+				storage={props.tabStorage} onChange={this.setDayEnd.bind(this)}
+				label="Day end time" storageKey="dayEndTime" defaultValue="15:15"
 			/>
 
 			<h4><i class="fa fa-fw fa-picture-o" /> Background</h4>
