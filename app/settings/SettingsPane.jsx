@@ -16,10 +16,20 @@ export default class SettingsPane extends Component {
 
 	setDayStart(event) {
 		this.setStorage.bind(this, "dayStartTime", event.target.value)();
+		var dayEnd = event.target.value.split(":")
+		var dayStart = this.props.tabStorage.dayStartTime.split(":")
+		if (parseInt(dayStart[0]) > parseInt(dayEnd[0]) || (parseInt(dayStart[0]) == parseInt(dayEnd[0]) && parseInt(dayStart[1]) > parseInt(dayEnd[1]))) {
+			this.setStorage.bind(this, "dayEndTime", event.target.value)();
+		}
 	}
 
 	setDayEnd(event) {
 		this.setStorage.bind(this, "dayEndTime", event.target.value)();
+		var dayEnd = event.target.value.split(":")
+		var dayStart = this.props.tabStorage.dayStartTime.split(":")
+		if (parseInt(dayStart[0]) > parseInt(dayEnd[0]) || (parseInt(dayStart[0]) == parseInt(dayEnd[0]) && parseInt(dayStart[1]) > parseInt(dayEnd[1]))) {
+			this.setStorage.bind(this, "dayStartTime", event.target.value)();
+		}
 	}
 
 	render(props, state) {
