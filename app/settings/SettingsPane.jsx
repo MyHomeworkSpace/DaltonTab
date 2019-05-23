@@ -9,10 +9,30 @@ import SettingTimeInput from "settings/SettingTimeInput.jsx";
 import sections from "sections.js";
 
 export default class SettingsPane extends Component {
+	constructor() {
+		super();
+		this.state = {
+			exportReady: false,
+			importCode: ""
+		};
+		this.generateExport();
+	}
+
+	generateExport() {
+		chrome.storage.sync.get(null, (data) => {
+			var unencodedString = JSON.stringify(data);
+			this.setState({
+				exportReady: true,
+				exportCode: window.btoa(unencodedString)
+			});
+		});
+	}
+
 	setStorage(key, value) {
 		var newStorage = {};
 		newStorage[key] = value;
 		this.props.updateStorage(newStorage);
+		this.generateExport();
 	}
 
 	setDayStart(event) {
@@ -42,6 +62,35 @@ export default class SettingsPane extends Component {
 			this.props.updateStorage({
 				sections: order
 			});
+		}
+	}
+
+	resetSettings() {
+		if (confirm("Are you sure you'd like to reset DaltonTab to it's default settings?")) {
+			browser.storage.sync.clear(() => {
+				location.reload();
+			});
+		}
+	}
+
+	updateImportCode(event) {
+		this.setState({
+			importCode: event.target.value
+		});
+	}
+
+	importSettings() {
+		let that = this;
+		try {
+			var importData = JSON.parse(window.atob(this.state.importCode));
+			if (confirm("This will override your current settings and data. Are you sure you would like to proceed?")) {
+				browser.storage.sync.clear(() => {
+					that.props.updateStorage(importData);
+					alert("Import successful.");
+				});
+			}
+		} catch (err) {
+			alert("The import code you provided is invalid.");
 		}
 	}
 
@@ -95,6 +144,25 @@ export default class SettingsPane extends Component {
 
 			<h4><i class="fa fa-fw fa-link" /> MyHomeworkSpace</h4>
 			<AccountSettings tabStorage={props.tabStorage} />
+
+			<h4><i class="fa fa-fw fa-archive"></i> Export Settings</h4>
+			<p>You can export an archive of your settings. Note that this archive may not be compatible with versions other than DaltonTab {chrome.runtime.getManifest().version}. To export your settings, copy and paste the code below into another instance of DaltonTab.</p>
+			{state.exportReady ? <pre>{state.exportCode}</pre> : <span><i class="fa fa-circle-o-notch fa-spin"></i> Loading</span>}
+			<small><i class="fa fa-exclamation-triangle"></i> Keep this code safe! Someone with malicious intents can use this code to access your MyHomeworkSpace account if you've connected MyHomeworkSpace to DaltonTab.</small>
+
+			<h4><i class="fa fa-fw fa-download"></i> Import Settings</h4>
+			<p>You can import settings from a different instance of DaltonTab by pasting that instance's export code below.</p>
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control import-field" placeholder="Export code" onChange={this.updateImportCode.bind(this)} value={state.importCode} />
+				<span class="input-group-btn">
+					<button class="btn btn-danger btn-sm" onClick={this.importSettings.bind(this)}>Import</button>
+				</span>
+			</div>
+			<small><i class="fa fa-exclamation-triangle"></i> Importing settings will overwrite all the settings that you currently have saved.</small>
+
+			<h4><i class="fa fa-fw fa-eraser"></i> Reset</h4>
+			<p>Use the button below to reset DaltonTab to it's default settings. Prior to doing this, make sure that you have backed up your settings by saving the export code in the "Export Settings" section.</p>
+			<button class="btn btn-sm btn-danger" onClick={this.resetSettings}>Reset DaltonTab</button>
 
 			<h4><i class="fa fa-fw fa-info-circle" /> About</h4>
 			<p>You're running DaltonTab version {chrome.runtime.getManifest().version} on {navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"}. DaltonTab was created for the TigerHacks NYC Hackathon, and is currently maintained by the MyHomeworkSpace team.</p>
