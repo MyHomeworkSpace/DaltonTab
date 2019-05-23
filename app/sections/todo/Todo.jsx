@@ -72,7 +72,7 @@ export default class Todo extends Component {
 		return <div class="todo-section">
 			<form class="add-item" onSubmit={this.handleSubmit.bind(this)}>
 				<div class="input-group">
-					<input type="text" class="form-control" value={state.newName} placeholder="Add an item" onChange={this.handleChange.bind(this)} />
+					<input type="text" class="form-control" value={state.newName} placeholder="Add an item" onChange={this.handleChange.bind(this)} required />
 					<span class="input-group-btn">
 						<input type="submit" class="btn btn-default" value="Add!" />
 					</span>
