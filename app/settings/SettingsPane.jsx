@@ -147,7 +147,7 @@ export default class SettingsPane extends Component {
 
 			<h4><i class="fa fa-fw fa-archive"></i> Export Settings</h4>
 			<p>You can export an archive of your settings. Note that this archive may not be compatible with versions other than DaltonTab {chrome.runtime.getManifest().version}. To export your settings, copy and paste the code below into another instance of DaltonTab.</p>
-			{state.exportReady ? <pre>{state.exportCode}</pre> : <span><i class="fa fa-circle-o-notch fa-spin"></i> Loading</span>}
+			{state.exportReady ? <input type="text" class="pre" onClick={(event) => event.target.select()} value={state.exportCode} /> : <span><i class="fa fa-circle-o-notch fa-spin"></i> Loading</span>}
 			<small><i class="fa fa-exclamation-triangle"></i> Keep this code safe! Someone with malicious intents can use this code to access your MyHomeworkSpace account if you've connected MyHomeworkSpace to DaltonTab.</small>
 
 			<h4><i class="fa fa-fw fa-download"></i> Import Settings</h4>
