@@ -10,7 +10,7 @@ import Modal from "ui/Modal.jsx";
 export default class WeatherModal extends Component {
 	componentWillMount() {
 		var that = this;
-		chrome.storage.sync.get([ "weather", "weatherUnits" ], function(storage) {
+		chrome.storage.sync.get(["weather", "weatherUnits"], function(storage) {
 			that.setState({
 				weather: storage.weather,
 				weatherUnits: storage.weatherUnits || "f"
@@ -115,13 +115,27 @@ export default class WeatherModal extends Component {
 				<h4>Location</h4>
 				{!state.weather && !state.locationLoading && <div>
 					{state.locationError && <div id="weatherLocationError" class="alert alert-danger">{state.locationError}</div>}
-					<input type="text" placeholder="Enter a location to use" class="form-control weatherLocationText" onChange={linkState(this, "locationName")} value={state.locationName} />
-					<button class="btn btn-primary weatherLocationSubmit" onClick={this.locationSubmit.bind(this)} disabled={state.locationLoading}>Go</button>
-					<button class="btn btn-primary" onClick={this.locationLocate.bind(this)} disabled={state.locationLocating || state.locationLoading || state.locationLocatingError}>
-						{state.locationLocatingError && "Couldn't get location"}
-						{state.locationLocating && "Getting your location..."}
-						{!state.locationLocatingError && !state.locationLocating && "Use current location"}
-					</button>
+					<div class="row">
+						<div class="col-lg-5">
+							<button class="btn btn-primary btn-block" onClick={this.locationLocate.bind(this)} disabled={state.locationLocating || state.locationLoading || state.locationLocatingError}>
+								<i class="fa fa-map-marker"></i>
+								{state.locationLocatingError && " Couldn't get location"}
+								{state.locationLocating && " Getting your location..."}
+								{!state.locationLocatingError && !state.locationLocating && " Use current location"}
+							</button>
+						</div>
+						<div class="col-sm-2 or">
+							<strong>OR</strong>
+						</div>
+						<div class="col-lg-5">
+							<div class="input-group">
+								<input type="text" placeholder="Enter a location to use" class="form-control weatherLocationText" onChange={linkState(this, "locationName")} value={state.locationName} />
+								<span class="input-group-btn">
+									<button class="btn btn-primary weatherLocationSubmit" onClick={this.locationSubmit.bind(this)} disabled={state.locationLoading}>Go</button>
+								</span>
+							</div>
+						</div>
+					</div>
 				</div>}
 				{state.locationLoading && <div>
 					<i class="fa fa-refresh fa-spin" /> Loading...
