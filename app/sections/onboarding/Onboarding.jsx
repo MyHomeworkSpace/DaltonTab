@@ -26,7 +26,7 @@ export default class Onboarding extends Component {
 				</div>
 				<div class="col-md-4 feature">
 					<h2 class="feature-name">Explore</h2>
-					<p>To remove this "Getting Started" section, open settigns by clicking the
+					<p>To remove this "Getting Started" section, open settings by clicking the
 						<i class="fa fa-cog"></i> button in the upper right-hand corner of the screen.
                         From there, click the <i class="fa fa-trash"></i> button next to "Getting Started."
                         If you have any questions, concerns, or feedback, feel free to reach out to us at
