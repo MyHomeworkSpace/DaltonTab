@@ -11,9 +11,9 @@ export default class FeedbackControls extends Component {
 
 	render(props, state) {
 		return <div class="feedbackControls">
-			<button class="btn btn-default" onClick={this.openFeedbackModal.bind(this, "smile")}><i class="fa fa-smile-o" /></button>
-			<button class="btn btn-default" onClick={this.openFeedbackModal.bind(this, "frown")}><i class="fa fa-frown-o" /></button>
-			<button class="btn btn-default" onClick={this.openFeedbackModal.bind(this, "idea")}><i class="fa fa-lightbulb-o" /></button>
+			<button class="btn btn-default" onClick={this.openFeedbackModal.bind(this, "smile")}><i class="fa fa-fw fa-smile-o" /></button>
+			<button class="btn btn-default" onClick={this.openFeedbackModal.bind(this, "frown")}><i class="fa fa-fw fa-frown-o" /></button>
+			<button class="btn btn-default" onClick={this.openFeedbackModal.bind(this, "idea")}><i class="fa fa-fw fa-lightbulb-o" /></button>
 		</div>;
 	}
 };
