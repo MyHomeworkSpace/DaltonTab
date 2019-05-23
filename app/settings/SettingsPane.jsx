@@ -6,6 +6,7 @@ import AccountSettings from "settings/AccountSettings.jsx";
 import LayoutSettings from "settings/LayoutSettings.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 import SettingTimeInput from "settings/SettingTimeInput.jsx";
+import sections from "sections.js";
 
 export default class SettingsPane extends Component {
 	setStorage(key, value) {
@@ -29,6 +30,18 @@ export default class SettingsPane extends Component {
 		var dayStart = this.props.tabStorage.dayStartTime.split(":");
 		if (parseInt(dayStart[0]) > parseInt(dayEnd[0]) || (parseInt(dayStart[0]) == parseInt(dayEnd[0]) && parseInt(dayStart[1]) > parseInt(dayEnd[1]))) {
 			this.setStorage.bind(this, "dayStartTime", event.target.value)();
+		}
+	}
+
+	addOnboarding() {
+		var order = this.props.tabStorage.sections || sections.defaultOrder;
+		if (order.includes("onboarding")) {
+			alert("Onboarding section already added.");
+		} else {
+			order.unshift("onboarding");
+			this.props.updateStorage({
+				sections: order
+			});
 		}
 	}
 
@@ -87,6 +100,7 @@ export default class SettingsPane extends Component {
 			<p>You're running DaltonTab version {chrome.runtime.getManifest().version} on {navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"}. DaltonTab was created for the TigerHacks NYC Hackathon, and is currently maintained by the MyHomeworkSpace team.</p>
 
 			<a href="https://github.com/MyHomeworkSpace/DaltonTab" class="btn btn-default btn-sm">View on GitHub</a>
+			<button class="btn btn-default btn-sm" onClick={this.addOnboarding.bind(this)}>Show new user onboarding</button>
 
 			<p class="small">This program uses the Lato font, which is copyright (c) 2010-2014 by tyPoland Lukasz Dziedzic (team@latofonts.com) with Reserved Font Name "Lato"</p>
 			<p class="small">We collect some data about the services you've enabled and your web browser's version. We use this to improve DaltonTab, and the data cannot be linked back to your account, as anything that could identify you (such as your username) is not sent.</p>

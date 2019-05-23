@@ -7,9 +7,10 @@ import TabCount from "sections/tabCount/TabCount.jsx";
 import Transit from "sections/transit/Transit.jsx";
 import Weather from "sections/weather/Weather.jsx";
 import Todo from "sections/todo/Todo.jsx";
+import Onboarding from "sections/onboarding/Onboarding.jsx";
 
 export default {
-	defaultOrder: ["myhomeworkspace", "schedule", "weather"],
+	defaultOrder: ["onboarding", "myhomeworkspace", "schedule", "weather"],
 	myhomeworkspace: {
 		name: "Homework",
 		icon: "fa-file",
@@ -82,5 +83,14 @@ export default {
 		background: "rgba(0, 140, 186, 0.9)",
 		storage: ["todoList"],
 		component: Todo
+	},
+	onboarding: {
+		name: "Getting started",
+		icon: "fa-smile-o",
+		description: "Get started with DaltonTab",
+		background: "rgba(0, 140, 186, 0.9)",
+		storage: [],
+		component: Onboarding,
+		hidden: true
 	}
 };
