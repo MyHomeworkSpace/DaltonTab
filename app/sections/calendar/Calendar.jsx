@@ -207,7 +207,7 @@ export default class Calendar extends Component {
 					/>);
 				});
 			});
-			
+
 			announcementContents.push(<div class={`calendarAnnouncements day${dayNumber}`}>
 				{announcements.map(function(announcement) {
 					return <div>{announcement.text}</div>;
