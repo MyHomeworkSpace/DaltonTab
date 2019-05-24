@@ -238,7 +238,7 @@ export default class Calendar extends Component {
 					</div>
 				</div>
 				<div class="calendarWeek">{dayHeaders}</div>
-				<div class="calendarViewport" style={"height: " + height + "px"}>
+				<div class="calendarViewport">
 					<div class="calendarWeek">{announcementContents}</div>
 					<div class="calendarWeek">{dayContents}</div>
 				</div>
