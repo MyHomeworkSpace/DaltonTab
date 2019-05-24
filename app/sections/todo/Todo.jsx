@@ -105,6 +105,10 @@ export default class Todo extends Component {
 					</span>
 				</div>
 			</form>
+			{state.data.length == 0 && <div class="todoListEmpty">
+				<h3>Your todo list is empty.</h3>
+				<p class="lead">Add some items using the field above.</p>
+			</div>}
 			{state.data.map(function(listItem, i) {
 				return <TodoListItem
 					done={listItem.done}
