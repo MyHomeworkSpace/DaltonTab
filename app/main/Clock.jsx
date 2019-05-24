@@ -43,12 +43,7 @@ export default class Clock extends Component {
 			var secondsToEnd = state.now.diff(start);
 			var secondsTotal = end.diff(start);
 			var percentUnrounded = Math.floor((secondsToEnd / secondsTotal) * 100);
-			percent = Math.max(percentUnrounded, 0);
-			if (percent > 100) {
-				percent = 100;
-			} else if (percent < 0) {
-				percent = 0;
-			}
+			percent = Math.min(Math.max(percentUnrounded, 0), 100);
 		}
 
 		if (props.type == "12hr" || props.type == "12hrnopm") {

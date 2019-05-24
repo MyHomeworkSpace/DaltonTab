@@ -6,6 +6,7 @@ import AccountSettings from "settings/AccountSettings.jsx";
 import LayoutSettings from "settings/LayoutSettings.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 import SettingTimeInput from "settings/SettingTimeInput.jsx";
+
 import sections from "sections.js";
 
 export default class SettingsPane extends Component {
@@ -19,9 +20,10 @@ export default class SettingsPane extends Component {
 	}
 
 	generateExport() {
-		chrome.storage.sync.get(null, (data) => {
+		var that = this;
+		chrome.storage.sync.get(null, function(data) {
 			var unencodedString = JSON.stringify(data);
-			this.setState({
+			that.setState({
 				exportReady: true,
 				exportCode: window.btoa(unencodedString)
 			});
@@ -66,9 +68,9 @@ export default class SettingsPane extends Component {
 	}
 
 	resetSettings() {
-		if (confirm("Are you sure you'd like to reset DaltonTab to it's default settings?")) {
-			browser.storage.sync.clear(() => {
-				location.reload();
+		if (confirm("Are you sure you'd like to reset DaltonTab to its default settings?")) {
+			chrome.storage.sync.clear(function() {
+				window.location.reload();
 			});
 		}
 	}
@@ -80,11 +82,11 @@ export default class SettingsPane extends Component {
 	}
 
 	importSettings() {
-		let that = this;
+		var that = this;
 		try {
 			var importData = JSON.parse(window.atob(this.state.importCode));
 			if (confirm("This will override your current settings and data. Are you sure you would like to proceed?")) {
-				browser.storage.sync.clear(() => {
+				chrome.storage.sync.clear(function() {
 					that.props.updateStorage(importData);
 					alert("Import successful.");
 				});
@@ -125,7 +127,7 @@ export default class SettingsPane extends Component {
 				label="Show a percentage of your completion of the day" storageKey="showPercent" defaultValue={false}
 			/>
 
-			{/* Time inputs arent widely supported (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#Browser_compatibility) */}
+			{/* Time inputs aren't widely supported (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#Browser_compatibility) */}
 			{/* but they work in both Firefox and Chrome, which makes them okay to use in this extension. */}
 			<SettingTimeInput
 				storage={props.tabStorage} onChange={this.setDayStart.bind(this)}
@@ -149,12 +151,12 @@ export default class SettingsPane extends Component {
 			<h4><i class="fa fa-fw fa-link" /> MyHomeworkSpace</h4>
 			<AccountSettings tabStorage={props.tabStorage} />
 
-			<h4><i class="fa fa-fw fa-archive"></i> Export Settings</h4>
+			<h4><i class="fa fa-fw fa-archive"></i> Export settings</h4>
 			<p>You can export an archive of your settings. Note that this archive may not be compatible with versions other than DaltonTab {chrome.runtime.getManifest().version}. To export your settings, copy and paste the code below into another instance of DaltonTab.</p>
-			{state.exportReady ? <input type="text" class="pre" onClick={(event) => event.target.select()} value={state.exportCode} /> : <span><i class="fa fa-circle-o-notch fa-spin"></i> Loading</span>}
+			{state.exportReady ? <input type="text" class="pre" onClick={function(e) { e.target.select(); }} value={state.exportCode} /> : <span><i class="fa fa-circle-o-notch fa-spin"></i> Loading</span>}
 			<small><i class="fa fa-exclamation-triangle"></i> Keep this code safe! Someone with malicious intents can use this code to access your MyHomeworkSpace account if you've connected MyHomeworkSpace to DaltonTab.</small>
 
-			<h4><i class="fa fa-fw fa-download"></i> Import Settings</h4>
+			<h4><i class="fa fa-fw fa-download"></i> Import settings</h4>
 			<p>You can import settings from a different instance of DaltonTab by pasting that instance's export code below.</p>
 			<div class="input-group input-group-sm">
 				<input type="text" class="form-control import-field" placeholder="Export code" onChange={this.updateImportCode.bind(this)} value={state.importCode} />
@@ -165,7 +167,7 @@ export default class SettingsPane extends Component {
 			<small><i class="fa fa-exclamation-triangle"></i> Importing settings will overwrite all the settings that you currently have saved.</small>
 
 			<h4><i class="fa fa-fw fa-eraser"></i> Reset</h4>
-			<p>Use the button below to reset DaltonTab to it's default settings. Prior to doing this, make sure that you have backed up your settings by saving the export code in the "Export Settings" section.</p>
+			<p>Use the button below to reset DaltonTab to its default settings. Prior to doing this, make sure that you have backed up your settings by saving the export code in the "Export Settings" section.</p>
 			<button class="btn btn-sm btn-danger" onClick={this.resetSettings}>Reset DaltonTab</button>
 
 			<h4><i class="fa fa-fw fa-info-circle" /> About</h4>

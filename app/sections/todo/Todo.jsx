@@ -2,8 +2,9 @@ import "sections/todo/Todo.styl";
 
 import { h, Component } from "preact";
 
-import Loading from "ui/Loading.jsx";
 import TodoListItem from "sections/todo/TodoListItem.jsx";
+
+import Loading from "ui/Loading.jsx";
 
 export default class Todo extends Component {
 	constructor() {
@@ -64,47 +65,53 @@ export default class Todo extends Component {
 		});
 	}
 
+	toggleItem(i) {
+		var that = this;
+		var data = this.state.data;
+		data[i].done = !data[i].done;
+		chrome.storage.sync.set({
+			todoList: data
+		}, function() {
+			that.setState({
+				data: data
+			});
+		});
+	}
+
+	deleteItem(i) {
+		var that = this;
+		var data = this.state.data;
+		data.splice(i, 1);
+		chrome.storage.sync.set({
+			todoList: data
+		}, function() {
+			that.setState({
+				data: data
+			});
+		});
+	}
+
 	render(props, state) {
 		if (state.loading) {
 			return <Loading section="Todo List" />;
 		}
 		var that = this;
-		return <div class="todo-section">
-			<form class="add-item" onSubmit={this.handleSubmit.bind(this)}>
+		return <div class="todoSection">
+			<form class="addItem" onSubmit={this.handleSubmit.bind(this)}>
 				<div class="input-group">
 					<input type="text" class="form-control" value={state.newName} placeholder="Add an item" onChange={this.handleChange.bind(this)} required />
 					<span class="input-group-btn">
-						<input type="submit" class="btn btn-default" value="Add!" />
+						<input type="submit" class="btn btn-default" value="Add" />
 					</span>
 				</div>
 			</form>
-			{/* <pre>{JSON.stringify(state, " ", 4)}</pre> */}
 			{state.data.map(function(listItem, i) {
 				return <TodoListItem
 					done={listItem.done}
-					toggleItem={(() => {
-						var data = state.data;
-						data[i].done = !data[i].done;
-						chrome.storage.sync.set({
-							todoList: data
-						}, function() {
-							that.setState({
-								data: data
-							});
-						});
-					}).bind(this)}
-					deleteItem={(() => {
-						var data = state.data;
-						data.splice(i, 1);
-						chrome.storage.sync.set({
-							todoList: data
-						}, function() {
-							that.setState({
-								data: data
-							});
-						});
-					}).bind(this)}
-					name={listItem.name} />;
+					toggleItem={that.toggleItem.bind(that, i)}
+					deleteItem={that.deleteItem.bind(that, i)}
+					name={listItem.name}
+				/>;
 			})}
 		</div>;
 	}

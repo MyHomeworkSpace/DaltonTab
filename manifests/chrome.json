@@ -11,7 +11,8 @@
 
 	"permissions": [
 		"storage",
-		"*://*.dalton.org/"
+		"*://*.dalton.org/",
+		"*://*.myhomework.space/"
 	],
 
 	"chrome_url_overrides" : {
