@@ -22,7 +22,7 @@ export default class SettingsPane extends Component {
 	generateExport() {
 		var that = this;
 		chrome.storage.sync.get(null, function(data) {
-			var unencodedString = JSON.stringify(data);
+			var unencodedString = escape(JSON.stringify(data));
 			that.setState({
 				exportReady: true,
 				exportCode: window.btoa(unencodedString)
@@ -84,11 +84,12 @@ export default class SettingsPane extends Component {
 	importSettings() {
 		var that = this;
 		try {
-			var importData = JSON.parse(window.atob(this.state.importCode));
+			var importData = JSON.parse(unescape(window.atob(this.state.importCode)));
 			if (confirm("This will override your current settings and data. Are you sure you would like to proceed?")) {
 				chrome.storage.sync.clear(function() {
 					that.props.updateStorage(importData);
 					alert("Import successful.");
+					window.location.reload();
 				});
 			}
 		} catch (err) {
