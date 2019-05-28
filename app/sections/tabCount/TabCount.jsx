@@ -14,8 +14,8 @@ export default class TabCount extends Component {
 
 	render(props, state) {
 		return <div class="tabCount">
-			<h1>{state.tabCount ? state.tabCount : "Error"}</h1>
-			<h2>{state.tabCount == 1 ? "tab": "tabs"} opened today</h2>
+			<h1>{state.tabCount ? state.tabCount : "0"}</h1>
+			<h2>{state.tabCount == 1 ? "tab" : "tabs"} opened today</h2>
 		</div>;
 	}
 };
