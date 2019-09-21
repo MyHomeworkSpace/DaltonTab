@@ -45,10 +45,13 @@ export default class LayoutSettings extends Component {
 		var that = this;
 		var order = props.storage.sections || sections.defaultOrder;
 
-		var availableSections = 0;
-		for (var i in sections) {
-			if (!sections[i].hidden) {
-				availableSections++;
+		var sectionsLeft = 0;
+		for (var sectionName in sections) {
+			if (sectionName == "defaultOrder") {
+				continue;
+			}
+			if (!sections[sectionName].hidden && order.indexOf(sectionName) == -1) {
+				sectionsLeft++;
 			}
 		}
 
@@ -79,7 +82,7 @@ export default class LayoutSettings extends Component {
 								</a>
 							</li>;
 						})}
-						{order.length >= availableSections && <li><a>You've added all of the available sections!</a></li>}
+						{sectionsLeft == 0 && <li><a>You've added all of the available sections!</a></li>}
 					</ul>
 				</div>
 			</h4>
