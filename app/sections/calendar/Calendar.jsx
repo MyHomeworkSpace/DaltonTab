@@ -13,31 +13,15 @@ import Loading from "ui/Loading.jsx";
 
 export default class Calendar extends Component {
 	componentDidMount() {
-		var that = this;
 		var token = this.props.storage.mhsToken || "";
-		mhs.get(token, "calendar/getStatus", {}, function(statusData) {
-			if (statusData.status != "ok") {
-				that.setState({
-					loaded: true,
-					loggedIn: false
-				});
-				return;
-			}
-			if (statusData.statusNum != 1) {
-				that.setState({
-					loaded: true,
-					loggedIn: true,
-					calendarEnabled: false
-				});
-				return;
-			}
 
+		if (token) {
 			var mondayDate = moment();
 			while (mondayDate.day() != 1) {
 				mondayDate.subtract(1, "day");
 			}
 
-			that.setState({
+			this.setState({
 				loaded: true,
 				loggedIn: true,
 				calendarEnabled: true,
@@ -45,10 +29,15 @@ export default class Calendar extends Component {
 				monday: mondayDate,
 				loadingWeek: true
 			}, function() {
-				that.loadCurrentWeek.call(that);
-				that.setInitialScroll.call(that);
+				this.loadCurrentWeek();
+				this.setInitialScroll();
 			});
-		});
+		} else {
+			this.setState({
+				loaded: true,
+				loggedIn: false
+			});
+		}
 	}
 
 	setInitialScroll() {
@@ -70,6 +59,14 @@ export default class Calendar extends Component {
 				start: that.state.monday.format("YYYY-MM-DD"),
 				end: moment(that.state.monday).add(7, "days").format("YYYY-MM-DD")
 			}, function(data) {
+				if (data.status != "ok") {
+					that.setState({
+						loaded: true,
+						loggedIn: false
+					});
+					return;
+				}
+
 				that.setState({
 					loadingWeek: false,
 					weekInfo: data
@@ -106,9 +103,6 @@ export default class Calendar extends Component {
 		}
 		if (!state.loggedIn) {
 			return <MHSConnect />;
-		}
-		if (!state.calendarEnabled) {
-			return <MHSConnect type="calendar" />;
 		}
 
 		var dayHeaders = [];
