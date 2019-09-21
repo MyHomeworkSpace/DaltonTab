@@ -79,7 +79,7 @@ export default class LayoutSettings extends Component {
 								</a>
 							</li>;
 						})}
-						{order.length >= availableSections - 1 && <li><a>You've added all of the available sections!</a></li>}
+						{order.length >= availableSections && <li><a>You've added all of the available sections!</a></li>}
 					</ul>
 				</div>
 			</h4>
