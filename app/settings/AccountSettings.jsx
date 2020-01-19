@@ -10,7 +10,7 @@ export default class AccountSettings extends Component {
 				that.setState({
 					loaded: true,
 					loggedIn: true,
-					user: data
+					user: data.user
 				});
 			} else {
 				that.setState({
