@@ -54,7 +54,7 @@ export default {
 	fetchImage: function(channel, callback) {
 		colors = [];
 		imageLoading = true;
-		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getImage.php?channel=" + channel, {}, function(image) {
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getImage?channel=" + channel, {}, function(image) {
 			if (image) {
 				colors = image.colors;
 

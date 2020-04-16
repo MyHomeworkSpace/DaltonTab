@@ -33,7 +33,7 @@ export default class Weather extends Component {
 				return;
 			}
 
-			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather.php", {
+			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather", {
 				units: units,
 				place: nextProps.storage.weather.query
 			}, function(data) {

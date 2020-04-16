@@ -37,7 +37,7 @@ export default class WeatherModal extends Component {
 			loadingError: null,
 			locationLoading: true
 		}, function() {
-			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather.php", {
+			ajax.request("GET", "https://daltontabservices.myhomework.space/v1/weather", {
 				units: "f",
 				place: locationName
 			}, function(data) {

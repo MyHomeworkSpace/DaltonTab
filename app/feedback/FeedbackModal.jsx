@@ -34,7 +34,7 @@ export default class FeedbackModal extends Component {
 				var metadata = {
 					clientID: clientID
 				};
-				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/submitFeedback.php", {
+				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/submitFeedback", {
 					type: feedbackType,
 					message: feedbackMessage,
 					version: version,

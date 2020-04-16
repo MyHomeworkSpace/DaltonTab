@@ -39,7 +39,7 @@ export default class EndOfYearModal extends Component {
 			error: ""
 		}, function() {
 			analytics.getClientID(function(clientID) {
-				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/eoy/submitEmail.php", {
+				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/eoy/submitEmail", {
 					clientID: clientID,
 					email: normalizedEmail + "@dalton.org"
 				}, function(data) {

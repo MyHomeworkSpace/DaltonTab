@@ -52,13 +52,13 @@ var analytics = {
 					var lastPingPayloadHash = storage.pingPayloadHash;
 					var shouldUpdatePingPayload = (!storage.pingPayloadHash || (pingPayloadHash != lastPingPayloadHash));
 
-					ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/ping.php", {
+					ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/ping", {
 						clientID: clientID,
 						extensionVersion: chrome.runtime.getManifest().version,
 						browserVersion: navigator.userAgent.split("/")[3].replace(" Safari", "")
 					}, function(data) {
 						if (shouldUpdatePingPayload) {
-							ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/updatePayload.php", {
+							ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/updatePayload", {
 								clientID: clientID,
 								payload: pingPayloadStr
 							}, function(data) {
@@ -77,7 +77,7 @@ var analytics = {
 	},
 
 	dismissMessage: function(clientID, campaign, callback) {
-		ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/dismiss.php", {
+		ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/dismiss", {
 			clientID: clientID,
 			campaign: campaign
 		}, function(data) {

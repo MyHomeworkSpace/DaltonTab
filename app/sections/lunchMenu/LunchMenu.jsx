@@ -7,7 +7,7 @@ import Loading from "ui/Loading.jsx";
 export default class LunchMenu extends Component {
 	componentDidMount() {
 		var that = this;
-		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/lunch.php", {}, function(data) {
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/lunch", {}, function(data) {
 			if (!data) {
 				that.setState({
 					noLunch: true

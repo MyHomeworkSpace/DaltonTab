@@ -17,7 +17,7 @@ export default class Articles extends Component {
 
 	load() {
 		var that = this;
-		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getPocketArticles.php", {}, function(data) {
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getPocketArticles", {}, function(data) {
 			that.setState({
 				loading: false,
 				data: data.list.slice(0, 4)

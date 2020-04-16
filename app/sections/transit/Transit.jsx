@@ -19,7 +19,7 @@ export default class Transit extends Component {
 
 	load() {
 		var that = this;
-		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getMTAInfo.php", {}, function(data) {
+		ajax.request("GET", "https://daltontabservices.myhomework.space/v1/getMTAInfo", {}, function(data) {
 			that.setState({
 				loading: false,
 				data: {
