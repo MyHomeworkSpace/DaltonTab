@@ -48,6 +48,7 @@ export default class CalendarEvent extends Component {
 			style={`top: ${offset - props.earliestEvent}px; left:${groupWidth * props.groupIndex}%; width: ${groupWidth}%; height: ${height}px;`}
 		>
 			<div class="calendarEventName" title={displayName}>
+				{props.event.recurRule && <i class="fa fa-refresh calendarEventRecur" />}
 				{props.event.tags[consts.EVENT_TAG_HOMEWORK] ? <HomeworkName name={displayName} /> : displayName}
 			</div>
 			<div class="calendarEventTime" title={timeDisplay}>
