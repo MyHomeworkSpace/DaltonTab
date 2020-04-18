@@ -69,7 +69,7 @@ export default {
 		component: Articles
 	},
 	transit: {
-		name: "Transit",
+		name: "MTA Service Status",
 		icon: "fa-train",
 		description: "Displays bus and train status from the MTA",
 		background: "rgba(0, 140, 186, 0.9)",

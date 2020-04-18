@@ -2,11 +2,11 @@ import { h, Component } from "preact";
 
 export default class TransitListItem extends Component {
 	render(props, state) {
-		return <li key={props.key} class="service">
-			<span class="service-name" style={`background-color: ${props.color}`}>
+		return <div class="transitListItem">
+			<span class="transitListItemName" style={`background-color: ${props.color}`}>
 				{props.data.name}
 			</span>
-			{props.data.status.toLowerCase()}
-		</li>;
+			<span class="transitListItemStatus">{props.data.status.toLowerCase()}</span>
+		</div>;
 	}
 };

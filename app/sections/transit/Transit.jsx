@@ -77,24 +77,24 @@ export default class Transit extends Component {
 			bus: {}
 		};
 
-		return <div class="transit-section">
-			<div class="mta-service">
+		return <div class="transit">
+			<div class="transitCategory">
 				<h3>Subway</h3>
 				<TransitList data={state.data.subway} colors={colors.subway} />
 			</div>
-			<div class="mta-service">
+			<div class="transitCategory">
 				<h3>Bus</h3>
 				<TransitList data={state.data.bus} colors={colors.bus} />
 			</div>
-			<div class="mta-service">
+			<div class="transitCategory">
 				<h3>Bridges/Tunnels</h3>
 				<TransitList data={state.data.bridgeTunnel} colors={colors.bridgeTunnel} />
 			</div>
-			<div class="mta-service">
+			<div class="transitCategory">
 				<h3>LIRR</h3>
 				<TransitList data={state.data.lirr} colors={colors.lirr} />
 			</div>
-			<div class="mta-service">
+			<div class="transitCategory">
 				<h3>MetroNorth</h3>
 				<TransitList data={state.data.metroNorth} colors={colors.metroNorth} />
 			</div>
