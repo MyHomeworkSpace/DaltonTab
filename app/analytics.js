@@ -55,6 +55,7 @@ var analytics = {
 					ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/ping", {
 						clientID: clientID,
 						extensionVersion: chrome.runtime.getManifest().version,
+						browserType: (navigator.userAgent.indexOf("Chrome") > -1 ? "Chrome" : "Firefox"),
 						browserVersion: navigator.userAgent.split("/")[3].replace(" Safari", "")
 					}, function(data) {
 						if (shouldUpdatePingPayload) {
