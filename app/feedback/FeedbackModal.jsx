@@ -23,6 +23,13 @@ export default class FeedbackModal extends Component {
 			return;
 		}
 
+		if (this.state.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.state.email)) {
+			this.setState({
+				error: "That email address is invalid."
+			});
+			return;
+		}
+
 		var feedbackType = this.props.modalState.type;
 		var feedbackMessage = this.state.message;
 
@@ -37,6 +44,7 @@ export default class FeedbackModal extends Component {
 				ajax.request("POST", "https://daltontabservices.myhomework.space/v1/submitFeedback", {
 					type: feedbackType,
 					message: feedbackMessage,
+					email: (that.state.email || ""),
 					version: version,
 					metadata: JSON.stringify(metadata)
 				}, function(response) {
@@ -88,7 +96,19 @@ export default class FeedbackModal extends Component {
 					<li>Your browser version (<strong>{navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"} {navigator.userAgent.split("/")[3].replace(" Safari", "")}</strong>)</li>
 					<li>Information about what services you've enabled and are signed into</li>
 				</ul>
-				<p>Thanks for the feedback! Click "Submit" to send it!</p>
+
+				<div class="form-group">
+					<label for="replyEmail">If you'd like a reply, you can also include your email address:</label>
+					<input
+						type="email"
+						class="form-control"
+						id="replyEmail"
+						placeholder="Email for replies (optional)"
+						disabled={state.loading}
+						value={state.email}
+						onChange={linkState(this, "email")}
+					/>
+				</div>
 			</div>
 			<div class="modal-footer">
 				{!state.loading && <button class="btn btn-default" onClick={this.close.bind(this)}>Close without submitting</button>}
