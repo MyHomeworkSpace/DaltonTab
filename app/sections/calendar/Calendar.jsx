@@ -160,8 +160,8 @@ export default class Calendar extends Component {
 						var groupEventToTest = groupToTest[eventIndex];
 
 						if (
-							(eventItem.groupInfo.offset <= groupEventToTest.groupInfo.endOffsetHeight) &&
-							(groupEventToTest.groupInfo.offset <= eventItem.groupInfo.endOffsetHeight)
+							(eventItem.groupInfo.offset < groupEventToTest.groupInfo.endOffsetHeight) &&
+							(groupEventToTest.groupInfo.offset < eventItem.groupInfo.endOffsetHeight)
 						) {
 							foundGroupIndex = groupIndex;
 							break;

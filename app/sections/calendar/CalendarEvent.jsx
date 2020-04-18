@@ -23,9 +23,8 @@ export default class CalendarEvent extends Component {
 
 		var displayName = props.event.name;
 
-		if (props.event.tags[consts.EVENT_TAG_CLASS_ID]) {
-			var displayNameSectionless = displayName.replace(/ -(.*)\(.*\)/g, "");
-			displayName = displayNameSectionless.trim();
+		if (props.event.tags[consts.EVENT_TAG_SHORT_NAME]) {
+			displayName = props.event.tags[consts.EVENT_TAG_SHORT_NAME];
 		}
 
 		var groupWidth = 100 / props.groupLength;
@@ -38,15 +37,22 @@ export default class CalendarEvent extends Component {
 		if (props.event.tags[consts.EVENT_TAG_ROOM_NUMBER]) {
 			timeDisplay += " in " + props.event.tags[consts.EVENT_TAG_ROOM_NUMBER];
 		}
+		if (props.event.tags[consts.EVENT_TAG_LOCATION]) {
+			timeDisplay += " at " + props.event.tags[consts.EVENT_TAG_LOCATION];
+		}
+
+		var cancelled = !!props.event.tags[consts.EVENT_TAG_CANCELLED];
 
 		return <div
-			class="calendarEvent"
+			class={`calendarEvent ${cancelled ? "calendarEventCancelled" : ""}`}
 			style={`top: ${offset - props.earliestEvent}px; left:${groupWidth * props.groupIndex}%; width: ${groupWidth}%; height: ${height}px;`}
 		>
 			<div class="calendarEventName" title={displayName}>
 				{props.event.tags[consts.EVENT_TAG_HOMEWORK] ? <HomeworkName name={displayName} /> : displayName}
 			</div>
-			<div class="calendarEventTime" title={timeDisplay}>{timeDisplay}</div>
+			<div class="calendarEventTime" title={timeDisplay}>
+				{cancelled ? <span><i class="fa fa-fw fa-ban" /> cancelled</span> : timeDisplay}
+			</div>
 		</div>;
 	}
 };
