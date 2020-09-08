@@ -8,7 +8,8 @@
 		"dev-edge": "cross-env BROWSER=edge webpack --watch",
 		"prod-firefox": "cross-env NODE_ENV=production BROWSER=firefox webpack",
 		"prod-chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack",
-		"prod-edge": "cross-env NODE_ENV=production BROWSER=edge webpack"
+		"prod-edge": "cross-env NODE_ENV=production BROWSER=edge webpack",
+		"prod-safari": "cross-env NODE_ENV=production BROWSER=safari webpack"
 	},
 	"devDependencies": {
 		"buble": "^0.18.0",

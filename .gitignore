@@ -3,7 +3,9 @@ node_modules/
 build-firefox/
 build-chrome/
 build-edge/
+build-safari/
 prod-firefox/
 prod-chrome/
 prod-edge/
+prod-safari/
 npm-debug.log
