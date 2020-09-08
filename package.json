@@ -5,8 +5,10 @@
 		"lint:fix": "eslint --ext js,jsx . --fix",
 		"dev-firefox": "cross-env BROWSER=firefox webpack --watch",
 		"dev-chrome": "cross-env BROWSER=chrome webpack --watch",
+		"dev-edge": "cross-env BROWSER=edge webpack --watch",
 		"prod-firefox": "cross-env NODE_ENV=production BROWSER=firefox webpack",
-		"prod-chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack"
+		"prod-chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack",
+		"prod-edge": "cross-env NODE_ENV=production BROWSER=edge webpack"
 	},
 	"devDependencies": {
 		"buble": "^0.18.0",

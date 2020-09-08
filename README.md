@@ -13,6 +13,6 @@ DaltonTab is available on Firefox and Chrome.
 ## Development
 Make sure you've run `npm install` first! 
 
-To develop DaltonTab, run either `npm run dev-chrome` (for Chrome) or `npm run dev-firefox` (for Firefox) and then load the extension in the newly-created `build-chrome` or `build-firefox` folders.
+To develop DaltonTab, run `npm run dev-chrome` (for Chrome), `npm run dev-firefox` (for Firefox), or `npm run dev-edge` (for Edge), and then load the extension in the newly-created `build-chrome`, `build-firefox`, and `build-edge` folders.
 
 DaltonTab is licensed under the MIT License. See the `LICENSE` file for more details.

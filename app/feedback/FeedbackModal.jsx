@@ -7,6 +7,7 @@ import Modal from "ui/Modal.jsx";
 
 import ajax from "ajax.js";
 import analytics from "analytics.js";
+import { getBrowser } from "browser.js";
 
 export default class FeedbackModal extends Component {
 	close() {
@@ -93,12 +94,12 @@ export default class FeedbackModal extends Component {
 				<strong>The following information will be sent with your feedback:</strong>
 				<ul>
 					<li>Your DaltonTab version (<strong>{chrome.runtime.getManifest().version}</strong>)</li>
-					<li>Your browser version (<strong>{navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"} {navigator.userAgent.split("/")[3].replace(" Safari", "")}</strong>)</li>
+					<li>Your browser version (<strong>{getBrowser()} {navigator.userAgent.split("/")[3].replace(" Safari", "")}</strong>)</li>
 					<li>Information about what services you've enabled and are signed into</li>
 				</ul>
 
 				<div class="form-group">
-					<label for="replyEmail">If you'd like a reply, you can also include your email address:</label>
+					<label htmlFor="replyEmail">If you'd like a reply, you can also include your email address:</label>
 					<input
 						type="email"
 						class="form-control"

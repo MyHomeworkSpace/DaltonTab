@@ -7,6 +7,7 @@ import LayoutSettings from "settings/LayoutSettings.jsx";
 import SettingCheckbox from "settings/SettingCheckbox.jsx";
 import SettingTimeInput from "settings/SettingTimeInput.jsx";
 
+import { getBrowser } from "browser.js";
 import sections from "sections.js";
 
 export default class SettingsPane extends Component {
@@ -101,6 +102,7 @@ export default class SettingsPane extends Component {
 		document.body.style.fontFamily = "Comic Sans MS";
 	}
 
+
 	render(props, state) {
 		return <div class="settingsPane">
 			<div class="settingsPaneClose" onClick={props.toggleSettings}>
@@ -172,7 +174,7 @@ export default class SettingsPane extends Component {
 			<button class="btn btn-sm btn-danger" onClick={this.resetSettings}>Reset DaltonTab</button>
 
 			<h4><i class="fa fa-fw fa-info-circle" /> About</h4>
-			<p>You're running DaltonTab version {chrome.runtime.getManifest().version} on {navigator.userAgent.indexOf("Firefox") > -1 ? "Firefox" : "Chrome"}. DaltonTab was created for the TigerHacks NYC Hackathon, and is currently maintained by the MyHomeworkSpace team.</p>
+			<p>You're running DaltonTab version {chrome.runtime.getManifest().version} on {getBrowser()}. DaltonTab was created for the TigerHacks NYC Hackathon, and is currently maintained by the MyHomeworkSpace team.</p>
 
 			<div class="btn-group btn-group-justified" role="group">
 				<a href="https://github.com/MyHomeworkSpace/DaltonTab" class="btn btn-default btn-sm">View on GitHub</a>

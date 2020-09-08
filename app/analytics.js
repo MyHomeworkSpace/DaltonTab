@@ -1,8 +1,9 @@
 import ajax from "ajax.js";
+import { getBrowser } from "browser.js";
 
 var analytics = {
 	collectPingPayload: function(callback) {
-		chrome.storage.sync.get([ "sections", "mhsToken" ], function(storage) {
+		chrome.storage.sync.get(["sections", "mhsToken"], function(storage) {
 			callback({
 				prod: (chrome.runtime.id == "ggfjkmflbbjndabmnngilkfpmdegbfkm"),
 				sections: (storage.sections || "default"),
@@ -28,7 +29,7 @@ var analytics = {
 		if (str.length == 0) return hash;
 		for (var i = 0; i < str.length; i++) {
 			var char = str.charCodeAt(i);
-			hash = ((hash<<5)-hash)+char;
+			hash = ((hash << 5) - hash) + char;
 			hash = hash & hash; // Convert to 32bit integer
 		}
 		return hash;
@@ -38,7 +39,7 @@ var analytics = {
 		var randomString = "";
 		for (var i = 0; i < len; i++) {
 			var randomPoz = Math.floor(Math.random() * charSet.length);
-			randomString += charSet.substring(randomPoz,randomPoz+1);
+			randomString += charSet.substring(randomPoz, randomPoz + 1);
 		}
 		return randomString;
 	},
@@ -55,7 +56,7 @@ var analytics = {
 					ajax.request("POST", "https://daltontabservices.myhomework.space/v1/analytics/ping", {
 						clientID: clientID,
 						extensionVersion: chrome.runtime.getManifest().version,
-						browserType: (navigator.userAgent.indexOf("Chrome") > -1 ? "Chrome" : "Firefox"),
+						browserType: getBrowser(),
 						browserVersion: navigator.userAgent.split("/")[3].replace(" Safari", "")
 					}, function(data) {
 						if (shouldUpdatePingPayload) {
@@ -63,7 +64,7 @@ var analytics = {
 								clientID: clientID,
 								payload: pingPayloadStr
 							}, function(data) {
-								chrome.storage.sync.set({ pingPayloadHash: pingPayloadHash }, function() {});
+								chrome.storage.sync.set({ pingPayloadHash: pingPayloadHash }, function() { });
 							});
 						}
 						if (data.isMessage) {

@@ -1,4 +1,6 @@
 build-firefox/
 build-chrome/
+build-edge/
 prod-firefox/
 prod-chrome/
+prod-edge/
