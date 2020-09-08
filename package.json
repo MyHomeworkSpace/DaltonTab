@@ -32,8 +32,7 @@
 		"font-awesome": "^4.7.0",
 		"linkstate": "^1.1.0",
 		"moment": "^2.20.1",
-		"preact": "^8.2.7",
-		"preact-compat": "^3.17.0",
+		"preact": "^10.4.8",
 		"react": "github:preact-compat/react",
 		"react-dom": "github:preact-compat/react-dom",
 		"react-scrollchor": "^6.0.0"
