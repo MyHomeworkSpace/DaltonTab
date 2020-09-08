@@ -1,9 +1,5 @@
 .DS_Store
 node_modules/
-build-firefox/
-build-chrome/
-build-edge/
-prod-firefox/
-prod-chrome/
-prod-edge/
+build-*/
+prod-*/
 npm-debug.log
