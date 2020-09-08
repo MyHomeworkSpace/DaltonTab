@@ -2,13 +2,11 @@
 DaltonTab is a new tab page built to be a hub for Dalton School students. It collects everything you need in one spot, and connects to your MyHomeworkSpace account.
 
 ## Get it!
-DaltonTab is available on Firefox and Chrome.
+DaltonTab is available on Firefox and Chrome, and is coming soon to Edge.
 
-### [Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/daltontab/)
-![Firefox Version](https://img.shields.io/amo/v/daltontab.svg) ![Firefox Rating](https://img.shields.io/amo/stars/daltontab.svg)
-
-### [Download for Chrome](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm)
-![Chrome Version](https://img.shields.io/chrome-web-store/v/ggfjkmflbbjndabmnngilkfpmdegbfkm.svg) ![Chrome Ratings](https://img.shields.io/chrome-web-store/stars/nimelepbpejjlbmoobocpfnjhihnpked.svg)
+| [**Firefox**](https://addons.mozilla.org/en-US/firefox/addon/daltontab/) | **Edge** | [**Chrome**](https://chrome.google.com/webstore/detail/daltontab/ggfjkmflbbjndabmnngilkfpmdegbfkm) |
+|-|-|-|
+| ![Firefox Version](https://img.shields.io/amo/v/daltontab.svg) | Coming Soon! | ![Chrome Version](https://img.shields.io/chrome-web-store/v/ggfjkmflbbjndabmnngilkfpmdegbfkm.svg)  |
 
 ## Development
 Make sure you've run `npm install` first! 
