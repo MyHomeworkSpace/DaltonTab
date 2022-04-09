@@ -33,7 +33,7 @@
 		"bootstrap": "^3.3.7",
 		"font-awesome": "^4.7.0",
 		"linkstate": "^1.1.0",
-		"moment": "^2.20.1",
+		"moment": "^2.29.2",
 		"preact": "^10.4.8",
 		"react": "github:preact-compat/react",
 		"react-dom": "github:preact-compat/react-dom",
